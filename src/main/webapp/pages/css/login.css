@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+.login-div {
+	position: absolute;
+    width: 250px;
+    height: 180px;
+    top: 30%;
+    left: 50%;
+    margin-top: -90px;
+    margin-left: -125px;
+    background-color: #ccc;
+    border-radius: 10px;
+    text-align: center;
+    background: -webkit-radial-gradient(center center,#E7E9EA ,#277DA7);
+}
+.login-div div{
+    margin-top: 20px;
+}
+input {
+    height: 26px;
+    border-radius: 5px;
+}
+button {
+	width: 100px;
+	height: 30px;
+	background-color: #00FFA1;
+	-webkit-box-shadow: 0px 4px 0px #2E6B54;
+	border-radius: 5px;
+	border: 0;
+	color: #151515;
+    font-size: 16px;
+    margin-top: 20px;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-appearance: none;
+    cursor:pointer;
+}
+button:active {
+	margin-top: 24px;
+	-webkit-box-shadow: none;
+}
+a {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 14px;
+    color: #F98407;
+    cursor:pointer;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主页面</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type="text/css">
+#main {
+	height: 560px;
+	width: 85%;
+}
+</style>
+</head>
+<div id="main">
+<frameset rows="20%,*" cols="*">
+	<frame name="p" src="head.html" scrolling="no"></frame>
+	<frameset rows="*" cols="20%,*">
+		<frame name="t1" src="pages/menu2.html" scrolling="no" noresize="no">
+		<frame id="t" name="t2" src="right.jsp" scrolling="no" noresize="no">
+	
+	</frameset>
+</frameset>
+</div>
+</html>

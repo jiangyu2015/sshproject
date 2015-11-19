@@ -1,0 +1,159 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul {
+	list-style: none;
+}
+
+body {
+	background: #F8F8FF;
+	font-size: 12px;
+}
+
+#top,#vi,#nav,#main,#bt {
+	width: 85%;
+	margin: 0px auto;
+}
+
+#top,#bt {
+	background: #000;
+}
+
+#top {
+	height: 18px;
+	padding-top: 5px;
+	text-align: right;
+	color: #fff;
+}
+
+#top_txt {
+	margin-right: 5px;
+}
+
+#top_txt a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#top_txt a:visited {
+	color: fff;
+}
+
+top_txt a:hover {
+	color: #ddd;
+}
+
+#vi {
+	height: 120px;
+	background: #E8E8E8;
+}
+
+#nav {
+	height: 55px;
+	background: #e6e4db;
+}
+
+#nav ul {
+	margin-left: 30px;
+}
+
+#nav ul li {
+	float: left;
+}
+
+#nav ul a {
+	display: block;
+	width: 100%;
+	height: 25px;
+	padding-top: 10px;
+	text-decoration: none;
+	letter-spacing: 15px;
+	text-align: center;
+	color: #000;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#nav ul a:visited {
+	color: #000;
+}
+
+#nav ul a:hover {
+	color: #FFFFE0;
+	background: #000;
+}
+
+#nav ul li.bar {
+	width: 10px;
+	padding-top: 12px;
+}
+
+hr {
+	margin-top: 20px;
+}
+
+#photo {
+	width: 85%;
+	height: 85px;
+	margin-left: 45px;
+	padding-top: 10px;
+	margin-top: 10px;
+	float: left;
+}
+
+h5 {
+	letter-spacing: 3px;
+	font-size: 40px;
+	height: 85px;
+	width: 80%;
+	padding-top: 20px;
+	margin-top: 20px;
+	padding-left: 160px;
+	color: #000;
+	font-family: sans-serif;
+}
+.btn1_mouseout {
+	BORDER-RIGHT: #7EBF4F 1px solid;
+	PADDING-RIGHT: 20px;
+	BORDER-TOP: #7EBF4F 1px solid;
+	PADDING-LEFT: 20px;
+	FONT-SIZE: 15px;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,
+		StartColorStr=#ffffff, EndColorStr=#B3D997 );
+	BORDER-LEFT: #7EBF4F 1px solid;
+	CURSOR: pointer;
+	COLOR: black;
+	PADDING-TOP: 10px;
+	PADDING-bottom:10px;
+	BORDER-BOTTOM: #7EBF4F 1px solid;
+	margin-left:110px;
+	
+}
+
+.btn1_mouseover {
+	BORDER-RIGHT: #7EBF4F 1px solid;
+	PADDING-RIGHT: 20px;
+	BORDER-TOP: #7EBF4F 1px solid;
+	PADDING-LEFT: 20px;
+	FONT-SIZE: 18px;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,
+		StartColorStr=#ffffff, EndColorStr=#1874CD );
+	BORDER-LEFT: #7EBF4F 1px solid;
+	CURSOR: hand;
+	COLOR: #EDEDED;
+	PADDING-TOP: 10px;
+	PADDING-bottom:10px;
+	BORDER-BOTTOM: #7EBF4F 1px solid;
+	margin-left:100px;
+	
+}
+
+
+#line {
+	width: 24px;
+	height: 350px;
+	border-right: 1px dashed #CCCCCC;
+	padding: 59px 8px 8px 8px;
+}

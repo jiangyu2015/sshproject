@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.hibtest1.entity.Goods" table="sp_info">
+		<id name="goodsId" type="java.lang.Integer">
+			<column name="sp_id" length="4" />
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="goodsName" type="java.lang.String">
+			<column name="sp_name" length="30" not-null="true" />
+		</property>
+		
+		<property name="goodsBackName" type="java.lang.String">
+			<column name="back_name" length="30" not-null="true" />
+		</property>
+		<property name="value" type="java.lang.Float">
+			<column name="value" length="15" not-null="false" />
+		</property>
+		
+		<property name="price" type="java.lang.Float">
+			<column name="price" length="15" not-null="false" />
+		</property>
+		<property name="length" type="java.lang.Float">
+			<column name="length" length="5" not-null="false" />
+		</property>
+		
+		<property name="wide" type="java.lang.Float">
+			<column name="wide" length="5" not-null="false" />
+		</property>
+		<property name="tall" type="java.lang.Float">
+			<column name="tall" length="5" not-null="false" />
+		</property>
+		
+		<property name="mweight" type="java.lang.Float">
+			<column name="mweight" length="5" not-null="false" />
+		</property>
+		<property name="volume" type="java.lang.Float">
+			<column name="volume" length="5" not-null="false" />
+		</property>
+		<property name="vweight" type="java.lang.Float">
+			<column name="vweight" length="5" not-null="false" />
+		</property>
+		
+		<property name="standard" type="java.lang.String">
+			<column name="standard" length="30" not-null="false" />
+		</property>
+		<property name="unit" type="java.lang.String">
+			<column name="unit" length="4" not-null="false" />
+		</property>
+		<property name="service" type="java.lang.String">
+			<column name="service" length="30" not-null="false" />
+		</property>
+		<property name="creationDate" type="java.sql.Timestamp">
+			<column name="creation_date" length="30" not-null="false" />
+		</property>
+		<property name="baozhiqi" type="java.lang.Integer">
+			<column name="baozhiqi" length="4" not-null="false" />
+		</property>
+		<property name="expirationDate" type="java.sql.Timestamp">
+			<column name="expiration_date" length="30" not-null="false" />
+		</property>
+		
+	</class>
+</hibernate-mapping>

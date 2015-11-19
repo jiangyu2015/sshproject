@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/jdbc  
+    http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd  
+    http://www.springframework.org/schema/cache  
+    http://www.springframework.org/schema/cache/spring-cache-3.1.xsd  
+    http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop.xsd  
+    http://www.springframework.org/schema/util  
+    http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- datasource -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <!-- 指定连接数据库的JDBC驱动 -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver">
+        </property>
+        <!-- 指定数据库所用的url -->
+        <property name="url" value="jdbc:mysql://localhost:3306/eju">
+        </property>
+        <!-- 指定连接数据库的用户名 -->
+        <property name="username" value="root"></property>
+        <!-- 指定连接数据库的密码 -->
+        <property name="password" value="1234"></property>
+    </bean>
+    <!-- spring与hibernate整合 spring来管理session的创建、打开和关闭 -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <!-- 将上面定义的数据源dataSource注入到LocalSessionFactoryBean类的sessionFactory属性  -->
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <!-- 设置Hibernate的相关属性 -->
+        <property name="hibernateProperties">
+            <props>
+                <!-- 设置Hibernate的数据库方言 -->
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQLDialect
+                </prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>Users.hbm.xml</value>
+                <value>Goods.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="userDAO" class="com.springtest1.dao.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userBiz" class="com.springtest1.biz.UserBizImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
+    <bean id="umAction" class="com.UserManagerAction">
+        <property name="userBiz" ref="userBiz"></property>
+    </bean>
+    <bean id="userAdd" class="com.UserManagerAction" scope="prototype">
+        <property name="userBiz" ref="userBiz"></property>
+    </bean>
+    <bean id="goodsDAO" class="com.springtest1.dao.GoodsDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="goodsBiz" class="com.springtest1.biz.GoodsBizImpl">
+        <property name="goodsDAO" ref="goodsDAO"/>
+    </bean>
+    <bean id="goodsSlecet" class="com.GoodsManagerAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"></property>
+    </bean>
+    <bean id="goodsAdd" class="com.GoodsManagerAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"></property>
+    </bean>
+</beans>
