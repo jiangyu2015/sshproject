@@ -18,7 +18,7 @@
             <h1>请输入查找的商品名称</h1>
         </div>
         <tr>
-            <td><s:textfield label="商品名称" name="goods.goodsName" /></td>
+            <td><s:textfield label="商品名称" name="goodsName" /></td>
         </tr>
         <tr>
             <td><s:submit align="left" value="查找" /></td>

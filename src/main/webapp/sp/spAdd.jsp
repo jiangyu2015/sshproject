@@ -50,7 +50,10 @@
 				<td><s:textfield label="单位" name="goods.unit" /></td>
 			</tr>
 			<tr>
-				<td><s:textfield label="实物服务" name="goods.service" /></td>
+
+				<td>
+					<s:radio id="goods.service" name="goods.service" list="#{'0':'服务,'1':'实物'}" listKey="key" listValue="value" />
+				</td>
 			</tr>
 
 			<tr>
@@ -77,6 +80,9 @@
 				<td>${requestScope.noWords}</td>
 			</tr>
 		</table>
+
+
+	  </div>
 
 	</s:form>
 </body>

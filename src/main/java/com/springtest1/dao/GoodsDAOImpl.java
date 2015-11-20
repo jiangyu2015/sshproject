@@ -4,10 +4,12 @@ import com.hibtest1.entity.Goods;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -28,9 +30,9 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
     }
 /*    public List search(final Goods condition) {
 
-        System.out.println(condition.getGoodsName() + "123");
-        List goodslist = this.getHibernateTemplate().find("from Goods g where g.goodsName =" + condition.getGoodsName());
-        return goodslist;
+		System.out.println(condition.getGoodsName()+"123");
+		List goodslist=this.getHibernateTemplate().find("from Goods where goodsName ="+condition.getGoodsName());
+		return goodslist;
 
     }*/
 /*	public Serializable add(final Goods condition) {

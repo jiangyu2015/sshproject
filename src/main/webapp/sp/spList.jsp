@@ -9,14 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<s:iterator value="%{#session.goodslist}" var="list">
+<s:iterator value="%{#session.goodslist}" var="goods">
 	<div class="div1">
 		<div class="divcss5">
-			<s:property value="#list.goodsName" />
+			<s:property value="#goods.goodsName" />
 
-			<s:property value="#list.value" />
+			<s:property value="#goods.value" />
 		</div>
 	</div>
 </s:iterator>
+
 </body>
 </html>

@@ -71,7 +71,8 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         if (list.size() > 0) {
             Goods goods = new Goods();
             goods = (Goods) list.get(0);
-            session.put("goodslist", list);
+          //  session.put("goodslist", list);
+            session.put("goodslist", goods);
             return "success";
         } else
             return "fail";
