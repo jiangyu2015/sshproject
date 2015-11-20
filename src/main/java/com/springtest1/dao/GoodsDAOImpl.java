@@ -4,45 +4,37 @@ import com.hibtest1.entity.Goods;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
 public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
-	 public List search(final Goods condition) {
-		return super.getHibernateTemplate().executeFind(
-				new HibernateCallback() {
-					public Object doInHibernate(Session session)
-							throws HibernateException, SQLException {
-						Criteria c = session.createCriteria(Goods.class);
-						if (condition != null) {
-							System.out.println(condition.getGoodsName()+"123");
-							if (condition.getGoodsName() != null
-									&& !condition.getGoodsName().equals("")) {
-								c.add(Restrictions.eq("goodsName",
-										condition.getGoodsName()));
+    public List<Goods> search(final Goods condition) {
+        return super.getHibernateTemplate().execute(new HibernateCallback<List<Goods>>() {
+            public List<Goods> doInHibernate(Session session) throws HibernateException, SQLException {
+                Criteria c = session.createCriteria(Goods.class);
+                if (condition != null) {
+                    System.out.println(condition.getGoodsName() + "123");
+                    if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
+                        c.add(Restrictions.eq("goodsName", condition.getGoodsName()));
+                    }
+                }
+                return c.list();
+            }
+        });
+    }
+/*    public List search(final Goods condition) {
 
-							}
-							
-						}
-						return c.list();
-					}
-				});
-	}
-/*	public List search(final Goods condition) {
+        System.out.println(condition.getGoodsName() + "123");
+        List goodslist = this.getHibernateTemplate().find("from Goods g where g.goodsName =" + condition.getGoodsName());
+        return goodslist;
 
-		System.out.println(condition.getGoodsName()+"123");
-		List goodslist=this.getHibernateTemplate().find("from goods where goodsName ="+condition.getGoodsName());
-		return goodslist;
-
-	} */
+    }*/
 /*	public Serializable add(final Goods condition) {
-		return super.getHibernateTemplate().execute(
+        return super.getHibernateTemplate().execute(
 				new HibernateCallback<Serializable>() {
 					public Serializable doInHibernate(Session session)
 							throws HibernateException, SQLException {
@@ -83,8 +75,8 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
 } */
 
 
-public void add( Goods good){
-	super.getHibernateTemplate().save(good);
-}
+    public void add(Goods good) {
+        super.getHibernateTemplate().save(good);
+    }
 
 }
