@@ -4,18 +4,18 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.hibtest1.entity.Users" table="user">
-		<id name="id" type="java.lang.Integer">
-			<column name="uid" length="4" />
-			<generator class="native">
-			</generator>
-		</id>
-		<property name="loginName" type="java.lang.String">
-			<column name="uname" length="20" not-null="true" />
-		</property>
-		
-		<property name="loginPwd" type="java.lang.String">
-			<column name="upwd" length="10" not-null="true" />
-		</property>
-	</class>
+    <class name="com.hibtest1.entity.Users" table="user">
+        <id name="id" type="java.lang.Integer">
+            <column name="uid" length="4"/>
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="loginName" type="java.lang.String">
+            <column name="uname" length="20" not-null="true"/>
+        </property>
+
+        <property name="loginPwd" type="java.lang.String">
+            <column name="upwd" length="10" not-null="true"/>
+        </property>
+    </class>
 </hibernate-mapping>
