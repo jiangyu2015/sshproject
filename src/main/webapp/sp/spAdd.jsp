@@ -26,22 +26,22 @@
 				<td><s:textfield label="单价" name="goods.price" /></td>
 			</tr>
 			<tr>
-				<td><s:textfield label="长" name="goods.length" /></td>
+				<td><s:textfield label="长cm" name="goods.length" /></td>
 			</tr>
 			<tr>
-				<td><s:textfield label="宽" name="goods.wide" /></td>
+				<td><s:textfield label="宽cm" name="goods.wide" /></td>
 			</tr>
 			<tr>
-				<td><s:textfield label="高" name="goods.tall" /></td>
+				<td><s:textfield label="高cm" name="goods.tall" /></td>
 			</tr>
 			<tr>
-				<td><s:textfield label="毛重" name="goods.mweight" /></td>
+				<td><s:textfield label="毛重kg" name="goods.mweight" /></td>
 			</tr>
 			<tr>
-				<td><s:textfield label="体积" name="goods.volume" /></td>
+				<td><s:textfield label="体积m*m*m" name="goods.volume" /></td>
 			</tr>
 			<tr>
-				<td><s:textfield label="体积重量" name="goods.vweight" /></td>
+				<td><s:textfield label="体积重量kg" name="goods.vweight" /></td>
 			</tr>
 			<tr>
 				<td><s:textfield label="装箱规格" name="goods.standard" /></td>
@@ -52,7 +52,8 @@
 			<tr>
 
 				<td>
-					<s:radio id="goods.service" name="goods.service" list="#{'0':'服务,'1':'实物'}" listKey="key" listValue="value" />
+
+					<s:radio name="goods.service" list="#{'服务':'服务','实物':'实物'}" listKey="key" listValue="value" value="'实物'"/>
 				</td>
 			</tr>
 
