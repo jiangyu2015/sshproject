@@ -17,8 +17,11 @@ public class GoodsBizImpl implements GoodsBiz{
 		return list;
 	}
 	
-	public Serializable add(Goods condition){
+/*	public Serializable add(Goods condition){
 		return goodsDAO.add(condition);
-	}
+	}  */
+     public void add(Goods condition){
+		 goodsDAO.add(condition);
+	 }
 
 }

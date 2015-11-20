@@ -15,7 +15,7 @@
         </property>
 
         <property name="goodsBackName" type="java.lang.String">
-            <column name="back_name" length="30" not-null="true"/>
+            <column name="back_name" length="30" not-null="false"/>
         </property>
         <property name="value" type="java.lang.Float">
             <column name="value" length="15" not-null="false"/>

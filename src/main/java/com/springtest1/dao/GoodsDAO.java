@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface GoodsDAO {
 	public List search(Goods condition);
-	public Serializable add(Goods condition);
+//	public Serializable add(Goods condition);
+    public void add(Goods condition);
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	import="java.sql.*,com.hibtest1.entity.*,java.util.*"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,17 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <%
-					List<Goods> list = (List<Goods>) session.getAttribute("goodsList");
-					for (int i = 0; i < list.size(); i++) {
-						Goods good = list.get(i);
-						String url = java.net.URLEncoder.encode(good.getRtitle(),
-								"UTF-8");
-				%>
+<s:iterator value="%{#session.goodslist}" var="list">
+	<div class="div1">
+		<div class="divcss5">
+			<s:property value="#list.goodsName" />
 
-				<li><a href="read/readList?read.rtitle=<%=url%>"><%=read.getRtitle()%></a></li>
-				<%
-					}
-				%>
+			<s:property value="#list.value" />
+		</div>
+	</div>
+</s:iterator>
 </body>
 </html>

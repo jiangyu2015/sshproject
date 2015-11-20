@@ -15,8 +15,8 @@
 			<result type="redirect" name="success">/index.jsp</result>
 		</action>
 		<action name="spSelect" class="goodsSlecet" method="searchGoodsList">
-			<result type="redirect" name="success">/test.jsp</result>
-			<result type="redirect" name="fail">/fail.jsp</result>
+			<result type="redirect" name="success">/sp/test.jsp</result>
+			<result type="redirect" name="fail">/sp/fail.jsp</result>
 		</action>
 		<action name="addGoods" class="goodsAdd" method="addGoods">
 			<result type="redirect" name="success">/sp/test.jsp</result>
