@@ -19,8 +19,8 @@
 			<result type="redirect" name="fail">/fail.jsp</result>
 		</action>
 		<action name="addGoods" class="goodsAdd" method="addGoods">
-			<result type="redirect" name="success">/test.jsp</result>
-			<result type="redirect" name="input">/fail.jsp</result>
+			<result type="redirect" name="success">/sp/test.jsp</result>
+			<result type="redirect" name="input">/sp/fail.jsp</result>
 		</action>
 	</package>
 </struts>

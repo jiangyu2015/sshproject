@@ -17,10 +17,10 @@
 				<td><s:textfield label="商品名称" name="goods.goodsName" /></td>
 			</tr>
 			<tr>
-				<td><s:password label="商品后台名称" name="goods。goodsBackName" /></td>
+				<td><s:textfield label="商品后台名称" name="goods。goodsBackName" /></td>
 			</tr>
 			<tr>
-				<td><s:password label="参考价值" name="goods.value" /></td>
+				<td><s:textfield label="参考价值" name="goods.value" /></td>
 			</tr>		
 			<tr>
 				<td><s:submit align="left" value="submit" /></td>
