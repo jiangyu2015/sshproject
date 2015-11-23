@@ -3,8 +3,8 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>
-    <class name="com.hibtest1.entity.Goods" table="sp_info">
+<hibernate-mapping package="com.hibtest1.entity">
+    <class name="Goods" table="sp_info" >
         <id name="goodsId" type="java.lang.Integer">
             <column name="sp_id" length="4"/>
             <generator class="native">
