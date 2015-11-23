@@ -71,7 +71,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         if (list.size() > 0) {
             Goods goods = new Goods();
             goods = (Goods) list.get(0);
-          //  session.put("goodslist", list);
+            //  session.put("goodslist", list);
             session.put("goodslist", goods);
             return "success";
         } else
@@ -133,18 +133,39 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         }
     }
 
-  /*  public String del(){
-        goodsBiz.delGoods(name);
-        return "list";
-    } */
+    public String delGoods() {
+        System.out.println(goodsName);
+        Goods condition = new Goods();
+        condition.setGoodsName(goodsName);
+        List<Goods> list = goodsBiz.getGoodsList(condition);
+        System.out.println(list.size());
+        if (list.size() > 0) {
+            Goods goods = new Goods();
+            goods = (Goods) list.get(0);
+            boolean e=goodsBiz.delGoods(goods);
+            if (e)  return "success";
+            else return "input";
+        } else return "input";
+    }
 
-   public String listGoods(){
-       System.out.println("ok!");
-       List goods=goodsBiz.getAllGoods();
-       session.put("goodslist",goods);
-       Goods g = new Goods();
-       g = (Goods) goods.get(0);
-       System.out.println(g.getGoodsName()+"123");
-       return "goods";
-   }
+    public String listGoods() {
+        List goods = goodsBiz.getAllGoods();
+        session.put("goodslistall",goods);
+        Goods g = new Goods();
+        g = (Goods) goods.get(0);
+        return "goods";
+    }
+
+    public String modify(){
+        Goods good=(Goods) session.get("goodslist");
+        good.setGoodsName(goods.getGoodsName());
+        if(goodsBiz.modifyGood(good)){
+            session.put("goodslist",good);
+            request.put("message","修改成功");  //先放着
+            return "success";
+        }
+        request.put("message","修改失败");
+        return "input";
+
+    }
 }

@@ -16,6 +16,10 @@
             <h1>商品信息</h1>
         </div>
         <tr>
+            <td><label>商品id</label></td>
+            <td><s:property value="#goods.goodsId"/></td>
+        </tr>
+        <tr>
             <td><label>商品名称</label></td>
             <td><s:property value="#goods.goodsName"/></td>
         </tr>

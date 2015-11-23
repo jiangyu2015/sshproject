@@ -11,9 +11,10 @@ public interface GoodsBiz {
     //public Serializable add(Goods condition);
     public void add(Goods condition);
 
-    //   public boolean delGoods(int id);
+      public boolean delGoods(Goods good);  //删除
   //  public  Goods getGood(String name);
 
     public List getAllGoods();
 
+    public boolean modifyGood(Goods good);
 }

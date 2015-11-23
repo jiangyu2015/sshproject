@@ -11,11 +11,13 @@ public interface GoodsDAO {
     //	public Serializable add(Goods condition);
     public void add(Goods condition); //添加商品
 
-  //  public boolean delGoods(Goods condition);
+    public boolean delGoods(Goods condition);
 
  //   public Goods getGood(String name);
 
     public List getAllGoods();
+
+    public  void modifyGood(Goods good); //修改商品
 
 
 }

@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,13 +33,23 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
         super.getHibernateTemplate().save(good);
     }
 
+    public boolean delGoods(Goods condition) {
+        super.getHibernateTemplate().delete(condition);
+        return true;
+    }
+
+    //   public Goods getGood(String name) {
+    //      return (Goods) super.getHibernateTemplate().get(Goods.class, name);
+    //   }
+
     public List getAllGoods() {
-        System.out.println("1");
         String hql = "from Goods";
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
-        System.out.println("2");
         return query.list();
-
     }
+
+    public  void modifyGood(Goods good){  //修改商品
+        super.getHibernateTemplate().update(good);
+    };
 }

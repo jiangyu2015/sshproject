@@ -24,7 +24,14 @@
 		</action>
 		<action name="listGoods" class="goodsList" method="listGoods">
 			<result type="redirect" name="goods">/sp/spAllList.jsp</result>
-
+		</action>
+		<action name="spDel" class="goodsDel" method="delGoods">
+			<result type="redirect" name="success">/sp/test.jsp</result>
+			<result type="redirect" name="input">/sp/fail.jsp</result>
+		</action>
+		<action name="spDel" class="goodsDel" method="delGoods">
+			<result type="redirect" name="success">/sp/test.jsp</result>
+			<result type="redirect" name="input">/sp/fail.jsp</result>
 		</action>
 	</package>
 </struts>

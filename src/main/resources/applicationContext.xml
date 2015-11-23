@@ -31,12 +31,12 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver">
         </property>
         <!-- 指定数据库所用的url -->
-        <property name="url" value="jdbc:mysql://localhost:3306/eju1120">
+        <property name="url" value="jdbc:mysql://localhost:3306/eju">
         </property>
         <!-- 指定连接数据库的用户名 -->
         <property name="username" value="root"/>
         <!-- 指定连接数据库的密码 -->
-        <property name="password" value="vvvv"/>
+        <property name="password" value="1234"/>
     </bean>
     <!-- spring与hibernate整合 spring来管理session的创建、打开和关闭 -->
     <bean id="sessionFactory"
@@ -82,6 +82,9 @@
         <property name="goodsBiz" ref="goodsBiz"></property>
     </bean>
     <bean id="goodsAdd" class="com.GoodsManagerAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"></property>
+    </bean>
+    <bean id="goodsDel" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"></property>
     </bean>
     <bean id="goodsList" class="com.GoodsManagerAction" scope="prototype">

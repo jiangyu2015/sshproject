@@ -8,6 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<s:form action="spDel" validate="true">
+	<table id="advSearch" width="380" height="66">
+		<div class="my-form-head">
+			<h1>请输入需删除的商品名称</h1>
+		</div>
+		<tr>
+			<td><s:textfield label="商品名称" name="goodsName" /></td>
+		</tr>
+		<tr>
+			<td><s:submit align="left" value="删除" /></td>
+
+		</tr>
+	</table>
+
+</s:form>
+
 
 </body>
 </html>
