@@ -6,8 +6,16 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface GoodsDAO {
-	public List search(Goods condition);
-//	public Serializable add(Goods condition);
-    public void add(Goods condition);
+    public List search(Goods condition);   //查询
+
+    //	public Serializable add(Goods condition);
+    public void add(Goods condition); //添加商品
+
+  //  public boolean delGoods(Goods condition);
+
+ //   public Goods getGood(String name);
+
+    public List getAllGoods();
+
 
 }

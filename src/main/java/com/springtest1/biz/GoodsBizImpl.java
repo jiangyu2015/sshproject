@@ -24,4 +24,18 @@ public class GoodsBizImpl implements GoodsBiz{
 		 goodsDAO.add(condition);
 	 }
 
+/*	public boolean delGoods(String name){
+		Goods good=goodsDAO.getGood(name);
+		return goodsDAO.delGoods(good);
+
+	}
+
+	public Goods getGood(String name){
+		return goodsDAO.getGood(name);
+	}  */
+
+	public List getAllGoods(){
+		return goodsDAO.getAllGoods();
+	}
+
 }

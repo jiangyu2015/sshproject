@@ -133,4 +133,18 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         }
     }
 
+  /*  public String del(){
+        goodsBiz.delGoods(name);
+        return "list";
+    } */
+
+   public String listGoods(){
+       System.out.println("ok!");
+       List goods=goodsBiz.getAllGoods();
+       session.put("goodslist",goods);
+       Goods g = new Goods();
+       g = (Goods) goods.get(0);
+       System.out.println(g.getGoodsName()+"123");
+       return "goods";
+   }
 }

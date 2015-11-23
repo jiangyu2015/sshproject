@@ -10,4 +10,10 @@ public interface GoodsBiz {
 
     //public Serializable add(Goods condition);
     public void add(Goods condition);
+
+    //   public boolean delGoods(int id);
+  //  public  Goods getGood(String name);
+
+    public List getAllGoods();
+
 }
