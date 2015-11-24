@@ -5,25 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+	<title>删除商品</title>
+	<link type="text/css" rel="stylesheet" href="common.css"/>
 </head>
 <body>
-<s:form action="spDel" validate="true">
-	<table id="advSearch" width="380" height="66">
-		<div class="my-form-head">
-			<h1>请输入需删除的商品名称</h1>
+<div class="title">删除商品</div>
+<div class="content">
+	<form method="post" action="spDel" >
+		<div class="line">
+			<div class="lable">商品名称：</div>
+			<div class="input-div"><input placeholder="请输入要删除的商品名称" name="goodsName"/></div>
 		</div>
-		<tr>
-			<td><s:textfield label="商品名称" name="goodsName" /></td>
-		</tr>
-		<tr>
-			<td><s:submit align="left" value="删除" /></td>
-
-		</tr>
-	</table>
-
-</s:form>
-
-
-</body>
+		<input type="submit" value="删除" class="btn-submit"/>
+	</form>
+</div>
 </html>

@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-   "http://struts.apache.org/dtds/struts-2.0.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<constant name="struts.devMode" value="true" />
-	<package name="default" namespace="/" extends="struts-default">
-
-		
-		<action name="doLogin" class="umAction" >
-			<result name="success">/menu.html</result>
-			<result name="error">/error.jsp</result>
-		</action>
-		<action name="reg" class="userAdd" method="addUser">
-			<result type="redirect" name="success">/index.jsp</result>
-		</action>
-		<action name="spSelect" class="goodsSlecet" method="searchGoodsList">
-			<result type="redirect" name="success">/sp/spList.jsp</result>
-			<result type="redirect" name="fail">/sp/fail.jsp</result>
-		</action>
-		<action name="addGoods" class="goodsAdd" method="addGoods">
-			<result type="redirect" name="success">/sp/test.jsp</result>
-			<result type="redirect" name="input">/sp/fail.jsp</result>
-		</action>
-		<action name="listGoods" class="goodsList" method="listGoods">
-			<result type="redirect" name="goods">/sp/spAllList.jsp</result>
-		</action>
-		<action name="spDel" class="goodsDel" method="delGoods">
-			<result type="redirect" name="success">/sp/test.jsp</result>
-			<result type="redirect" name="input">/sp/fail.jsp</result>
-		</action>
-		<action name="spDel" class="goodsDel" method="delGoods">
-			<result type="redirect" name="success">/sp/test.jsp</result>
-			<result type="redirect" name="input">/sp/fail.jsp</result>
-		</action>
-	</package>
+    <constant name="struts.devMode" value="true"/>
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="doLogin" class="umAction">
+            <result name="success">/menu.html</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="reg" class="userAdd" method="addUser">
+            <result type="redirect" name="success">/index.jsp</result>
+        </action>
+        <action name="spSelect" class="goodsSlecet" method="searchGoodsList">
+            <result type="redirect" name="success">/sp/spList.jsp</result>
+            <result type="redirect" name="fail">/sp/fail.jsp</result>
+        </action>
+        <action name="addGoods" class="goodsAdd" method="addGoods">
+            <result type="redirect" name="success">/sp/test.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>
+        <action name="listGoods" class="goodsList" method="listGoods">
+            <result type="redirect" name="goods">/sp/spAllList.jsp</result>
+        </action>
+        <action name="spDel" class="goodsDel" method="delGoods">
+            <result type="redirect" name="success">/sp/test.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>
+        <action name="spDel" class="goodsDel" method="delGoods">
+            <result type="redirect" name="success">/sp/test.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>
+        <action name="spUpdShow" class="goodsUpdShow" method="modifyShow">
+            <result type="redirect" name="success">/sp/spUpList.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>
+        <action name="spUpd" class="goodsUpd" method="modify">
+            <result type="redirect" name="success">/sp/test.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>
+    </package>
 </struts>

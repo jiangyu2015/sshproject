@@ -50,6 +50,7 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
     }
 
     public  void modifyGood(Goods good){  //修改商品
+        System.out.println("DAO里面的"+good.getService());
         super.getHibernateTemplate().update(good);
     };
 }

@@ -40,6 +40,8 @@ public class GoodsBizImpl implements GoodsBiz {
     }
 
     public boolean modifyGood(Goods good){
+        System.out.println(good.getPrice()+"biz里面的");
+        System.out.println(good.getService()+"biz里面的");
         goodsDAO.modifyGood(good);
         return true;
 
