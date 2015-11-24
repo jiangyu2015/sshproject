@@ -2,31 +2,34 @@
 
 body{
 	margin: 0px;
+	padding: 0px;
 	background-color: #D3E9FF;
 }
 .title {
   	width: 100%;
   	height: 60px;
   	line-height: 60px;
-  	text-align: center;
   	font-size: 32px;
 	background-color: #C1E1FF;
 	margin-bottom: 20px;
 	color: #464646;
 	font-weight: bold;
+	padding-left: 35%;
+    box-sizing: border-box;
 }
 .content {
 	position: absolute;
 	width: 550px;
 	left: 35%;
 	margin-left: -250px;
+	text-align: center;
 }
 .line {
 	height: 28px;
 	padding: 10px 0px;
 }
 .lable {
-	width: 30%;
+	width: 35%;
  	float: left;
  	text-align: right;
  	font-size: 20px;
@@ -37,7 +40,7 @@ body{
 }
 .input-div {
     position: relative;
- 	width: 70%;
+ 	width: 65%;
     float: right;
 	text-align: left;
 	font-size: 16px;
@@ -53,6 +56,8 @@ input {
 	border: 1px solid #97CAF9;
 	border-radius: 5px;
 	-webkit-box-shadow: 0px 1.5px 1.5px #8CACAD;
+	outline: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 input[type="radio"] {
 	width: 18px;
@@ -69,7 +74,7 @@ input[type="radio"] {
 	right: 50px;
 	color: #3E3C3C;
 }
-.btn-submit {
+.btn-submit, .btn-cancle {
 	width: 130px;
 	height: 40px;
 	line-height: 40px;
@@ -82,8 +87,126 @@ input[type="radio"] {
 	-webkit-box-shadow: 0px 2px 2px #454A4A;
 	-webkit-user-select: none;
 	cursor: pointer;
+	border: none;
+	outline: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-appearance: none;
 }
 .btn-submit:active {
    	margin: 52px auto;
    	-webkit-box-shadow: none;
+}
+.btn-cancle {
+	background-color: #E27678;
+	-webkit-box-shadow: 0px 2px 2px #5F4F52;
+	margin-left: 50px;
+}
+.btn-cancle:active {
+   	margin: 52px auto;
+   	-webkit-box-shadow: none;
+   	margin-left: 50px;
+}
+.table-div {
+	position: absolute;
+	width: 100%;
+}
+.table {
+	width: 100%;
+	font-size: 14px;
+	color: #4d4d4d;
+}
+.table tr {
+	height: 30px;
+	background-color: #fff;
+}
+.table tbody tr:nth-child(even){
+	background-color: #F5FBFB;
+}
+.table tbody tr:hover {
+	background-color: #eee;
+}
+.table thead tr th {
+	background-color: #CAE8EA;
+	text-align: center;
+	max-width: 100px;
+}
+.table tbody tr td {
+	text-align: center;
+	max-width: 100px;
+}
+.active {
+	background-color: #F5F17E !important;
+}
+.btn-div {
+	height: 45px;
+	padding-left: 20px;
+}
+.btn-eidt, .btn-remove {
+	position: absolute;
+	width: 80px;
+    height: 30px;
+    line-height: 30px;
+    background: -webkit-radial-gradient(center center,#DBEFF7 ,#29A3EA);
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 2px 2px #454A4A;
+    -webkit-user-select: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-appearance: none;
+}
+.btn-eidt:active {
+   	margin-top: 2px;
+   	-webkit-box-shadow: none;
+}
+.btn-remove {
+	left: 130px;
+	background: -webkit-radial-gradient(center center,#F5E5E9 ,#FB4163);
+}
+.btn-remove:active {
+   	margin-top: 2px;
+   	-webkit-box-shadow: none;
+}
+.dialog-div {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+.dialog-masking {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.8;
+	z-index: 998;
+}
+.dialog-content {
+	position: absolute;
+	width: 80%;
+	height: 80%;
+	left: 10%;
+	top: 10%;
+	background-color: #fff;
+	border-radius: 10px;
+	z-index: 999;
+}
+.dialog-content .title {
+	text-align: center;
+	padding-left: 0px;
+	height: 8%;
+	margin-bottom: 0px;
+}
+.dialog-content .overflow-div{
+	position: relative;
+	width: 100%; 
+	height: 92%; 
+	overflow: auto;
+}
+.dialog-content .overflow-div .content {
+	left: 45%;
 }

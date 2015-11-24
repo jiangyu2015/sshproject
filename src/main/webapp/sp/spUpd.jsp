@@ -20,4 +20,5 @@
         <input type="submit" value="查找" class="btn-submit"/>
     </form>
 </div>
+</body>
 </html>
