@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>添加商品</title>
-    <link type="text/css" rel="stylesheet" href="common.css" />
+    <link type="text/css" rel="stylesheet" href="../common.css" />
 </head>
 
 <body>

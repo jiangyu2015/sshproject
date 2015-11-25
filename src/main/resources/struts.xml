@@ -35,5 +35,25 @@
             <result type="redirect" name="success">/sp/test.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
         </action>
+        <action name="listSh" class="producerList" method="listProducer">
+            <result type="redirect" name="producer">/sh/shAllList.jsp</result>
+        </action>
+        <action name="shSelect" class="producerSelect" method="searchGoodsList">
+            <result type="redirect" name="success">/sh/shList.jsp</result>
+            <result type="redirect" name="input">/sh/fail.jsp</result>
+        </action>
+        <action name="shAdd" class="producerAdd" method="addProducer">
+            <result type="redirect" name="success">/sh/test.jsp</result>
+            <result type="redirect" name="input">/sh/fail.jsp</result>
+        </action>
+        <action name="shDel" class="producerDel" method="delProducer">
+            <result type="redirect" name="success">/sh/test.jsp</result>
+            <result type="redirect" name="input">/sh/fail.jsp</result>
+        </action>
+
+        <action name="listPlace" class="placeList" method="listplace">
+            <result type="redirect" name="place">/place/placeAllList.jsp</result>
+        </action>
+
     </package>
 </struts>

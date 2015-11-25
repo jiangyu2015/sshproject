@@ -56,6 +56,8 @@
             <list>
                 <value>Users.hbm.xml</value>
                 <value>Goods.hbm.xml</value>
+                <value>Producer.hbm.xml</value>
+                <value>Place.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -95,5 +97,34 @@
     </bean>
     <bean id="goodsUpd" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"></property>
+    </bean>
+
+    <bean id="producerDAO" class="com.springtest1.dao.ProducerDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="producerBiz" class="com.springtest1.biz.ProducerBizImpl">
+        <property name="producerDAO" ref="producerDAO"/>
+    </bean>
+    <bean id="producerList" class="com.ProducerManagerAction" scope="prototype">
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="producerSelect" class="com.ProducerManagerAction" scope="prototype">
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="producerAdd" class="com.ProducerManagerAction" scope="prototype">
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="producerDel" class="com.ProducerManagerAction" scope="prototype">
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+
+    <bean id="placeDAO" class="com.springtest1.dao.PlaceDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="placeBiz" class="com.springtest1.biz.PlaceBizImpl">
+        <property name="placeDAO" ref="placeDAO"/>
+    </bean>
+    <bean id="placeList" class="com.PlaceManagerAction" scope="prototype">
+        <property name="placeBiz" ref="placeBiz"/>
     </bean>
 </beans>

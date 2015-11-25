@@ -1,6 +1,7 @@
 package com.springtest1.dao;
 
 import com.hibtest1.entity.Goods;
+import com.hibtest1.entity.Producer;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;

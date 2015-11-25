@@ -13,11 +13,11 @@ public interface GoodsDAO {
 
     public boolean delGoods(Goods condition);
 
- //   public Goods getGood(String name);
+    //   public Goods getGood(String name);
 
-    public List getAllGoods();
+    public List getAllGoods();  //查询所有
 
-    public  void modifyGood(Goods good); //修改商品
+    public void modifyGood(Goods good); //修改商品
 
 
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibtest1.entity">
+    <class name="Producer" table="sh_info">
+        <id name="producerId" type="java.lang.Integer">
+            <column name="sh_id" length="4"/>
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="producerName" type="java.lang.String">
+            <column name="sh_name" length="30" not-null="true"/>
+        </property>
+        <property name="producerAddress" type="java.lang.String">
+            <column name="sh_add" length="50" not-null="false"/>
+        </property>
+        <property name="linkman" type="java.lang.String">
+            <column name="linkman" length="5" not-null="false"/>
+        </property>
+        <property name="telOne" type="java.lang.String">
+            <column name="link_tel1" length="15" not-null="false"/>
+        </property>
+        <property name="telTwo" type="java.lang.String">
+            <column name="link_tel2" length="15" not-null="false"/>
+        </property>
+    </class>
+</hibernate-mapping>

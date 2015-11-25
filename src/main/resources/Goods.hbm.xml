@@ -25,31 +25,31 @@
             <column name="price" length="15" not-null="false"/>
         </property>
         <property name="length" type="java.lang.Float">
-            <column name="length" length="5" not-null="false"/>
+            <column name="length" length="10" not-null="false"/>
         </property>
 
         <property name="wide" type="java.lang.Float">
-            <column name="wide" length="5" not-null="false"/>
+            <column name="wide" length="10" not-null="false"/>
         </property>
         <property name="tall" type="java.lang.Float">
-            <column name="tall" length="5" not-null="false"/>
+            <column name="tall" length="10" not-null="false"/>
         </property>
 
         <property name="mweight" type="java.lang.Float">
-            <column name="mweight" length="5" not-null="false"/>
+            <column name="mweight" length="10" not-null="false"/>
         </property>
         <property name="volume" type="java.lang.Float">
-            <column name="volume" length="5" not-null="false"/>
+            <column name="volume" length="10" not-null="false"/>
         </property>
         <property name="vweight" type="java.lang.Float">
-            <column name="vweight" length="5" not-null="false"/>
+            <column name="vweight" length="10" not-null="false"/>
         </property>
 
         <property name="standard" type="java.lang.String">
             <column name="standard" length="30" not-null="false"/>
         </property>
         <property name="unit" type="java.lang.String">
-            <column name="unit" length="4" not-null="false"/>
+            <column name="unit" length="10" not-null="false"/>
         </property>
         <property name="service" type="java.lang.String">
             <column name="service" length="30" not-null="false"/>
@@ -58,7 +58,7 @@
             <column name="creation_date" length="30" not-null="false"/>
         </property>
         <property name="baozhiqi" type="java.lang.Integer">
-            <column name="baozhiqi" length="4" not-null="false"/>
+            <column name="baozhiqi" length="10" not-null="false"/>
         </property>
         <property name="expirationDate" type="java.sql.Timestamp">
             <column name="expiration_date" length="30" not-null="false"/>

@@ -31,9 +31,6 @@ public class GoodsBizImpl implements GoodsBiz {
         return goodsDAO.delGoods(good);
     }
 
-    /*   public Goods getGood(String name){
-           return goodsDAO.getGood(name);
-       }  */
     @Transactional
     public List getAllGoods() {
         return goodsDAO.getAllGoods();
