@@ -13,4 +13,6 @@ public interface ProducerDAO {
     public void add(Producer condition);//add
     public boolean delGoods(Producer condition); //del
 
+    public void editProducer(Producer producer); //修改AllList商品
+
 }

@@ -17,14 +17,9 @@
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
 
-                    if (i == 0) {
-                        $line.find('.input-div').html($tds.eq(i).text());
-                    } else if (i == 13) {
-                        $('input:radio[name="goods.service"]').prop('checked', false);
-                        $('input:radio[name="goods.service"][value="' + $tds.eq(i).text() + '"]').prop('checked', true);
-                    } else {
+
                         $line.find('input').val($tds.eq(i).text());
-                    }
+
                 }
 
                 $("#dialog_edit").show();
@@ -112,10 +107,11 @@
         <div class="title">修改商户</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editSh" target="_parent">
+                <form method="post" action="editSh" >
                     <div class="line">
                         <div class="lable">商户id：</div>
-                        <div class="input-div"></div>
+                        <div class="input-div"><input  name="producer.producerId" readonly="readonly" style="border: none;-webkit-box-shadow: none;"/></div>
+
                     </div>
                     <div class="line">
                         <div class="lable">商户名称：</div>

@@ -27,6 +27,10 @@
             <result type="redirect" name="success">/sp/test.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
         </action>
+        <action name="spEdit" class="editGoods" method="editGoods">
+            <result type="redirect" name="success">/sp/spList.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>
         <action name="spUpdShow" class="goodsUpdShow" method="modifyShow">
             <result type="redirect" name="success">/sp/spUpList.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
@@ -42,6 +46,10 @@
             <result type="redirect" name="success">/sh/shList.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
+        <action name="editSh" class="producerEdit" method="editProducer">
+            <result type="redirect" name="success">/sh/shList.jsp</result>
+            <result type="redirect" name="input">/sh/fail.jsp</result>
+        </action>
         <action name="shAdd" class="producerAdd" method="addProducer">
             <result type="redirect" name="success">/sh/test.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
@@ -50,10 +58,11 @@
             <result type="redirect" name="success">/sh/test.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
-
         <action name="listPlace" class="placeList" method="listplace">
             <result type="redirect" name="place">/place/placeAllList.jsp</result>
         </action>
+
+
 
     </package>
 </struts>

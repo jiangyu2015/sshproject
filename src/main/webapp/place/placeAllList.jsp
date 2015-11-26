@@ -26,9 +26,6 @@
 
                     if(i == 0){
                         $line.find('.input-div').html($tds.eq(i).text());
-                    }else if(i == 13) {
-                        $('input:radio[name="goods.service"]').prop('checked', false);
-                        $('input:radio[name="goods.service"][value="'+$tds.eq(i).text()+'"]').prop('checked', true);
                     }else {
                         $line.find('input').val($tds.eq(i).text());
                     }
@@ -81,7 +78,7 @@
         <div class="title">修改仓库</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editGoods" target="_parent">
+                <form method="post" action="editPlace" target="_parent">
                     <div class="line">
                         <div class="lable">仓库id：</div>
                         <div class="input-div"></div>

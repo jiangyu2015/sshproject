@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibtest1.entity">
+    <class name="StorageApp" table="rk_application">
+        <id name="storageAppId" type="java.lang.Integer">
+            <column name="rk_application_id" length="4"/>
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="goodsName" type="java.lang.String">
+            <column name="sp_name" length="30" not-null="true"/>
+        </property>
+        <property name="producerName" type="java.lang.String">
+            <column name="sh_name" length="30" not-null="true"/>
+        </property>
+        <property name="expectedDate" type="java.sql.Timestamp">
+            <column name="expect_rk_time" length="30" not-null="false"/>
+        </property>
+        <property name="expectedNumber" type="java.lang.Integer">
+            <column name="expect_rk_number" length="10" not-null="false"/>
+        </property>
+        <property name="commodityRating" type="java.lang.String">
+            <column name="commodity_rating" length="10" not-null="false"/>
+        </property>
+        <property name="sldId" type="java.lang.String">
+            <column name="sld_id" length="10" not-null="false"/>
+        </property>
+        <property name="storagePlace" type="java.lang.String">
+            <column name="rk_place_add" length="30" not-null="true"/>
+        </property>
+        <property name="storageType" type="java.lang.String">
+            <column name="rk_type" length="50" not-null="false"/>
+        </property>
+        <property name="state" type="java.lang.String">
+            <column name="state" length="50" not-null="false"/>
+        </property>
+    </class>
+</hibernate-mapping>

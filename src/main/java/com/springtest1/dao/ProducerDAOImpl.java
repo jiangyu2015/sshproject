@@ -47,5 +47,10 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
         return true;
     }
 
+    public void editProducer(Producer producer) {
+        System.out.println("DAO里面的"+producer.getProducerName());
+        super.getHibernateTemplate().update(producer);   //修改
+    }
+
 
 }

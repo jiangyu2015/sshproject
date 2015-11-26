@@ -69,10 +69,10 @@
         <property name="userDAO" ref="userDAO"/>
     </bean>
     <bean id="umAction" class="com.UserManagerAction">
-        <property name="userBiz" ref="userBiz"></property>
+        <property name="userBiz" ref="userBiz"/>
     </bean>
     <bean id="userAdd" class="com.UserManagerAction" scope="prototype">
-        <property name="userBiz" ref="userBiz"></property>
+        <property name="userBiz" ref="userBiz"/>
     </bean>
     <bean id="goodsDAO" class="com.springtest1.dao.GoodsDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -81,22 +81,25 @@
         <property name="goodsDAO" ref="goodsDAO"/>
     </bean>
     <bean id="goodsSlecet" class="com.GoodsManagerAction" scope="prototype">
-        <property name="goodsBiz" ref="goodsBiz"></property>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="goodsAdd" class="com.GoodsManagerAction" scope="prototype">
-        <property name="goodsBiz" ref="goodsBiz"></property>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="goodsDel" class="com.GoodsManagerAction" scope="prototype">
-        <property name="goodsBiz" ref="goodsBiz"></property>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="goodsList" class="com.GoodsManagerAction" scope="prototype">
-        <property name="goodsBiz" ref="goodsBiz"></property>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="goodsUpdShow" class="com.GoodsManagerAction" scope="prototype">
-        <property name="goodsBiz" ref="goodsBiz"></property>
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
+    <bean id="editGoods" class="com.GoodsManagerAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="goodsUpd" class="com.GoodsManagerAction" scope="prototype">
-        <property name="goodsBiz" ref="goodsBiz"></property>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
 
     <bean id="producerDAO" class="com.springtest1.dao.ProducerDAOImpl">
@@ -115,6 +118,10 @@
         <property name="producerBiz" ref="producerBiz"/>
     </bean>
     <bean id="producerDel" class="com.ProducerManagerAction" scope="prototype">
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+
+    <bean id="producerEdit" class="com.ProducerManagerAction" scope="prototype">
         <property name="producerBiz" ref="producerBiz"/>
     </bean>
 

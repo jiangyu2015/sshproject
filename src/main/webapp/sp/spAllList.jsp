@@ -17,9 +17,7 @@
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
 
-                    if (i == 0) {
-                        $line.find('.input-div').html($tds.eq(i).text());
-                    } else if (i == 13) {
+                     if (i == 13) {
                         $('input:radio[name="goods.service"]').prop('checked', false);
                         $('input:radio[name="goods.service"][value="' + $tds.eq(i).text() + '"]').prop('checked', true);
                     } else {
@@ -134,10 +132,11 @@
         <div class="title">修改商品</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editGoods" target="_parent">
+                <form method="post" action="spEdit">
                     <div class="line">
                         <div class="lable">商品id：</div>
-                        <div class="input-div"></div>
+                        <div class="input-div"><input  name="goods.goodsId" readonly="readonly" style="border: none;-webkit-box-shadow: none;"/></div>
+
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
@@ -215,7 +214,7 @@
 
                     <div class="line">
                         <div class="lable">生产日期：</div>
-                        <div class="input-div"><input placeholder="请输入生产日期" name="goods.creationDate"/></div>
+                        <div class="input-div"><input placeholder="请输入生产日期" name="goods.creationDate" type="date"/></div>
                     </div>
 
                     <div class="line">
@@ -225,7 +224,7 @@
 
                     <div class="line">
                         <div class="lable">保质期截止日期：</div>
-                        <div class="input-div"><input placeholder="请输入保质期截止日期" name="goods.expirationDate"/></div>
+                        <div class="input-div"><input placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date"/></div>
                     </div>
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>

@@ -170,11 +170,11 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
     }
 
     public String modify() {
-        Goods condition =(Goods)session.get("goods");
-        System.out.println("session里面得来的"+condition.getGoodsName());
-        System.out.println("session里面得来的"+condition.getService());
+        Goods condition = (Goods) session.get("goods");
+        System.out.println("session里面得来的" + condition.getGoodsName());
+        System.out.println("session里面得来的" + condition.getService());
 
-        if (goods.getGoodsBackName() != null  && !goods.getGoodsBackName().equals(""))        //后台名字
+        if (goods.getGoodsBackName() != null && !goods.getGoodsBackName().equals(""))        //后台名字
             condition.setGoodsBackName(goods.getGoodsBackName());
         if (goods.getBaozhiqi() != null && !goods.getBaozhiqi().equals(""))                      //保质期
             condition.setBaozhiqi(goods.getBaozhiqi());
@@ -184,15 +184,15 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setExpirationDate(goods.getExpirationDate());
         if (goods.getGoodsName() != null && !goods.getGoodsName().equals(""))          //商品名称
             condition.setGoodsName(goods.getGoodsName());
-        if (goods.getLength() != null&& !goods.getLength().equals(""))              //长
+        if (goods.getLength() != null && !goods.getLength().equals(""))              //长
             condition.setLength(goods.getLength());
         if (goods.getMweight() != null && !goods.getMweight().equals(""))                  //毛重
             condition.setMweight(goods.getMweight());
         if (goods.getPrice() != null && !goods.getPrice().equals(""))              //价格
-            System.out.println(goods.getPrice()+"更新的价格");
-            condition.setPrice(goods.getPrice());
+            System.out.println(goods.getPrice() + "更新的价格");
+        condition.setPrice(goods.getPrice());
         if (goods.getTall() != null && !goods.getTall().equals(""))                   //高
-            condition.setTall(goods.getTall() );
+            condition.setTall(goods.getTall());
         if (goods.getValue() != null && !goods.getValue().equals(""))                   //价值
             condition.setValue(goods.getValue());
         if (goods.getUnit() != null && !goods.getUnit().equals(""))
@@ -207,12 +207,59 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setVweight(goods.getVweight()); //体积重量
         if (goods.getStandard() != null && !goods.getStandard().equals(""))
             condition.setStandard(goods.getStandard());  //装箱规格
-        if(goodsBiz.modifyGood(condition)){
-            session.put("goodslist",condition);
-            request.put("message","修改成功");  //先放着
+        if (goodsBiz.modifyGood(condition)) {
+            session.put("goodslist", condition);
+            request.put("message", "修改成功");  //先放着
             return "success";
-        }else
-         return "input";
+        } else
+            return "input";
 
+    }
+
+    public String editGoods() {
+        Goods condition = new Goods();
+        System.out.println("修改的商品id" + goods.getGoodsId());
+        if (goods.getGoodsId() != null && !goods.getGoodsId().equals("")) {
+            condition.setGoodsId(goods.getGoodsId());
+        }
+        if (goods.getGoodsBackName() != null && !goods.getGoodsBackName().equals(""))        //后台名字
+            condition.setGoodsBackName(goods.getGoodsBackName());
+        if (goods.getBaozhiqi() != null && !goods.getBaozhiqi().equals(""))                      //保质期
+            condition.setBaozhiqi(goods.getBaozhiqi());
+        if (goods.getCreationDate() != null && !goods.getCreationDate().equals(""))                 //生成日期
+            condition.setCreationDate(goods.getCreationDate());
+        if (goods.getExpirationDate() != null && !goods.getExpirationDate().equals(""))               //截止日期
+            condition.setExpirationDate(goods.getExpirationDate());
+        if (goods.getGoodsName() != null && !goods.getGoodsName().equals(""))          //商品名称
+            condition.setGoodsName(goods.getGoodsName());
+        if (goods.getLength() != null && !goods.getLength().equals(""))              //长
+            condition.setLength(goods.getLength());
+        if (goods.getMweight() != null && !goods.getMweight().equals(""))                  //毛重
+            condition.setMweight(goods.getMweight());
+        if (goods.getPrice() != null && !goods.getPrice().equals(""))              //价格
+            System.out.println(goods.getPrice() + "更新的价格");
+        condition.setPrice(goods.getPrice());
+        if (goods.getTall() != null && !goods.getTall().equals(""))                   //高
+            condition.setTall(goods.getTall());
+        if (goods.getValue() != null && !goods.getValue().equals(""))                   //价值
+            condition.setValue(goods.getValue());
+        if (goods.getUnit() != null && !goods.getUnit().equals(""))
+            condition.setUnit(goods.getUnit());   //单位
+        if (goods.getWide() != null && !goods.getWide().equals(""))
+            condition.setWide(goods.getWide());   //宽
+        if (goods.getVolume() != null && !goods.getVolume().equals(""))
+            condition.setVolume(goods.getVolume());  //体积
+        if (goods.getService() != null && !goods.getService().equals(""))
+            condition.setService(goods.getService()); //实物服务
+        if (goods.getVweight() != null && !goods.getVweight().equals(""))
+            condition.setVweight(goods.getVweight()); //体积重量
+        if (goods.getStandard() != null && !goods.getStandard().equals(""))
+            condition.setStandard(goods.getStandard());  //装箱规格
+        if (goodsBiz.modifyGood(condition)) {
+            session.put("goodslist", condition);
+            request.put("message", "修改成功");  //先放着
+            return "success";
+        } else
+            return "input";
     }
 }

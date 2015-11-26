@@ -62,7 +62,6 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
     public String listProducer() {
         List producer = producerBiz.getAllProducer();
         Producer producer1 = (Producer) producer.get(0);
-        System.out.print(producer1.getProducerName() + "aaa");
         session.put("producerlistall", producer);
 
         return "producer";
@@ -142,5 +141,41 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
             session.put("producer", producer);
             return "success";
         } else return "input";
+    }
+
+    public String editProducer() {
+        Producer condition = new Producer();
+        if (producer.getProducerId() != null && !producer.getProducerId().equals("")){
+            condition.setProducerId(producer.getProducerId());
+            System.out.println(producer.getProducerId());
+        }
+        if (producer.getProducerName() != null && !producer.getProducerName().equals("")){
+            condition.setProducerName(producer.getProducerName());
+            System.out.println(producer.getProducerName());
+        }
+        if (producer.getProducerAddress() != null && !producer.getProducerAddress().equals("")){
+            condition.setProducerAddress(producer.getProducerAddress());
+            System.out.println(producer.getProducerAddress());
+        }
+        if (producer.getLinkman() != null && !producer.getLinkman().equals("")){
+            condition.setLinkman(producer.getLinkman());
+            System.out.println(producer.getLinkman());
+        }
+        if (producer.getTelOne() != null && !producer.getTelOne().equals("")){
+            condition.setTelOne(producer.getTelOne());
+            System.out.println(producer.getTelOne());
+        }
+        if (producer.getTelTwo() != null && !producer.getTelTwo().equals("")){
+            condition.setTelTwo(producer.getTelTwo());
+            System.out.println(producer.getTelTwo());
+        }
+        if (producerBiz.editProducer(condition)) {
+            System.out.println("condition"+condition.getProducerName());
+            System.out.println(condition.getTelTwo());
+            session.put("producerlist", condition);
+            return "success";
+        } else return "input";
+
+
     }
 }

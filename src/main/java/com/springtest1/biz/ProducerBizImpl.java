@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by user on 2015/11/25.
  */
-public class ProducerBizImpl implements ProducerBiz{
+public class ProducerBizImpl implements ProducerBiz {
     private ProducerDAO producerDAO;
 
     public void setProducerDAO(ProducerDAO producerDAO) {
@@ -18,10 +18,10 @@ public class ProducerBizImpl implements ProducerBiz{
 
     @Transactional
     public List getAllProducer() {
-        System.out.println("我经过这里");
         return producerDAO.getAllProducer();
     }
-    public List getProducerList( Producer condition){
+
+    public List getProducerList(Producer condition) {
         List list = producerDAO.search(condition);
         return list;
     }
@@ -33,4 +33,10 @@ public class ProducerBizImpl implements ProducerBiz{
     public boolean delGoods(Producer producer) {
         return producerDAO.delGoods(producer);
     }
+
+    public boolean editProducer(Producer producer) {
+        System.out.println("biz里面的"+producer.getProducerName());
+        producerDAO.editProducer(producer);
+        return true;
+    } //修改AllList商品
 }
