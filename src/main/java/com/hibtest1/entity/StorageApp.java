@@ -11,12 +11,8 @@ public class StorageApp implements Serializable {
     private String goodsName; //商品名字
     private String producerName; //商户名字
     private Date expectedDate;  //预期时间
-    private String expectedNumber;  //预期数量
+    protected Integer expectedNumber;  //预期数量
     private String commodityRating; //商品评级
-    private String sldId; //三联单编号
-    private String storagePlace;  //入库地点
-    private String storageType; //入库类型
-    private String state;  //处理状态
 
     public Integer getStorageAppId() {
         return storageAppId;
@@ -50,11 +46,11 @@ public class StorageApp implements Serializable {
         this.expectedDate = expectedDate;
     }
 
-    public String getExpectedNumber() {
+    public Integer getExpectedNumber() {
         return expectedNumber;
     }
 
-    public void setExpectedNumber(String expectedNumber) {
+    public void setExpectedNumber(Integer expectedNumber) {
         this.expectedNumber = expectedNumber;
     }
 
@@ -97,4 +93,11 @@ public class StorageApp implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
+
+    private String sldId; //三联单编号
+    private String storagePlace;  //入库地点
+    private String storageType; //入库类型
+    private String state;  //处理状态
+
+
 }

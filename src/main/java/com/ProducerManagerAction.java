@@ -67,7 +67,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         return "producer";
     }
 
-    public String searchGoodsList() {
+    public String searchProducerList() {
         System.out.println(producerName);
         Producer condition = new Producer();
         condition.setProducerName(producerName);

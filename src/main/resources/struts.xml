@@ -61,6 +61,12 @@
         <action name="listPlace" class="placeList" method="listplace">
             <result type="redirect" name="place">/place/placeAllList.jsp</result>
         </action>
+        <action name="listrksq" class="storageAppList" method="listStorageApp">
+            <result type="redirect" name="storageApp">/rksq/rksqAllList.jsp</result>
+        </action>
+        <action name="editrksq" class="storageAppEdit" method="editStorageApp">
+            <result type="redirect" name="success">/rksq/rksqList.jsp</result>
+        </action>
 
 
 

@@ -58,6 +58,7 @@
                 <value>Goods.hbm.xml</value>
                 <value>Producer.hbm.xml</value>
                 <value>Place.hbm.xml</value>
+                <value>StorageApp.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -133,5 +134,18 @@
     </bean>
     <bean id="placeList" class="com.PlaceManagerAction" scope="prototype">
         <property name="placeBiz" ref="placeBiz"/>
+    </bean>
+
+    <bean id="storageAppDAO" class="com.springtest1.dao.StorageAppDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="storageAppBiz" class="com.springtest1.biz.StorageAppBizImpl">
+        <property name="storageAppDAO" ref="storageAppDAO"/>
+    </bean>
+    <bean id="storageAppEdit" class="com.StorageAppManagerAction" scope="prototype">
+        <property name="storageAppBiz" ref="storageAppBiz"/>
+    </bean>
+    <bean id="storageAppList" class="com.StorageAppManagerAction" scope="prototype">
+        <property name="storageAppBiz" ref="storageAppBiz"/>
     </bean>
 </beans>
