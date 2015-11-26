@@ -16,7 +16,7 @@
         <property name="producerName" type="java.lang.String">
             <column name="sh_name" length="30" not-null="true"/>
         </property>
-        <property name="expectedDate" type="java.sql.Timestamp">
+        <property name="expectedDate" type="java.util.Date">
             <column name="expect_rk_time" length="30" not-null="false"/>
         </property>
         <property name="expectedNumber" type="java.lang.Integer">

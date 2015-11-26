@@ -67,8 +67,10 @@
         <action name="editrksq" class="storageAppEdit" method="editStorageApp">
             <result type="redirect" name="success">/rksq/rksqList.jsp</result>
         </action>
-
-
+        <action name="rksqAdd" class="storageAppAdd" method="addStorageApp">
+            <result type="redirect" name="success">/rksq/test.jsp</result>
+            <result type="redirect" name="input">/rksq/fail.jsp</result>
+        </action>
 
     </package>
 </struts>

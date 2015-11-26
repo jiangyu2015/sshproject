@@ -4,6 +4,7 @@ import com.hibtest1.entity.StorageApp;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.StorageAppBiz;
+import org.apache.logging.log4j.core.appender.SyslogAppender;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -119,8 +120,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     }  */
 
     public String addStorageApp() throws Exception {                  //增加入库申请
+        System.out.println("addStorageApp");
         StorageApp condition = new StorageApp();
-        System.out.println(storageApp.getProducerName() + "入库我传过来了");
+        System.out.println(storageApp.getProducerName() + "入库申请我传过来了");
         if (storageApp.getProducerName() != null && !storageApp.getProducerName().equals(""))
             condition.setProducerName(storageApp.getProducerName());
         else {
@@ -182,6 +184,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
     public String editStorageApp() {
         StorageApp condition = new StorageApp();
+        if (storageApp.getStorageAppId() != null && !storageApp.getStorageAppId().equals("")) {
+            condition.setStorageAppId(storageApp.getStorageAppId());
+        }
         if (storageApp.getProducerName() != null && !storageApp.getProducerName().equals(""))        //商户名称
             condition.setProducerName(storageApp.getProducerName());
         if (storageApp.getStoragePlace() != null && !storageApp.getStoragePlace().equals(""))                      //仓库地址

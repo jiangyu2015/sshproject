@@ -23,8 +23,6 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-
-
                     $line.find('input').val($tds.eq(i).text());
 
                 }
@@ -125,49 +123,49 @@
                 <form method="post" action="editrksq">
                     <div class="line">
                         <div class="lable">入库申请id：</div>
-                        <div class="input-div"><input name="storageapp.storageAppId" readonly="readonly"
+                        <div class="input-div"><input name="storageApp.storageAppId" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
 
                     </div>
                     <div class="line">
                         <div class="lable">商户名称：</div>
-                        <div class="input-div"><input placeholder="请输入商户名称" name="storageapp.producerName"/></div>
+                        <div class="input-div"><input placeholder="请输入商户名称" name="storageApp.producerName"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input placeholder="请输入商品名称" name="storageapp.goodsName"/></div>
+                        <div class="input-div"><input placeholder="请输入商品名称" name="storageApp.goodsName"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">入库地点：</div>
-                        <div class="input-div"><input placeholder="请输入入库地点" name="storageapp.storagePlace"/></div>
+                        <div class="input-div"><input placeholder="请输入入库地点" name="storageApp.storagePlace"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">商品评级：</div>
-                        <div class="input-div"><input placeholder="请输入商品评级" name="storageapp.commodityRating"/></div>
+                        <div class="input-div"><input placeholder="请输入商品评级" name="storageApp.commodityRating"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">预期入库时间：</div>
-                        <div class="input-div"><input placeholder="请输入预期入库时间" name="storageapp.expectedDate" type="date"/></div>
+                        <div class="input-div"><input placeholder="请输入预期入库时间" name="storageApp.expectedDate" type="date"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">预期入库数量：</div>
-                        <div class="input-div"><input placeholder="请输入预期入库数量" name="storageapp.expectedNumber"/></div>
+                        <div class="input-div"><input placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">三联单编号：</div>
-                        <div class="input-div"><input placeholder="请输入三联单编号" name="storageapp.sldId"/></div>
+                        <div class="input-div"><input placeholder="请输入三联单编号" name="storageApp.sldId"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">入库类型：</div>
-                        <div class="input-div"><input placeholder="请输入入库类型" name="storageapp.storageType"/></div>
+                        <div class="input-div"><input placeholder="请输入入库类型" name="storageApp.storageType"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">处理状态：</div>
-                        <div class="input-div"><input placeholder="请输入处理状态" name="storageapp.state"/></div>
+                        <div class="input-div"><input placeholder="请输入处理状态" name="storageApp.state"/></div>
                     </div>
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
