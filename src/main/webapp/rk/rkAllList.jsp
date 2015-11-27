@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 2015/11/26
-  Time: 16:19
+  Date: 2015/11/27
+  Time: 13:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>入库申请信息</title>
+    <title>入库明细信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
@@ -75,7 +75,7 @@
 
 <body>
 <div class="table-div">
-    <div class="title">入库申请信息</div>
+    <div class="title">入库明细信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
         <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">
@@ -83,31 +83,25 @@
     <table id="advSearch" class="table">
         <thead>
         <tr>
-            <th>入库申请id</th>
-            <th>商户名称</th>
-            <th>商品名称</th>
-            <th>入库地点</th>
-            <th>商品评级</th>
-            <th>预期入库时间</th>
-            <th>预期入库数量</th>
-            <th>三联单编号</th>
+            <th>入库明细id</th>
+            <th>商品id</th>
+            <th>仓库id</th>
+            <th>实际入库时间</th>
+            <th>实收数量</th>
             <th>入库类型</th>
-            <th>处理状态</th>
+            <th>备注</th>
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.storageapplistall}" var="storageapp">
+        <s:iterator value="%{#session.storagelistall}" var="storage">
             <tr>
-                <td><s:property value="#storageapp.storageAppId"/></td>
-                <td><s:property value="#storageapp.producerName"/></td>
-                <td><s:property value="#storageapp.goodsName"/></td>
-                <td><s:property value="#storageapp.storagePlace"/></td>
-                <td><s:property value="#storageapp.commodityRating"/></td>
-                <td><s:date format="yyyy-MM-dd" name="#storageapp.expectedDate"/></td>
-                <td><s:property value="#storageapp.expectedNumber"/></td>
-                <td><s:property value="#storageapp.sldId"/></td>
-                <td><s:property value="#storageapp.storageType"/></td>
-                <td><s:property value="#storageapp.state"/></td>
+                <td><s:property value="#storage.storageId"/></td>
+                <td><s:property value="#storage.goodsId"/></td>
+                <td><s:property value="#storage.placeId"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storage.storageDate"/></td>
+                <td><s:property value="#storage.storageNumber"/></td>
+                <td><s:property value="#storage.storageType"/></td>
+                <td><s:property value="#storage.remark"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -117,54 +111,43 @@
 <div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
-        <div class="title">修改入库申请</div>
+        <div class="title">修改入库明细信息</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editrksq">
+                <form method="post" action="editrk">
                     <div class="line">
-                        <div class="lable">入库申请id：</div>
-                        <div class="input-div"><input name="storageApp.storageAppId" readonly="readonly"
+                        <div class="lable">入库明细id：</div>
+                        <div class="input-div"><input name="storage.storageId" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+
                     </div>
                     <div class="line">
-                        <div class="lable">商户名称：</div>
-                        <div class="input-div"><input placeholder="请输入商户名称" name="storageApp.producerName"/></div>
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input placeholder="请输入商品id" name="storageApp.storage.goodsId"/></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">商品名称：</div>
-                        <div class="input-div"><input placeholder="请输入商品名称" name="storageApp.goodsName"/></div>
+                        <div class="lable">仓库id：</div>
+                        <div class="input-div"><input placeholder="请输入仓库id" name="storage.placeId"/></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">入库地点：</div>
-                        <div class="input-div"><input placeholder="请输入入库地点" name="storageApp.storagePlace"/></div>
+                        <div class="lable">实际入库时间：</div>
+                        <div class="input-div"><input placeholder="请输入实际入库时间" name="storage.storageDate"/></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">商品评级：</div>
-                        <div class="input-div"><input placeholder="请输入商品评级" name="storageApp.commodityRating"/></div>
+                        <div class="lable">实收数量：</div>
+                        <div class="input-div"><input placeholder="请输入实收数量" name="storageNumber"/></div>
                     </div>
 
-                    <div class="line">
-                        <div class="lable">预期入库时间：</div>
-                        <div class="input-div"><input placeholder="请输入预期入库时间" name="storageApp.expectedDate" type="date"/></div>
-                    </div>
-                    <div class="line">
-                        <div class="lable">预期入库数量：</div>
-                        <div class="input-div"><input placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/></div>
-                    </div>
-                    <div class="line">
-                        <div class="lable">三联单编号：</div>
-                        <div class="input-div"><input placeholder="请输入三联单编号" name="storageApp.sldId"/></div>
-                    </div>
                     <div class="line">
                         <div class="lable">入库类型：</div>
-                        <div class="input-div"><input placeholder="请输入入库类型" name="storageApp.storageType"/></div>
+                        <div class="input-div"><input placeholder="请输入入库类型" name="storage.storageType" type="date"/></div>
                     </div>
                     <div class="line">
-                        <div class="lable">处理状态：</div>
-                        <div class="input-div"><input placeholder="请输入处理状态" name="storageApp.state"/></div>
+                        <div class="lable">备注：</div>
+                        <div class="input-div"><input placeholder="请输入备注" name="storage.remark"/></div>
                     </div>
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
@@ -176,3 +159,4 @@
 </div>
 </body>
 </html>
+

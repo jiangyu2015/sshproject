@@ -42,13 +42,13 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
         super.getHibernateTemplate().save(producer);
     }
 
-    public boolean delGoods(Producer condition) {
+    public boolean delProducer(Producer condition) {
         super.getHibernateTemplate().delete(condition);
         return true;
     }
 
     public void editProducer(Producer producer) {
-        System.out.println("DAO里面的"+producer.getProducerName());
+        System.out.println("DAO里面的" + producer.getProducerName());
         super.getHibernateTemplate().update(producer);   //修改
     }
 

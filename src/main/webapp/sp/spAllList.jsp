@@ -117,9 +117,9 @@
                 <td><s:property value="#goods.standard"/></td>
                 <td><s:property value="#goods.unit"/></td>
                 <td><s:property value="#goods.service"/></td>
-                <td><s:property value="#goods.creationDate"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#goods.creationDate"/></td>
                 <td><s:property value="#goods.baozhiqi"/></td>
-                <td><s:property value="#goods.expirationDate"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
             </tr>
         </s:iterator>
         </tbody>

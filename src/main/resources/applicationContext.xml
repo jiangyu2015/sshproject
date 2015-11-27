@@ -59,6 +59,7 @@
                 <value>Producer.hbm.xml</value>
                 <value>Place.hbm.xml</value>
                 <value>StorageApp.hbm.xml</value>
+                <value>Storage.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -150,5 +151,18 @@
     </bean>
     <bean id="storageAppAdd" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
+    </bean>
+
+    <bean id="storageDAO" class="com.springtest1.dao.StorageDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="storageBiz" class="com.springtest1.biz.StorageBizImpl">
+        <property name="storageDAO" ref="storageDAO"/>
+    </bean>
+    <bean id="storageList" class="com.StorageAppManagerAction" scope="prototype">
+        <property name="storageBiz" ref="storageBiz"/>
+    </bean>
+    <bean id="storageEdit" class="com.StorageAppManagerAction" scope="prototype">
+        <property name="storageBiz" ref="storageBiz"/>
     </bean>
 </beans>

@@ -27,6 +27,7 @@ public class StorageAppBizImpl  implements StorageAppBiz {
     }
 
     public void add(StorageApp condition) {
+        System.out.println( "BIzImpl传值商品"+condition.getGoodsName()+"商户"+condition.getProducerName()+"库存地点"+ condition.getStoragePlace());
         storageAppDAO.add(condition);
     }
 

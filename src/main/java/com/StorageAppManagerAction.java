@@ -141,8 +141,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             ActionContext.getContext().put("yesWords", "请输入仓库名称!");
             return "input";
         }
-        List list = storageAppBiz.getStorageAppList(condition);
-
         System.out.println("ok");
 
         if (storageApp.getProducerName() != null)        //商户名称
@@ -205,14 +203,12 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setState(storageApp.getState());
         if (storageApp.getStorageType()!= null  && !storageApp.getStorageType().equals(""))          //入库类型
             condition.setStorageType(storageApp.getStorageType());
-
         if (storageAppBiz.editStorageApp(condition)) {
             System.out.println("condition" + condition.getProducerName());
             System.out.println(condition.getGoodsName());
             session.put("storageapplist", condition);
             return "success";
         } else return "input";
-
 
     }
 }

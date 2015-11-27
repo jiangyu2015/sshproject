@@ -13,5 +13,5 @@ public interface StorageAppDAO {
     public void add(StorageApp condition);//add
    // public boolean delGoods(StorageApp condition); //del
 
-    public void editStorageApp(StorageApp storageApp); //修改AllList商品
+    public void editStorageApp(StorageApp storageApp); //修改AllList\
 }

@@ -71,12 +71,13 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         System.out.println(producerName);
         Producer condition = new Producer();
         condition.setProducerName(producerName);
+        System.out.println("商户查询Manager"+condition.getProducerName());
         List list = producerBiz.getProducerList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
             Producer producer = new Producer();
             producer = (Producer) list.get(0);
-            //  session.put("goodslist", list);
+
             session.put("producerlist", producer);
             return "success";
         } else
@@ -92,7 +93,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         if (list.size() > 0) {
             Producer producer = new Producer();
             producer = (Producer) list.get(0);
-            boolean e = producerBiz.delGoods(producer);
+            boolean e = producerBiz.delProducer(producer);
             if (e) return "success";
             else return "input";
         } else return "input";

@@ -39,6 +39,8 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
     }
 
     public void add(StorageApp storageApp) {
+
+        System.out.println( "商品"+storageApp.getGoodsName()+"商户"+ storageApp.getProducerName()+"库存地点"+ storageApp.getStoragePlace());
         super.getHibernateTemplate().save(storageApp);
     }
 

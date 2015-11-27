@@ -15,6 +15,7 @@
 	<table id="advSearch" class="table">
 		<thead>
 			<tr>
+				<th>商品id</th>
 	            <th>商品名称</th>
 	            <th>后台商品名称</th>
 	            <th>参考价值</th>
@@ -36,6 +37,7 @@
         <tbody>
 	       <s:iterator value="%{#session.goodslist}" var="goods">
 		        <tr>
+					<td><s:property value="#goods.goodsId"/></td>
 		            <td><s:property value="#goods.goodsName"/></td>
 		            <td><s:property value="#goods.goodsBackName"/></td>
 		            <td><s:property value="#goods.value"/></td>
@@ -49,9 +51,9 @@
 		            <td><s:property value="#goods.standard"/></td>
 		            <td><s:property value="#goods.unit"/></td>
 		            <td><s:property value="#goods.service"/></td>
-		            <td><s:property value="#goods.creationDate"/></td>
+		            <td><s:date format="yyyy-MM-dd" name="#goods.creationDate" /></td>
 		            <td><s:property value="#goods.baozhiqi"/></td>
-		            <td><s:property value="#goods.expirationDate"/></td>
+		            <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
 		        </tr>
 	        </s:iterator>
         </tbody>

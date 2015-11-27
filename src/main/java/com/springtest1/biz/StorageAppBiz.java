@@ -16,5 +16,5 @@ public interface StorageAppBiz {
 
   //  public boolean delGoods(StorageApp good);  //删除x
 
-    public boolean editStorageApp(StorageApp StorageApp); //修改AllList
+    public boolean editStorageApp(StorageApp storageApp); //修改AllList
 }

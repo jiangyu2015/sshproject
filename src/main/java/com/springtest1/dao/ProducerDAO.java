@@ -11,7 +11,7 @@ public interface ProducerDAO {
     public List getAllProducer();
     public List search(Producer condition);   //查询
     public void add(Producer condition);//add
-    public boolean delGoods(Producer condition); //del
+    public boolean delProducer(Producer condition); //del
 
     public void editProducer(Producer producer); //修改AllList商品
 
