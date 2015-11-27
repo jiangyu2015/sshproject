@@ -11,7 +11,7 @@ public class StorageApp implements Serializable {
     private String goodsName; //商品名字
     private String producerName; //商户名字
     private Date expectedDate;  //预期时间
-    protected Integer expectedNumber;  //预期数量
+    private Integer expectedNumber;  //预期数量
     private String commodityRating; //商品评级
 
     public Integer getStorageAppId() {

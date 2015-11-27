@@ -96,7 +96,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         System.out.println(list.size());
         if (list.size() > 0) {
         //    StorageApp storageApp = new StorageApp();
-
             //  session.put("goodslist", list);
             session.put("storageapplist", list);
             return "success";

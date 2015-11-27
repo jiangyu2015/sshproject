@@ -18,7 +18,24 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     Map<String, Object> request;
     Map<String, Object> session;
     Storage storage;
-    String goodsName;   //商品名称
+     String goodsName;   //商品名称
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getStoragePlace() {
+        return storagePlace;
+    }
+
+    public void setStoragePlace(String storagePlace) {
+        this.storagePlace = storagePlace;
+    }
+
     String storagePlace;  //入库地点
     Integer goodsId;   //商品id
 
@@ -70,28 +87,10 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         this.storage = storage;
     }
 
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-
-    public String getStoragePlace() {
-        return storagePlace;
-    }
-
-    public void setStoragePlace(String storagePlace) {
-        this.storagePlace = storagePlace;
-    }
-
-
     public String listStorage() {
         List storage = storageBiz.getAllStorage();
         Storage storage1 = (Storage) storage.get(0);
-        session.put("storagealistall", storage);
-
+        session.put("storagelistall", storage);
         return "storage";
     }
 
@@ -128,7 +127,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     public String addStorage() throws Exception {                  //增加入库申请
         System.out.println("addStorage");
         Storage condition = new Storage();
-        System.out.println(storage.getGoodsId() + "入库申请商品id我传过来了");
+        System.out.println(storage.getGoodsId() + "入库明细添加商品id我传过来了");
  /*       if (storage.getProducerName() != null && !storage.getProducerName().equals(""))
             condition.setProducerName(storage.getProducerName());
         else {
@@ -150,8 +149,9 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         System.out.println("ok");
         if (storage.getGoodsId() != null)        //商品id
             condition.setGoodsId(storage.getGoodsId());
-        if (storage.getPlaceId() != null)                 //仓库id
-            condition.setPlaceId(storage.getPlaceId());
+        if (storage.getPlaceId() != null)   {              //仓库id
+            System.out.println("入库明细添加仓库id我传过来了"+storage.getPlaceId());
+            condition.setPlaceId(storage.getPlaceId());}
         if (storage.getStorageDate() != null)                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null)               //实收数量
@@ -184,14 +184,19 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         if (storage.getStorageId() != null && !storage.getStorageId().equals("")) {
             condition.setStorageId(storage.getStorageId());
         }
-        if (storage.getGoodsId() != null && !storage.getGoodsId().equals(""))        //商品id
+        if (storage.getGoodsId() != null && !storage.getGoodsId().equals(""))  {      //商品id
+            System.out.println("Action商品id"+storage.getGoodsId());
             condition.setGoodsId(storage.getGoodsId());
-        if (storage.getPlaceId() != null && !storage.getPlaceId().equals(""))                 //仓库id
+        }
+        if (storage.getPlaceId() != null && !storage.getPlaceId().equals(""))  {               //仓库id
             condition.setPlaceId(storage.getPlaceId());
+            System.out.println("Action仓库id"+storage.getPlaceId());
+        }
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
-        if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals(""))               //实收数量
-            condition.setStorageNumber(storage.getStorageNumber());
+        if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals(""))  {             //实收数量
+            System.out.println("Action实收数量"+storage.getStorageNumber());
+            condition.setStorageNumber(storage.getStorageNumber());}
         if (storage.getStorageType() != null && !storage.getStorageType().equals(""))          //入库类型
             condition.setStorageType(storage.getStorageType());
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注

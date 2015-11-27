@@ -11,7 +11,7 @@ public class Storage implements Serializable {
     private Integer placeId; //仓库id
     private Integer goodsId; //商品id
     private Date storageDate;  //实际入库时间
-    protected Integer storageNumber;  //实际入库数量
+    private Integer storageNumber;  //实际入库数量
     private String  storageType; //入库类型
     private String remark; //备注
 

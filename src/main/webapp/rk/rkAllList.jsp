@@ -123,7 +123,7 @@
                     </div>
                     <div class="line">
                         <div class="lable">商品id：</div>
-                        <div class="input-div"><input placeholder="请输入商品id" name="storageApp.storage.goodsId"/></div>
+                        <div class="input-div"><input placeholder="请输入商品id" name="storage.goodsId"/></div>
                     </div>
 
                     <div class="line">
@@ -133,17 +133,17 @@
 
                     <div class="line">
                         <div class="lable">实际入库时间：</div>
-                        <div class="input-div"><input placeholder="请输入实际入库时间" name="storage.storageDate"/></div>
+                        <div class="input-div"><input placeholder="请输入实际入库时间" name="storage.storageDate"  type="date"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">实收数量：</div>
-                        <div class="input-div"><input placeholder="请输入实收数量" name="storageNumber"/></div>
+                        <div class="input-div"><input placeholder="请输入实收数量" name="storage.storageNumber"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">入库类型：</div>
-                        <div class="input-div"><input placeholder="请输入入库类型" name="storage.storageType" type="date"/></div>
+                        <div class="input-div"><input placeholder="请输入入库类型" name="storage.storageType"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">备注：</div>

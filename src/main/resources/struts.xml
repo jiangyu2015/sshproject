@@ -73,10 +73,13 @@
         </action>
 
         <action name="listrk" class="storageList" method="listStorage">
-            <result type="redirect" name="storageApp">/rk/rkAllList.jsp</result>
+            <result type="redirect" name="storage">/rk/rkAllList.jsp</result>
         </action>
         <action name="editrk" class="storageEdit" method="editStorage">
             <result type="redirect" name="success">/rk/rkList.jsp</result>
+        </action>
+        <action name="rkAdd" class="storageAdd" method="addStorage">
+            <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
 
     </package>

@@ -159,10 +159,13 @@
     <bean id="storageBiz" class="com.springtest1.biz.StorageBizImpl">
         <property name="storageDAO" ref="storageDAO"/>
     </bean>
-    <bean id="storageList" class="com.StorageAppManagerAction" scope="prototype">
+    <bean id="storageList" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
-    <bean id="storageEdit" class="com.StorageAppManagerAction" scope="prototype">
+    <bean id="storageEdit" class="com.StorageManagerAction" scope="prototype">
+        <property name="storageBiz" ref="storageBiz"/>
+    </bean>
+    <bean id="storageAdd" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
 </beans>

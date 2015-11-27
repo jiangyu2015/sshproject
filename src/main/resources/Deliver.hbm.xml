@@ -4,26 +4,29 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.hibtest1.entity">
-    <class name="Storage" table="rk_detail">
-        <id name="storageId" type="java.lang.Integer">
-            <column name="rk_id" length="4"/>
+    <class name="Deliver" table="ck_detail">
+        <id name="deliverId" type="java.lang.Integer">
+            <column name="ck_id" length="4"/>
             <generator class="native">
             </generator>
         </id>
         <property name="placeId" type="java.lang.Integer">
-            <column name="rk_place_id" length="4" not-null="false"/>
+            <column name="ck_place_id" length="10" not-null="false"/>
         </property>
         <property name="goodsId" type="java.lang.Integer">
             <column name="sp_id" length="4" not-null="false"/>
         </property>
-        <property name="storageDate" type="java.util.Date">
-            <column name="sj_stock_date" length="30" not-null="false"/>
+        <property name="deliverDate" type="java.util.Date">
+            <column name="ck_time" length="30" not-null="false"/>
         </property>
-        <property name="storageNumber" type="java.lang.Integer">
-            <column name="ss_number" length="10" not-null="false"/>
+        <property name="expecteNumber" type="java.lang.Integer">
+            <column name="yf_number" length="10" not-null="false"/>
         </property>
-        <property name="storageType" type="java.lang.String">
-            <column name="rk_type" length="30" not-null="false"/>
+        <property name="deliverNumber" type="java.lang.Integer">
+            <column name="ck_number" length="10" not-null="false"/>
+        </property>
+        <property name="deliverType" type="java.lang.String">
+            <column name="ck_type" length="30" not-null="false"/>
         </property>
         <property name="remark" type="java.lang.String">
             <column name="remark" length="30" not-null="false"/>
