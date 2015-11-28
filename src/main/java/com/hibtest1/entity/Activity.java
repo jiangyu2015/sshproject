@@ -8,11 +8,34 @@ import java.util.Date;
  */
 public class Activity implements Serializable {
     private Integer aid; //id
-    private  Integer activityId; //活动id
+    //  private  Integer activityId; //活动id
     private String activityType; //活动类型
     private Date activityDate;//活动时间
     private Integer consume_number; //预提消耗数量
     private String state; //活动类型
+    private Withholding withholding;
+
+    public Withholding getWithholding() {
+        return withholding;
+    }
+
+    public void setWithholding(Withholding withholding) {
+        this.withholding = withholding;
+    }
+
+    public Activity(){}
+    public Activity (String activityType, Date activityDate, Integer consume_number, Integer activityId){
+        this.activityType = activityType;
+        this.activityDate = activityDate;
+        this.consume_number = consume_number;
+    }
+    public Activity(String activityType, Date activityDate, Integer consume_number,  Integer activityId,String state) {
+        this.activityType = activityType;
+        this.activityDate = activityDate;
+        this.consume_number = consume_number;
+        this.state = state;
+
+    }
 
     public Integer getAid() {
         return aid;
@@ -22,13 +45,13 @@ public class Activity implements Serializable {
         this.aid = aid;
     }
 
-    public Integer getActivityId() {
+  /*  public Integer getActivityId() {
         return activityId;
     }
 
     public void setActivityId(Integer activityId) {
         this.activityId = activityId;
-    }
+    }*/
 
     public String getActivityType() {
         return activityType;

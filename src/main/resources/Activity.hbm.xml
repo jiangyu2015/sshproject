@@ -10,9 +10,9 @@
             <generator class="native">
             </generator>
         </id>
-        <property name="activityId" type="java.lang.Integer">
+    <!--    <property name="activityId" type="java.lang.Integer">
             <column name="hd_id" length="4" not-null="false"/>
-        </property>
+        </property>  -->
         <property name="activityType" type="java.lang.String">
             <column name="hd_type" length="4" not-null="false"/>
         </property>
@@ -25,7 +25,7 @@
         <property name="state" type="java.lang.String">
             <column name="hd_state" length="30" not-null="false"/>
         </property>
-
-
+        <many-to-one name="withholding" column="WithholdingId"
+                     class="com.hibtest1.entity.Withholding" />
     </class>
 </hibernate-mapping>

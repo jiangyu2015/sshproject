@@ -16,6 +16,8 @@ public class Withholding implements Serializable {
     private  Integer witholdingNumber;  //预提数
     private String useType; //使用类型
 
+
+
     public Integer getWithholdingId() {
         return withholdingId;
     }
