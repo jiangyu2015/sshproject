@@ -86,7 +86,11 @@
             <result type="redirect" name="deliver">/ck/ckAllList.jsp</result>
         </action>
         <action name="ckAdd" class="deliverAdd" method="addDeliver">
-            <result type="redirect" name="deliver">/ck/ckList.jsp</result>
+            <result type="redirect" name="success">/ck/test.jsp</result>
+        </action>
+        <action name="editck" class="deliverEdit" method="editDeliver">
+            <result type="redirect" name="success">/ck/ckList.jsp</result>
+            <result type="redirect" name="input">/ck/fail.jsp</result>
         </action>
 
     </package>

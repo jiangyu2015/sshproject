@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibtest1.entity">
+    <class name="Activity" table="activity">
+        <id name="aid" type="java.lang.Integer">
+            <column name="id" length="4"/>
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="activityId" type="java.lang.Integer">
+            <column name="hd_id" length="4" not-null="false"/>
+        </property>
+        <property name="activityType" type="java.lang.String">
+            <column name="hd_type" length="4" not-null="false"/>
+        </property>
+        <property name="activityDate" type="java.util.Date">
+            <column name="hd_date" length="30" not-null="false"/>
+        </property>
+        <property name="consume_number" type="java.lang.Integer">
+            <column name="peisong_cost" length="6" not-null="false"/>
+        </property>
+        <property name="state" type="java.lang.String">
+            <column name="hd_state" length="30" not-null="false"/>
+        </property>
+
+
+    </class>
+</hibernate-mapping>

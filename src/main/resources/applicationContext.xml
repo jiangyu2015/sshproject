@@ -60,6 +60,7 @@
                 <value>Place.hbm.xml</value>
                 <value>StorageApp.hbm.xml</value>
                 <value>Storage.hbm.xml</value>
+                <value>Deliver.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -179,6 +180,9 @@
         <property name="deliverBiz" ref="deliverBiz"/>
     </bean>
     <bean id="deliverAdd" class="com.DeliverManagerAction" scope="prototype">
+        <property name="deliverBiz" ref="deliverBiz"/>
+    </bean>
+    <bean id="deliverEdit" class="com.DeliverManagerAction" scope="prototype">
         <property name="deliverBiz" ref="deliverBiz"/>
     </bean>
 </beans>

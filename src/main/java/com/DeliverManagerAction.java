@@ -124,10 +124,10 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         } else return "input";
     }  */
 
-    public String addDeliver() throws Exception {                  //增加入库申请
+    public String addDeliver() throws Exception {                  //增加出库申请
         System.out.println("addDeliver");
         Deliver condition = new Deliver();
-        System.out.println(deliver.getGoodsId() + "入库明细添加商品id我传过来了");
+        System.out.println(deliver.getGoodsId() + "出库明细添加商品id我传过来了");
  /*       if (deliver.getProducerName() != null && !deliver.getProducerName().equals(""))
             condition.setProducerName(deliver.getProducerName());
         else {
@@ -150,7 +150,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (deliver.getGoodsId() != null)        //商品id
             condition.setGoodsId(deliver.getGoodsId());
         if (deliver.getPlaceId() != null)   {              //仓库id
-            System.out.println("入库明细添加仓库id我传过来了"+deliver.getPlaceId());
+            System.out.println("出库明细添加仓库id我传过来了"+deliver.getPlaceId());
             condition.setPlaceId(deliver.getPlaceId());}
         if (deliver.getDeliverDate() != null)                      //实际出库时间
             condition.setDeliverDate(deliver.getDeliverDate());

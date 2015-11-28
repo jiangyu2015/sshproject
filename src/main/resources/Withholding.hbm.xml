@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibtest1.entity">
+    <class name="Withholding" table="yt_application">
+        <id name="withholdingId" type="java.lang.Integer">
+            <column name="yt_id" length="4"/>
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="placeId" type="java.lang.Integer">
+            <column name="place_id" length="4" not-null="true"/>
+        </property>
+        <property name="goodsId" type="java.lang.Integer">
+            <column name="sp_id" length="4" not-null="true"/>
+        </property>
+        <property name="witholdingDate" type="java.util.Date">
+            <column name="yt_time" length="30" not-null="false"/>
+        </property>
+        <property name="deadline" type="java.util.Date">
+            <column name="dateline" length="30" not-null="false"/>
+        </property>
+        <property name="activityId" type="java.lang.Integer">
+            <column name="hd_id" length="4" not-null="false"/>
+        </property>
+        <property name="witholdingNumber" type="java.lang.Integer">
+            <column name="yt_number" length="5" not-null="false"/>
+        </property>
+        <property name="useType" type="java.lang.String">
+            <column name="use_type" length="30" not-null="false"/>
+        </property>
+
+    </class>
+</hibernate-mapping>
