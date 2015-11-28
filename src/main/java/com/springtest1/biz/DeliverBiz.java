@@ -14,7 +14,7 @@ public interface DeliverBiz {
 
     public void add(Deliver condition);
 
-    //  public boolean delGoods(Deliver good);  //删除x
+    //  public boolean delGoods(Deliver deliver);  //删除x
 
     public boolean editDeliver(Deliver deliver); //修改AllList
 }

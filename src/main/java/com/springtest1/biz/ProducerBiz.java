@@ -14,7 +14,7 @@ public interface ProducerBiz {
 
     public void add(Producer condition);
 
-    public boolean delProducer(Producer good);  //删除x
+    public boolean delProducer(Producer producer);  //删除x
 
     public boolean editProducer(Producer producer); //修改AllList商品
 }

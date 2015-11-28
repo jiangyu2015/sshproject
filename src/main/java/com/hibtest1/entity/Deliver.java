@@ -8,8 +8,8 @@ import java.util.Date;
  */
 public class Deliver implements Serializable {
     private Integer deliverId; //id
-    private Integer placeId; //仓库id
     private Integer goodsId; //商品id
+    private Integer placeId; //仓库id
     private Date deliverDate;  //出库时间
     private Integer expecteNumber;  //应发数量
     private Integer deliverNumber;  //出库数量

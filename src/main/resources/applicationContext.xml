@@ -168,4 +168,17 @@
     <bean id="storageAdd" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
+
+    <bean id="deliverDAO" class="com.springtest1.dao.DeliverDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="deliverBiz" class="com.springtest1.biz.DeliverBizImpl">
+        <property name="deliverDAO" ref="deliverDAO"/>
+    </bean>
+    <bean id="deliverList" class="com.DeliverManagerAction" scope="prototype">
+        <property name="deliverBiz" ref="deliverBiz"/>
+    </bean>
+    <bean id="deliverAdd" class="com.DeliverManagerAction" scope="prototype">
+        <property name="deliverBiz" ref="deliverBiz"/>
+    </bean>
 </beans>

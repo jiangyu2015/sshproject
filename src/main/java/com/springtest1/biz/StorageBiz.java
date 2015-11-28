@@ -14,7 +14,7 @@ public interface StorageBiz {
 
     public void add(Storage condition);
 
-    //  public boolean delGoods(Storage good);  //删除x
+    //  public boolean delGoods(Storage storage);  //删除x
 
     public boolean editStorage(Storage storage); //修改AllList
 }

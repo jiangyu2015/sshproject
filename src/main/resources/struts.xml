@@ -82,5 +82,12 @@
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
 
+        <action name="listck" class="deliverList" method="listDeliver">
+            <result type="redirect" name="deliver">/ck/ckAllList.jsp</result>
+        </action>
+        <action name="ckAdd" class="deliverAdd" method="addDeliver">
+            <result type="redirect" name="deliver">/ck/ckList.jsp</result>
+        </action>
+
     </package>
 </struts>
