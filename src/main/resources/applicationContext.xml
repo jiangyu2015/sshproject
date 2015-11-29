@@ -61,6 +61,8 @@
                 <value>StorageApp.hbm.xml</value>
                 <value>Storage.hbm.xml</value>
                 <value>Deliver.hbm.xml</value>
+                <value>Withholding.hbm.xml</value>
+                <value>Activity.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -169,7 +171,6 @@
     <bean id="storageAdd" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
-
     <bean id="deliverDAO" class="com.springtest1.dao.DeliverDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -184,5 +185,23 @@
     </bean>
     <bean id="deliverEdit" class="com.DeliverManagerAction" scope="prototype">
         <property name="deliverBiz" ref="deliverBiz"/>
+    </bean>
+
+    <bean id="withholdingDAO" class="com.springtest1.dao.WithholdingDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="withholdingBiz" class="com.springtest1.biz.WithholdingBizImpl">
+        <property name="withholdingDAO" ref="withholdingDAO"/>
+    </bean>
+
+
+    <bean id="activityDAO" class="com.springtest1.dao.ActivityDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="activityBiz" class="com.springtest1.biz.ActivityBizImpl">
+        <property name="activityDAO" ref="activityDAO"/>
+    </bean>
+    <bean id="activityList" class="com.ActivityManagerAction" scope="prototype">
+        <property name="activityBiz" ref="activityBiz"/>
     </bean>
 </beans>

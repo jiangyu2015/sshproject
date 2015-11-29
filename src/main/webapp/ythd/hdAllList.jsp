@@ -1,6 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: dell
+  Date: 2015/11/29
+  Time: 14:44
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: dell
   Date: 2015/11/28
   Time: 14:03
   To change this template use File | Settings | File Templates.
@@ -10,7 +17,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>预提活动信息</title>
+    <title>出库明细信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
@@ -75,7 +82,7 @@
 
 <body>
 <div class="table-div">
-    <div class="title">预提活动信息</div>
+    <div class="title">出库明细信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
         <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">
@@ -83,27 +90,21 @@
     <table id="advSearch" class="table">
         <thead>
         <tr>
-            <th>出库明细id</th>
-            <th>商品id</th>
-            <th>仓库id</th>
-            <th>实际出库时间</th>
-            <th>预期出库数量</th>
-            <th>实际出库数量</th>
-            <th>出库类型</th>
-            <th>备注</th>
+            <th>活动预提id</th>
+            <th>活动id</th>
+            <th>活动预提消耗</th>
+            <th>预提消耗总数</th>
+
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.deliverlistall}" var="deliver">
+        <s:iterator value="%{#session.activitylistall}" var="activity">
             <tr>
-                <td><s:property value="#deliver.deliverId"/></td>
-                <td><s:property value="#deliver.goodsId"/></td>
-                <td><s:property value="#deliver.placeId"/></td>
-                <td><s:date format="yyyy-MM-dd" name="#deliver.deliverDate"/></td>
-                <td><s:property value="#deliver.expecteNumber"/></td>
-                <td><s:property value="#deliver.deliverNumber"/></td>
-                <td><s:property value="#deliver.deliverType"/></td>
-                <td><s:property value="#deliver.remark"/></td>
+                <td><s:property value="#activity.aid"/></td>
+                <td><s:property value="#activity.withholding.activityId"/></td>
+                <td><s:property value="#activity.consumeNumber"/></td>
+                <td><s:property value="#activity.withholding.witholdingNumber"/></td>
+
             </tr>
         </s:iterator>
         </tbody>

@@ -11,7 +11,7 @@ public class Activity implements Serializable {
     //  private  Integer activityId; //活动id
     private String activityType; //活动类型
     private Date activityDate;//活动时间
-    private Integer consume_number; //预提消耗数量
+    private Integer consumeNumber; //预提消耗数量
     private String state; //活动类型
     private Withholding withholding;
 
@@ -24,15 +24,15 @@ public class Activity implements Serializable {
     }
 
     public Activity(){}
-    public Activity (String activityType, Date activityDate, Integer consume_number, Integer activityId){
+    public Activity (String activityType, Date activityDate, Integer consumeNumber, Integer activityId){
         this.activityType = activityType;
         this.activityDate = activityDate;
-        this.consume_number = consume_number;
+        this.consumeNumber = consumeNumber;
     }
-    public Activity(String activityType, Date activityDate, Integer consume_number,  Integer activityId,String state) {
+    public Activity(String activityType, Date activityDate, Integer consumeNumber,  Integer activityId,String state) {
         this.activityType = activityType;
         this.activityDate = activityDate;
-        this.consume_number = consume_number;
+        this.consumeNumber = consumeNumber;
         this.state = state;
 
     }
@@ -69,12 +69,12 @@ public class Activity implements Serializable {
         this.activityDate = activityDate;
     }
 
-    public Integer getConsume_number() {
-        return consume_number;
+    public Integer getConsumeNumber() {
+        return consumeNumber;
     }
 
-    public void setConsume_number(Integer consume_number) {
-        this.consume_number = consume_number;
+    public void setConsumeNumber(Integer consumeNumber) {
+        this.consumeNumber = consumeNumber;
     }
 
     public String getState() {

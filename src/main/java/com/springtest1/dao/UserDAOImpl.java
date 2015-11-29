@@ -16,7 +16,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	 * public boolean login(String username, String password) { if
 	 * (username.equals("admin") && password.equals("123")) { return true; }
 	 * return false; }
-	 * 
+	 *
 	 * /* public boolean validate(String loginName, String loginPwd) { // TODO
 	 * Auto-generated method stub boolean flag = false; // ��װ��ѯ���� Users
 	 * condition = new Users(); condition.setLoginName(loginName);

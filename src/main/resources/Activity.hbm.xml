@@ -19,13 +19,13 @@
         <property name="activityDate" type="java.util.Date">
             <column name="hd_date" length="30" not-null="false"/>
         </property>
-        <property name="consume_number" type="java.lang.Integer">
+        <property name="consumeNumber" type="java.lang.Integer">
             <column name="peisong_cost" length="6" not-null="false"/>
         </property>
         <property name="state" type="java.lang.String">
             <column name="hd_state" length="30" not-null="false"/>
         </property>
         <many-to-one name="withholding" column="WithholdingId"
-                     class="com.hibtest1.entity.Withholding" />
+                     class="com.hibtest1.entity.Withholding" lazy="false"/>
     </class>
 </hibernate-mapping>

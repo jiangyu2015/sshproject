@@ -93,5 +93,8 @@
             <result type="redirect" name="input">/ck/fail.jsp</result>
         </action>
 
+        <action name="listythd" class="activityList" method="listActivity">
+            <result type="redirect" name="activity">/ythd/hdAllList.jsp</result>
+        </action>
     </package>
 </struts>
