@@ -22,15 +22,19 @@
         <property name="deadline" type="java.util.Date">
             <column name="dateline" length="30" not-null="false"/>
         </property>
-        <property name="activityId" type="java.lang.Integer">
+    <!--    <property name="activityId" type="java.lang.Integer">
             <column name="hd_id" length="4" not-null="false"/>
-        </property>
+        </property>  -->
         <property name="witholdingNumber" type="java.lang.Integer">
             <column name="yt_number" length="5" not-null="false"/>
         </property>
         <property name="useType" type="java.lang.String">
             <column name="use_type" length="30" not-null="false"/>
         </property>
-
+      <!-- <set name="bks" lazy="false">
+           <key column="hd_id"></key>
+           <one-to-many class="com.hibtest1.entity.Activity"/>
+       </set>  -->
     </class>
+
 </hibernate-mapping>

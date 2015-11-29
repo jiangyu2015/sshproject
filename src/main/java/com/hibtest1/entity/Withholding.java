@@ -2,6 +2,8 @@ package com.hibtest1.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Created by dell on 2015/11/28.
@@ -12,10 +14,17 @@ public class Withholding implements Serializable {
     private Integer goodsId; //商品id
     private Date witholdingDate;//预提时间
     private Date deadline; //截止时间
-    private  Integer activityId; //活动id
+//    private  Integer activityId; //活动id
     private  Integer witholdingNumber;  //预提数
     private String useType; //使用类型
+  /*  private Set bks=new HashSet();
+    public Set getBks() {
+        return bks;
+    }
 
+    public void setBks(Set bks) {
+        this.bks = bks;
+    }  */
 
 
     public Integer getWithholdingId() {
@@ -50,13 +59,13 @@ public class Withholding implements Serializable {
         this.witholdingDate = witholdingDate;
     }
 
-    public Integer getActivityId() {
+  /*  public Integer getActivityId() {
         return activityId;
     }
 
     public void setActivityId(Integer activityId) {
         this.activityId = activityId;
-    }
+    }  */
 
     public Integer getWitholdingNumber() {
         return witholdingNumber;

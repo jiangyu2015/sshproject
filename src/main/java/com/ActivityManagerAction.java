@@ -53,7 +53,7 @@ public class ActivityManagerAction extends ActionSupport implements RequestAware
         List<Activity> activities = activityBiz.getAllActivity();
         Activity activity = (Activity) activities.get(0);
         System.out.println("id" + activity.getAid() + "活动类型" + activity.getActivityType()
-                + "活动消耗" + activity.getConsumeNumber() + "活动id" + activity.getWithholding().getActivityId()
+                + "活动消耗" + activity.getConsumeNumber() + "活动id" + activity.getWithholding().getWithholdingId()
                 + "活动预提总数" + activity.getWithholding().getWitholdingNumber());
         session.put("activitylistall", activities);
         return "activity";

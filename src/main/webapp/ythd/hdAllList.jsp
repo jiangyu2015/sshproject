@@ -17,7 +17,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>出库明细信息</title>
+    <title>活动预提信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
@@ -82,7 +82,7 @@
 
 <body>
 <div class="table-div">
-    <div class="title">出库明细信息</div>
+    <div class="title">活动预提信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
         <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">
@@ -101,7 +101,7 @@
         <s:iterator value="%{#session.activitylistall}" var="activity">
             <tr>
                 <td><s:property value="#activity.aid"/></td>
-                <td><s:property value="#activity.withholding.activityId"/></td>
+                <td><s:property value="#activity.withholding.withholdingId"/></td>
                 <td><s:property value="#activity.consumeNumber"/></td>
                 <td><s:property value="#activity.withholding.witholdingNumber"/></td>
 
