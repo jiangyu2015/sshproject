@@ -5,17 +5,35 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.hibtest1.entity.Goods;
+import com.springtest1.biz.GoodsBiz;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.interceptor.SessionAware;
 
 public class JsonAction extends ActionSupport implements ServletRequestAware{
     private static final long serialVersionUID = 1L;
 
     private HttpServletRequest request;
     private String result;
+    private Goods goods;
+
+    public void setGoodsBiz(GoodsBiz goodsBiz) {
+        this.goodsBiz = goodsBiz;
+    }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
+    GoodsBiz goodsBiz;
 
     public void setServletRequest(HttpServletRequest arg0) {
         this.request = arg0;
@@ -33,7 +51,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware{
      */
     public String excuteAjax(){
 
-        try {
+ /*       try {
             //获取数据
             String name = request.getParameter("name");
             int age = Integer.parseInt(request.getParameter("age"));
@@ -49,10 +67,17 @@ public class JsonAction extends ActionSupport implements ServletRequestAware{
             result = json.toString();//给result赋值，传递给页面
         } catch (Exception e) {
             e.printStackTrace();
+        }  */
+
+        try{
+            String name=request.getParameter("item");
+
+        }catch (Exception e) {
+            e.printStackTrace();
         }
+
         return SUCCESS;
     }
-
 
 
 }
