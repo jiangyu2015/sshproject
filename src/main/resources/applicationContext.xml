@@ -97,6 +97,9 @@
     <bean id="goodsList" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
+    <bean id="goodsListTest" class="com.GoodsManagerAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
     <bean id="goodsUpdShow" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"/>
     </bean>

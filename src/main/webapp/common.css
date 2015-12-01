@@ -47,7 +47,7 @@ body{
 	color: #7B7676;
 	line-height: 28px;
 }
-input {
+input,select {
 	height: 28px;
 	width: 350px;
 	padding-left: 5px;
@@ -64,6 +64,7 @@ input[type="radio"] {
 	height: 18px;
 	-webkit-box-shadow: none;
 }
+
 .lable-left{
     position: absolute;
 	left: 30px;

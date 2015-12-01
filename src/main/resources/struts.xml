@@ -3,6 +3,7 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
+
     <constant name="struts.devMode" value="true"/>
     <package name="default" namespace="/" extends="struts-default">
         <action name="doLogin" class="umAction">
@@ -22,6 +23,9 @@
         </action>
         <action name="listGoods" class="goodsList" method="listGoods">
             <result type="redirect" name="goods">/sp/spAllList.jsp</result>
+        </action>
+        <action name="listGoodsTest" class="goodsListTest" method="listGoodsTest">
+
         </action>
         <action name="spDel" class="goodsDel" method="delGoods">
             <result type="redirect" name="success">/sp/test.jsp</result>
@@ -95,6 +99,14 @@
 
         <action name="listythd" class="activityList" method="listActivity">
             <result type="redirect" name="activity">/ythd/hdAllList.jsp</result>
+        </action>
+
+        <action name="*JsonAction" method="{1}" class="com.JsonAction">
+            <result name="fail"></result>
+            <!-- 返回json类型数据 -->
+            <result type="json">
+                <param name="root">result<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 --></param>
+            </result>
         </action>
     </package>
 </struts>

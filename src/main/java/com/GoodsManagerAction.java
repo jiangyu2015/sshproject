@@ -156,6 +156,14 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         return "goods";
     }
 
+    public String listGoodsTest() {
+        List goods = goodsBiz.getAllGoods();
+        session.put("goodslistall", goods);
+        //     Goods g = new Goods();
+        //     g = (Goods) goods.get(0);
+        return NONE;
+    }
+
     public String modifyShow() {
         Goods condition = new Goods();
         condition.setGoodsName(goodsName);

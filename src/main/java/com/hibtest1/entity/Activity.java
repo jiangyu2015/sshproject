@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Activity implements Serializable {
     private Integer aid; //id
-//    private  Integer activityId; //活动id
+//     private  Integer activityId; //活动id
     private String activityType; //活动类型
     private Date activityDate;//活动时间
     private Integer consumeNumber; //预提消耗数量
@@ -28,13 +28,14 @@ public class Activity implements Serializable {
         this.activityType = activityType;
         this.activityDate = activityDate;
         this.consumeNumber = consumeNumber;
+   //     this.activityId=activityId;
     }
     public Activity(String activityType, Date activityDate, Integer consumeNumber,  Integer activityId,String state) {
         this.activityType = activityType;
         this.activityDate = activityDate;
         this.consumeNumber = consumeNumber;
         this.state = state;
-
+  //      this.activityId=activityId;
     }
 
     public Integer getAid() {
@@ -51,7 +52,7 @@ public class Activity implements Serializable {
 
     public void setActivityId(Integer activityId) {
         this.activityId = activityId;
-    }*/
+    }  */
 
     public String getActivityType() {
         return activityType;

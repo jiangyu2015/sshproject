@@ -14,7 +14,6 @@
     <title>添加入库申请信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
 </head>
-
 <body>
 <div class="title">添加入库申请信息</div>
 <div class="content">
@@ -49,7 +48,7 @@
         </div>
         <div class="line">
             <div class="lable">入库类型：</div>
-            <div class="input-div"><input placeholder="请输入入库类型" name="storageApp.storageType" /></div>
+            <div class="input-div"><input placeholder="请输入入库类型" name="storageApp.storageType"/></div>
         </div>
         <div class="line">
             <div class="lable">处理状态：</div>
