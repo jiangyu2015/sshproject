@@ -100,7 +100,8 @@
         <action name="listythd" class="activityList" method="listActivity">
             <result type="redirect" name="activity">/ythd/hdAllList.jsp</result>
         </action>
-
+    </package>
+    <package name="json" extends="struts-default, json-default">
         <action name="*JsonAction" method="{1}" class="com.JsonAction">
             <result name="fail"></result>
             <!-- 返回json类型数据 -->
