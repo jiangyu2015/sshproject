@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
@@ -50,8 +51,36 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
         return query.list();
     }
 
-    public  void modifyGood(Goods good){  //修改商品
-        System.out.println("DAO里面的"+good.getService());
+    public void modifyGood(Goods good) {  //修改商品
+        System.out.println("DAO里面的" + good.getService());
         super.getHibernateTemplate().update(good);
-    };
+    }
+
+    /*   public List<Goods> getGoods(String name) {    //模糊查询
+           String hql = "from Goods g where g.goodsName like '" + name + "%'";
+           System.out.println("GOODSDAOIMPL" + hql);
+           Session session = this.getSessionFactory().getCurrentSession();
+           Query query = session.createQuery(hql);
+           Goods g =new Goods();
+           g=(Goods) query.list().get(0);
+           System.out.println(g.getGoodsName());
+           return query.list();
+
+       } */
+    public List<Goods> getGoods(String name) {    //模糊查询
+        String hql = "from Goods g where g.goodsName like '" + name + "%'";
+        System.out.println("GOODSDAOIMPL" + hql);
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+
+        List<Goods> goodslist = query.list();
+
+        if (goodslist.size() <= 0) {
+            return new ArrayList<Goods>();
+        } else {
+            Goods g = (Goods) query.list().get(0);
+            System.out.println(g.getGoodsName());
+            return goodslist;
+        }
+    }
 }

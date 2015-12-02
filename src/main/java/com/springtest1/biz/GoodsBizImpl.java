@@ -41,6 +41,9 @@ public class GoodsBizImpl implements GoodsBiz {
         System.out.println(good.getService()+"biz里面的");
         goodsDAO.modifyGood(good);
         return true;
-
+    }
+    @Transactional
+    public List<Goods> getGoods(String name){
+        return goodsDAO.getGoods(name);
     }
 }

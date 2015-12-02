@@ -17,4 +17,6 @@ public interface GoodsBiz {
     public List getAllGoods();
 
     public boolean modifyGood(Goods good);
+
+    public List<Goods> getGoods(String name);
 }

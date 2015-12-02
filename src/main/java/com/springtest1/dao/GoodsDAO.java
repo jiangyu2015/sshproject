@@ -19,5 +19,7 @@ public interface GoodsDAO {
 
     public void modifyGood(Goods good); //修改商品
 
+   public List<Goods> getGoods(String name);  //模糊查询
+
 
 }

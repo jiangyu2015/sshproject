@@ -1,6 +1,7 @@
 package com;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +52,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware{
      */
     public String excuteAjax(){
 
- /*       try {
+     /*   try {
             //获取数据
             String name = request.getParameter("name");
             int age = Integer.parseInt(request.getParameter("age"));
@@ -67,10 +68,20 @@ public class JsonAction extends ActionSupport implements ServletRequestAware{
             result = json.toString();//给result赋值，传递给页面
         } catch (Exception e) {
             e.printStackTrace();
-        }  */
+        } */
+
 
         try{
-            String name=request.getParameter("item");
+            String goodsname=request.getParameter("item");
+        //    String goodsname="吃";
+            System.out.println(goodsname+"传值JsonAction");
+          // List<Goods> goodslist = goodsBiz.getGoods(goodsname);
+            List<Goods> goodslist = goodsBiz.getAllGoods();
+
+             JSONObject json = new JSONObject();
+                json.put("goodsList", goodslist);
+
+                 result = json.toString();//给result赋值，传递给页面
 
         }catch (Exception e) {
             e.printStackTrace();
