@@ -1,9 +1,13 @@
 package com;
 
 import com.dto.EnteringWarehouseDto;
+import com.hibtest1.entity.*;
 import com.hibtest1.entity.StorageApp;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.springtest1.biz.GoodsBiz;
+import com.springtest1.biz.PlaceBiz;
+import com.springtest1.biz.ProducerBiz;
 import com.springtest1.biz.StorageAppBiz;
 import org.apache.logging.log4j.core.appender.SyslogAppender;
 import org.apache.struts2.interceptor.RequestAware;
@@ -19,11 +23,27 @@ import java.util.Date;
  */
 public class StorageAppManagerAction extends ActionSupport implements RequestAware, SessionAware {
     StorageAppBiz storageAppBiz;
+    GoodsBiz goodsBiz;
+    PlaceBiz placeBiz;
+    ProducerBiz producerBiz;
     Map<String, Object> request;
+
+    public void setGoodsBiz(GoodsBiz goodsBiz) {
+        this.goodsBiz = goodsBiz;
+    }
+
+    public void setPlaceBiz(PlaceBiz placeBiz) {
+        this.placeBiz = placeBiz;
+    }
+
+    public void setProducerBiz(ProducerBiz producerBiz) {
+        this.producerBiz = producerBiz;
+    }
+
     Map<String, Object> session;
     StorageApp storageApp;
 
-    EnteringWarehouseDto enteringWarehouseDto;
+  //  EnteringWarehouseDto enteringWarehouseDto;
 
     String goodsName;
     String producerName;
@@ -123,7 +143,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     }  */
 
     public String addStorageApp() throws Exception {                  //增加入库申请
-        System.out.println(enteringWarehouseDto);
+    //    System.out.println(enteringWarehouseDto);
         System.out.println("addStorageApp");
         StorageApp condition = new StorageApp();
         System.out.println(storageApp.getProducerName() + "入库申请我传过来了");
@@ -173,6 +193,12 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Date date = calendar.getTime();
         condition.setApplicationDate(date);
         System.out.println("当前时间" + date);
+        Goods goods=goodsBiz.getGoods(condition.getGoodsName()).get(0);
+        condition.setGoods(goods);
+   /*    Producer producer=producerBiz.get(condition.getGoodsName()).get(0);
+        condition.setGoods(goods);
+        Goods goods=goodsBiz.getGoods(condition.getGoodsName()).get(0);
+        condition.setGoods(goods);*/
         storageAppBiz.add(condition);
         return "success";
 
@@ -224,11 +250,5 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
     }
 
-    public EnteringWarehouseDto getEnteringWarehouseDto() {
-        return enteringWarehouseDto;
-    }
 
-    public void setEnteringWarehouseDto(EnteringWarehouseDto enteringWarehouseDto) {
-        this.enteringWarehouseDto = enteringWarehouseDto;
-    }
 }

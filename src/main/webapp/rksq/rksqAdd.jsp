@@ -81,7 +81,7 @@
                 dataType: 'json'
             });
 
-            //添加入库申请
+       /*     //添加入库申请
             $('#add').click(function () {
                 $.ajax({
                     url: 'rksqAdd',
@@ -95,8 +95,8 @@
                         alert('success');
                     }
                 });
-            });
-        });
+            });;*/
+        })
     </script>
 </head>
 <body>

@@ -21,6 +21,11 @@ public class StorageApp implements Serializable {
     private Goods goods;
     private Producer producer;
 
+  /*  private  Integer goodsId;
+    private  Integer producerId;
+    private  Integer placeId; */
+
+
     public Goods getGoods() {
         return goods;
     }
