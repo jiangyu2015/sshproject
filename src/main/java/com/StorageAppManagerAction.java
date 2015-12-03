@@ -143,14 +143,14 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         }
         System.out.println("ok");
 
-       /* if (storageApp.getProducerName() != null)        //商户名称
+        if (storageApp.getProducerName() != null)        //商户名称
             condition.setProducerName(storageApp.getProducerName());
         if (storageApp.getGoodsName() != null)                 //商品名称
             condition.setGoodsName(storageApp.getGoodsName());
         if (storageApp.getStoragePlace() != null)                      //仓库地址
-            condition.setStoragePlace(storageApp.getStoragePlace());*/
-        if (storageApp.getProducer().getProducerId()!= null)        //商品名称
-            condition.setProducerName(storageApp.getProducer().getProducerId());
+            condition.setStoragePlace(storageApp.getStoragePlace());
+   //     if (storageApp.getProducer().getProducerId()!= null)        //商品名称
+
 
         if (storageApp.getCommodityRating() != null)               //商品评级
             condition.setCommodityRating(storageApp.getCommodityRating());
