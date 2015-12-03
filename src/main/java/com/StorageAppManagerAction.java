@@ -106,6 +106,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String listStorageApp() {
         List storageApp = storageAppBiz.getAllStorageApp();
         StorageApp storageApp1 = (StorageApp) storageApp.get(0);
+        System.out.println(storageApp1.getGoodsName());
         session.put("storageapplistall", storageApp);
 
         return "storageApp";
