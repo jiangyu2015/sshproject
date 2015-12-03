@@ -1,5 +1,6 @@
 package com.springtest1.biz;
 
+import com.dto.EnteringWarehouseDto;
 import com.hibtest1.entity.StorageApp;
 import com.springtest1.dao.StorageAppDAO;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by user on 2015/11/26.
  */
-public class StorageAppBizImpl  implements StorageAppBiz {
+public class StorageAppBizImpl implements StorageAppBiz {
     private StorageAppDAO storageAppDAO;
 
     public void setStorageAppDAO(StorageAppDAO storageAppDAO) {
@@ -27,8 +28,15 @@ public class StorageAppBizImpl  implements StorageAppBiz {
     }
 
     public void add(StorageApp condition) {
-        System.out.println( "BIzImpl传值商品"+condition.getGoodsName()+"商户"+condition.getProducerName()+"库存地点"+ condition.getStoragePlace());
+        System.out.println("BIzImpl传值商品" + condition.getGoodsName() + "商户" + condition.getProducerName() + "库存地点" + condition.getStoragePlace());
         storageAppDAO.add(condition);
+    }
+
+    @Override
+    public void add(EnteringWarehouseDto enteringWarehouseDto) {
+        StorageApp storageApp = new StorageApp();
+        storageApp.setSldId(enteringWarehouseDto.getGoodsId());
+        storageAppDAO.add(storageApp);
     }
 
   /*  public boolean delGoods(StorageApp storageApp) {
@@ -36,9 +44,9 @@ public class StorageAppBizImpl  implements StorageAppBiz {
     }  */
 
     public boolean editStorageApp(StorageApp storageApp) {
-        System.out.println("biz里面的"+storageApp.getProducerName());
+        System.out.println("biz里面的" + storageApp.getProducerName());
         storageAppDAO.editStorageApp(storageApp);
         return true;
     } //修改AllList商品
-    
+
 }

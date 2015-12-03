@@ -1,5 +1,6 @@
 package com.springtest1.biz;
 
+import com.dto.EnteringWarehouseDto;
 import com.hibtest1.entity.StorageApp;
 
 import java.util.List;
@@ -14,7 +15,9 @@ public interface StorageAppBiz {
 
     public void add(StorageApp condition);
 
-  //  public boolean delGoods(StorageApp good);  //删除x
+    void add(EnteringWarehouseDto enteringWarehouseDto);
+
+    //  public boolean delGoods(StorageApp good);  //删除x
 
     public boolean editStorageApp(StorageApp storageApp); //修改AllList
 }
