@@ -125,7 +125,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String addStorageApp() throws Exception {                  //增加入库申请
         System.out.println(enteringWarehouseDto);
         System.out.println("addStorageApp");
-        StorageApp condition = new StorageApp();
+        /*StorageApp condition = new StorageApp();
         System.out.println(storageApp.getProducerName() + "入库申请我传过来了");
         if (storageApp.getProducerName() != null && !storageApp.getProducerName().equals(""))
             condition.setProducerName(storageApp.getProducerName());
@@ -166,17 +166,15 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setSldId(storageApp.getSldId());
         if (storageApp.getStorageType() != null)          //入库类型
             condition.setStorageType(storageApp.getStorageType());
-      /*  if (storageApp.getState() != null)          //处理状态
-            condition.setState(storageApp.getState());*/
+      *//*  if (storageApp.getState() != null)          //处理状态
+            condition.setState(storageApp.getState());*//*
         condition.setState("no");  //处理状态新增默认为no 待审核
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         condition.setApplicationDate(date);
-        System.out.println("当前时间" + date);
-        storageAppBiz.add(condition);
+        System.out.println("当前时间" + date);*/
+        storageAppBiz.add(enteringWarehouseDto);
         return "success";
-
-
     }
 
   /*  public String modifyShow() {                        //更新显示
