@@ -194,7 +194,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         System.out.println("当前时间" + date);
         Goods goods=goodsBiz.getGoods(condition.getGoodsName()).get(0);
         condition.setGoods(goods);
-   /*    Producer producer=producerBiz.get(condition.getGoodsName()).get(0);
+   /*    Producer producer=producerBiz.get(condition.getGoodsName()).get(0);、、
         condition.setGoods(goods);
         Goods goods=goodsBiz.getGoods(condition.getGoodsName()).get(0);
         condition.setGoods(goods);*/
