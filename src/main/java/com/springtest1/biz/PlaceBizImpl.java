@@ -10,28 +10,32 @@ import java.util.List;
  * Created by user on 2015/11/25.
  */
 public class PlaceBizImpl implements PlaceBiz {
-    private PlaceDAO PlaceDAO;
+    private PlaceDAO placeDAO;
 
     public void setPlaceDAO(PlaceDAO PlaceDAO) {
-        this.PlaceDAO = PlaceDAO;
+        this.placeDAO = PlaceDAO;
     }
 
     @Transactional
     public List getAllPlace() {
         System.out.println("我经过这里AllPlace");
-        return PlaceDAO.getAllPlace();
+        return placeDAO.getAllPlace();
     }
     public List getPlaceList( Place condition){
-        List list = PlaceDAO.search(condition);
+        List list = placeDAO.search(condition);
         return list;
     }
 
     public void add(Place condition) {
-        PlaceDAO.add(condition);
+        placeDAO.add(condition);
     }
 
     public boolean delGoods(Place Place) {
-        return PlaceDAO.delGoods(Place);
+        return placeDAO.delGoods(Place);
+    }
+    @Transactional
+    public List<Place> getPlace(String name){
+        return placeDAO.getPlace(name);
     }
     
 }

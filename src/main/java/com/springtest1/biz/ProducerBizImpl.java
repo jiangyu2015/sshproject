@@ -39,4 +39,9 @@ public class ProducerBizImpl implements ProducerBiz {
         producerDAO.editProducer(producer);
         return true;
     } //修改AllList商品
+
+    @Transactional
+    public List<Producer> getProducer(String name) {
+        return producerDAO.getProducer(name);
+    }
 }

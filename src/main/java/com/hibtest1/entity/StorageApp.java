@@ -19,12 +19,8 @@ public class StorageApp implements Serializable {
     private String state = "no";  //处理状态
     private Date applicationDate; //申请录入时间
     private Goods goods;
-//    private Producer producer;
-
-  /*  private  Integer goodsId;
-    private  Integer producerId;
-    private  Integer placeId; */
-
+    /*private Producer producer;*/
+    private Place place;
 
     public Goods getGoods() {
         return goods;
@@ -34,7 +30,7 @@ public class StorageApp implements Serializable {
         this.goods = goods;
     }
 
-  /*  public Producer getProducer() {
+   /* public Producer getProducer() {
         return producer;
     }
 
@@ -42,15 +38,13 @@ public class StorageApp implements Serializable {
         this.producer = producer;
     }*/
 
-   /* public Place getPlace() {
+    public Place getPlace() {
         return place;
     }
 
     public void setPlace(Place place) {
         this.place = place;
     }
-
-    private Place place;*/
 
     public Date getApplicationDate() {
         return applicationDate;
@@ -139,6 +133,5 @@ public class StorageApp implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-
 
 }

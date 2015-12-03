@@ -174,9 +174,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setGoodsName(storageApp.getGoodsName());
         if (storageApp.getStoragePlace() != null)                      //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
-        //     if (storageApp.getProducer().getProducerId()!= null)        //商品名称
-
-
         if (storageApp.getCommodityRating() != null)               //商品评级
             condition.setCommodityRating(storageApp.getCommodityRating());
         if (storageApp.getExpectedDate() != null)          //预期入库时间
@@ -194,12 +191,13 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Date date = calendar.getTime();
         condition.setApplicationDate(date);
         System.out.println("当前时间" + date);
-        Goods goods = goodsBiz.getGoods(condition.getGoodsName()).get(0);
+        Goods goods = goodsBiz.getGoods(storageApp.getGoodsName()).get(0);
         condition.setGoods(goods);
-        /*Producer producer = producerBiz.get(condition.getGoodsName()).get(0);
-        condition.setGoods(goods);*/
-        /*Goods goods1 = goodsBiz.getGoods(condition.getGoodsName()).get(0);
-        condition.setGoods(goods1);*/
+      /*  Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
+        condition.setProducer(producer);*/
+        Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
+        System.out.println("输出仓库id"+place.getPlaceId());
+        condition.setPlace(place);
         storageAppBiz.add(condition);
         return "success";
 

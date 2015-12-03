@@ -69,8 +69,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         List list = goodsBiz.getGoodsList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
-            Goods goods = new Goods();
-            goods = (Goods) list.get(0);
+            Goods goods = (Goods) list.get(0);
             //  session.put("goodslist", list);
             session.put("goodslist", goods);
             return "success";
@@ -127,7 +126,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
                 condition.setVweight(goods.getVweight()); //体积重量
             if (goods.getStandard() != null)
                 condition.setStandard(goods.getStandard());  //装箱规格
-       //     goods.setState("no");
+            //     goods.setState("no");
             condition.setState("ok");
             goodsBiz.add(condition);
             return "success";
@@ -151,8 +150,8 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
 
     public String listGoods() {
         List goods = goodsBiz.getAllGoods();
-        Goods g=(Goods)goods.get(0);
-        System.out.print(g.getState()+"state");
+        Goods g = (Goods) goods.get(0);
+        System.out.print(g.getState() + "state");
         session.put("goodslistall", goods);
         //     Goods g = new Goods();
         //     g = (Goods) goods.get(0);
@@ -219,7 +218,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         if (goods.getStandard() != null && !goods.getStandard().equals(""))
             condition.setStandard(goods.getStandard());  //装箱规格
         if (goods.getState() != null && !goods.getState().equals(""))
-            condition.setState (goods.getState());  //开放状态
+            condition.setState(goods.getState());  //开放状态
         if (goodsBiz.modifyGood(condition)) {
             session.put("goodslist", condition);
             request.put("message", "修改成功");  //先放着
@@ -269,7 +268,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         if (goods.getStandard() != null && !goods.getStandard().equals(""))
             condition.setStandard(goods.getStandard());  //装箱规格
         if (goods.getState() != null && !goods.getState().equals(""))
-            condition.setState (goods.getState());  //开放状态
+            condition.setState(goods.getState());  //开放状态
         if (goodsBiz.modifyGood(condition)) {
             session.put("goodslist", condition);
             request.put("message", "修改成功");  //先放着

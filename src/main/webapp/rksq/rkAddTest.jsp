@@ -26,61 +26,61 @@
         }
     </style>
     <script>
-    var timer="";
-    //异步模糊查询供应商
-    $("#goodsName").keyup(function(){
-    clearTimeout(timer);
-    $("#showCompanyname").empty();
-    var companyname = $("#companyname").val();
-    //alert(companyname);
-    if(goodsName){
+        var timer = "";
+        //异步模糊查询供应商
+        $("#goodsName").keyup(function () {
+            clearTimeout(timer);
+            $("#showCompanyname").empty();
+            var companyname = $("#companyname").val();
+            //alert(companyname);
+            if (goodsName) {
 
-    timer = setTimeout(function(){
-    $.ajax({
-    url: "<%=request.getContextPath() %>/listGoodsTest.action",
-    type: "POST",
-    data : { "goodsName":goodsName },
-    async:true,
-    dataType:"json",
-    success:function(data){
-    if(data&&data.list&&data.list.length){
-    var $ul =$("<ul></ul>");
-    for(var i=0;i<data.list.length;i++){
-    var $li = $("<li></li>");
-    $li.text(data.list[i].goodsName);
-    $ul.append($li);
-    $li.click(function(){
+                timer = setTimeout(function () {
+                    $.ajax({
+                        url: "<%=request.getContextPath() %>/listGoodsTest.action",
+                        type: "POST",
+                        data: {"goodsName": goodsName},
+                        async: true,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data && data.list && data.list.length) {
+                                var $ul = $("<ul></ul>");
+                                for (var i = 0; i < data.list.length; i++) {
+                                    var $li = $("<li></li>");
+                                    $li.text(data.list[i].goodsName);
+                                    $ul.append($li);
+                                    $li.click(function () {
 
-    $("#companyname").val($li.text());
-    $("#showCompanyname").hide();
-    $("#isResult").val(1);
+                                        $("#companyname").val($li.text());
+                                        $("#showCompanyname").hide();
+                                        $("#isResult").val(1);
 
-    });
-    }
-    $("#showCompanyname").append($ul).show();
-    }else{
-    $("#isResult").val(0);
-    }
-    }
-    });},500);
-    }else{
-    $("#isResult").val(0);
-    $("#showCompanyname").hide();
-    }
-    }).blur(function(){
-    if($("#isResult").val){
-    $(this).val("");
-    }
-    });
+                                    });
+                                }
+                                $("#showCompanyname").append($ul).show();
+                            } else {
+                                $("#isResult").val(0);
+                            }
+                        }
+                    });
+                }, 500);
+            } else {
+                $("#isResult").val(0);
+                $("#showCompanyname").hide();
+            }
+        }).blur(function () {
+            if ($("#isResult").val) {
+                $(this).val("");
+            }
+        });
 
 
+        $("body").click(function () {
+            $("#showCompanyname").attr("style", "display:none");//单个属性的设置
 
-    $("body").click(function(){
-    $("#showCompanyname").attr("style", "display:none");//单个属性的设置
-
-    });
+        });
     </script>
- <!--   <% if(session.getAttribute("goodslistall")==null){response.sendRedirect("listrk");} %>  -->
+    <!--   <% if(session.getAttribute("goodslistall")==null){response.sendRedirect("listrk");} %>  -->
 </head>
 
 <body>
@@ -103,15 +103,13 @@
             <div class="input-div"><input placeholder="请输入商品名称" name="storageApp.goodsName"/></div>
 
 
-        <input name="isResult" id="isResult" type="hidden" />
-        <input name="storageApp.goodsName" id="goodsName" value="" />
-        <div id="isShowCompanyName" ></div>
-        <div  class="bdsug" style="height: auto;" id="showCompanyname"></div> <br/>
+            <input name="isResult" id="isResult" type="hidden"/>
+            <input name="storageApp.goodsName" id="goodsName" value=""/>
+
+            <div id="isShowCompanyName"></div>
+            <div class="bdsug" style="height: auto;" id="showCompanyname"></div>
+            <br/>
         </div>
-
-
-
-
 
 
         <input type="submit" value="提交" class="btn-submit"/>

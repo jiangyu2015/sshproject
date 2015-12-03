@@ -53,37 +53,7 @@
 
 
 
-        <div class="line">
-            <div class="lable">仓库id：</div>
-            <div class="input-div"><input placeholder="请输入仓库id" name="storage.placeId"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">实际入库时间：</div>
-            <div class="input-div"><input placeholder="请输入实际入库时间" name="storage.storageDate" type="date"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">实收数量：</div>
-            <div class="input-div"><input placeholder="请输入实收数量" name="storage.storageNumber"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">入库类型：</div>
-            <!--  <div class="input-div"><input placeholder="请输入入库类型" name="storage.storageType"/></div>  -->
-            <div class="input-div">
-                <select name="storage.storageType">
-                    <option value="调入">调入</option>
-                    <option value="任意配置">任意配置</option>
-                    <option value="一元购">一元购</option>
-                    <option value="社区特卖">社区特卖</option>
-                    <option value="物业礼包">物业礼包</option>
-                    <option value="福利">福利</option>
-                </select>
 
-            </div>
-        </div>
-        <div class="line">
-            <div class="lable">备注：</div>
-            <div class="input-div"><input placeholder="请输入备注" name="storage.remark"/></div>
-        </div>
 
         <input type="submit" value="提交" class="btn-submit"/>
     </form>

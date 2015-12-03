@@ -26,7 +26,8 @@
                     console.log(goods);
                     for (var i = 0; i < goods.length; i++) {
                      //   str = str + "<option>" + goods[i].goodsName + "</option>";
-                              str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                     //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                        str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
                     }
                     $("#select").html(str);
 

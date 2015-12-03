@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,5 +53,20 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
         super.getHibernateTemplate().update(producer);   //修改
     }
 
+    public List<Producer> getProducer(String name) {    // 查询id
+        String hql = "from Producer p where p.producerName = '" + name + "'";
+        System.out.println("ProducerDAOIMPL" + hql);
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+
+        List<Producer> producerList = query.list();
+        if (producerList.size() <= 0) {
+            return new ArrayList<Producer>();
+        } else {
+            Producer p = (Producer) query.list().get(0);
+            System.out.println(p.getProducerName());
+            return producerList;
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.springtest1.biz;
 
+
 import com.hibtest1.entity.Place;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface PlaceBiz {
     public List getPlaceList( Place condition);
     public void add(Place condition);
     public boolean delGoods(Place good);  //删除x
+    public List<Place> getPlace(String name);
+
 }

@@ -12,4 +12,6 @@ public interface PlaceDAO {
     public void add(Place condition);//add
     public boolean delGoods(Place condition); //del
 
+    public List<Place> getPlace(String name);  //找id查询
+
 }
