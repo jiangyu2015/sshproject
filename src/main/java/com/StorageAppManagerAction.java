@@ -175,7 +175,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setStoragePlace(storageApp.getStoragePlace());
         //     if (storageApp.getProducer().getProducerId()!= null)        //商品名称
 
-
         if (storageApp.getCommodityRating() != null)               //商品评级
             condition.setCommodityRating(storageApp.getCommodityRating());
         if (storageApp.getExpectedDate() != null)          //预期入库时间
