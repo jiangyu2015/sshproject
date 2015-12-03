@@ -184,7 +184,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setExpectedNumber(storageApp.getExpectedNumber());
         if (storageApp.getSldId() != null)          //三联单编号
             condition.setSldId(storageApp.getSldId());
-        if (storageApp.getStorageType() != null)          //入库类型
+        if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
             condition.setStorageType(storageApp.getStorageType());
       /*  if (storageApp.getState() != null)          //处理状态
             condition.setState(storageApp.getState());*/

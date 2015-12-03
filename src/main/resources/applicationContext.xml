@@ -151,12 +151,15 @@
     </bean>
     <bean id="storageAppEdit" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="storageAppList" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="storageAppAdd" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
 
     <bean id="storageDAO" class="com.springtest1.dao.StorageDAOImpl">
