@@ -13,6 +13,47 @@ public class StorageApp implements Serializable {
     private Date expectedDate;  //预期时间
     private Integer expectedNumber;  //预期数量
     private String commodityRating; //商品评级
+    private String sldId; //三联单编号
+    private String storagePlace;  //入库地点
+    private String storageType; //入库类型
+    private String state;  //处理状态
+    private Date applicationDate; //申请录入时间
+    private Goods goods;
+    private Producer producer;
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
+    private Place place;
+
+    public Date getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(Date applicationDate) {
+        this.applicationDate = applicationDate;
+    }
 
     public Integer getStorageAppId() {
         return storageAppId;
@@ -93,11 +134,6 @@ public class StorageApp implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-
-    private String sldId; //三联单编号
-    private String storagePlace;  //入库地点
-    private String storageType; //入库类型
-    private String state;  //处理状态
 
 
 }

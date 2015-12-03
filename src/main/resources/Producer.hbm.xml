@@ -25,5 +25,8 @@
         <property name="telTwo" type="java.lang.String">
             <column name="link_tel2" length="15" not-null="false"/>
         </property>
+        <property name="state" type="java.lang.String">
+            <column name="state" length="15" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

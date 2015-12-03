@@ -71,7 +71,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         System.out.println(producerName);
         Producer condition = new Producer();
         condition.setProducerName(producerName);
-        System.out.println("商户查询Manager"+condition.getProducerName());
+        System.out.println("商户查询Manager" + condition.getProducerName());
         List list = producerBiz.getProducerList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
@@ -126,6 +126,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
                 condition.setTelOne(producer.getTelOne());
             if (producer.getTelTwo() != null)          //联系电话2
                 condition.setTelTwo(producer.getTelTwo());
+            condition.setState("ok");
             producerBiz.add(condition);
             return "success";
         }
@@ -146,32 +147,33 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
 
     public String editProducer() {
         Producer condition = new Producer();
-        if (producer.getProducerId() != null && !producer.getProducerId().equals("")){
+        if (producer.getProducerId() != null && !producer.getProducerId().equals("")) {
             condition.setProducerId(producer.getProducerId());
             System.out.println(producer.getProducerId());
         }
-        if (producer.getProducerName() != null && !producer.getProducerName().equals("")){
+        if (producer.getProducerName() != null && !producer.getProducerName().equals("")) {
             condition.setProducerName(producer.getProducerName());
             System.out.println(producer.getProducerName());
         }
-        if (producer.getProducerAddress() != null && !producer.getProducerAddress().equals("")){
+        if (producer.getProducerAddress() != null && !producer.getProducerAddress().equals("")) {
             condition.setProducerAddress(producer.getProducerAddress());
             System.out.println(producer.getProducerAddress());
         }
-        if (producer.getLinkman() != null && !producer.getLinkman().equals("")){
+        if (producer.getLinkman() != null && !producer.getLinkman().equals("")) {
             condition.setLinkman(producer.getLinkman());
             System.out.println(producer.getLinkman());
         }
-        if (producer.getTelOne() != null && !producer.getTelOne().equals("")){
+        if (producer.getTelOne() != null && !producer.getTelOne().equals("")) {
             condition.setTelOne(producer.getTelOne());
-            System.out.println(producer.getTelOne());
         }
-        if (producer.getTelTwo() != null && !producer.getTelTwo().equals("")){
+        if (producer.getTelTwo() != null && !producer.getTelTwo().equals("")) {
             condition.setTelTwo(producer.getTelTwo());
-            System.out.println(producer.getTelTwo());
+        }
+        if (producer.getState() != null && !producer.getState().equals("")) {
+            condition.setState(producer.getState());
         }
         if (producerBiz.editProducer(condition)) {
-            System.out.println("condition"+condition.getProducerName());
+            System.out.println("condition" + condition.getProducerName());
             System.out.println(condition.getTelTwo());
             session.put("producerlist", condition);
             return "success";

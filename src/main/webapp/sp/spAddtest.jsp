@@ -99,6 +99,7 @@
             <div class="lable">保质期截止日期：</div>
             <div class="input-div"><input placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date"/></div>
         </div>
+
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>

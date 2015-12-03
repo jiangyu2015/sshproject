@@ -63,6 +63,9 @@
         <property name="expirationDate" type="java.util.Date">
             <column name="expiration_date" length="30" not-null="false"/>
         </property>
+        <property name="state" type="java.lang.String">
+            <column name="state" length="30" not-null="true"/>
+        </property>
 
     </class>
 </hibernate-mapping>

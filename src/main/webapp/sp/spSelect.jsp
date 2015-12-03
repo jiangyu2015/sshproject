@@ -6,16 +6,56 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>查询商品</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
+    <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                         str = str + "<option>" + goods[i].goodsName + "</option>";
+                  //      str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                    }
+                    $("#select").html(str);
+
+                    $('#item').bind('input propertychange', function () {
+                        $("#select").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+        });
+
+        /*   function aaa() {
+         var val = $("#item").val();
+         var selectId = $("[value='" + val + "']").eq(0).attr('id');
+         if (selectId == undefined) {
+         console.log("该商品不存在");
+         return;
+         }
+         console.log("val: " + val);
+         console.log("Id: " + selectId);
+         }*/
+    </script>
 </head>
 
 <body>
 <div class="title">查询商品</div>
 <div class="content">
-    <form method="post" action="spSelect" >
+    <form method="post" action="spSelect">
         <div class="line">
             <div class="lable">商品名称：</div>
-            <div class="input-div"><input placeholder="请输入要查询的商品名称" name="goodsName"/></div>
+            <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商品名称" name="goodsName"/>
+                <datalist id="select"></datalist>
+            </div>
         </div>
+
+
         <input type="submit" value="查找" class="btn-submit"/>
     </form>
 </div>

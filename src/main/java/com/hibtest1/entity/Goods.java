@@ -20,6 +20,15 @@ public class Goods implements java.io.Serializable {
     private Date creationDate;
     private Integer baozhiqi;
     private Date expirationDate;
+    private String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public Integer getGoodsId() {
         return goodsId;

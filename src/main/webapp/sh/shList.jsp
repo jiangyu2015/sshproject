@@ -28,6 +28,7 @@
         <th>联系人</th>
         <th>联系电话1</th>
         <th>联系电话2</th>
+        <th>商户可用</th>
     </tr>
     </thead>
     <tbody>
@@ -39,6 +40,7 @@
             <td><s:property value="#producer.linkman"/></td>
             <td><s:property value="#producer.telOne"/></td>
             <td><s:property value="#producer.telTwo"/></td>
+            <td><s:property value="#producer.state"/></td>
         </tr>
     </s:iterator>
     </tbody>

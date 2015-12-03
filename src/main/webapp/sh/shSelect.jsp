@@ -13,15 +13,44 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>查询商户</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
+    <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "post",
+                url: "excuteProducerAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    alert("sh");
+                    var d = eval("(" + data + ")");
+                    var producer = d.producerList;
+                    console.log(producer);
+                    for (var i = 0; i < producer.length; i++) {
+                        str = str + "<option>" + producer[i].producerName + "</option>";
+                        //      str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                    }
+                    $("#select").html(str);
+
+                    $('#item').bind('input propertychange', function () {
+                        $("#select").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+        });
+    </script>
+
 </head>
 
 <body>
 <div class="title">查询商户</div>
 <div class="content">
-    <form method="post" action="shSelect" >
+    <form method="post" action="shSelect">
         <div class="line">
             <div class="lable">商户名称：</div>
-            <div class="input-div"><input placeholder="请输入要查询的商户名称" name="producerName"/></div>
+            <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商户名称" name="producerName"/>
+                <datalist id="select"></datalist>
+            </div>
         </div>
         <input type="submit" value="查找" class="btn-submit"/>
     </form>

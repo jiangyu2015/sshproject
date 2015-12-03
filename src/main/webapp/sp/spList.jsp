@@ -32,6 +32,7 @@
 	            <th>生产日期</th>
 	            <th>保质期</th>
 	            <th>保质期截止日期</th>
+				<th>商品可用</th>
 	        </tr>
         </thead>
         <tbody>
@@ -54,6 +55,7 @@
 		            <td><s:date format="yyyy-MM-dd" name="#goods.creationDate" /></td>
 		            <td><s:property value="#goods.baozhiqi"/></td>
 		            <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
+					<td><s:property value="#goods.state"/></td>
 		        </tr>
 	        </s:iterator>
         </tbody>

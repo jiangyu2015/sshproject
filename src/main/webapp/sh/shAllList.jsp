@@ -6,7 +6,6 @@
     <title>商户信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
-
     <script>
         function edit() {
             if ($(".active").length == 0) {
@@ -16,16 +15,11 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-
-
                         $line.find('input').val($tds.eq(i).text());
-
                 }
-
                 $("#dialog_edit").show();
             }
         }
-
         var _move = false;//移动标记
         var _x, _y;//鼠标离控件左上角的相对位置
 
@@ -84,6 +78,7 @@
             <th>联系人</th>
             <th>联系电话1</th>
             <th>联系电话2</th>
+            <th>商户可用</th>
         </tr>
         </thead>
         <tbody>
@@ -95,6 +90,7 @@
                 <td><s:property value="#producer.linkman"/></td>
                 <td><s:property value="#producer.telOne"/></td>
                 <td><s:property value="#producer.telTwo"/></td>
+                <td><s:property value="#producer.state"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -136,6 +132,10 @@
                     <div class="line">
                         <div class="lable">联系电话2：</div>
                         <div class="input-div"><input placeholder="请输入备用联系电话" name="producer.telTwo"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">商户可用状态：</div>
+                        <div class="input-div"><input placeholder="请输入备用联系电话" name="producer.state"/></div>
                     </div>
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>

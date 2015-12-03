@@ -14,13 +14,15 @@
             } else {
                 var $tds = $("tr.active").children();
                 var $lines = $("#dialog_edit").find('form').children();
+                alert("123" + $tds.length);
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
 
-                     if (i == 13) {
+                    if (i == 13) {
                         $('input:radio[name="goods.service"]').prop('checked', false);
                         $('input:radio[name="goods.service"][value="' + $tds.eq(i).text() + '"]').prop('checked', true);
-                    } else {
+                    }
+                    else {
                         $line.find('input').val($tds.eq(i).text());
                     }
                 }
@@ -39,33 +41,33 @@
             });
             var width = $(document).width();
             var height = $(document).height();
-            $(".dialog-content .title").click(function(){
-            }).mousedown(function(e){
-                _move=true;
-                _x=e.pageX-parseInt($(".dialog-content").css("left"));
-                _y=e.pageY-parseInt($(".dialog-content").css("top"));
+            $(".dialog-content .title").click(function () {
+            }).mousedown(function (e) {
+                _move = true;
+                _x = e.pageX - parseInt($(".dialog-content").css("left"));
+                _y = e.pageY - parseInt($(".dialog-content").css("top"));
             });
-            $(document).mousemove(function(e){
-                if(_move){
-                    var x=e.pageX-_x;//移动时根据鼠标位置计算控件左上角的绝对位置
-                    var y=e.pageY-_y;
+            $(document).mousemove(function (e) {
+                if (_move) {
+                    var x = e.pageX - _x;//移动时根据鼠标位置计算控件左上角的绝对位置
+                    var y = e.pageY - _y;
 
-                    if(x <= 0){
+                    if (x <= 0) {
                         x = 0;
-                    }else if(x >= 0.2*width){
-                        x = 0.2*width;
+                    } else if (x >= 0.2 * width) {
+                        x = 0.2 * width;
                     }
 
-                    if(y <= 0){
+                    if (y <= 0) {
                         y = 0;
-                    }else if( y >= (0.2*height)){
-                        y = 0.2*height;
+                    } else if (y >= (0.2 * height)) {
+                        y = 0.2 * height;
                     }
 
-                    $(".dialog-content").css({top:y,left:x});//控件新位置
+                    $(".dialog-content").css({top: y, left: x});//控件新位置
                 }
-            }).mouseup(function(){
-                _move=false;
+            }).mouseup(function () {
+                _move = false;
             });
         });
     </script>
@@ -98,6 +100,7 @@
             <th>生产日期</th>
             <th>保质期</th>
             <th>保质期截止日期</th>
+            <th>商品可用</th>
         </tr>
         </thead>
         <tbody>
@@ -120,6 +123,7 @@
                 <td><s:date format="yyyy-MM-dd" name="#goods.creationDate"/></td>
                 <td><s:property value="#goods.baozhiqi"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
+                <td><s:property value="#goods.state"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -135,97 +139,94 @@
                 <form method="post" action="spEdit">
                     <div class="line">
                         <div class="lable">商品id：</div>
-                        <div class="input-div"><input  name="goods.goodsId" readonly="readonly" style="border: none;-webkit-box-shadow: none;"/></div>
-
+                        <div class="input-div"><input name="goods.goodsId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
                         <div class="input-div"><input placeholder="请输入商品名称" name="goods.goodsName"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">商品后台名称：</div>
                         <div class="input-div"><input placeholder="请输入商品后台名称" name="goods.goodsBackName"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">参考价值：</div>
                         <div class="input-div"><input placeholder="请输入参考价值" name="goods.value"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">单价：</div>
                         <div class="input-div"><input placeholder="请输入单价" name="goods.price"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">长cm：</div>
                         <div class="input-div"><input placeholder="请输入长cm" name="goods.length"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">宽cm：</div>
                         <div class="input-div"><input placeholder="请输入宽cm" name="goods.wide"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">高cm：</div>
                         <div class="input-div"><input placeholder="请输入高cm" name="goods.tall"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">毛重kg：</div>
                         <div class="input-div"><input placeholder="请输入毛重kg" name="goods.mweight"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">体积m*m*m：</div>
                         <div class="input-div"><input placeholder="请输入体积m*m*m" name="goods.volume"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">体积重量kg：</div>
                         <div class="input-div"><input placeholder="请输入体积重量kg" name="goods.vweight"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">装箱规格：</div>
                         <div class="input-div"><input placeholder="请输入装箱规格" name="goods.standard"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">单位：</div>
                         <div class="input-div"><input placeholder="请输入单位" name="goods.unit"/></div>
                     </div>
-
                     <div class="line">
                         <div class="input-div">
                             <div class="lable-left">
                                 <input type="radio" name="goods.service" value="服务" id="radio_service"/>
-                                <label for="radio_service">服务</lable>
+                                <label for="radio_service"/>服务
                             </div>
                             <div class="lable-right">
                                 <input type="radio" name="goods.service" value="实物" id="radio_object"
                                        checked="checked"/>
-                                <label for="radio_object">实物</lable>
+                                <label for="radio_object"/>实物
                             </div>
                         </div>
                     </div>
-
                     <div class="line">
                         <div class="lable">生产日期：</div>
-                        <div class="input-div"><input placeholder="请输入生产日期" name="goods.creationDate" type="date"/></div>
+                        <div class="input-div"><input placeholder="请输入生产日期" name="goods.creationDate" type="date"/>
+                        </div>
                     </div>
-
                     <div class="line">
                         <div class="lable">保质期：</div>
                         <div class="input-div"><input placeholder="请输入保质期" name="goods.baozhiqi"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable">保质期截止日期：</div>
-                        <div class="input-div"><input placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date"/></div>
+                        <div class="input-div"><input placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date"/>
+                        </div>
                     </div>
+                   <%-- <div class="line">
+                        <div class="lable">商品可用：</div>
+                        <div class="input-div"><input name="goods.state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>--%>
+                    <div class="line">
+                        <div class="lable">商品可用：</div>
+                        <div class="input-div"><input placeholder="请输入商品可用状态ok no" name="goods.state"/></div>
+                    </div>
+
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>

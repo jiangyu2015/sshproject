@@ -8,8 +8,10 @@ import org.apache.logging.log4j.core.appender.SyslogAppender;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 /**
  * Created by user on 2015/11/26.
@@ -78,7 +80,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         this.session = session;
     }
 
-
     public String listStorageApp() {
         List storageApp = storageAppBiz.getAllStorageApp();
         StorageApp storageApp1 = (StorageApp) storageApp.get(0);
@@ -91,11 +92,11 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         System.out.println(producerName);
         StorageApp condition = new StorageApp();
         condition.setProducerName(producerName);
-       // condition.setGoodsName(goodsName);
+        // condition.setGoodsName(goodsName);
         List list = storageAppBiz.getStorageAppList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
-        //    StorageApp storageApp = new StorageApp();
+            //    StorageApp storageApp = new StorageApp();
             //  session.put("goodslist", list);
             session.put("storageapplist", list);
             return "success";
@@ -142,12 +143,15 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         }
         System.out.println("ok");
 
-        if (storageApp.getProducerName() != null)        //商户名称
+       /* if (storageApp.getProducerName() != null)        //商户名称
             condition.setProducerName(storageApp.getProducerName());
         if (storageApp.getGoodsName() != null)                 //商品名称
             condition.setGoodsName(storageApp.getGoodsName());
         if (storageApp.getStoragePlace() != null)                      //仓库地址
-            condition.setStoragePlace(storageApp.getStoragePlace());
+            condition.setStoragePlace(storageApp.getStoragePlace());*/
+        if (storageApp.getProducer().getProducerId()!= null)        //商品名称
+            condition.setProducerName(storageApp.getProducer().getProducerId());
+
         if (storageApp.getCommodityRating() != null)               //商品评级
             condition.setCommodityRating(storageApp.getCommodityRating());
         if (storageApp.getExpectedDate() != null)          //预期入库时间
@@ -156,15 +160,20 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setExpectedNumber(storageApp.getExpectedNumber());
         if (storageApp.getSldId() != null)          //三联单编号
             condition.setSldId(storageApp.getSldId());
-        if (storageApp.getStorageType()!= null)          //入库类型
+        if (storageApp.getStorageType() != null)          //入库类型
             condition.setStorageType(storageApp.getStorageType());
-        if (storageApp.getState()!= null)          //处理状态
-            condition.setState(storageApp.getState());
+      /*  if (storageApp.getState() != null)          //处理状态
+            condition.setState(storageApp.getState());*/
+        condition.setState("no");  //处理状态新增默认为no 待审核
+        Calendar calendar= Calendar.getInstance();
+        Date date=calendar.getTime();
+        condition.setApplicationDate(date);
+        System.out.println("当前时间"+date);
         storageAppBiz.add(condition);
         return "success";
 
 
-}
+    }
 
   /*  public String modifyShow() {                        //更新显示
         StorageApp condition = new StorageApp();
@@ -192,15 +201,15 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setGoodsName(storageApp.getGoodsName());
         if (storageApp.getCommodityRating() != null && !storageApp.getCommodityRating().equals(""))               //商品评级
             condition.setCommodityRating(storageApp.getCommodityRating());
-        if (storageApp.getExpectedDate() != null  && !storageApp.getExpectedDate().equals(""))          //预期入库时间
+        if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))          //预期入库时间
             condition.setExpectedDate(storageApp.getExpectedDate());
-        if (storageApp.getExpectedNumber() != null  && !storageApp.getExpectedNumber().equals(""))          //预期入库数量
+        if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))          //预期入库数量
             condition.setExpectedNumber(storageApp.getExpectedNumber());
         if (storageApp.getSldId() != null && !storageApp.getSldId().equals(""))          //三联单编号
             condition.setSldId(storageApp.getSldId());
-        if (storageApp.getState()!= null  && !storageApp.getState().equals(""))          //处理状态
+        if (storageApp.getState() != null && !storageApp.getState().equals(""))          //处理状态
             condition.setState(storageApp.getState());
-        if (storageApp.getStorageType()!= null  && !storageApp.getStorageType().equals(""))          //入库类型
+        if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
             condition.setStorageType(storageApp.getStorageType());
         if (storageAppBiz.editStorageApp(condition)) {
             System.out.println("condition" + condition.getProducerName());

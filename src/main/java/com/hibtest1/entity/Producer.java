@@ -12,6 +12,15 @@ public class Producer  implements Serializable {
     private String linkman;
     private String telOne;
     private String telTwo;
+    private String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public String getProducerName() {
         return producerName;
