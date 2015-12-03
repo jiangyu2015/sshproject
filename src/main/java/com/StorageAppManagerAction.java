@@ -1,5 +1,6 @@
 package com;
 
+import com.dto.EnteringWarehouseDto;
 import com.hibtest1.entity.StorageApp;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,6 +22,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     Map<String, Object> request;
     Map<String, Object> session;
     StorageApp storageApp;
+
+    EnteringWarehouseDto enteringWarehouseDto;
 
     String goodsName;
     String producerName;
@@ -120,6 +123,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     }  */
 
     public String addStorageApp() throws Exception {                  //增加入库申请
+        System.out.println(enteringWarehouseDto);
         System.out.println("addStorageApp");
         StorageApp condition = new StorageApp();
         System.out.println(storageApp.getProducerName() + "入库申请我传过来了");
@@ -149,7 +153,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setGoodsName(storageApp.getGoodsName());
         if (storageApp.getStoragePlace() != null)                      //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
-   //     if (storageApp.getProducer().getProducerId()!= null)        //商品名称
+        //     if (storageApp.getProducer().getProducerId()!= null)        //商品名称
 
 
         if (storageApp.getCommodityRating() != null)               //商品评级
@@ -165,10 +169,10 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
       /*  if (storageApp.getState() != null)          //处理状态
             condition.setState(storageApp.getState());*/
         condition.setState("no");  //处理状态新增默认为no 待审核
-        Calendar calendar= Calendar.getInstance();
-        Date date=calendar.getTime();
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
         condition.setApplicationDate(date);
-        System.out.println("当前时间"+date);
+        System.out.println("当前时间" + date);
         storageAppBiz.add(condition);
         return "success";
 
@@ -218,5 +222,13 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             return "success";
         } else return "input";
 
+    }
+
+    public EnteringWarehouseDto getEnteringWarehouseDto() {
+        return enteringWarehouseDto;
+    }
+
+    public void setEnteringWarehouseDto(EnteringWarehouseDto enteringWarehouseDto) {
+        this.enteringWarehouseDto = enteringWarehouseDto;
     }
 }
