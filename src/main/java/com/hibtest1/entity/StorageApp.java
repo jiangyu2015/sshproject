@@ -19,7 +19,7 @@ public class StorageApp implements Serializable {
     private String state = "no";  //处理状态
     private Date applicationDate; //申请录入时间
     private Goods goods;
-    /*private Producer producer;*/
+    private Producer producer;
     private Place place;
 
     public Goods getGoods() {
@@ -30,13 +30,13 @@ public class StorageApp implements Serializable {
         this.goods = goods;
     }
 
-   /* public Producer getProducer() {
+    public Producer getProducer() {
         return producer;
     }
 
     public void setProducer(Producer producer) {
         this.producer = producer;
-    }*/
+    }
 
     public Place getPlace() {
         return place;

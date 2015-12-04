@@ -33,8 +33,10 @@ public class PlaceBizImpl implements PlaceBiz {
     public boolean delGoods(Place Place) {
         return placeDAO.delGoods(Place);
     }
+
     @Transactional
     public List<Place> getPlace(String name){
+        System.out.println("我经过这里getPlaceBiz"+name);
         return placeDAO.getPlace(name);
     }
     
