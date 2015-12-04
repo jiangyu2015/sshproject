@@ -111,7 +111,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
 
     public String checkStorage() {               //得到所需入库的单子
         System.out.println("审核checkStorage");
-        List<Storage> storageApp = storageBiz.getCheckStorage();
+        List<Storage> storage = storageBiz.getCheckStorage();
         session.put("storagelistcheck", storage);
         return "storageCheck";
     }

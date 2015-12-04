@@ -104,7 +104,7 @@
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.storagelistall}" var="storage">
+        <s:iterator value="%{#session.storagelistcheck}" var="storage">
             <tr>
                 <td><s:property value="#storage.storageId"/></td>
                 <td><s:property value="#storage.producerId"/></td>

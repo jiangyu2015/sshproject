@@ -84,6 +84,8 @@
                     success: function () {
                         alert("已确认未通过");
                         $('#dialog_edit').hide();
+                      //  window.location.reload();
+                        window.location.href="rksqcheck.action";
                     },
                     error: function () {
                         alert("系统异常，请稍后重试！");

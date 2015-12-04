@@ -160,7 +160,7 @@
                             <div class="input-div"><input name="storage.storageDate" readonly="readonly"
                                                           style="border: none;-webkit-box-shadow: none;"  type="date"/></div>
                         </div>
-                    </div>
+
 
                     <div class="line">
                         <div class="lable">预期数量：</div>
@@ -190,7 +190,7 @@
                                                       style="border: none;-webkit-box-shadow: none;" /></div>
                     </div>
 
-                    <div style="position: relative; bottom: 0px;">
+                    <div style="position: relative; bottom: 0px; text-align: center;">
                         <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
                         <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
 
