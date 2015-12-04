@@ -13,11 +13,20 @@
         <property name="placeId" type="java.lang.Integer">
             <column name="rk_place_id" length="4" not-null="false"/>
         </property>
+        <property name="producerId" type="java.lang.Integer">
+            <column name="sh_id" length="4" not-null="false"/>
+        </property>
         <property name="goodsId" type="java.lang.Integer">
             <column name="sp_id" length="4" not-null="false"/>
         </property>
+        <property name="expectedDate" type="java.util.Date">
+            <column name="expect_rk_time" length="30" not-null="false"/>
+        </property>
         <property name="storageDate" type="java.util.Date">
             <column name="sj_stock_date" length="30" not-null="false"/>
+        </property>
+        <property name="expectedNumber" type="java.lang.Integer">
+            <column name="expect_rk_number" length="10" not-null="false"/>
         </property>
         <property name="storageNumber" type="java.lang.Integer">
             <column name="ss_number" length="10" not-null="false"/>
@@ -27,6 +36,9 @@
         </property>
         <property name="remark" type="java.lang.String">
             <column name="remark" length="30" not-null="false"/>
+        </property>
+        <property name="state" type="java.lang.String">
+            <column name="state" length="30" not-null="false"/>
         </property>
 
     </class>

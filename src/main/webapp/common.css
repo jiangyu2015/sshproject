@@ -75,7 +75,7 @@ input[type="radio"] {
 	right: 50px;
 	color: #3E3C3C;
 }
-.btn-submit, .btn-cancle {
+.btn-submit, .btn-cancle,.btn {
 	width: 130px;
 	height: 40px;
 	line-height: 40px;
@@ -97,8 +97,15 @@ input[type="radio"] {
    	margin: 52px auto;
    	-webkit-box-shadow: none;
 }
-.btn-cancle {
+
+.btn-cancle{
 	background-color: #E27678;
+	-webkit-box-shadow: 0px 2px 2px #5F4F52;
+	margin-left: 50px;
+}
+
+.btn {
+	background-color: #7744FF;
 	-webkit-box-shadow: 0px 2px 2px #5F4F52;
 	margin-left: 50px;
 }

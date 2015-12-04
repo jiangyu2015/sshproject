@@ -14,4 +14,8 @@ public interface StorageAppDAO {
    // public boolean delGoods(StorageApp condition); //del
 
     public void editStorageApp(StorageApp storageApp); //修改AllList\
+
+    public List<StorageApp> getCheckStorageApp();
+/*     public void changeState(String state,Integer id);*/
+
 }

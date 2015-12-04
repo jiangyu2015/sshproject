@@ -9,11 +9,16 @@ import java.util.List;
 /**
  * Created by user on 2015/11/27.
  */
-public class StorageBizImpl implements StorageBiz{
+public class StorageBizImpl implements StorageBiz {
     private StorageDAO storageDAO;
 
     public void setStorageDAO(StorageDAO storageDAO) {
         this.storageDAO = storageDAO;
+    }
+
+    @Transactional
+    public List<Storage> getCheckStorage() {    //审核单子
+        return storageDAO.getCheckStorage();
     }
 
     @Transactional
@@ -35,7 +40,7 @@ public class StorageBizImpl implements StorageBiz{
     }  */
 
     public boolean editStorage(Storage storage) {
-        System.out.println("入库明细biz里面的"+storage.getPlaceId());
+        System.out.println("入库明细biz里面的" + storage.getPlaceId());
         storageDAO.editStorage(storage);
         return true;
     } //修改AllList商品

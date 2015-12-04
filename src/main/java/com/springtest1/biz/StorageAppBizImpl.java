@@ -22,6 +22,11 @@ public class StorageAppBizImpl implements StorageAppBiz {
         return storageAppDAO.getAllStorageApp();
     }
 
+    @Transactional
+    public List<StorageApp> getCheckStorageApp() {    //审核单子
+        return storageAppDAO.getCheckStorageApp();
+    }
+
     public List getStorageAppList(StorageApp condition) {
         List list = storageAppDAO.search(condition);
         return list;

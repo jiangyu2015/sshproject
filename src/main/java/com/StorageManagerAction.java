@@ -109,6 +109,35 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
             return "input";
     }
 
+    public String checkStorage() {               //得到所需入库的单子
+        System.out.println("审核checkStorage");
+        List<Storage> storageApp = storageBiz.getCheckStorage();
+        session.put("storagelistcheck", storage);
+        return "storageCheck";
+    }
+
+    public String StorageOk() {               //通过
+        System.out.println("通过checkStorage");
+        Storage condition = new Storage();
+        System.out.println(storage.getStorageId());
+        condition.setStorageId(storage.getStorageId());
+        List list = storageBiz.getStorageList(condition);
+        System.out.println(list.size());
+        Storage storage2 = (Storage) list.get(0);
+        storage2.setState("ok");
+        if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
+            storage2.setStorageDate(storage.getStorageDate());
+        if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals(""))  {             //实收数量
+            System.out.println("Action实收数量"+storage.getStorageNumber());
+            storage2.setStorageNumber(storage.getStorageNumber());}
+        if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
+            storage2.setRemark(storage.getRemark());
+
+        storageBiz.editStorage(storage2);                //更改状态ok
+
+        return "success";
+    }
+
  /*   public String delStorage() {
         System.out.println(storageName);
         Storage condition = new Storage();
@@ -146,7 +175,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
             ActionContext.getContext().put("yesWords", "请输入仓库名称!");
             return "input";
         }*/
-        System.out.println("ok");
+
         if (storage.getGoodsId() != null)        //商品id
             condition.setGoodsId(storage.getGoodsId());
         if (storage.getPlaceId() != null)   {              //仓库id

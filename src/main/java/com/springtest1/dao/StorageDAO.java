@@ -14,4 +14,6 @@ public interface StorageDAO {
     // public boolean delGoods(Storage condition); //del
 
     public void editStorage(Storage storage); //修改AllList
+
+    public List<Storage> getCheckStorage();
 }

@@ -10,10 +10,48 @@ public class Storage implements Serializable {
     private Integer storageId; //id
     private Integer placeId; //仓库id
     private Integer goodsId; //商品id
+    private Integer producerId; //商户id
     private Date storageDate;  //实际入库时间
+    private Date expectedDate;  //预期时间
+    private Integer expectedNumber;  //预期数量
+    private String state = "no";  //处理状态 no就是未收货
     private Integer storageNumber;  //实际入库数量
-    private String  storageType; //入库类型
+    private String storageType; //入库类型
     private String remark; //备注
+
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Date getExpectedDate() {
+        return expectedDate;
+
+    }
+
+    public void setExpectedDate(Date expectedDate) {
+        this.expectedDate = expectedDate;
+    }
+
+    public Integer getExpectedNumber() {
+        return expectedNumber;
+    }
+
+    public void setExpectedNumber(Integer expectedNumber) {
+        this.expectedNumber = expectedNumber;
+    }
+
+    public Integer getProducerId() {
+        return producerId;
+    }
+
+    public void setProducerId(Integer producerId) {
+        this.producerId = producerId;
+    }
 
     public Integer getStorageId() {
         return storageId;

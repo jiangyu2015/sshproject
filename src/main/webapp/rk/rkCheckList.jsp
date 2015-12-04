@@ -1,6 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
+  Date: 2015/12/4
+  Time: 17:26
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: user
   Date: 2015/11/27
   Time: 13:53
   To change this template use File | Settings | File Templates.
@@ -75,10 +82,10 @@
 
 <body>
 <div class="table-div">
-    <div class="title">入库明细信息</div>
+    <div class="title">确认收货</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-       <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();">
+        <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -119,10 +126,10 @@
 <div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
-        <div class="title">修改入库明细信息</div>
+        <div class="title">确认收货</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editrk">
+                <form method="post" action="rkOk">
                     <div class="line">
                         <div class="lable">入库明细id：</div>
                         <div class="input-div"><input name="storage.storageId" readonly="readonly"
@@ -157,8 +164,7 @@
 
                     <div class="line">
                         <div class="lable">实际入库时间：</div>
-                            <div class="input-div"><input name="storage.storageDate" readonly="readonly"
-                                                          style="border: none;-webkit-box-shadow: none;"  type="date"/></div>
+                        <div class="input-div"><input placeholder="请输入实际入库时间" name="storage.storageDate" type="date"/>
                         </div>
                     </div>
 
@@ -170,8 +176,7 @@
 
                     <div class="line">
                         <div class="lable">实收数量：</div>
-                        <div class="input-div"><input name="storage.storageNumber" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                        <div class="input-div"><input placeholder="请输入实收数量" name="storage.storageNumber"/></div>
                     </div>
 
                     <div class="line">
@@ -191,12 +196,9 @@
                     </div>
 
                     <div style="position: relative; bottom: 0px;">
-                        <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
-                        <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
+                        <input type="submit" value="确认" class="btn-submit" onclick="btn()"/>
 
                     </div>
-
-
                 </form>
             </div>
         </div>

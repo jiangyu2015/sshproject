@@ -10,9 +10,11 @@ import com.hibtest1.entity.Goods;
 
 import com.hibtest1.entity.Place;
 import com.hibtest1.entity.Producer;
+import com.hibtest1.entity.StorageApp;
 import com.springtest1.biz.GoodsBiz;
 import com.springtest1.biz.ProducerBiz;
 import com.springtest1.biz.PlaceBiz;
+import com.springtest1.biz.StorageAppBiz;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -42,6 +44,11 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     GoodsBiz goodsBiz;
     ProducerBiz producerBiz;
     PlaceBiz placeBiz;
+    StorageAppBiz storageAppBiz;
+
+    public void setStorageAppBiz(StorageAppBiz storageAppBiz) {
+        this.storageAppBiz = storageAppBiz;
+    }
 
     public void setPlaceBiz(PlaceBiz placeBiz) {
         this.placeBiz = placeBiz;
@@ -134,4 +141,23 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         }
         return SUCCESS;
     }
+
+    public String excuteCheck() {
+        String id = request.getParameter("id");
+        int storageAppId = Integer.valueOf(id);
+        System.out.println("JsonActionCheck传值"+storageAppId);
+        StorageApp condition=new StorageApp();
+        condition.setStorageAppId(storageAppId);
+        System.out.println(condition.getStorageAppId()+"condition.setStorageAppId");
+        List list = storageAppBiz.getStorageAppList(condition);
+        System.out.println(list.size());
+        StorageApp storageApp=(StorageApp)list.get(0);
+        System.out.print(storageApp.getProducerName()+storageApp.getStoragePlace()+storageApp.getGoodsName());
+        storageApp.setState("yesno");
+        storageAppBiz.editStorageApp(storageApp);
+
+
+        return SUCCESS;
+    }
+
 }

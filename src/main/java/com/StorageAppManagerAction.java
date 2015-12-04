@@ -5,10 +5,7 @@ import com.hibtest1.entity.*;
 import com.hibtest1.entity.StorageApp;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.springtest1.biz.GoodsBiz;
-import com.springtest1.biz.PlaceBiz;
-import com.springtest1.biz.ProducerBiz;
-import com.springtest1.biz.StorageAppBiz;
+import com.springtest1.biz.*;
 import org.apache.logging.log4j.core.appender.SyslogAppender;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -27,6 +24,12 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     PlaceBiz placeBiz;
     ProducerBiz producerBiz;
     Map<String, Object> request;
+
+    public void setStorageBiz(StorageBiz storageBiz) {
+        this.storageBiz = storageBiz;
+    }
+
+    StorageBiz storageBiz;
 
     public void setGoodsBiz(GoodsBiz goodsBiz) {
         this.goodsBiz = goodsBiz;
@@ -103,13 +106,53 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         this.session = session;
     }
 
-    public String listStorageApp() {
+    public String listStorageApp() {               //得到所有入库申请单
         List storageApp = storageAppBiz.getAllStorageApp();
         StorageApp storageApp1 = (StorageApp) storageApp.get(0);
         System.out.println(storageApp1.getGoodsName());
         session.put("storageapplistall", storageApp);
 
         return "storageApp";
+    }
+
+    public String checkStorageApp() {               //得到所需审核的单子
+        System.out.println("审核checkStorageApp");
+        List<StorageApp> storageApp = storageAppBiz.getCheckStorageApp();
+        StorageApp storageApp1 = (StorageApp) storageApp.get(0);
+        System.out.println(storageApp1.getGoodsName());
+        session.put("storageapplistcheck", storageApp);
+        return "storageAppCheck";
+    }
+
+    public String StorageAppOk() {               //通过
+        System.out.println("通过checkStorageApp");
+        StorageApp condition = new StorageApp();
+        System.out.println(storageApp.getStorageAppId());
+        condition.setStorageAppId(storageApp.getStorageAppId());
+        System.out.println(condition.getGoodsName() + "商户" + condition.getProducerName() + condition.getStoragePlace());
+        List list = storageAppBiz.getStorageAppList(condition);
+        System.out.println(list.size());
+        StorageApp storageApp = (StorageApp) list.get(0);
+        storageApp.setState("yesok");
+        storageAppBiz.editStorageApp(storageApp);                //更改状态yesok
+        Storage storage = new Storage();           //新建入库明细表
+        if (storageApp.getGoods().getGoodsId() != null && !storageApp.getGoods().getGoodsId().equals(""))        //商品id
+            storage.setGoodsId(storageApp.getGoods().getGoodsId());
+        if (storageApp.getProducer().getProducerId() != null && !storageApp.getProducer().getProducerId().equals(""))        //商户id
+            storage.setProducerId(storageApp.getProducer().getProducerId());
+        if (storageApp.getPlace().getPlaceId() != null && !storageApp.getPlace().getPlaceId().equals("")) {              //仓库id
+            System.out.println("入库明细添加仓库id我传过来了" + storage.getPlaceId());
+            storage.setPlaceId(storageApp.getPlace().getPlaceId());
+        }
+        if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))                      //预期入库时间
+            storage.setExpectedDate(storageApp.getExpectedDate());
+        if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))               //预收数量
+            storage.setExpectedNumber(storageApp.getExpectedNumber());
+        if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
+            storage.setStorageType(storageApp.getStorageType());
+        storage.setState("no");
+        storageBiz.add(storage);
+        return "success";
     }
 
     public String searchStorageList() {
@@ -174,7 +217,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setGoodsName(storageApp.getGoodsName());
         if (storageApp.getStoragePlace() != null) {                     //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
-            System.out.print("传入仓库地址"+storageApp.getStoragePlace());
+            System.out.print("传入仓库地址" + storageApp.getStoragePlace());
         }
         if (storageApp.getCommodityRating() != null)               //商品评级
             condition.setCommodityRating(storageApp.getCommodityRating());
@@ -197,12 +240,11 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         condition.setGoods(goods);
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
         condition.setProducer(producer);
-        Place place = placeBiz.getPlace(storageApp.getProducerName()).get(0);
-        System.out.println("输出仓库id"+place.getPlaceId());
+        Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
+        System.out.println("输出仓库id" + place.getPlaceId());
         condition.setPlace(place);
         storageAppBiz.add(condition);
         return "success";
-
 
     }
 

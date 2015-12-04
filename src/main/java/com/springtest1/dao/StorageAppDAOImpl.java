@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,22 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
         return query.list();
     }
 
+    public List<StorageApp> getCheckStorageApp() {     //审核查出"no"状态的单子
+        String hql = "from StorageApp sa where sa.state='no'";
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+
+        List<StorageApp> storageapplist = query.list();
+        if (storageapplist.size() <= 0) {
+            return new ArrayList<StorageApp>();
+        } else {
+            StorageApp sa = (StorageApp) query.list().get(0);
+            System.out.println(sa.getGoodsName());
+            return storageapplist;
+        }
+
+    }
+
     public List<StorageApp> search(final StorageApp condition) {
         return super.getHibernateTemplate().execute(new HibernateCallback<List<StorageApp>>() {
             public List<StorageApp> doInHibernate(Session session) throws HibernateException, SQLException {
@@ -30,7 +47,11 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
                 if (condition != null) {
                     System.out.println(condition.getProducerName() + "商户名称 DAOImpl");
                     if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
-                        c.add(Restrictions.eq("StorageAppName", condition.getProducerName()));
+                        c.add(Restrictions.eq("storageAppName", condition.getProducerName()));
+                    }
+                    if (condition.getStorageAppId() != null && !condition.getStorageAppId().equals("") ) {
+                        System.out.println("DAO"+condition.getStorageAppId() );
+                        c.add(Restrictions.eq("storageAppId", condition.getStorageAppId()));
                     }
                 }
                 return c.list();
@@ -40,7 +61,7 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
 
     public void add(StorageApp storageApp) {
 
-        System.out.println( "商品"+storageApp.getGoodsName()+"商户"+ storageApp.getProducerName()+"库存地点"+ storageApp.getStoragePlace());
+        System.out.println("商品" + storageApp.getGoodsName() + "商户" + storageApp.getProducerName() + "库存地点" + storageApp.getStoragePlace());
         super.getHibernateTemplate().save(storageApp);
     }
 
@@ -53,4 +74,7 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
         System.out.println("DAO里面的入库申请" + storageApp.getProducerName());
         super.getHibernateTemplate().update(storageApp);   //修改
     }
+
+
+
 }

@@ -17,4 +17,6 @@ public interface StorageBiz {
     //  public boolean delGoods(Storage storage);  //删除x
 
     public boolean editStorage(Storage storage); //修改AllList
+
+    public List<Storage> getCheckStorage();
 }
