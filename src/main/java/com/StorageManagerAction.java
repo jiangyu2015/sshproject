@@ -133,7 +133,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
             storage2.setRemark(storage.getRemark());
 
-        storageBiz.editStorage(storage2);                //更改状态ok
+        storageBiz.editStorage(storage2);                //更改状态ok1
 
         return "success";
     }
