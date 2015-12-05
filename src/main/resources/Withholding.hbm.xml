@@ -36,6 +36,8 @@
            <key column="hd_id"></key>
            <one-to-many class="com.hibtest1.entity.Activity"/>
        </set>  -->
+        <many-to-one name="goods" column="sp_id" class="com.hibtest1.entity.Goods" lazy="false"/>
+        <many-to-one name="place" column="rk_place_id" class="com.hibtest1.entity.Place"  lazy="false"/>
     </class>
 
 </hibernate-mapping>

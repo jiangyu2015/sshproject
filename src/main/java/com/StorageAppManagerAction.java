@@ -136,14 +136,25 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         storageApp.setState("yesok");
         storageAppBiz.editStorageApp(storageApp);                //更改状态yesok
         Storage storage = new Storage();           //新建入库明细表
-        if (storageApp.getGoods().getGoodsId() != null && !storageApp.getGoods().getGoodsId().equals(""))        //商品id
+      /*  if (storageApp.getGoods().getGoodsId() != null && !storageApp.getGoods().getGoodsId().equals(""))        //商品id
             storage.setGoodsId(storageApp.getGoods().getGoodsId());
         if (storageApp.getProducer().getProducerId() != null && !storageApp.getProducer().getProducerId().equals(""))        //商户id
             storage.setProducerId(storageApp.getProducer().getProducerId());
         if (storageApp.getPlace().getPlaceId() != null && !storageApp.getPlace().getPlaceId().equals("")) {              //仓库id
             System.out.println("入库明细添加仓库id我传过来了" + storage.getPlaceId());
             storage.setPlaceId(storageApp.getPlace().getPlaceId());
-        }
+        }*/
+
+
+        Goods goods = goodsBiz.getGoods(storageApp.getGoodsName()).get(0);
+        storage.setGoods(goods);
+        Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
+        storage.setProducer(producer);
+        Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
+        System.out.println("输出仓库id" + place.getPlaceId());
+        storage.setPlace(place);
+
+
         if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))                      //预期入库时间
             storage.setExpectedDate(storageApp.getExpectedDate());
         if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))               //预收数量

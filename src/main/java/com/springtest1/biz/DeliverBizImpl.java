@@ -35,7 +35,7 @@ public class DeliverBizImpl implements DeliverBiz {
     }  */
 
     public boolean editDeliver(Deliver deliver) {
-        System.out.println("入库明细bizImpl里面的"+deliver.getPlaceId());
+
         deliverDAO.editDeliver(deliver);
         return true;
     } //修改AllList

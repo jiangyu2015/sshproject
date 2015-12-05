@@ -23,9 +23,9 @@
     <thead>
     <tr>
         <th>入库明细id</th>
-        <th>商户id</th>
-        <th>商品id</th>
-        <th>仓库id</th>
+        <th>商户名称</th>
+        <th>商品名称</th>
+        <th>仓库名称</th>
         <th>预期入库时间</th>
         <th>实际入库时间</th>
         <th>预期数量</th>
@@ -39,9 +39,9 @@
     <s:iterator value="%{#session.storagelist}" var="storage">
         <tr>
             <td><s:property value="#storage.storageId"/></td>
-            <td><s:property value="#storage.producerId"/></td>
-            <td><s:property value="#storage.goodsId"/></td>
-            <td><s:property value="#storage.placeId"/></td>
+            <td><s:property value="#storage.producer.producerName"/></td>
+            <td><s:property value="#storage.goods.goodsName"/></td>
+            <td><s:property value="#storage.place.placeName"/></td>
             <td><s:date format="yyyy-MM-dd" name="#storage.expectedDate"/></td>
             <td><s:date format="yyyy-MM-dd" name="#storage.storageDate"/></td>
             <td><s:property value="#storage.expectedNumber"/></td>

@@ -8,9 +8,12 @@ import java.util.Date;
  */
 public class Storage implements Serializable {
     private Integer storageId; //id
-    private Integer placeId; //仓库id
+  /*  private Integer placeId; //仓库id
     private Integer goodsId; //商品id
-    private Integer producerId; //商户id
+    private Integer producerId; //商户id*/
+    private Goods goods;
+    private Producer producer;
+    private Place place;
     private Date storageDate;  //实际入库时间
     private Date expectedDate;  //预期时间
     private Integer expectedNumber;  //预期数量
@@ -19,6 +22,29 @@ public class Storage implements Serializable {
     private String storageType; //入库类型
     private String remark; //备注
 
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
 
     public String getState() {
         return state;
@@ -45,13 +71,13 @@ public class Storage implements Serializable {
         this.expectedNumber = expectedNumber;
     }
 
-    public Integer getProducerId() {
+  /*  public Integer getProducerId() {
         return producerId;
     }
 
     public void setProducerId(Integer producerId) {
         this.producerId = producerId;
-    }
+    }*/
 
     public Integer getStorageId() {
         return storageId;
@@ -61,7 +87,7 @@ public class Storage implements Serializable {
         this.storageId = storageId;
     }
 
-    public Integer getPlaceId() {
+ /*   public Integer getPlaceId() {
         return placeId;
     }
 
@@ -75,7 +101,7 @@ public class Storage implements Serializable {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
-    }
+    }*/
 
     public Date getStorageDate() {
         return storageDate;

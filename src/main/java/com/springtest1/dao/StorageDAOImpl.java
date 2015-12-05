@@ -34,7 +34,7 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
             return new ArrayList<Storage>();
         } else {
             Storage s = (Storage) query.list().get(0);
-            System.out.println(s.getGoodsId());
+            System.out.println(s.getGoods().getGoodsId());
             return storagelist;
         }
 
@@ -45,23 +45,25 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
             public List<Storage> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Storage.class);
                 if (condition != null) {
-                    System.out.println(condition.getGoodsId() + "入库商品id DAOImpl");
-                    if (condition.getGoodsId() != null && !condition.getGoodsId().equals("")) {
-                        c.add(Restrictions.eq("storageName", condition.getGoodsId()));
+                    /*{
+
+                    if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
+                        c.add(Restrictions.eq("storageName", condition.getGoods().getGoodsId()));
+                    }
+                }*/
+                    if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
+                        System.out.println("DAO" + condition.getStorageId());
+                        c.add(Restrictions.eq("storageId", condition.getStorageId()));
                     }
                 }
-                if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
-                    System.out.println("DAO" + condition.getStorageId());
-                    c.add(Restrictions.eq("storageId", condition.getStorageId()));
-                }
                 return c.list();
+
             }
         });
     }
 
     public void add(Storage storage) {
 
-        System.out.println("商品" + storage.getGoodsId() + "库存地点" + storage.getPlaceId());
         super.getHibernateTemplate().save(storage);
     }
 
@@ -71,7 +73,6 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
     }  */
 
     public void editStorage(Storage storage) {
-        System.out.println("DAO里面的入库申请" + storage.getPlaceId());
         super.getHibernateTemplate().update(storage);   //修改
     }
 }

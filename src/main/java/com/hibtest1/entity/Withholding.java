@@ -10,13 +10,33 @@ import java.util.HashSet;
  */
 public class Withholding implements Serializable {
     private Integer withholdingId; //id
-    private Integer placeId; //仓库id
-    private Integer goodsId; //商品id
+   /* private Integer placeId; //仓库id
+    private Integer goodsId; //商品id*/
+   private Place place;
+    private Goods goods;
     private Date witholdingDate;//预提时间
     private Date deadline; //截止时间
-   private  Integer activityId; //活动id
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
+    private  Integer activityId; //活动id
     private  Integer witholdingNumber;  //预提数
     private String useType; //使用类型
+
   /*  private Set bks=new HashSet();
     public Set getBks() {
         return bks;
@@ -35,7 +55,7 @@ public class Withholding implements Serializable {
         this.withholdingId = withholdingId;
     }
 
-    public Integer getPlaceId() {
+   /* public Integer getPlaceId() {
         return placeId;
     }
 
@@ -49,7 +69,7 @@ public class Withholding implements Serializable {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
-    }
+    }*/
 
     public Date getWitholdingDate() {
         return witholdingDate;

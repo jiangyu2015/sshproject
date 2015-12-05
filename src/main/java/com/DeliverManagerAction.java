@@ -97,7 +97,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     public String searchDeliverList() {
         System.out.println(goodsId);
         Deliver condition = new Deliver();
-        condition.setGoodsId(goodsId);
+
         // condition.setGoodsName(goodsName);
         List list = deliverBiz.getDeliverList(condition);
         System.out.println(list.size());
@@ -127,7 +127,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     public String addDeliver() throws Exception {                  //增加出库申请
         System.out.println("addDeliver");
         Deliver condition = new Deliver();
-        System.out.println(deliver.getGoodsId() + "出库明细添加商品id我传过来了");
+     //   System.out.println(deliver.getGoodsId() + "出库明细添加商品id我传过来了");
  /*       if (deliver.getProducerName() != null && !deliver.getProducerName().equals(""))
             condition.setProducerName(deliver.getProducerName());
         else {
@@ -147,11 +147,15 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             return "input";
         }*/
         System.out.println("ok");
-        if (deliver.getGoodsId() != null)        //商品id
+
+
+       /* if (deliver.getGoodsId() != null)        //商品id
             condition.setGoodsId(deliver.getGoodsId());
         if (deliver.getPlaceId() != null)   {              //仓库id
             System.out.println("出库明细添加仓库id我传过来了"+deliver.getPlaceId());
-            condition.setPlaceId(deliver.getPlaceId());}
+            condition.setPlaceId(deliver.getPlaceId());}*/           //到时候要改
+
+
         if (deliver.getDeliverDate() != null)                      //实际出库时间
             condition.setDeliverDate(deliver.getDeliverDate());
         if (deliver.getExpecteNumber() != null)               //预期出库数量
@@ -186,14 +190,14 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (deliver.getDeliverId() != null && !deliver.getDeliverId().equals("")) {
             condition.setDeliverId(deliver.getDeliverId());
         }
-        if (deliver.getGoodsId() != null && !deliver.getGoodsId().equals(""))  {      //商品id
+     /*   if (deliver.getGoodsId() != null && !deliver.getGoodsId().equals(""))  {      //商品id
             System.out.println("Action商品id"+deliver.getGoodsId());
             condition.setGoodsId(deliver.getGoodsId());
         }
         if (deliver.getPlaceId() != null && !deliver.getPlaceId().equals(""))  {               //仓库id
             condition.setPlaceId(deliver.getPlaceId());
             System.out.println("Action仓库id"+deliver.getPlaceId());
-        }
+        }*/
         if (deliver.getDeliverDate() != null && !deliver.getDeliverDate().equals(""))                      //实际出库时间
             condition.setDeliverDate(deliver.getDeliverDate());
         if (deliver.getExpecteNumber() != null && !deliver.getExpecteNumber().equals(""))               //预期出库数量
@@ -206,8 +210,6 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (deliver.getRemark() != null && !deliver.getRemark().equals(""))          //备注
             condition.setRemark(deliver.getRemark());
         if (deliverBiz.editDeliver(condition)) {
-            System.out.println("condition" + condition.getPlaceId());
-            System.out.println(condition.getGoodsId());
             session.put("deliverlist", condition);
             return "success";
         } else return "input";

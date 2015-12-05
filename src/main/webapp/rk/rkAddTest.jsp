@@ -26,8 +26,6 @@
         }
     </style>
 
-
- <!--   <% if(session.getAttribute("goodslistall")==null){response.sendRedirect("listrk");} %>  -->
 </head>
 
 <body>

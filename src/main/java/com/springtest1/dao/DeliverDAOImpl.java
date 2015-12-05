@@ -29,9 +29,9 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
             public List<Deliver> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Deliver.class);
                 if (condition != null) {
-                    System.out.println(condition.getGoodsId() + "出库商品id DAOImpl");
-                    if (condition.getGoodsId() != null && !condition.getGoodsId().equals("")) {
-                        c.add(Restrictions.eq("DeliverName", condition.getGoodsId()));
+
+                        if (condition.getDeliverId() != null && !condition.getDeliverId().equals("")) {
+                            c.add(Restrictions.eq("deliverId", condition.getDeliverId()));
                     }
                 }
                 return c.list();
@@ -40,7 +40,7 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
     }
 
     public void add(Deliver deliver) {
-        System.out.println("商品" + deliver.getGoodsId() + "库存地点" + deliver.getPlaceId());
+
         super.getHibernateTemplate().save(deliver);
     }
 
@@ -50,7 +50,7 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
     }  */
 
     public void editDeliver(Deliver deliver) {
-        System.out.println("DAO里面的入库申请" + deliver.getPlaceId());
+
         super.getHibernateTemplate().update(deliver);   //修改
     }
 }

@@ -1,8 +1,14 @@
 package com;
 
+import com.hibtest1.entity.Goods;
+import com.hibtest1.entity.Place;
+import com.hibtest1.entity.Producer;
 import com.hibtest1.entity.Storage;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.springtest1.biz.GoodsBiz;
+import com.springtest1.biz.PlaceBiz;
+import com.springtest1.biz.ProducerBiz;
 import com.springtest1.biz.StorageBiz;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -15,8 +21,24 @@ import java.util.Map;
  */
 public class StorageManagerAction extends ActionSupport implements RequestAware, SessionAware {
     StorageBiz storageBiz;
+    GoodsBiz goodsBiz;
+    PlaceBiz placeBiz;
+    ProducerBiz producerBiz;
     Map<String, Object> request;
     Map<String, Object> session;
+
+    public void setGoodsBiz(GoodsBiz goodsBiz) {
+        this.goodsBiz = goodsBiz;
+    }
+
+    public void setPlaceBiz(PlaceBiz placeBiz) {
+        this.placeBiz = placeBiz;
+    }
+
+    public void setProducerBiz(ProducerBiz producerBiz) {
+        this.producerBiz = producerBiz;
+    }
+
     Storage storage;
      String goodsName;   //商品名称
 
@@ -94,10 +116,12 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         return "storage";
     }
 
-    public String searchStorageList() {
+    public String searchStorageList() {      //增加这个方法需要注入 biz别忘了
         System.out.println(goodsId);
         Storage condition = new Storage();
-        condition.setGoodsId(goodsId);
+    /*    condition.setGoodsId(goodsId);*/
+        Goods goods = goodsBiz.getGoods(goodsName).get(0);
+        condition.setGoods(goods);
         // condition.setGoodsName(goodsName);
         List list = storageBiz.getStorageList(condition);
         System.out.println(list.size());
@@ -156,7 +180,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     public String addStorage() throws Exception {                  //增加入库申请
         System.out.println("addStorage");
         Storage condition = new Storage();
-        System.out.println(storage.getGoodsId() + "入库明细添加商品id我传过来了");
+
  /*       if (storage.getProducerName() != null && !storage.getProducerName().equals(""))
             condition.setProducerName(storage.getProducerName());
         else {
@@ -176,11 +200,20 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
             return "input";
         }*/
 
-        if (storage.getGoodsId() != null)        //商品id
+       /* if (storage.getGoodsId() != null)        //商品id
             condition.setGoodsId(storage.getGoodsId());
         if (storage.getPlaceId() != null)   {              //仓库id
             System.out.println("入库明细添加仓库id我传过来了"+storage.getPlaceId());
-            condition.setPlaceId(storage.getPlaceId());}
+            condition.setPlaceId(storage.getPlaceId());}*/
+
+        Goods goods = goodsBiz.getGoods(goodsName).get(0);
+        condition.setGoods(goods);
+        Producer producer = producerBiz.getProducer(storagePlace).get(0);
+        condition.setProducer(producer);
+        Place place = placeBiz.getPlace(storagePlace).get(0);
+
+        condition.setPlace(place);
+
         if (storage.getStorageDate() != null)                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null)               //实收数量
@@ -213,14 +246,14 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         if (storage.getStorageId() != null && !storage.getStorageId().equals("")) {
             condition.setStorageId(storage.getStorageId());
         }
-        if (storage.getGoodsId() != null && !storage.getGoodsId().equals(""))  {      //商品id
+     /*   if (storage.getGoodsId() != null && !storage.getGoodsId().equals(""))  {      //商品id
             System.out.println("Action商品id"+storage.getGoodsId());
             condition.setGoodsId(storage.getGoodsId());
         }
         if (storage.getPlaceId() != null && !storage.getPlaceId().equals(""))  {               //仓库id
             condition.setPlaceId(storage.getPlaceId());
             System.out.println("Action仓库id"+storage.getPlaceId());
-        }
+        }*/
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals(""))  {             //实收数量
@@ -231,8 +264,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
             condition.setRemark(storage.getRemark());
         if (storageBiz.editStorage(condition)) {
-            System.out.println("condition" + condition.getPlaceId());
-            System.out.println(condition.getGoodsId());
             session.put("storagelist", condition);
             return "success";
         } else return "input";

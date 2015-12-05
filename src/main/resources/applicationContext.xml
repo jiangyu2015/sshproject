@@ -165,6 +165,9 @@
     <bean id="storageAppOk" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
         <property name="storageBiz" ref="storageBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
     </bean>
 
     <bean id="storageAppAdd" class="com.StorageAppManagerAction" scope="prototype">
@@ -188,6 +191,9 @@
     </bean>
     <bean id="storageAdd" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
     </bean>
     <bean id="storageCheck" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>

@@ -27,6 +27,7 @@ public class StorageBizImpl implements StorageBiz {
     }
 
     public List getStorageList(Storage condition) {
+        System.out.println("Biz" + condition.getStorageId());
         List list = storageDAO.search(condition);
         return list;
     }
@@ -40,7 +41,6 @@ public class StorageBizImpl implements StorageBiz {
     }  */
 
     public boolean editStorage(Storage storage) {
-        System.out.println("入库明细biz里面的" + storage.getPlaceId());
         storageDAO.editStorage(storage);
         return true;
     } //修改AllList商品

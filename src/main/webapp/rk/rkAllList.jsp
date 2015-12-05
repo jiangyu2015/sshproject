@@ -78,15 +78,20 @@
     <div class="title">入库明细信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-       <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
         <tr>
             <th>入库明细id</th>
-            <th>商户id</th>
-            <th>商品id</th>
-            <th>仓库id</th>
+            <th>商户名称</th>
+            <th>商品名称</th>
+            <th>仓库名称</th>
+
+            <th>商品生产日期</th>
+            <th>商品保质期</th>
+            <th>商品截止日期</th>
+
             <th>预期入库时间</th>
             <th>实际入库时间</th>
             <th>预期数量</th>
@@ -100,9 +105,14 @@
         <s:iterator value="%{#session.storagelistall}" var="storage">
             <tr>
                 <td><s:property value="#storage.storageId"/></td>
-                <td><s:property value="#storage.producerId"/></td>
-                <td><s:property value="#storage.goodsId"/></td>
-                <td><s:property value="#storage.placeId"/></td>
+                <td><s:property value="#storage.producer.producerName"/></td>
+                <td><s:property value="#storage.goods.goodsName"/></td>
+                <td><s:property value="#storage.place.placeName"/></td>
+
+                <td><s:property value="#storage.goods.creationDate"/></td>
+                <td><s:property value="#storage.goods.baozhiqi"/></td>
+                <td><s:property value="#storage.goods.expirationDate"/></td>
+
                 <td><s:date format="yyyy-MM-dd" name="#storage.expectedDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storage.storageDate"/></td>
                 <td><s:property value="#storage.expectedNumber"/></td>
@@ -130,23 +140,41 @@
 
                     </div>
                     <div class="line">
-                        <div class="lable">商户id：</div>
+                        <div class="lable">商户名称：</div>
                         <div class="input-div">
-                            <input name="storage.producerId" readonly="readonly"
+                            <input name="storage.producer.producerName" readonly="readonly"
                                    style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
 
                     <div class="line">
-                        <div class="lable">商品id：</div>
-                        <div class="input-div"><input name="storage.goodsId" readonly="readonly"
+                        <div class="lable">商品名称：</div>
+                        <div class="input-div"><input name="storage.goods.goodsName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">仓库id：</div>
-                        <div class="input-div"><input name="storage.placeId" readonly="readonly"
+                        <div class="lable">仓库名称：</div>
+                        <div class="input-div"><input name="storage.place.placeName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">商品生产日期：</div>
+                        <div class="input-div"><input name="storage.goods.creationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">商品保质期：</div>
+                        <div class="input-div"><input name="storage.goods.baozhiqi" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">商品截止日期：</div>
+                        <div class="input-div"><input name="storage.goods.expirationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
                     </div>
 
                     <div class="line">
@@ -157,27 +185,27 @@
 
                     <div class="line">
                         <div class="lable">实际入库时间：</div>
-                            <div class="input-div"><input name="storage.storageDate" readonly="readonly"
-                                                          style="border: none;-webkit-box-shadow: none;"  type="date"/></div>
-                        </div>
+                        <div class="input-div"><input name="storage.storageDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
 
 
                     <div class="line">
                         <div class="lable">预期数量：</div>
                         <div class="input-div"><input name="storage.expectedNumber" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">实收数量：</div>
                         <div class="input-div"><input name="storage.storageNumber" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">入库类型：</div>
                         <div class="input-div"><input name="storage.storageType" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">备注：</div>
@@ -187,7 +215,7 @@
                     <div class="line">
                         <div class="lable">入库状态：</div>
                         <div class="input-div"><input name="storage.state" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div style="position: relative; bottom: 0px; text-align: center;">
