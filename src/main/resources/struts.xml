@@ -75,7 +75,7 @@
             <result type="redirect" name="storageAppCheck">/rksq/rksqCheckList.jsp</result>
         </action>
 
-        <action name="rksqOk" class="storageAppOk" method="StorageAppOk">
+        <action name="rksqOk" class="storageAppOk" method="storageAppOk">
             <result type="redirect" name="success">/rksq/test.jsp</result>
         </action>
 
@@ -90,6 +90,9 @@
         <action name="editrk" class="storageEdit" method="editStorage">
             <result type="redirect" name="success">/rk/rkList.jsp</result>
         </action>
+        <action name="rkSelect" class="storageSelect" method="searchStorageList">
+            <result type="redirect" name="success">/rk/rkList.jsp</result>
+        </action>
         <action name="rkAdd" class="storageAdd" method="addStorage">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
@@ -98,7 +101,7 @@
             <result type="redirect" name="storageCheck">/rk/rkCheckList.jsp</result>
         </action>
 
-        <action name="rkOk" class="storageOk" method="StorageOk">
+        <action name="rkOk" class="storageOk" method="storageOk">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
 

@@ -10,12 +10,12 @@
             <generator class="native">
             </generator>
         </id>
-        <property name="placeId" type="java.lang.Integer">
+      <!--  <property name="placeId" type="java.lang.Integer">
             <column name="place_id" length="4" not-null="true"/>
         </property>
         <property name="goodsId" type="java.lang.Integer">
             <column name="sp_id" length="4" not-null="true"/>
-        </property>
+        </property>-->
 
         <property name="witholdingDate" type="java.util.Date">
             <column name="yt_time" length="30" not-null="false"/>

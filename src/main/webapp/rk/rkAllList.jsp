@@ -70,6 +70,10 @@
                 _move = false;
             });
         });
+
+        function search(){
+            window.location.href="rkSelect.jsp";
+        }
     </script>
 </head>
 
@@ -78,7 +82,7 @@
     <div class="title">入库明细信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-        <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <input type="button" class="btn-remove" value="查询" onclick="search();">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -109,9 +113,10 @@
                 <td><s:property value="#storage.goods.goodsName"/></td>
                 <td><s:property value="#storage.place.placeName"/></td>
 
-                <td><s:property value="#storage.goods.creationDate"/></td>
+
+                <td><s:date format="yyyy-MM-dd" name="#storage.goods.creationDate"/></td>
                 <td><s:property value="#storage.goods.baozhiqi"/></td>
-                <td><s:property value="#storage.goods.expirationDate"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storage.goods.expirationDate"/></td>
 
                 <td><s:date format="yyyy-MM-dd" name="#storage.expectedDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storage.storageDate"/></td>
@@ -223,8 +228,6 @@
                         <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
 
                     </div>
-
-
                 </form>
             </div>
         </div>

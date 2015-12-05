@@ -189,6 +189,12 @@
     <bean id="storageEdit" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
+    <bean id="storageSelect" class="com.StorageManagerAction" scope="prototype">
+        <property name="storageBiz" ref="storageBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
     <bean id="storageAdd" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
         <property name="goodsBiz" ref="goodsBiz"/>

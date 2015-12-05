@@ -45,16 +45,19 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
             public List<Storage> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Storage.class);
                 if (condition != null) {
-                    /*{
 
-                    if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
-                        c.add(Restrictions.eq("storageName", condition.getGoods().getGoodsId()));
+                   /* if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
+                        c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                    }*/
+                    if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
+                        System.out.print(condition.getProducer().getProducerId()+"searchDAOStorage");
+                        c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
                     }
-                }*/
                     if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
                         System.out.println("DAO" + condition.getStorageId());
                         c.add(Restrictions.eq("storageId", condition.getStorageId()));
                     }
+
                 }
                 return c.list();
 

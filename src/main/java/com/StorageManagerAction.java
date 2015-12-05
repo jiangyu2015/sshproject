@@ -41,6 +41,15 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
 
     Storage storage;
      String goodsName;   //商品名称
+    String producerName;//商户
+
+    public String getProducerName() {
+        return producerName;
+    }
+
+    public void setProducerName(String producerName) {
+        this.producerName = producerName;
+    }
 
     public String getGoodsName() {
         return goodsName;
@@ -59,7 +68,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     String storagePlace;  //入库地点
-    Integer goodsId;   //商品id
+   /* Integer goodsId;   //商品id
 
     public Integer getGoodsId() {
         return goodsId;
@@ -77,7 +86,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         this.placeId = placeId;
     }
 
-    Integer placeId;  //仓库id
+    Integer placeId;  //仓库id*/
 
     public void setStorageBiz(StorageBiz storageBiz) {
         this.storageBiz = storageBiz;
@@ -117,11 +126,24 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String searchStorageList() {      //增加这个方法需要注入 biz别忘了
-        System.out.println(goodsId);
+
         Storage condition = new Storage();
-    /*    condition.setGoodsId(goodsId);*/
-        Goods goods = goodsBiz.getGoods(goodsName).get(0);
+
+       /* Goods goods = goodsBiz.getGoods(goodsName).get(0);
         condition.setGoods(goods);
+        // condition.setGoodsName(goodsName);
+        List list = storageBiz.getStorageList(condition);
+        System.out.println(list.size());
+        if (list.size() > 0) {
+            //  session.put("goodslist", list);
+            session.put("storagelist", list);
+            return "success";
+        } else
+            return "input";*/
+        System.out.println(producerName+"ActionSelect");
+        Producer producer = producerBiz.getProducer(producerName).get(0);
+        System.out.println(producer.getProducerId()+"ProducerId(");
+        condition.setProducer(producer);
         // condition.setGoodsName(goodsName);
         List list = storageBiz.getStorageList(condition);
         System.out.println(list.size());
@@ -140,7 +162,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         return "storageCheck";
     }
 
-    public String StorageOk() {               //通过
+    public String storageOk() {               //通过
         System.out.println("通过checkStorage");
         Storage condition = new Storage();
         System.out.println(storage.getStorageId());

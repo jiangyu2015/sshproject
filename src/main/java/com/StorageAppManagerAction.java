@@ -124,7 +124,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         return "storageAppCheck";
     }
 
-    public String StorageAppOk() {               //通过
+    public String storageAppOk() {               //通过
         System.out.println("通过checkStorageApp");
         StorageApp condition = new StorageApp();
         System.out.println(storageApp.getStorageAppId());
