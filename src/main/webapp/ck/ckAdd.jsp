@@ -13,6 +13,60 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>添加出库信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
+    <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        //   str = str + "<option>" + goods[i].goodsName + "</option>";
+                        //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                    //    str = str + "<option value='" + goods[i].goodsName + "'data-id='"+goods[i].goodsId+"'>"+ goods[i].goodsId+"</option>";
+                     /*   str = str + "<option value='" + goods[i].goodsId + "'>"+ goods[i].goodsName+"</option>";*/
+                        //<option value="name" data-id="id">name</option>
+                        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
+                    }
+                    $("#select").html(str);
+
+                    $('#item').bind('input propertychange', function () {
+                        $("#select").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+
+            $.ajax({
+                type: "post",
+                url: "excutePlaceAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+//                    alert("ck");
+                    var d = eval("(" + data + ")");
+                    var place = d.placeList;
+                    console.log(place);
+                    for (var i = 0; i < place.length; i++) {
+                        // str = str + "<option>" + place[i].placeName + "</option>";
+                        str = str + "<option id='" + place[i].placeId  + "' value='" + place[i].placeName  + "'>";
+
+
+                    }
+                    $("#select3").html(str);
+
+                    $('#item3').bind('input propertychange', function () {
+                        $("#select3").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+        });
+
+    </script>
 </head>
 
 <body>
@@ -20,13 +74,19 @@
 <div class="content">
     <form method="post" action="ckAdd">
         <div class="line">
-            <div class="lable">商品id：</div>
-            <div class="input-div"><input placeholder="请输入商品id" name="deliver.goodsId"/></div>
+            <div class="lable">商品名称：</div>
+            <div class="input-div"><input id="item" list="select" placeholder="请输入商品名称" name="goodsName"/>
+                <datalist id="select"></datalist>
+            </div>
         </div>
         <div class="line">
-            <div class="lable">仓库id：</div>
-            <div class="input-div"><input placeholder="请输入仓库id" name="deliver.placeId"/></div>
+            <div class="lable">入库地点：</div>
+            <div class="input-div"><input id="item3" list="select3" placeholder="请输入出库地点"
+                                          name="placeName"/>
+                <datalist id="select3"></datalist>
+            </div>
         </div>
+
         <div class="line">
             <div class="lable">实际出库时间：</div>
             <div class="input-div"><input placeholder="请输入实际出库时间" name="deliver.deliverDate" type="date"/></div>

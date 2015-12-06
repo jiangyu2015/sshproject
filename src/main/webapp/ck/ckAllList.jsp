@@ -84,8 +84,8 @@
         <thead>
         <tr>
             <th>出库明细id</th>
-            <th>商品id</th>
-            <th>仓库id</th>
+            <th>商品名称</th>
+            <th>仓库地点</th>
             <th>实际出库时间</th>
             <th>预期出库数量</th>
             <th>实际出库数量</th>
@@ -97,8 +97,8 @@
         <s:iterator value="%{#session.deliverlistall}" var="deliver">
             <tr>
                 <td><s:property value="#deliver.deliverId"/></td>
-                <td><s:property value="#deliver.goodsId"/></td>
-                <td><s:property value="#deliver.placeId"/></td>
+                <td><s:property value="#deliver.goods.goodsName"/></td>
+                <td><s:property value="#deliver.place.placeName"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#deliver.deliverDate"/></td>
                 <td><s:property value="#deliver.expecteNumber"/></td>
                 <td><s:property value="#deliver.deliverNumber"/></td>
@@ -123,13 +123,13 @@
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
-                        <div class="lable">商品id：</div>
-                        <div class="input-div"><input placeholder="请输入商品id" name="deliver.goodsId"/></div>
+                        <div class="lable">商品名称：</div>
+                        <div class="input-div"><input placeholder="请输入商品" name="deliver.goods.goodsName"/></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">仓库id：</div>
-                        <div class="input-div"><input placeholder="请输入仓库id" name="deliver.placeId"/></div>
+                        <div class="lable">仓库名称：</div>
+                        <div class="input-div"><input placeholder="请输入仓库" name="deliver.place.placeName"/></div>
                     </div>
 
                     <div class="line">

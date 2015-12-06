@@ -21,7 +21,10 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
             public List<Goods> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Goods.class);
                 if (condition != null) {
-                    System.out.println(condition.getGoodsName() + "123");
+
+                    if (condition.getGoodsId() != null && !condition.getGoodsId().equals("")) {
+                        c.add(Restrictions.eq("goodsId", condition.getGoodsId()));
+                    }
                     if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
                         c.add(Restrictions.eq("goodsName", condition.getGoodsName()));
                     }
@@ -50,6 +53,13 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
         Query query = session.createQuery(hql);
         return query.list();
     }
+
+ /*   public List getAllGoods() {         //试试左连接
+        String hql = "from Goods";
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+        return query.list();
+    }*/
 
     public void modifyGood(Goods good) {  //修改商品
         System.out.println("DAO里面的" + good.getService());

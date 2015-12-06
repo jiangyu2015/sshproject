@@ -220,6 +220,8 @@
     </bean>
     <bean id="deliverAdd" class="com.DeliverManagerAction" scope="prototype">
         <property name="deliverBiz" ref="deliverBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
     </bean>
     <bean id="deliverEdit" class="com.DeliverManagerAction" scope="prototype">
         <property name="deliverBiz" ref="deliverBiz"/>

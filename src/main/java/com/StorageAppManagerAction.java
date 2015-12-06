@@ -124,7 +124,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         return "storageAppCheck";
     }
 
-    public String storageAppOk() {               //通过
+    public String storageAppOk() {               //通过          需要增加不能为空的提示
         System.out.println("通过checkStorageApp");
         StorageApp condition = new StorageApp();
         System.out.println(storageApp.getStorageAppId());
@@ -136,17 +136,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         storageApp.setState("yesok");
         storageAppBiz.editStorageApp(storageApp);                //更改状态yesok
         Storage storage = new Storage();           //新建入库明细表
-      /*  if (storageApp.getGoods().getGoodsId() != null && !storageApp.getGoods().getGoodsId().equals(""))        //商品id
-            storage.setGoodsId(storageApp.getGoods().getGoodsId());
-        if (storageApp.getProducer().getProducerId() != null && !storageApp.getProducer().getProducerId().equals(""))        //商户id
-            storage.setProducerId(storageApp.getProducer().getProducerId());
-        if (storageApp.getPlace().getPlaceId() != null && !storageApp.getPlace().getPlaceId().equals("")) {              //仓库id
-            System.out.println("入库明细添加仓库id我传过来了" + storage.getPlaceId());
-            storage.setPlaceId(storageApp.getPlace().getPlaceId());
-        }*/
 
-
-        Goods goods = goodsBiz.getGoods(storageApp.getGoodsName()).get(0);
+        Goods goods = (Goods)goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
+        System.out.println("StorageApp通过时传入的商品id是"+goods.getGoodsId());
         storage.setGoods(goods);
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
         storage.setProducer(producer);
@@ -182,20 +174,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             return "input";
     }
 
- /*   public String delStorageApp() {
-        System.out.println(storageAppName);
-        StorageApp condition = new StorageApp();
-        condition.setStorageAppName(storageAppName);
-        List<StorageApp> list = storageAppBiz.getStorageAppList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            StorageApp storageApp = new StorageApp();
-            storageApp = (StorageApp) list.get(0);
-            boolean e = storageAppBiz.delGoods(storageApp);
-            if (e) return "success";
-            else return "input";
-        } else return "input";
-    }  */
 
     public String addStorageApp() throws Exception {                  //增加入库申请
         //    System.out.println(enteringWarehouseDto);
@@ -224,8 +202,15 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
         if (storageApp.getProducerName() != null)        //商户名称
             condition.setProducerName(storageApp.getProducerName());
-        if (storageApp.getGoodsName() != null)                 //商品名称
-            condition.setGoodsName(storageApp.getGoodsName());
+        if (storageApp.getGoodsName() != null) {          //商品名称
+
+
+            String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
+            String name = strs[0];
+            condition.setGoodsName(name);
+
+        }
+
         if (storageApp.getStoragePlace() != null) {                     //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
             System.out.print("传入仓库地址" + storageApp.getStoragePlace());
@@ -247,9 +232,15 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Date date = calendar.getTime();
         condition.setApplicationDate(date);
         System.out.println("当前时间" + date);
-        Goods goods = goodsBiz.getGoods(storageApp.getGoodsName()).get(0);
+        String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
+        String name = strs[0];
+        Integer id = Integer.parseInt(strs[1]);
+        Goods g = new Goods();
+        g.setGoodsId(id);
+        Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
+        System.out.println(goods.getGoodsName());
         condition.setGoods(goods);
-        Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
+        Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);       //增加商户
         condition.setProducer(producer);
         Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
         System.out.println("输出仓库id" + place.getPlaceId());

@@ -155,9 +155,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         System.out.print(storageApp.getProducerName()+storageApp.getStoragePlace()+storageApp.getGoodsName());
         storageApp.setState("yesno");
         storageAppBiz.editStorageApp(storageApp);
-
-
         return SUCCESS;
     }
+
+
 
 }

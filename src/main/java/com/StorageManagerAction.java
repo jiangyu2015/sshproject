@@ -12,6 +12,7 @@ import com.springtest1.biz.ProducerBiz;
 import com.springtest1.biz.StorageBiz;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.interceptor.StrutsConversionErrorInterceptor;
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     Storage storage;
-     String goodsName;   //商品名称
+    String goodsName;   //商品名称
     String producerName;//商户
 
     public String getProducerName() {
@@ -68,25 +69,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     String storagePlace;  //入库地点
-   /* Integer goodsId;   //商品id
-
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
-
-    public Integer getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Integer placeId) {
-        this.placeId = placeId;
-    }
-
-    Integer placeId;  //仓库id*/
 
     public void setStorageBiz(StorageBiz storageBiz) {
         this.storageBiz = storageBiz;
@@ -126,33 +108,56 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String searchStorageList() {      //增加这个方法需要注入 biz别忘了
-
         Storage condition = new Storage();
+        if (goodsName != null && !goodsName.equals("")) {
+            String[] strs = goodsName.split("\\|");
+            String name = strs[0];
+            Integer id = Integer.parseInt(strs[1]);
 
-       /* Goods goods = goodsBiz.getGoods(goodsName).get(0);
-        condition.setGoods(goods);
-        // condition.setGoodsName(goodsName);
-        List list = storageBiz.getStorageList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            //  session.put("goodslist", list);
-            session.put("storagelist", list);
-            return "success";
-        } else
-            return "input";*/
-        System.out.println(producerName+"ActionSelect");
-        Producer producer = producerBiz.getProducer(producerName).get(0);
-        System.out.println(producer.getProducerId()+"ProducerId(");
-        condition.setProducer(producer);
-        // condition.setGoodsName(goodsName);
-        List list = storageBiz.getStorageList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            //  session.put("goodslist", list);
-            session.put("storagelist", list);
-            return "success";
-        } else
-            return "input";
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
+            System.out.println(goods.getGoodsName());
+            condition.setGoods(goods);
+            List list = storageBiz.getStorageList(condition);
+            System.out.println(list.size());
+            if (list.size() > 0) {
+                //  session.put("goodslist", list);
+                session.put("storagelist", list);
+                return "success";
+            } else
+                return "input";
+        } else if (producerName != null && !producerName.equals("")) {
+            System.out.println("22");
+            Producer producer = producerBiz.getProducer(producerName).get(0);
+            System.out.println(producer.getProducerId() + "ProducerId(");
+            condition.setProducer(producer);
+            // condition.setGoodsName(goodsName);
+            List list = storageBiz.getStorageList(condition);
+            System.out.println(list.size());
+            if (list.size() > 0) {
+                //  session.put("goodslist", list);
+                session.put("storagelist", list);
+                return "success";
+            } else
+                return "input";
+        }
+        else if(storagePlace!= null && !storagePlace.equals("")){
+            System.out.println("33");
+            Place place = placeBiz.getPlace(storagePlace).get(0);
+            System.out.println(place.getPlaceId() + "PlaceId");
+            condition.setPlace(place);
+            // condition.setGoodsName(goodsName);
+            List list = storageBiz.getStorageList(condition);
+            System.out.println(list.size());
+            if (list.size() > 0) {
+                //  session.put("goodslist", list);
+                session.put("storagelist", list);
+                return "success";
+            } else
+                return "input";
+        }
+        return "success";
     }
 
     public String checkStorage() {               //得到所需入库的单子
@@ -173,12 +178,12 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         storage2.setState("ok");
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             storage2.setStorageDate(storage.getStorageDate());
-        if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals(""))  {             //实收数量
-            System.out.println("Action实收数量"+storage.getStorageNumber());
-            storage2.setStorageNumber(storage.getStorageNumber());}
+        if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals("")) {             //实收数量
+            System.out.println("Action实收数量" + storage.getStorageNumber());
+            storage2.setStorageNumber(storage.getStorageNumber());
+        }
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
             storage2.setRemark(storage.getRemark());
-
         storageBiz.editStorage(storage2);                //更改状态ok1
 
         return "success";
@@ -278,9 +283,10 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         }*/
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
-        if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals(""))  {             //实收数量
-            System.out.println("Action实收数量"+storage.getStorageNumber());
-            condition.setStorageNumber(storage.getStorageNumber());}
+        if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals("")) {             //实收数量
+            System.out.println("Action实收数量" + storage.getStorageNumber());
+            condition.setStorageNumber(storage.getStorageNumber());
+        }
         if (storage.getStorageType() != null && !storage.getStorageType().equals(""))          //入库类型
             condition.setStorageType(storage.getStorageType());
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注

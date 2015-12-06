@@ -92,6 +92,7 @@
         </action>
         <action name="rkSelect" class="storageSelect" method="searchStorageList">
             <result type="redirect" name="success">/rk/rkList.jsp</result>
+            <result type="redirect" name="input">/rk/fail.jsp</result>
         </action>
         <action name="rkAdd" class="storageAdd" method="addStorage">
             <result type="redirect" name="success">/rk/test.jsp</result>

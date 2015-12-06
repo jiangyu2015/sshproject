@@ -45,13 +45,21 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
             public List<Storage> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Storage.class);
                 if (condition != null) {
-
-                   /* if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
-                        c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
-                    }*/
-                    if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
-                        System.out.print(condition.getProducer().getProducerId()+"searchDAOStorage");
-                        c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                    if (condition.getGoods() != null) {
+                        if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
+                            System.out.println("1");
+                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                        }
+                    } else if (condition.getProducer() != null) {
+                        if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
+                            System.out.println("2");
+                            c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                        }
+                    } else if (condition.getPlace() != null) {
+                        if (condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
+                            System.out.println("3");
+                            c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                        }
                     }
                     if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
                         System.out.println("DAO" + condition.getStorageId());

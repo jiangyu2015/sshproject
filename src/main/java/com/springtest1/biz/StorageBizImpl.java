@@ -27,7 +27,7 @@ public class StorageBizImpl implements StorageBiz {
     }
 
     public List getStorageList(Storage condition) {
-        System.out.println("Biz" + condition.getStorageId());
+
         List list = storageDAO.search(condition);
         return list;
     }

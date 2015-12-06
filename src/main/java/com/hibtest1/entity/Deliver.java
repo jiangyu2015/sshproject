@@ -32,7 +32,7 @@ public class Deliver implements Serializable {
     private Date deliverDate;  //出库时间
     private Integer expecteNumber;  //应发数量
     private Integer deliverNumber;  //出库数量
-    private String deliverType; //出库类型
+    private String deliverType="其他"; //出库类型
     private String remark; //备注
 
     public Integer getDeliverId() {

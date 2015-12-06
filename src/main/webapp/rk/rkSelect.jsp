@@ -26,8 +26,10 @@
                     console.log(goods);
                     for (var i = 0; i < goods.length; i++) {
                         //   str = str + "<option>" + goods[i].goodsName + "</option>";
-                        //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
-                        str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
+                         /*     str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsId + "'>"+ goods[i].goodsName+"</option>";*/
+                    //  str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
+                    //    str = str + "<option value='" + goods[i].goodsName + "'data-id='"+goods[i].goodsId+"'>"+ goods[i].goodsId+"</option>";
+                        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
                     }
                     $("#select").html(str);
 
@@ -60,7 +62,7 @@
                 dataType: 'json'
             });
 
-           /* $.ajax({
+            $.ajax({
                 type: "post",
                 url: "excutePlaceAjaxJsonAction",
                 success: function (data, xhrTxt) {
@@ -80,8 +82,38 @@
                     });
                 },
                 dataType: 'json'
-            });*/
+            });
         });
+        function aaa(){
+            var val = $("#item").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('id');
+            if(selectId == undefined){
+                console.log("该商品不存在");
+                return;
+            }
+            console.log("val: " + val);
+            console.log("Id: " + selectId);
+        }
+
+      /*  function  find(){
+            var val = $("#item").val();
+            var strs = val.split('|');
+            var value=strs[0];
+            var id=strs[1];
+            console.log(id + "," + value);
+            $.ajax({
+                type: "post",
+                url: "selectStorageJsonAction",
+                data: {
+                    goodId: id,
+                    goodNmae: value
+                },
+                success: function (data, xhrTxt) {
+
+                },
+                dataType: 'json'
+            });
+        }*/
     </script>
 </head>
 
@@ -102,8 +134,15 @@
             </div>
         </div>
 
+        <div class="line">
+            <div class="lable">仓库地址：</div>
+            <div class="input-div"><input id="item3" list="select3" placeholder="请输入要查询的入库商户名称" name="storagePlace"/>
+                <datalist id="select3"></datalist>
+            </div>
+        </div>
 
-        <input type="submit" value="查找" class="btn-submit"/>
+
+        <input type="submit" value="查找" class="btn-submit" <%--onclick="find();"--%>/>
     </form>
 </div>
 </body>
