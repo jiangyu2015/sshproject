@@ -206,7 +206,6 @@
     </bean>
     <bean id="storageOk" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
-
     </bean>
 
     <bean id="deliverDAO" class="com.springtest1.dao.DeliverDAOImpl">
@@ -243,5 +242,15 @@
     </bean>
     <bean id="activityList" class="com.ActivityManagerAction" scope="prototype">
         <property name="activityBiz" ref="activityBiz"/>
+    </bean>
+
+    <bean id="searchDAO" class="com.springtest1.dao.SearchDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="searchBiz" class="com.springtest1.biz.SearchBizImpl">
+        <property name="searchDAO" ref="searchDAO"/>
+    </bean>
+    <bean id="searchInventoryFlow" class="com.SearchManagerAction" scope="prototype">
+        <property name="searchBiz" ref="searchBiz"/>
     </bean>
 </beans>

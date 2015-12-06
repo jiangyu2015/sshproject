@@ -120,6 +120,11 @@
         <action name="listythd" class="activityList" method="listActivity">
             <result type="redirect" name="activity">/ythd/hdAllList.jsp</result>
         </action>
+
+        <action name="searchkcld" class="searchInventoryFlow" method="searchInventoryFlow">
+            <result type="redirect" name="success">/search/test.jsp</result>
+            <result type="redirect" name="fail">/search/fail.jsp</result>
+        </action>
     </package>
     <package name="json" extends="struts-default, json-default">
         <action name="*JsonAction" method="{1}" class="com.JsonAction">

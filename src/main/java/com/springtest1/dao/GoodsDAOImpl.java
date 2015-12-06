@@ -43,10 +43,6 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
         return true;
     }
 
-    //   public Goods getGood(String name) {
-    //      return (Goods) super.getHibernateTemplate().get(Goods.class, name);
-    //   }
-
     public List getAllGoods() {
         String hql = "from Goods";
         Session session = this.getSessionFactory().getCurrentSession();
