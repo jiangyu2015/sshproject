@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <title>Title</title>
@@ -13,13 +14,46 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 </head>
 <body>
-<script>
+<%--<script>
     $.ajax({
         url: 'searchkcld',
         success: function () {
 
         }
     });
-</script>
+</script>--%>
+<div class="table-div">
+    <div class="title">库存仓库信息</div>
+    <table id="advSearch" class="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>商品id</th>
+            <th>库存id</th>
+            <th>初次入库时间</th>
+            <th>初次入库数量</th>
+            <th>总入库数</th>
+            <th>总出库数</th>
+            <th>账面剩余库存数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <s:iterator value="%{#session.inventoryflow}" var="inventoryflow">
+            <tr>
+                <td><s:property value="#inventoryflow.id"/></td>
+                <td><s:property value="#inventoryflow.goodsId"/></td>
+                <td><s:property value="#inventoryflow.placeId"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#inventoryflow.firstStorageTime"/></td>
+
+                <td><s:property value="#inventoryflow.firstStorageNumber"/></td>
+                <td><s:property value="#inventoryflow.totolStorage"/></td>
+                <td><s:property value="#inventoryflow.totolDeliver"/></td>
+                <td><s:property value="#inventoryflow.carryingExcessInventory"/></td>
+
+            </tr>
+        </s:iterator>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

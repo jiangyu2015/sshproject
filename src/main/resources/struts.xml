@@ -122,7 +122,7 @@
         </action>
 
         <action name="searchkcld" class="searchInventoryFlow" method="searchInventoryFlow">
-            <result type="redirect" name="success">/search/test.jsp</result>
+            <result type="redirect" name="success">/search/inventoryFlow.jsp</result>
             <result type="redirect" name="fail">/search/fail.jsp</result>
         </action>
     </package>

@@ -1,5 +1,6 @@
 package com;
 
+import com.dto.CommodityDto;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.SearchBiz;
 import org.apache.struts2.interceptor.RequestAware;
@@ -14,6 +15,15 @@ import java.util.Map;
 public class SearchManagerAction extends ActionSupport implements RequestAware, SessionAware {
     SearchBiz searchBiz;
     Map<String, Object> request;
+    CommodityDto commodityDto;
+
+    public CommodityDto getCommodityDto() {
+        return commodityDto;
+    }
+
+    public void setCommodityDto(CommodityDto commodityDto) {
+        this.commodityDto = commodityDto;
+    }
 
     public Map<String, Object> getRequest() {
         return request;
@@ -40,7 +50,7 @@ public class SearchManagerAction extends ActionSupport implements RequestAware, 
     Map<String, Object> session;
 
     public String searchInventoryFlow() {
-        List list = searchBiz.searchInventoryFlow();
+        List<CommodityDto> list = searchBiz.searchInventoryFlow();
         System.out.println(list.size());
         if (list.size() > 0) {
             session.put("inventoryflow", list);

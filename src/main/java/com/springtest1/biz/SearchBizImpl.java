@@ -1,5 +1,6 @@
 package com.springtest1.biz;
 
+import com.dto.CommodityDto;
 import com.springtest1.dao.SearchDAO;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ public class SearchBizImpl extends HibernateDaoSupport implements SearchBiz {
     }
 
     @Transactional
-    public List searchInventoryFlow(){
+    public List<CommodityDto> searchInventoryFlow(){
         return searchDAO.searchInventoryFlow();
 
     }
