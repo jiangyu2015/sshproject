@@ -249,6 +249,7 @@
     </bean>
     <bean id="searchBiz" class="com.springtest1.biz.SearchBizImpl">
         <property name="searchDAO" ref="searchDAO"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="searchInventoryFlow" class="com.SearchManagerAction" scope="prototype">
         <property name="searchBiz" ref="searchBiz"/>

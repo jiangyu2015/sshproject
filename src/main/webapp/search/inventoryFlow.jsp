@@ -9,8 +9,17 @@
 <html>
 <head>
     <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../common.css"/>
+    <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 </head>
 <body>
+<script>
+    $.ajax({
+        url: 'searchkcld',
+        success: function () {
 
+        }
+    });
+</script>
 </body>
 </html>
