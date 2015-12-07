@@ -28,8 +28,8 @@
         <thead>
         <tr>
             <th>id</th>
-            <th>商品id</th>
-            <th>库存id</th>
+            <th>商品名称</th>
+            <th>库存名称</th>
             <th>初次入库时间</th>
             <th>初次入库数量</th>
             <th>总入库数</th>
@@ -41,8 +41,8 @@
         <s:iterator value="%{#session.inventoryflow}" var="inventoryflow">
             <tr>
                 <td><s:property value="#inventoryflow.id"/></td>
-                <td><s:property value="#inventoryflow.goodsId"/></td>
-                <td><s:property value="#inventoryflow.placeId"/></td>
+                <td><s:property value="#inventoryflow.goodsName"/></td>
+                <td><s:property value="#inventoryflow.placeName"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#inventoryflow.firstStorageTime"/></td>
 
                 <td><s:property value="#inventoryflow.firstStorageNumber"/></td>

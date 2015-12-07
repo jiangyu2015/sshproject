@@ -8,8 +8,27 @@ import java.util.Date;
  */
 public class CommodityDto {
     private Integer id;
-    private Integer goodsId;
-    private Integer placeId;
+  /*  private Integer goodsId;
+    private Integer placeId;*/
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    private String goodsName;
+    private String placeName;
 
     private Date firstStorageTime; //初次入库时间
 
@@ -18,14 +37,6 @@ public class CommodityDto {
     private BigDecimal totolDeliver;//总出库数
     private BigDecimal carryingExcessInventory;//账面剩余库存数
 
-
-    public Integer getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Integer placeId) {
-        this.placeId = placeId;
-    }
 
     public Integer getFirstStorageNumber() {
         return firstStorageNumber;
@@ -91,14 +102,6 @@ public class CommodityDto {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
     }
 
     public Date getFirstStorageTime() {

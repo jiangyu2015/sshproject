@@ -17,8 +17,10 @@ import java.util.List;
 public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
     public List<CommodityDto> searchInventoryFlow() {
         String sql = "SELECT ccin.rk_id as id, " +
-                " ccin.sp_id AS goodsId, " +
-                " ccin.rk_place_id AS placeId, " +
+                " sp.sp_name  AS goodsName, " +
+                " kc.place AS placeName, " +
+                /*" ccin.sp_id AS goodsId, " +
+                " ccin.rk_place_id AS placeId, " +*/
                 " ccin.sj_stock_date AS firstStorageTime, " +
                 " ccin.ss_number AS firstStorageNumber, " +
                 " ccin.total_in AS totolStorage, " +
@@ -42,7 +44,9 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "    cout.sp_id, " +
                 "    cout.ck_place_id " +
                 ") AS ccout ON ccin.sp_id = ccout.sp_id " +
-                "AND ccin.rk_place_id = ccout.ck_place_id";
+                "AND ccin.rk_place_id = ccout.ck_place_id LEFT JOIN kc_place AS kc ON ccin.rk_place_id = kc.kc_id " +
+                "LEFT JOIN sp_info AS sp " +
+                "on ccin.sp_id = sp.sp_id;";
         Session session = this.getSessionFactory().getCurrentSession();
 //        System.out.println(sql);
         SQLQuery sqlQuery = session.createSQLQuery(sql);
@@ -54,10 +58,10 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             CommodityDto commodityDto = new CommodityDto();
             commodityDto.setId((Integer) row[0]);
             System.out.println(commodityDto.getId());
-            commodityDto.setGoodsId((Integer) row[1]);
-            System.out.println(commodityDto.getGoodsId());
-            commodityDto.setPlaceId((Integer) row[2]);
-            System.out.println(commodityDto.getPlaceId());
+            commodityDto.setGoodsName((String) row[1]);
+            System.out.println(commodityDto.getGoodsName());
+            commodityDto.setPlaceName((String) row[2]);
+            System.out.println(commodityDto.getPlaceName());
             commodityDto.setFirstStorageTime((Date) row[3]);    //初次入库时间
             System.out.println(commodityDto.getFirstStorageTime());
             commodityDto.setFirstStorageNumber((Integer) row[4]);   //初次入库数量
