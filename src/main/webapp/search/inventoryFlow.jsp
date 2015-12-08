@@ -35,6 +35,7 @@
             <th>总入库数</th>
             <th>总出库数</th>
             <th>账面剩余库存数</th>
+            <th>入库类型</th>
         </tr>
         </thead>
         <tbody>
@@ -49,6 +50,7 @@
                 <td><s:property value="#inventoryflow.totolStorage"/></td>
                 <td><s:property value="#inventoryflow.totolDeliver"/></td>
                 <td><s:property value="#inventoryflow.carryingExcessInventory"/></td>
+                <td><s:property value="#inventoryflow.type"/></td>
 
             </tr>
         </s:iterator>

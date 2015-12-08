@@ -30,6 +30,15 @@ public class CommodityDto {
     private String goodsName;
     private String placeName;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type; //活动类型;
     private Date firstStorageTime; //初次入库时间
 
     private Integer firstStorageNumber;  //初次入库数量

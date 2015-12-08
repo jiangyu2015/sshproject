@@ -28,7 +28,6 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
         String hql = "from StorageApp sa where sa.state='no'";
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
-
         List<StorageApp> storageapplist = query.list();
         if (storageapplist.size() <= 0) {
             return new ArrayList<StorageApp>();
@@ -37,7 +36,6 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
             System.out.println(sa.getGoodsName());
             return storageapplist;
         }
-
     }
 
     public List<StorageApp> search(final StorageApp condition) {
@@ -49,8 +47,9 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
                     if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
                         c.add(Restrictions.eq("storageAppName", condition.getProducerName()));
                     }
-                    if (condition.getStorageAppId() != null && !condition.getStorageAppId().equals("") ) {
-                        System.out.println("DAO"+condition.getStorageAppId() );
+
+                    if (condition.getStorageAppId() != null && !condition.getStorageAppId().equals("")) {
+                        System.out.println("DAO" + condition.getStorageAppId());
                         c.add(Restrictions.eq("storageAppId", condition.getStorageAppId()));
                     }
                 }
@@ -74,7 +73,6 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
         System.out.println("DAO里面的入库申请" + storageApp.getProducerName());
         super.getHibernateTemplate().update(storageApp);   //修改
     }
-
 
 
 }

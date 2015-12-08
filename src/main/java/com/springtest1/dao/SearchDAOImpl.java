@@ -25,10 +25,11 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 " ccin.ss_number AS firstStorageNumber, " +
                 " ccin.total_in AS totolStorage, " +
                 " IFNULL(ccout.total_out, 0) AS totolDeliver, " +
-                " IFNULL(ccin.total_in, 0) - IFNULL(ccout.total_out, 0) AS carryingExcessInventory " +
+                " IFNULL(ccin.total_in, 0) - IFNULL(ccout.total_out, 0) AS carryingExcessInventory, " +
+                "ccin.rk_type "+
                 "FROM(SELECT *, sum(cin.ss_number) AS total_in " +
-                "    FROM((SELECT * FROM rk_detail cin ORDER BY cin.sj_stock_date)) cin " +
-                "    GROUP BY cin.sp_id, cin.rk_place_id " +
+                "    FROM((SELECT * FROM rk_detail cin ORDER BY cin.sj_stock_date)) cin where cin.state='ok'" +
+                "    GROUP BY cin.sp_id, cin.rk_place_id,cin.rk_type " +
                 "    ORDER BY cin.sp_id, cin.sj_stock_date " +
                 "  ) AS ccin " +
                 "LEFT JOIN ( " +
@@ -57,21 +58,22 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             System.out.println(row);
             CommodityDto commodityDto = new CommodityDto();
             commodityDto.setId((Integer) row[0]);
-            System.out.println(commodityDto.getId());
+        //    System.out.println(commodityDto.getId());
             commodityDto.setGoodsName((String) row[1]);
-            System.out.println(commodityDto.getGoodsName());
+        //    System.out.println(commodityDto.getGoodsName());
             commodityDto.setPlaceName((String) row[2]);
-            System.out.println(commodityDto.getPlaceName());
+      //      System.out.println(commodityDto.getPlaceName());
             commodityDto.setFirstStorageTime((Date) row[3]);    //初次入库时间
-            System.out.println(commodityDto.getFirstStorageTime());
+      //      System.out.println(commodityDto.getFirstStorageTime());
             commodityDto.setFirstStorageNumber((Integer) row[4]);   //初次入库数量
-            System.out.println(commodityDto.getFirstStorageNumber());
+       //     System.out.println(commodityDto.getFirstStorageNumber());
             commodityDto.setTotolStorage((BigDecimal) row[5]);  //总入库数  BigDecimal
-            System.out.println(commodityDto.getTotolStorage());
+      //      System.out.println(commodityDto.getTotolStorage());
             commodityDto.setTotolDeliver((BigDecimal) row[6]); //总出库数 BigDecimal
-            System.out.println(commodityDto.getTotolDeliver());
+      //      System.out.println(commodityDto.getTotolDeliver());
             commodityDto.setCarryingExcessInventory((BigDecimal) row[7]);  //账面剩余库存数
-            System.out.println(commodityDto.getCarryingExcessInventory());
+     //       System.out.println(commodityDto.getCarryingExcessInventory());
+            commodityDto.setType((String) row[8]);  //入库类型
 
             //其他自己加
             commodityDtoList.add(commodityDto);

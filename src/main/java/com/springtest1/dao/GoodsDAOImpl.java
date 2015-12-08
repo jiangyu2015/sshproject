@@ -89,4 +89,18 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
             return goodslist;
         }
     }
+
+    public List<Goods> getGoodsCheck() {    //state=“ok”
+        String hql = "from Goods g where g.state='ok'";
+        System.out.println("GOODSDAOIMPL" + hql);
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+        List<Goods> goodslist = query.list();
+        if (goodslist.size() <= 0) return new ArrayList<Goods>();
+        else {
+            Goods g = (Goods) query.list().get(0);
+            System.out.println(g.getGoodsName());
+            return goodslist;
+        }
+    }
 }

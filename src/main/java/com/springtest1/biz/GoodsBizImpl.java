@@ -46,4 +46,8 @@ public class GoodsBizImpl implements GoodsBiz {
     public List<Goods> getGoods(String name){
         return goodsDAO.getGoods(name);
     }
+    @Transactional
+    public List<Goods> getGoodsCheck(){
+        return  goodsDAO.getGoodsCheck();
+    }
 }

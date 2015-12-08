@@ -21,5 +21,7 @@ public interface GoodsDAO {
 
    public List<Goods> getGoods(String name);  //模糊查询
 
+    public List<Goods> getGoodsCheck();  //选出ok的商品
+
 
 }

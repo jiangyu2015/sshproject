@@ -102,7 +102,6 @@
             <div class="lable">商品名称：</div>
             <div class="input-div"><input placeholder="请输入商品名称" name="storageApp.goodsName"/></div>
 
-
             <input name="isResult" id="isResult" type="hidden"/>
             <input name="storageApp.goodsName" id="goodsName" value=""/>
 

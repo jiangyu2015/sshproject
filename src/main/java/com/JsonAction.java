@@ -97,28 +97,20 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
 
         try {
-            //    String goodsname="吃";
-            // List<Goods> goodslist = goodsBiz.getGoods(goodsname);
-            List<Goods> goodslist = goodsBiz.getAllGoods();
+            List<Goods> goodslist = goodsBiz.getGoodsCheck();
             Goods g = goodslist.get(0);
             System.out.println(g.getGoodsId() + "传值JsonAction");
-
             JSONObject json = new JSONObject();
             json.put("goodsList", goodslist);
-
             result = json.toString();//给result赋值，传递给页面
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return SUCCESS;
     }
 
     public String excuteProducerAjax() {    //商户
         try {
-            //     String producername = request.getParameter("item");
-         //   System.out.println(producername + "传值JsonAction");
             List<Producer> producerlist = producerBiz.getAllProducer();
             JSONObject json = new JSONObject();
             json.put("producerList", producerlist);
@@ -153,8 +145,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         System.out.println(list.size());
         StorageApp storageApp=(StorageApp)list.get(0);
         System.out.print(storageApp.getProducerName()+storageApp.getStoragePlace()+storageApp.getGoodsName());
-        storageApp.setState("yesno");
+        storageApp.setState("yesno");                               //改申请state
         storageAppBiz.editStorageApp(storageApp);
+
         return SUCCESS;
     }
 
