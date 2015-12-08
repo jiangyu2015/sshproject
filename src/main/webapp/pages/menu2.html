@@ -9,7 +9,9 @@
     <link rel="stylesheet" type="text/css" href="../resources/jquery-easyui/demo/demo.css">
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <style>
-        a{ text-decoration:none}
+        a {
+            text-decoration: none
+        }
     </style>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.easyui.min.js"></script>
 
@@ -124,7 +126,7 @@
                             <ul>
                                 <li id="rksq/rksqAdd.jsp">增加</li>
                                 <!--       <li>删除</li>        -->
-                               <li>修改</li>
+                                <li>修改</li>
                                 <li>查询</li>
                             </ul>
                         </li>
@@ -136,81 +138,72 @@
                             </ul>
                         </li>
 
-                       <!-- <li>
-                            <span><a href="listrk.action" target="t2">入库明细</a></span>
-                            <ul>
-                                <li>查询</li>
-                            </ul>
-                        </li>-->
+                        <!-- <li>
+                             <span><a href="listrk.action" target="t2">入库明细</a></span>
+                             <ul>
+                                 <li>查询</li>
+                             </ul>
+                         </li>-->
 
                         <li>
                             <span><a href="rkcheck.action" target="t2">确认收货</a></span>
                             <ul>
-                                <li  id="listrk.action">查询</li>
+                                <li id="listrk.action">查询</li>
                             </ul>
                         </li>
 
                         <li>
                             <span>预提申请</span>
                             <ul>
-                                <li>增加</li>
-                             <!--   <li>删除</li>  -->
+                                <li id="yt/eventsAdd.jsp">预提申请原由事件填写</li>
+                                <li>预提商品库存情况查找</li>
+                                <li>查询</li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <span><a href="listck.action" target="t2">出库明细</a></span>
+                            <ul>
+                                <li id="ck/ckAdd.jsp">增加</li>
                                 <li>修改</li>
                                 <li>查询</li>
                             </ul>
                         </li>
+                    </ul>
+                </li>
+                <li>
+                    <span>库存查询</span>
+                    <ul>
                         <li>
-                            <span><a href="listythd.action" target="t2">预提活动申请</a></span>
+                            <span>库存流动情况查询</span>
                             <ul>
-                                <li>增加</li>
-                                <!--   <li>删除</li> -->
-                                  <li>修改</li>
-                                  <li>查询</li>
-                              </ul>
-                          </li>
-                          <li>
-                              <span><a href="listck.action" target="t2">出库明细</a></span>
-                              <ul>
-                                  <li id="ck/ckAdd.jsp">增加</li>
-                                 <!-- <li>删除</li> -->
-                                  <li>修改</li>
-                                  <li>查询</li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                      <span>库存查询</span>
-                      <ul>
-                          <li>
-                              <span>库存流动情况查询</span>
-                              <ul>
-                                  <li id="searchkcld.action">查库存</li>
-                                  <li>查查查</li>
-                                  <li>啦啦啦</li>
+                                <li id="searchkcld.action">查库存</li>
+                                <li>查查查</li>
+                                <li>啦啦啦</li>
 
-                              </ul>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
-  </div>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
 
 
-  <!--  	<div class="right-div">
-          <table class="easyui-datagrid" title="项目表" style="width: 100%; height: 100%;"
-                  data-options="singleSelect:true,collapsible:true,url:'pages/datagrid_data1.json',method:'get'">
-              <thead>
-                  <tr>
-                      <th data-options="field:'itemId',align:'center'" width="25%">项目ID</th>
-                      <th data-options="field:'itemName',align:'center'" width="25%">项目名称</th>
-                      <th data-options="field:'itemContent',align:'center'" width="25%">项目内容</th>
-                      <th data-options="field:'status',align:'center'" width="25%">基本操作</th>
-                  </tr>
-              </thead>
-          </table>
-      </div>   -->
+<!--  	<div class="right-div">
+        <table class="easyui-datagrid" title="项目表" style="width: 100%; height: 100%;"
+                data-options="singleSelect:true,collapsible:true,url:'pages/datagrid_data1.json',method:'get'">
+            <thead>
+                <tr>
+                    <th data-options="field:'itemId',align:'center'" width="25%">项目ID</th>
+                    <th data-options="field:'itemName',align:'center'" width="25%">项目名称</th>
+                    <th data-options="field:'itemContent',align:'center'" width="25%">项目内容</th>
+                    <th data-options="field:'status',align:'center'" width="25%">基本操作</th>
+                </tr>
+            </thead>
+        </table>
+    </div>   -->
 
 </body>
 </html>

@@ -13,14 +13,11 @@ import java.util.List;
  */
 public class ActivityDAOImpl extends HibernateDaoSupport implements ActivityDAO {
     public List<Activity> getAllActivity() {
-   /*   String sql = "select * from  Activity  as a LEFT JOIN  yt_application as yt on yt.hd_id= a.hd_id ";
-         Session session = this.getSessionFactory().getCurrentSession();
-        Query query = session.createSQLQuery(sql);  */
         String hql = "from Activity";
         org.hibernate.Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         Activity activity = (Activity) query.list().get(0);
-        System.out.println(activity.getWithholding().getActivityId() + "ActivityDAOImpl");
+
         return query.list();
 
 

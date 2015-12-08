@@ -45,7 +45,6 @@
                 <td><s:property value="#inventoryflow.goodsName"/></td>
                 <td><s:property value="#inventoryflow.placeName"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#inventoryflow.firstStorageTime"/></td>
-
                 <td><s:property value="#inventoryflow.firstStorageNumber"/></td>
                 <td><s:property value="#inventoryflow.totolStorage"/></td>
                 <td><s:property value="#inventoryflow.totolDeliver"/></td>

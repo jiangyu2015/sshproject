@@ -21,7 +21,6 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
             public List<Goods> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Goods.class);
                 if (condition != null) {
-
                     if (condition.getGoodsId() != null && !condition.getGoodsId().equals("")) {
                         c.add(Restrictions.eq("goodsId", condition.getGoodsId()));
                     }

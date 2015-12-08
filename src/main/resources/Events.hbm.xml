@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hibtest1.entity">
+    <class name="com.hibtest1.entity.Events" table="event">
+        <id name="eventId" type="java.lang.Integer">
+            <column name="event_id" length="4"/>
+            <generator class="native">
+            </generator>
+        </id>
+        <property name="eventName" type="java.lang.String">
+            <column name="event_name" length="30" not-null="false"/>
+        </property>
+        <property name="activityId" type="java.lang.String">
+            <column name="hd_id" length="10" not-null="false"/>
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark" length="30" not-null="false"/>
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="userName" length="30" not-null="false"/>
+        </property>
+    </class>
+</hibernate-mapping>

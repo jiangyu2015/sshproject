@@ -10,12 +10,39 @@ import java.util.HashSet;
  */
 public class Withholding implements Serializable {
     private Integer withholdingId; //id
-   /* private Integer placeId; //仓库id
-    private Integer goodsId; //商品id*/
    private Place place;
     private Goods goods;
     private Date witholdingDate;//预提时间
-    private Date deadline; //截止时间
+    private Date deteline; //截止时间
+    private  Integer eventId; //活动id
+    private  Integer witholdingNumber;  //预提数
+    private String useType; //使用类型
+    private String userName;  //要和user表连
+
+
+    public Date getDeteline() {
+        return deteline;
+    }
+
+    public void setDeteline(Date deteline) {
+        this.deteline = deteline;
+    }
+
+    public Integer getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Place getPlace() {
         return place;
@@ -33,20 +60,6 @@ public class Withholding implements Serializable {
         this.goods = goods;
     }
 
-    private  Integer activityId; //活动id
-    private  Integer witholdingNumber;  //预提数
-    private String useType; //使用类型
-
-  /*  private Set bks=new HashSet();
-    public Set getBks() {
-        return bks;
-    }
-
-    public void setBks(Set bks) {
-        this.bks = bks;
-    }  */
-
-
     public Integer getWithholdingId() {
         return withholdingId;
     }
@@ -55,36 +68,12 @@ public class Withholding implements Serializable {
         this.withholdingId = withholdingId;
     }
 
-   /* public Integer getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Integer placeId) {
-        this.placeId = placeId;
-    }
-
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }*/
-
     public Date getWitholdingDate() {
         return witholdingDate;
     }
 
     public void setWitholdingDate(Date witholdingDate) {
         this.witholdingDate = witholdingDate;
-    }
-
-   public Integer getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
     }
 
     public Integer getWitholdingNumber() {
@@ -103,11 +92,5 @@ public class Withholding implements Serializable {
         this.useType = useType;
     }
 
-    public Date getDeadline() {
-        return deadline;
-    }
 
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
 }

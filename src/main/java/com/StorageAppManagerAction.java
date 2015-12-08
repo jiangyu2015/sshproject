@@ -137,8 +137,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         storageAppBiz.editStorageApp(storageApp);                //更改状态yesok
         Storage storage = new Storage();           //新建入库明细表
 
-        Goods goods = (Goods)goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
-        System.out.println("StorageApp通过时传入的商品id是"+goods.getGoodsId());
+        Goods goods = (Goods) goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
+        System.out.println("StorageApp通过时传入的商品id是" + goods.getGoodsId());
         storage.setGoods(goods);
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
         storage.setProducer(producer);
@@ -203,14 +203,10 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         if (storageApp.getProducerName() != null)        //商户名称
             condition.setProducerName(storageApp.getProducerName());
         if (storageApp.getGoodsName() != null) {          //商品名称
-
-
             String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
             String name = strs[0];
             condition.setGoodsName(name);
-
         }
-
         if (storageApp.getStoragePlace() != null) {                     //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
             System.out.print("传入仓库地址" + storageApp.getStoragePlace());
