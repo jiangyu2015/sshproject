@@ -8,6 +8,11 @@ import com.springtest1.dao.EventsDAO;
  */
 public class EventsBizImpl implements EventsBiz  {
     private EventsDAO eventsDAO;
+
+    public void setEventsDAO(EventsDAO eventsDAO) {
+        this.eventsDAO = eventsDAO;
+    }
+
     public void add(Events events){
          eventsDAO.add(events);
     }

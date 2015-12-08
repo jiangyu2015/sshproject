@@ -97,12 +97,14 @@
         <action name="rkAdd" class="storageAdd" method="addStorage">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
-
         <action name="rkcheck" class="storageCheck" method="checkStorage">
             <result type="redirect" name="storageCheck">/rk/rkCheckList.jsp</result>
         </action>
-
         <action name="rkOk" class="storageOk" method="storageOk">
+            <result type="redirect" name="success">/rk/test.jsp</result>
+        </action>
+
+        <action name="eventsAdd" class="eventsAdd" method="addEvents">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
 

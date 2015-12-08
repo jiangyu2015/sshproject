@@ -25,9 +25,7 @@
         <property name="useType" type="java.lang.String">
             <column name="use_type" length="30" not-null="false"/>
         </property>
-        <property name="useType" type="java.lang.String">
-            <column name="use_type" length="30" not-null="false"/>
-        </property>
+
       <!-- <set name="bks" lazy="false">
            <key column="hd_id"></key>
            <one-to-many class="com.hibtest1.entity.Activity"/>

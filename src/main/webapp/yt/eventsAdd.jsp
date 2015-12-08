@@ -21,15 +21,15 @@
     <form method="post" action="eventsAdd">
         <div class="line">
             <div class="lable">事件名称：</div>
-            <div class="input-div"><input placeholder="请输入预提时间原由" name="producer.producerName"/></div>
+            <div class="input-div"><input placeholder="请输入预提时间原由" name="events.eventName"/></div>
         </div>
         <div class="line">
-            <div class="lable">商户地址：</div>
-            <div class="input-div"><input placeholder="请输入商户地址" name="producer.producerAddress"/></div>
+            <div class="lable">活动id：</div>
+            <div class="input-div"><input placeholder="如事件有活动id，请输入" name="events.activityId"/></div>
         </div>
         <div class="line">
-            <div class="lable">联系人：</div>
-            <div class="input-div"><input placeholder="请输入商户联系人" name="producer.linkman"/></div>
+            <div class="lable">备注：</div>
+            <div class="input-div"><input placeholder="请输入备注" name="events.remark"/></div>
         </div>
 
         <input type="submit" value="提交" class="btn-submit"/>

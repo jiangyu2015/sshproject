@@ -63,6 +63,7 @@
                 <value>Deliver.hbm.xml</value>
                 <value>Withholding.hbm.xml</value>
                 <value>Activity.hbm.xml</value>
+                <value>Events.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -226,13 +227,24 @@
         <property name="deliverBiz" ref="deliverBiz"/>
     </bean>
 
+    <bean id="eventsDAO" class="com.springtest1.dao.EventsDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="eventsBiz" class="com.springtest1.biz.EventsBizImpl">
+        <property name="eventsDAO" ref="eventsDAO"/>
+    </bean>
+    <bean id="eventsAdd" class="com.WithholdingManagerAction">
+        <property name="eventsBiz" ref="eventsBiz"/>
+
+
+    </bean>
+
     <bean id="withholdingDAO" class="com.springtest1.dao.WithholdingDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="withholdingBiz" class="com.springtest1.biz.WithholdingBizImpl">
         <property name="withholdingDAO" ref="withholdingDAO"/>
     </bean>
-
 
     <bean id="activityDAO" class="com.springtest1.dao.ActivityDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
