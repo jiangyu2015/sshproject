@@ -16,9 +16,6 @@
         <property name="deteline" type="java.util.Date">
             <column name="dateline" length="30" not-null="false"/>
         </property>
-        <!--   <property name="eventId" type="java.lang.Integer">
-                <column name="event_id" length="4" not-null="false"/>
-            </property>-->
         <property name="events" type="java.lang.String">
             <column name="events" length="50" not-null="false"/>
         </property>
@@ -36,6 +33,7 @@
         </property>
         <many-to-one name="goods" column="sp_id" class="com.hibtest1.entity.Goods" lazy="false"/>
         <many-to-one name="place" column="rk_place_id" class="com.hibtest1.entity.Place" lazy="false"/>
+
     </class>
 
 </hibernate-mapping>

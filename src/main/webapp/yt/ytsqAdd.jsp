@@ -23,27 +23,29 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            alert( "123"+id);
+
+           alert( GetQueryString("id"));
             $.ajax({
 
                 type: "post",
                 url: "doWithholdingJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                 data: {//设置数据源
-                    id: $tds.eq(0).text()
+                    id: GetQueryString("id")
                 },
                 /*  dataType: "json",//设置需要返回的数据类型*/
                 success: function (data, xhrTxt) {
+
                     var str = "";
                     var d = eval("(" + data + ")");
-
+                    alert(d);
                     var goodsId = str + d.goodsId;
                     alert (goodsId);
                     var goodsName = str + d.goodsName;
-                    alert (goodsName+"123");
+                    alert ("123"+goodsName);
                     var placeId = str + d.placeId;
                     var placeName = str + d.placeName;
                     var type = str + d.type;
-                    $('#item').append($('<option>').val().text(goodsName));
+                    $('#select').append($('<option>').val().text(goodsName));
 
                 },
                 error: function () {
@@ -69,6 +71,12 @@
                  dataType: 'json'*/
             });
         });
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
 
     </script>
 </head>
