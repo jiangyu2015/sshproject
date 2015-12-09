@@ -65,7 +65,7 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
                         System.out.println("DAO" + condition.getStorageId());
                         c.add(Restrictions.eq("storageId", condition.getStorageId()));
                     }
-
+   //为了保存
                 }
                 return c.list();
 
