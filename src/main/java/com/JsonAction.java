@@ -172,6 +172,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         json.put("placeName",placeName);
         json.put("type",type);
         System.out.println(goodsId+goodsName+placeId+placeName);
+        result = json.toString();
         return SUCCESS;
     }
 

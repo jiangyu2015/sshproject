@@ -23,61 +23,37 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
         $(function () {
-
-           alert( GetQueryString("id"));
             $.ajax({
-
-                type: "post",
                 url: "doWithholdingJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                 data: {//设置数据源
                     id: GetQueryString("id")
                 },
-                /*  dataType: "json",//设置需要返回的数据类型*/
+                dataType: "json",//设置需要返回的数据类型*/
                 success: function (data, xhrTxt) {
-
                     var str = "";
                     var d = eval("(" + data + ")");
-                    alert(d);
                     var goodsId = str + d.goodsId;
-                    alert (goodsId);
                     var goodsName = str + d.goodsName;
-                    alert ("123"+goodsName);
                     var placeId = str + d.placeId;
                     var placeName = str + d.placeName;
                     var type = str + d.type;
-                    $('#select').append($('<option>').val().text(goodsName));
-
+                    $('#goodsId').val(goodsId);
+                    $('#goodsName').val(goodsName);
+                    $('#placeId').val(placeId);
+                    $('#placeName').val(placeName);
+                    $('#type').val(type);
                 },
                 error: function () {
                     alert("系统异常，请稍后重试！");
                 }//这里不要加","
-                /*  参考  success: function (data, xhrTxt) {
-                 var str = "";
-                 var d = eval("(" + data + ")");
-                 var goods = d.goodsList;
-                 console.log(goods);
-                 for (var i = 0; i < goods.length; i++) {
-
-                 //      str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
-                 str = str + "<option>" + goods[i].goodsName + "</option>";
-                 //        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
-                 }
-                 $("#select").html(str);
-
-                 $('#item').bind('input propertychange', function () {
-                 $("#select").html(str);
-                 });
-                 },
-                 dataType: 'json'*/
             });
         });
-        function GetQueryString(name)
-        {
-            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
-            if(r!=null)return  unescape(r[2]); return null;
+            if (r != null)return unescape(r[2]);
+            return null;
         }
-
     </script>
 </head>
 <body>
@@ -85,42 +61,48 @@
 <div class="content">
     <form method="post" action="rksqAdd">
         <div class="line">
-            <div class="lable">商户名称：</div>
-            <div class="input-div"><input id="item2" list="select2" placeholder="请输入商户名称"
-                                          name="storageApp.producerName"/>
-                <datalist id="select2"></datalist>
-            </div>
-        </div>
-        <div class="line">
-            <div class="lable">商品名称：</div>
-            <div class="input-div"><input id="item" list="select" placeholder="请输入商品名称" name="storageApp.goodsName"/>
-                <datalist id="select"></datalist>
-            </div>
-        </div>
-        <div class="line">
-            <div class="lable">入库地点：</div>
-            <div class="input-div"><input id="item3" list="select3" placeholder="请输入入库地点"
-                                          name="storageApp.storagePlace"/>
-                <datalist id="select3"></datalist>
-            </div>
-        </div>
-        <div class="line">
-            <div class="lable">商品评级：</div>
-            <div class="input-div"><input placeholder="请输入商品评级" name="storageApp.commodityRating"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">预期入库时间：</div>
-            <div class="input-div"><input placeholder="请输入预期入库时间" name="storageApp.expectedDate" type="date"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">预期入库数量：</div>
-            <div class="input-div"><input placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/></div>
+            <div class="lable">商品id：</div>
+            <div class="input-div"><input id="goodsId" name="withholding.goods.goodsId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
 
         <div class="line">
-            <div class="lable">入库类型：</div>
-            <div class="input-div"><input placeholder="请输入入库类型" name="storageApp.storageType"/></div>
+            <div class="lable">商品名称：</div>
+            <div class="input-div"><input id="goodsName" name="withholding.goods.goodsName" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
+        <div class="line">
+            <div class="lable">仓库id：</div>
+            <div class="input-div"><input id="placeId" name="withholding.place.placeId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">仓库地址：</div>
+            <div class="input-div"><input id="placeName" name="withholding.place.placeName" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">使用原由：</div>
+            <div class="input-div"><input name="withholding.events" placeholder="请输入预提出库事件原由"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">活动id：</div>
+            <div class="input-div"><input name="withholding.activityId" placeholder="如该活动有id请输入"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">预提数：</div>
+            <div class="input-div"><input name="withholding.witholdingNumber" placeholder="请输入预提数"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">截止日期：</div>
+            <div class="input-div"><input name="withholding.deteline" placeholder="请输入截止日期" type="date"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">使用类型：</div>
+            <div class="input-div"><input id="type" name="withholding.useType" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+
 
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
