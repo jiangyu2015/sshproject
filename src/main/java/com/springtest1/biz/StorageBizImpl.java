@@ -36,10 +36,6 @@ public class StorageBizImpl implements StorageBiz {
         storageDAO.add(condition);
     }
 
-  /*  public boolean delGoods(Storage storage) {
-        return storageDAO.delGoods(storage);
-    }  */
-
     public boolean editStorage(Storage storage) {
         storageDAO.editStorage(storage);
         return true;

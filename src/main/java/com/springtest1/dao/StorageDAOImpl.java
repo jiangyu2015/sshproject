@@ -78,11 +78,6 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
         super.getHibernateTemplate().save(storage);
     }
 
-  /*  public boolean delGoods(Storage condition) {
-        super.getHibernateTemplate().delete(condition);
-        return true;
-    }  */
-
     public void editStorage(Storage storage) {
         super.getHibernateTemplate().update(storage);   //修改
     }

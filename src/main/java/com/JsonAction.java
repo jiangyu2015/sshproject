@@ -6,15 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.hibtest1.entity.Goods;
+import com.hibtest1.entity.*;
 
-import com.hibtest1.entity.Place;
-import com.hibtest1.entity.Producer;
-import com.hibtest1.entity.StorageApp;
-import com.springtest1.biz.GoodsBiz;
-import com.springtest1.biz.ProducerBiz;
-import com.springtest1.biz.PlaceBiz;
-import com.springtest1.biz.StorageAppBiz;
+import com.springtest1.biz.*;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -42,9 +36,15 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     }
 
     GoodsBiz goodsBiz;
+
+    public void setStorageBiz(StorageBiz storageBiz) {
+        this.storageBiz = storageBiz;
+    }
+
     ProducerBiz producerBiz;
     PlaceBiz placeBiz;
     StorageAppBiz storageAppBiz;
+    StorageBiz storageBiz;
 
     public void setStorageAppBiz(StorageAppBiz storageAppBiz) {
         this.storageAppBiz = storageAppBiz;
@@ -97,7 +97,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
 
         try {
-            List<Goods> goodslist = goodsBiz.getGoodsCheck();
+            List<Goods> goodslist = goodsBiz.getAllGoods();
             Goods g = goodslist.get(0);
             System.out.println(g.getGoodsId() + "传值JsonAction");
             JSONObject json = new JSONObject();
@@ -148,6 +148,30 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         storageApp.setState("yesno");                               //改申请state
         storageAppBiz.editStorageApp(storageApp);
 
+        return SUCCESS;
+    }
+
+    public String doWithholding(){
+        String id = request.getParameter("id");
+        int storageId = Integer.valueOf(id);
+        System.out.println(storageId+"流动的明细取到的id");
+        Storage condition=new Storage();
+        condition.setStorageId(storageId);
+        List<Storage>storageList= storageBiz.getStorageList(condition);
+        Storage storage=storageList.get(0);
+        int goodsId=storage.getGoods().getGoodsId();
+        String goodsName=storage.getGoods().getGoodsName();
+        int placeId=storage.getPlace().getPlaceId();
+        String placeName=storage.getPlace().getPlaceName();
+        String type=storage.getStorageType();
+
+        JSONObject json = new JSONObject();
+        json.put("goodsId",goodsId);
+        json.put("goodsName",goodsName);
+        json.put("placeId",placeId);
+        json.put("placeName",placeName);
+        json.put("type",type);
+        System.out.println(goodsId+goodsName+placeId+placeName);
         return SUCCESS;
     }
 

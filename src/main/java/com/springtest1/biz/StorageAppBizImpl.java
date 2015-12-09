@@ -44,10 +44,6 @@ public class StorageAppBizImpl implements StorageAppBiz {
         storageAppDAO.add(storageApp);
     }
 
-  /*  public boolean delGoods(StorageApp storageApp) {
-        return storageAppDAO.delGoods(storageApp);
-    }  */
-
     public boolean editStorageApp(StorageApp storageApp) {
         System.out.println("biz里面的" + storageApp.getProducerName());
         storageAppDAO.editStorageApp(storageApp);

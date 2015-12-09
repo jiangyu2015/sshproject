@@ -34,6 +34,6 @@
 
         <many-to-one name="goods" column="sp_id" class="com.hibtest1.entity.Goods" lazy="false"/>
         <many-to-one name="place" column="ck_place_id" class="com.hibtest1.entity.Place"  lazy="false"/>
-
+        <many-to-one name="withholding" column="yt_id" class="com.hibtest1.entity.Withholding" lazy="false"/>
     </class>
 </hibernate-mapping>

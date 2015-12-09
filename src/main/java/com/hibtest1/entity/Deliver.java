@@ -8,10 +8,9 @@ import java.util.Date;
  */
 public class Deliver implements Serializable {
     private Integer deliverId; //id
-  /*  private Integer goodsId; //商品id
-    private Integer placeId; //仓库id*/
     private Place place;
     private Goods goods;
+    private Withholding withholding;
 
     public Place getPlace() {
         return place;
@@ -29,6 +28,14 @@ public class Deliver implements Serializable {
         this.goods = goods;
     }
 
+    public Withholding getWithholding() {
+        return withholding;
+    }
+
+    public void setWithholding(Withholding withholding) {
+        this.withholding = withholding;
+    }
+
     private Date deliverDate;  //出库时间
     private Integer expecteNumber;  //应发数量
     private Integer deliverNumber;  //出库数量
@@ -42,22 +49,6 @@ public class Deliver implements Serializable {
     public void setDeliverId(Integer deliverId) {
         this.deliverId = deliverId;
     }
-
-    /*public Integer getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Integer placeId) {
-        this.placeId = placeId;
-    }
-
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }*/
 
     public Date getDeliverDate() {
         return deliverDate;

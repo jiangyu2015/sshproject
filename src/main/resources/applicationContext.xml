@@ -246,6 +246,10 @@
         <property name="withholdingDAO" ref="withholdingDAO"/>
     </bean>
 
+    <bean id="withholdingSelect" class="com.SearchManagerAction">
+        <property name="searchBiz" ref="searchBiz"/>
+    </bean>
+
     <bean id="activityDAO" class="com.springtest1.dao.ActivityDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

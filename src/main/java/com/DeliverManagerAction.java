@@ -114,9 +114,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String searchDeliverList() {
-
         Deliver condition = new Deliver();
-
         // condition.setGoodsName(goodsName);
         List list = deliverBiz.getDeliverList(condition);
         System.out.println(list.size());
@@ -127,21 +125,6 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         } else
             return "input";
     }
-
- /*   public String delDeliver() {
-        System.out.println(deliverName);
-        Deliver condition = new Deliver();
-        condition.setDeliverName(deliverName);
-        List<Deliver> list = deliverBiz.getDeliverList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            Deliver deliver = new Deliver();
-            deliver = (Deliver) list.get(0);
-            boolean e = deliverBiz.delGoods(deliver);
-            if (e) return "success";
-            else return "input";
-        } else return "input";
-    }  */
 
     public String addDeliver() throws Exception {                  //增加出库申请
         System.out.println("addDeliver");

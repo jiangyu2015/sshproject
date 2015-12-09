@@ -14,11 +14,28 @@ public class Withholding implements Serializable {
     private Goods goods;
     private Date witholdingDate;//预提时间
     private Date deteline; //截止时间
-    private  Integer eventId; //活动id
+  //  private  Integer eventId; //活动id
     private  Integer witholdingNumber;  //预提数
     private String useType; //使用类型
     private String userName;  //要和user表连
+    private  String events;//事件
+    private String activityId;//活动id
 
+    public String getEvents() {
+        return events;
+    }
+
+    public void setEvents(String events) {
+        this.events = events;
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
 
     public Date getDeteline() {
         return deteline;
@@ -28,13 +45,13 @@ public class Withholding implements Serializable {
         this.deteline = deteline;
     }
 
-    public Integer getEventId() {
+  /*  public Integer getEventId() {
         return eventId;
     }
 
     public void setEventId(Integer eventId) {
         this.eventId = eventId;
-    }
+    }*/
 
     public String getUserName() {
         return userName;

@@ -16,6 +16,15 @@ public class SearchManagerAction extends ActionSupport implements RequestAware, 
     SearchBiz searchBiz;
     Map<String, Object> request;
     CommodityDto commodityDto;
+    private String goodsName;
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
 
     public CommodityDto getCommodityDto() {
         return commodityDto;
@@ -57,6 +66,16 @@ public class SearchManagerAction extends ActionSupport implements RequestAware, 
             return "success";
         } else
             return "fail";
+    }
+
+    public String searchInventoryFlowGoods() {
+        List<CommodityDto> list = searchBiz.searchInventoryFlowGoods(goodsName);
+        System.out.println(list.size());
+        if (list.size() > 0) {
+            session.put("inventoryflow", list);
+            return "success";
+        } else
+            return "fail";   //应该提示该商品未入库
     }
 
 

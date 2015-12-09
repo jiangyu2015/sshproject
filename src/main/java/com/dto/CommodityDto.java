@@ -30,6 +30,16 @@ public class CommodityDto {
     private String goodsName;
     private String placeName;
 
+    public String getProducerName() {
+        return producerName;
+    }
+
+    public void setProducerName(String producerName) {
+        this.producerName = producerName;
+    }
+
+    private String producerName;
+
     public String getType() {
         return type;
     }
@@ -40,6 +50,16 @@ public class CommodityDto {
 
     private String type; //活动类型;
     private Date firstStorageTime; //初次入库时间
+
+    public BigDecimal getExpectNumber() {
+        return expectNumber;
+    }
+
+    public void setExpectNumber(BigDecimal expectNumber) {
+        this.expectNumber = expectNumber;
+    }
+
+    private BigDecimal expectNumber;//应收数量expect_rk_number
 
     private Integer firstStorageNumber;  //初次入库数量
     private BigDecimal totolStorage;  //总入库数
