@@ -222,6 +222,7 @@
         <property name="deliverBiz" ref="deliverBiz"/>
         <property name="goodsBiz" ref="goodsBiz"/>
         <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
         <property name="withholdingBiz" ref="withholdingBiz"/>
     </bean>
     <bean id="deliverEdit" class="com.DeliverManagerAction" scope="prototype">
@@ -249,6 +250,7 @@
         <property name="withholdingBiz" ref="withholdingBiz"/>
         <property name="goodsbiz" ref="goodsBiz"/>
         <property name="placebiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
     </bean>
     <bean id="withholdingList" class="com.WithholdingManagerAction">
         <property name="withholdingBiz" ref="withholdingBiz"/>

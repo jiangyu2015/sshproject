@@ -23,6 +23,7 @@
                 alert('请选择要修改的行');
             } else {
                 var $tds = $("tr.active").children();
+                alert("取到的值id"+$tds.eq(0).text());
                 $.ajax({
                     success: function () {
                         window.location.href = "ckAdd.jsp?id="+$tds.eq(0).text()+"";
@@ -54,6 +55,8 @@
     <thead>
     <tr>
         <th>预提单id</th>
+        <th>商户id</th>
+        <th>商户名称</th>
         <th>商品id</th>
         <th>商品名称</th>
         <th>仓库id</th>
@@ -72,6 +75,8 @@
     <s:iterator value="%{#session.withholdinglist}" var="withholding">
         <tr>
             <td><s:property value="#withholding.withholdingId"/></td>
+            <td><s:property value="#withholding.producer.producerId"/></td>
+            <td><s:property value="#withholding.producer.producerName"/></td>
             <td><s:property value="#withholding.goods.goodsId"/></td>
             <td><s:property value="#withholding.goods.goodsName"/></td>
             <td><s:property value="#withholding.place.placeId"/></td>

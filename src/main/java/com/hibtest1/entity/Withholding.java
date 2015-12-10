@@ -10,15 +10,25 @@ import java.util.HashSet;
  */
 public class Withholding implements Serializable {
     private Integer withholdingId; //id
-   private Place place;
+    private Place place;
+    private Producer producer;
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
     private Goods goods;
     private Date witholdingDate;//预提时间
     private Date deteline; //截止时间
-  //  private  Integer eventId; //活动id
-    private  Integer witholdingNumber;  //预提数
+    //  private  Integer eventId; //活动id
+    private Integer witholdingNumber;  //预提数
     private String useType; //使用类型
     private String userName;  //要和user表连
-    private  String events;//事件
+    private String events;//事件
     private String activityId;//活动id
     private String unit;//单位
 
@@ -53,14 +63,6 @@ public class Withholding implements Serializable {
     public void setDeteline(Date deteline) {
         this.deteline = deteline;
     }
-
-  /*  public Integer getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Integer eventId) {
-        this.eventId = eventId;
-    }*/
 
     public String getUserName() {
         return userName;

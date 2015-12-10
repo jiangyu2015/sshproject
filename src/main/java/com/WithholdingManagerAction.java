@@ -4,10 +4,7 @@ import com.hibtest1.entity.*;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.springtest1.biz.EventsBiz;
-import com.springtest1.biz.GoodsBiz;
-import com.springtest1.biz.PlaceBiz;
-import com.springtest1.biz.WithholdingBiz;
+import com.springtest1.biz.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -24,6 +21,11 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     WithholdingBiz withholdingBiz;
     GoodsBiz goodsbiz;
     PlaceBiz placebiz;
+    ProducerBiz producerBiz;
+
+    public void setProducerBiz(ProducerBiz producerBiz) {
+        this.producerBiz = producerBiz;
+    }
 
     public void setEventsBiz(EventsBiz eventsBiz) {
         this.eventsBiz = eventsBiz;
@@ -79,8 +81,18 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     Map<String, Object> session;
     Events events;
     Withholding withholding;
+
+    public Integer getProducerId() {
+        return producerId;
+    }
+
+    public void setProducerId(Integer producerId) {
+        this.producerId = producerId;
+    }
+
     Integer goodsId;
     Integer placeId;
+    Integer producerId;
 
     public Integer getPlaceId() {
         return placeId;
@@ -131,6 +143,12 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             Place place = placebiz.getPlaceList(p).get(0);
             condition.setPlace(place);
         }
+        if (producerId != null && !producerId.equals("")) {          //商户id
+            Producer p = new Producer();
+            p.setProducerId(producerId);
+            Producer producer = (Producer) producerBiz.getProducerList(p).get(0);
+            condition.setProducer(producer);
+        }
         if (withholding.getEvents() != null && !withholding.getEvents().equals(""))               //预提原由
             condition.setEvents(withholding.getEvents());
         if (withholding.getActivityId() != null && !withholding.getActivityId().equals(""))               //活动id
@@ -153,9 +171,9 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
 
     public String listWithholding() {               //得到所有预提单
         List<Withholding> withholdinglist = withholdingBiz.getAllWithholding();
-         Withholding withholding1 = withholdinglist.get(0);
-        System.out.println(withholding1.getGoods().getGoodsId()+"得到所有预提单");
-        session.put("withholdinglistall",withholdinglist);
+        Withholding withholding1 = withholdinglist.get(0);
+        System.out.println(withholding1.getGoods().getGoodsId() + "得到所有预提单");
+        session.put("withholdinglistall", withholdinglist);
 
         return "withholding";
     }
@@ -181,7 +199,8 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             } else
                 return "input";
         }
-        else */if(withholding.getWithholdingId()!= null && !withholding.getWithholdingId().equals("")){
+        else */
+        if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
             System.out.println(withholding.getWithholdingId());
 
             condition.setWithholdingId(withholding.getWithholdingId());

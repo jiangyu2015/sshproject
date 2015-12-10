@@ -17,7 +17,7 @@
     <script type="text/javascript">
         $(function () {
             $.ajax({
-                url: "doWithholdingJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                url: "doDeliverJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                 data: {//设置数据源
                     id: GetQueryString("id")
                 },
@@ -29,12 +29,16 @@
                     var goodsName = str + d.goodsName;
                     var placeId = str + d.placeId;
                     var placeName = str + d.placeName;
+                    var producerId = str + d.producerId;
+                    var producerName = str + d.producerName;
                     var type = str + d.type;
                     $('#goodsId').val(goodsId);
                     $('#goodsName').val(goodsName);
                     $('#placeId').val(placeId);
                     $('#placeName').val(placeName);
                     $('#type').val(type);
+                    $('#producerId').val(producerId);
+                    $('#producerName').val(producerName);
                     $('#id').val(GetQueryString("id"));
                 },
                 error: function () {
@@ -60,6 +64,16 @@
         <div class="line">
             <div class="lable">预提单id：</div>
             <div class="input-div"><input id="id" name="withholdingId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">商户id：</div>
+            <div class="input-div"><input id="producerId" name="producerId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">商户名称：</div>
+            <div class="input-div"><input id="producerName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">

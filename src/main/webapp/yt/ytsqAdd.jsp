@@ -36,11 +36,15 @@
                     var goodsName = str + d.goodsName;
                     var placeId = str + d.placeId;
                     var placeName = str + d.placeName;
+                    var producerId = str + d.producerId;
+                    var producerName = str + d.producerName;
                     var type = str + d.type;
                     $('#goodsId').val(goodsId);
                     $('#goodsName').val(goodsName);
                     $('#placeId').val(placeId);
                     $('#placeName').val(placeName);
+                    $('#producerId').val(producerId);
+                    $('#producerName').val(producerName);
                     $('#type').val(type);
                 },
                 error: function () {
@@ -50,14 +54,13 @@
         });
         function check() {
             alert("check");
-            alert($("#goodsId").val());
-            alert($("#placeId").val());
             $.ajax({
                 type: "post",
                 url: "doWithholdingCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                 data: {//设置数据源
                     goodsId: $("#goodsId").val(),
                     placeId: $("#placeId").val(),
+                    producerId: $("producerId").val(),
                     witholdingNumber: $("#witholdingNumber").val(),
                     type: $("#type").val(),
                     unit:$("#unit").val()
@@ -86,6 +89,16 @@
 <div class="title">添加预提申请信息</div>
 <div class="content">
     <form method="post" action="ytAdd">
+        <div class="line">
+            <div class="lable">商户id：</div>
+            <div class="input-div"><input id="producerId" name="producerId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">商户名称：</div>
+            <div class="input-div"><input id="producerName" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
         <div class="line">
             <div class="lable">商品id：</div>
             <div class="input-div"><input id="goodsId" name="goodsId" readonly="readonly"
@@ -133,9 +146,7 @@
             <div class="input-div"><input id="type" name="withholding.useType" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
-
-
-        <input type="submit" value="提交" class="btn-submit" onclick="check();"/>
+        <input type="submit" value="提交" class="btn-submit" <%--onclick="check();"--%>/>
     </form>
 </div>
 </body>

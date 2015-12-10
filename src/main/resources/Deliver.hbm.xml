@@ -10,12 +10,7 @@
             <generator class="native">
             </generator>
         </id>
-       <!-- <property name="placeId" type="java.lang.Integer">
-            <column name="ck_place_id" length="10" not-null="false"/>
-        </property>
-        <property name="goodsId" type="java.lang.Integer">
-            <column name="sp_id" length="4" not-null="false"/>
-        </property>-->
+
         <property name="deliverDate" type="java.util.Date">
             <column name="ck_time" length="30" not-null="false"/>
         </property>
@@ -35,5 +30,6 @@
         <many-to-one name="goods" column="sp_id" class="com.hibtest1.entity.Goods" lazy="false"/>
         <many-to-one name="place" column="ck_place_id" class="com.hibtest1.entity.Place"  lazy="false"/>
         <many-to-one name="withholding" column="yt_id" class="com.hibtest1.entity.Withholding" lazy="false"/>
+        <many-to-one name="producer" column="sh_id" class="com.hibtest1.entity.Producer" lazy="false"/>
     </class>
 </hibernate-mapping>

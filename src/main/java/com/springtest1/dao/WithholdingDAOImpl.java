@@ -70,7 +70,7 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
                         System.out.println("DAO" + condition.getWithholdingId());
                         c.add(Restrictions.eq("withholdingId", condition.getWithholdingId()));
                     }
-                    //为了保存
+
                 }
                 return c.list();
 

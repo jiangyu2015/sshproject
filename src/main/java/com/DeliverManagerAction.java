@@ -1,10 +1,7 @@
 package com;
 
 import com.hibtest1.entity.*;
-import com.springtest1.biz.DeliverBiz;
-import com.springtest1.biz.GoodsBiz;
-import com.springtest1.biz.PlaceBiz;
-import com.springtest1.biz.WithholdingBiz;
+import com.springtest1.biz.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.ActionContext;
@@ -20,6 +17,12 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     DeliverBiz deliverBiz;
     GoodsBiz goodsBiz;
     PlaceBiz placeBiz;
+
+    public void setProducerBiz(ProducerBiz producerBiz) {
+        this.producerBiz = producerBiz;
+    }
+
+    ProducerBiz producerBiz;
     WithholdingBiz withholdingBiz;
     Map<String, Object> request;
 
@@ -61,6 +64,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     Integer goodsId;
     Integer placeId;
     Integer withholdingId;
+    Integer producerId;
 
     public Integer getWithholdingId() {
         return withholdingId;
@@ -106,6 +110,10 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     @Override
     public void setSession(Map<String, Object> session) {
         this.session = session;
+    }
+
+    public void setProducerId(Integer producerId) {
+        this.producerId = producerId;
     }
 
     public Deliver getDeliver() {
@@ -170,6 +178,14 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             p.setPlaceId(placeId);
             Place place =(Place) placeBiz.getPlaceList(p).get(0);
             condition.setPlace(place);
+        }
+
+        if (producerId != null && !producerId.equals("")) {          //商户id
+            Producer p = new Producer();
+            p.setProducerId(producerId);
+            Producer producer = (Producer) producerBiz.getProducerList(p).get(0);
+            condition.setProducer(producer);
+            System.out.println("DeliverManegerAction"+condition.getProducer().getProducerName());
         }
       if( withholdingId!= null && ! withholdingId.equals("")){
           Withholding w=new Withholding();

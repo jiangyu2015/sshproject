@@ -24,9 +24,7 @@
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
                     $line.find('input').val($tds.eq(i).text());
-
                 }
-
                 $("#dialog_edit").show();
             }
         }
@@ -77,13 +75,14 @@
 <div class="table-div">
     <div class="title">出库明细信息</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">
+        <input type="button" class="btn-eidt" value="修改备注" onclick="edit();">
+     <%--   <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
         <tr>
             <th>出库明细id</th>
+            <th>商户名称</th>
             <th>商品名称</th>
             <th>仓库地点</th>
             <th>实际出库时间</th>
@@ -98,6 +97,7 @@
         <s:iterator value="%{#session.deliverlistall}" var="deliver">
             <tr>
                 <td><s:property value="#deliver.deliverId"/></td>
+                <td><s:property value="#deliver.producer.producerName"/></td>
                 <td><s:property value="#deliver.goods.goodsName"/></td>
                 <td><s:property value="#deliver.place.placeName"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#deliver.deliverDate"/></td>
@@ -123,6 +123,10 @@
                         <div class="lable">出库明细id：</div>
                         <div class="input-div"><input name="deliver.deliverId" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">商户名称：</div>
+                        <div class="input-div"><input placeholder="请输入商户" name="deliver.producer.producerName"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>

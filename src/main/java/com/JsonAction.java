@@ -46,6 +46,17 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     StorageAppBiz storageAppBiz;
     StorageBiz storageBiz;
 
+    public void setWithholdingBiz(WithholdingBiz withholdingBiz) {
+        this.withholdingBiz = withholdingBiz;
+    }
+
+    DeliverBiz deliverBiz;
+    WithholdingBiz withholdingBiz;
+
+    public void setDeliverBiz(DeliverBiz deliverBiz) {
+        this.deliverBiz = deliverBiz;
+    }
+
     public void setStorageAppBiz(StorageAppBiz storageAppBiz) {
         this.storageAppBiz = storageAppBiz;
     }
@@ -159,19 +170,23 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         condition.setStorageId(storageId);
         List<Storage>storageList= storageBiz.getStorageList(condition);
         Storage storage=storageList.get(0);
-        int goodsId=storage.getGoods().getGoodsId();
+        Integer goodsId=storage.getGoods().getGoodsId();
         String goodsName=storage.getGoods().getGoodsName();
-        int placeId=storage.getPlace().getPlaceId();
+        Integer placeId=storage.getPlace().getPlaceId();
         String placeName=storage.getPlace().getPlaceName();
         String type=storage.getStorageType();
 
+        Integer producerId=storage.getProducer().getProducerId();
+        String producerName=storage.getProducer().getProducerName();
         JSONObject json = new JSONObject();
         json.put("goodsId",goodsId);
         json.put("goodsName",goodsName);
         json.put("placeId",placeId);
         json.put("placeName",placeName);
+        json.put("producerId",producerId);
+        json.put("producerName",producerName);
         json.put("type",type);
-        System.out.println(goodsId+goodsName+placeId+placeName);
+        System.out.println(goodsId+goodsName+placeId+placeName+producerName);
         result = json.toString();
         return SUCCESS;
     }
@@ -180,6 +195,34 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         return SUCCESS;
     }
 
+    public String doDeliver(){
+        String id = request.getParameter("id");
+        int withholdingId = Integer.valueOf(id);
+        System.out.println(withholdingId+"流动的明细取到的id");
+        Withholding  condition=new Withholding();
+        condition.setWithholdingId(withholdingId);
+        List<Withholding>withholdingList= withholdingBiz.search(condition);
+        Withholding withholding=withholdingList.get(0);
+        Integer goodsId=withholding.getGoods().getGoodsId();
+        String goodsName=withholding.getGoods().getGoodsName();
+        Integer placeId=withholding.getPlace().getPlaceId();
+        String placeName=withholding.getPlace().getPlaceName();
+        String type=withholding.getUseType();
+
+        Integer producerId=withholding.getProducer().getProducerId();
+        String producerName=withholding.getProducer().getProducerName();
+        JSONObject json = new JSONObject();
+        json.put("goodsId",goodsId);
+        json.put("goodsName",goodsName);
+        json.put("placeId",placeId);
+        json.put("placeName",placeName);
+        json.put("producerId",producerId);
+        json.put("producerName",producerName);
+        json.put("type",type);
+        System.out.println(goodsId+goodsName+placeId+placeName+producerName);
+        result = json.toString();
+        return SUCCESS;
+    }
 
 
 
