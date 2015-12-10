@@ -176,6 +176,11 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         return SUCCESS;
     }
 
+    public String  doWithholdingCheck(){      //检查是否可以预提，预提数小于等于预提后可用库存
+        return SUCCESS;
+    }
+
+
 
 
 }

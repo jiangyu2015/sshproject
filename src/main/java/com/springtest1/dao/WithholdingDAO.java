@@ -1,5 +1,7 @@
 package com.springtest1.dao;
 
+import com.hibtest1.entity.Withholding;
+
 import java.util.List;
 
 /**
@@ -7,4 +9,7 @@ import java.util.List;
  */
 public interface WithholdingDAO {
   //  public List getAllWithholding();
+   public void add(Withholding withholding); //预提添加
+    public List<Withholding> getAllWithholding();
+    public List<Withholding> search(final Withholding condition);//按条件查询
 }

@@ -29,8 +29,8 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "ccin.rk_type, "+
                 "ccin.total_exceptin, "+
                 "sh.sh_name AS producerName "+
-                "FROM(SELECT *, sum(cin.ss_number) AS total_in,sum(cin.expect_rk_number) As total_exceptin " +
-                "    FROM((SELECT * FROM rk_detail cin ORDER BY cin.sj_stock_date)) cin where cin.state='ok'" +
+                "FROM(SELECT *, sum(cin.ss_number) AS total_in,sum(cin.expect_rk_number) As total_exceptin,Min(cin.sj_stock_date) " +
+                "    FROM(SELECT * FROM rk_detail As c where c.state='ok')As cin " +
                 "    GROUP BY cin.sp_id, cin.rk_place_id,cin.rk_type " +
                 "    ORDER BY cin.sp_id, cin.sj_stock_date " +
                 "  ) AS ccin " +
@@ -95,8 +95,8 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "ccin.rk_type, "+
                 "ccin.total_exceptin, "+
                 "sh.sh_name AS producerName "+
-                "FROM(SELECT *, sum(cin.ss_number) AS total_in,sum(cin.expect_rk_number) As total_exceptin " +
-                "    FROM((SELECT * FROM rk_detail cin ORDER BY cin.sj_stock_date)) cin where cin.state='ok'" +
+                "FROM(SELECT *, sum(cin.ss_number) AS total_in,sum(cin.expect_rk_number) As total_exceptin,Min(cin.sj_stock_date) " +
+                "    FROM(SELECT * FROM rk_detail As c where c.state='ok')As cin " +
                 "    GROUP BY cin.sp_id, cin.rk_place_id,cin.rk_type " +
                 "    ORDER BY cin.sp_id, cin.sj_stock_date " +
                 "  ) AS ccin " +

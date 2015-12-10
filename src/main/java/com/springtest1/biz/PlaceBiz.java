@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface PlaceBiz {
     public List getAllPlace();
-    public List getPlaceList( Place condition);
+    public List<Place> getPlaceList( Place condition);
     public void add(Place condition);
     public boolean delGoods(Place good);  //删除x
     public List<Place> getPlace(String name);

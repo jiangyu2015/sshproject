@@ -71,9 +71,6 @@
 
         function btn() {
             alert("no");
-          /*  var $btn = $("input.btn");//获取按钮元素
-            //给按钮绑定点击事件
-            $btn.bind("click", function () {*/
                 $.ajax({
                     type: "post",
                     url: "excuteCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
@@ -91,7 +88,7 @@
                         alert("系统异常，请稍后重试！");
                     }//这里不要加","
                 });
-           /* });*/
+
         }
 
     </script>

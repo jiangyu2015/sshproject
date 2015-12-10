@@ -8,7 +8,7 @@ import com.hibtest1.entity.Place;
  */
 public interface PlaceDAO {
     public List getAllPlace();
-    public List search(Place condition);   //查询
+    public List<Place> search(Place condition);   //查询
     public void add(Place condition);//add
     public boolean delGoods(Place condition); //del
 

@@ -14,12 +14,6 @@
                 var $tds = $("tr.active").children();
                 alert($tds.eq(0).text())
                 $.ajax({
-                  /*  type: "post",
-                    url: "doWithholdingJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
-                    data: {//设置数据源
-                        id: $tds.eq(0).text()
-                    },*/
-                  /*  dataType: "json",//设置需要返回的数据类型*/
                     success: function () {
                         window.location.href = "ytsqAdd.jsp?id="+$tds.eq(0).text();
                     },

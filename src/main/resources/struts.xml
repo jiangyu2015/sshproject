@@ -112,6 +112,16 @@
             <result type="redirect" name="success">/yt/ytsqGoodsList.jsp</result>
             <result type="redirect" name="fail">/yt/fail.jsp</result>
         </action>
+        <action name="ytAdd" class="withholdingAdd" method="addWithholding">
+            <result type="redirect" name="success">/yt/test.jsp</result>
+        </action>
+        <action name="listyt" class="withholdingList" method="listWithholding">
+            <result type="redirect" name="withholding">/yt/ytAllList.jsp</result>
+        </action>
+        <action name="ytSelectDeliver" class="withholdingDeliverSelect" method="searchWithholdingList">
+            <result type="redirect" name="success">/ck/ytList.jsp</result>
+            <result type="redirect" name="input">/ck/fail.jsp</result>
+        </action>
 
         <action name="listck" class="deliverList" method="listDeliver">
             <result type="redirect" name="deliver">/ck/ckAllList.jsp</result>

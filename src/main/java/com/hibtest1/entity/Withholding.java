@@ -20,6 +20,15 @@ public class Withholding implements Serializable {
     private String userName;  //要和user表连
     private  String events;//事件
     private String activityId;//活动id
+    private String unit;//单位
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public String getEvents() {
         return events;

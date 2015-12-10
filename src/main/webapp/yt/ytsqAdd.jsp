@@ -48,6 +48,32 @@
                 }//这里不要加","
             });
         });
+        function check() {
+            alert("check");
+            alert($("#goodsId").val());
+            alert($("#placeId").val());
+            $.ajax({
+                type: "post",
+                url: "doWithholdingCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                data: {//设置数据源
+                    goodsId: $("#goodsId").val(),
+                    placeId: $("#placeId").val(),
+                    witholdingNumber: $("#witholdingNumber").val(),
+                    type: $("#type").val(),
+                    unit:$("#unit").val()
+                },
+                dataType: "json",//设置需要返回的数据类型
+                success: function () {
+                    alert("预提成功");
+                    /*   window.location.href = "ytAdd.action";*/
+                },
+                error: function () {
+                    alert("预提不成功，当前预提后可用库存为");
+                }//这里不要加","
+            });
+        }
+
+
         function GetQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
@@ -59,26 +85,26 @@
 <body>
 <div class="title">添加预提申请信息</div>
 <div class="content">
-    <form method="post" action="rksqAdd">
+    <form method="post" action="ytAdd">
         <div class="line">
             <div class="lable">商品id：</div>
-            <div class="input-div"><input id="goodsId" name="withholding.goods.goodsId" readonly="readonly"
+            <div class="input-div"><input id="goodsId" name="goodsId" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
 
         <div class="line">
             <div class="lable">商品名称：</div>
-            <div class="input-div"><input id="goodsName" name="withholding.goods.goodsName" readonly="readonly"
+            <div class="input-div"><input id="goodsName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
             <div class="lable">仓库id：</div>
-            <div class="input-div"><input id="placeId" name="withholding.place.placeId" readonly="readonly"
+            <div class="input-div"><input id="placeId" name="placeId" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
             <div class="lable">仓库地址：</div>
-            <div class="input-div"><input id="placeName" name="withholding.place.placeName" readonly="readonly"
+            <div class="input-div"><input id="placeName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
@@ -90,8 +116,13 @@
             <div class="input-div"><input name="withholding.activityId" placeholder="如该活动有id请输入"/></div>
         </div>
         <div class="line">
+            <div class="lable">单位：</div>
+            <div class="input-div"><input id="unit" name="withholding.unit" placeholder="请确认预提商品单位，如不一致会失败"/></div>
+        </div>
+        <div class="line">
             <div class="lable">预提数：</div>
-            <div class="input-div"><input name="withholding.witholdingNumber" placeholder="请输入预提数"/></div>
+            <div class="input-div"><input id="witholdingNumber" input name="withholding.witholdingNumber"
+                                          placeholder="请输入预提数"/></div>
         </div>
         <div class="line">
             <div class="lable">截止日期：</div>
@@ -104,7 +135,7 @@
         </div>
 
 
-        <input type="submit" value="提交" class="btn-submit"/>
+        <input type="submit" value="提交" class="btn-submit" onclick="check();"/>
     </form>
 </div>
 </body>

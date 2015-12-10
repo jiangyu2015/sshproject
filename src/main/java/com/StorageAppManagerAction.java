@@ -166,8 +166,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         List list = storageAppBiz.getStorageAppList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
-            //    StorageApp storageApp = new StorageApp();
-            //  session.put("goodslist", list);
+
             session.put("storageapplist", list);
             return "success";
         } else
@@ -176,7 +175,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
 
     public String addStorageApp() throws Exception {                  //增加入库申请
-        //    System.out.println(enteringWarehouseDto);
         System.out.println("addStorageApp");
         StorageApp condition = new StorageApp();
         System.out.println(storageApp.getProducerName() + "入库申请我传过来了");

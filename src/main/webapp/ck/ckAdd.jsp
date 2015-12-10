@@ -17,54 +17,38 @@
     <script type="text/javascript">
         $(function () {
             $.ajax({
-                type: "post",
-                url: "excuteAjaxJsonAction",
+                url: "doWithholdingJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                data: {//设置数据源
+                    id: GetQueryString("id")
+                },
+                dataType: "json",//设置需要返回的数据类型*/
                 success: function (data, xhrTxt) {
                     var str = "";
                     var d = eval("(" + data + ")");
-                    var goods = d.goodsList;
-                    console.log(goods);
-                    for (var i = 0; i < goods.length; i++) {
-                        //   str = str + "<option>" + goods[i].goodsName + "</option>";
-                        //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
-                    //    str = str + "<option value='" + goods[i].goodsName + "'data-id='"+goods[i].goodsId+"'>"+ goods[i].goodsId+"</option>";
-                     /*   str = str + "<option value='" + goods[i].goodsId + "'>"+ goods[i].goodsName+"</option>";*/
-                        //<option value="name" data-id="id">name</option>
-                        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
-                    }
-                    $("#select").html(str);
-
-                    $('#item').bind('input propertychange', function () {
-                        $("#select").html(str);
-                    });
+                    var goodsId = str + d.goodsId;
+                    var goodsName = str + d.goodsName;
+                    var placeId = str + d.placeId;
+                    var placeName = str + d.placeName;
+                    var type = str + d.type;
+                    $('#goodsId').val(goodsId);
+                    $('#goodsName').val(goodsName);
+                    $('#placeId').val(placeId);
+                    $('#placeName').val(placeName);
+                    $('#type').val(type);
+                    $('#id').val(GetQueryString("id"));
                 },
-                dataType: 'json'
-            });
-
-            $.ajax({
-                type: "post",
-                url: "excutePlaceAjaxJsonAction",
-                success: function (data, xhrTxt) {
-                    var str = "";
-//                    alert("ck");
-                    var d = eval("(" + data + ")");
-                    var place = d.placeList;
-                    console.log(place);
-                    for (var i = 0; i < place.length; i++) {
-                        // str = str + "<option>" + place[i].placeName + "</option>";
-                        str = str + "<option id='" + place[i].placeId  + "' value='" + place[i].placeName  + "'>";
-
-
-                    }
-                    $("#select3").html(str);
-
-                    $('#item3').bind('input propertychange', function () {
-                        $("#select3").html(str);
-                    });
-                },
-                dataType: 'json'
+                error: function () {
+                    alert("系统异常，请稍后重试！");
+                }//这里不要加","
             });
         });
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null)return unescape(r[2]);
+            return null;
+        }
 
     </script>
 </head>
@@ -74,40 +58,56 @@
 <div class="content">
     <form method="post" action="ckAdd">
         <div class="line">
-            <div class="lable">商品名称：</div>
-            <div class="input-div"><input id="item" list="select" placeholder="请输入商品名称" name="goodsName"/>
-                <datalist id="select"></datalist>
-            </div>
+            <div class="lable">预提单id：</div>
+            <div class="input-div"><input id="id" name="withholdingId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">入库地点：</div>
-            <div class="input-div"><input id="item3" list="select3" placeholder="请输入出库地点"
-                                          name="placeName"/>
-                <datalist id="select3"></datalist>
-            </div>
+            <div class="lable">商品id：</div>
+            <div class="input-div"><input id="goodsId" name="goodsId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
 
         <div class="line">
-            <div class="lable">实际出库时间：</div>
-            <div class="input-div"><input placeholder="请输入实际出库时间" name="deliver.deliverDate" type="date"/></div>
+            <div class="lable">商品名称：</div>
+            <div class="input-div"><input id="goodsName"  readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">预期出库数量：</div>
-            <div class="input-div"><input placeholder="请输入预期出库数量" name="deliver.expecteNumber"/></div>
+            <div class="lable">仓库id：</div>
+            <div class="input-div"><input id="placeId" name="placeId" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">实际出库数量：</div>
-            <div class="input-div"><input placeholder="请输入实际出库数量" name="deliver.deliverNumber"/></div>
+            <div class="lable">仓库地址：</div>
+            <div class="input-div"><input id="placeName" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+
         </div>
         <div class="line">
-            <div class="lable">出库类型：</div>
-            <div class="input-div"><input placeholder="请输入出库类型" name="deliver.deliverType"/></div>
+            <div class="lable">应发数量：</div>
+            <div class="input-div"><input id="witholdingNumber" input name="deliver.expecteNumber"
+                                          placeholder="请输入应发数量"/></div>
         </div>
         <div class="line">
-            <div class="lable">备注：</div>
-            <div class="input-div"><input placeholder="请输入备注" name="deliver.remark"/></div>
+            <div class="lable">实发数量：</div>
+            <div class="input-div"><input  input name="deliver.deliverNumber"
+                                          placeholder="请输入实发数量"/></div>
         </div>
-        <input type="submit" value="提交" class="btn-submit"/>
+
+        <div class="line">
+            <div class="lable">出库时间：</div>
+            <div class="input-div"><input name="deliver.deliverDate" placeholder="请输入出库时间" type="date"/></div>
+        </div>
+
+        <div class="line">
+            <div class="lable">使用类型：</div>
+            <div class="input-div"><input id="type" name="withholding.useType" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+
+
+        <input type="submit" value="提交" class="btn-submit" />
     </form>
 </div>
 </body>

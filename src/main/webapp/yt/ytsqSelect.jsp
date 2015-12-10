@@ -50,8 +50,6 @@
                 alert("该商品不存在");
                 return;
             }
-           /* alert("val: " + val);
-            alert("Id: " + selectId);*/
         }
     </script>
 </head>

@@ -91,6 +91,7 @@
             <th>实际出库数量</th>
             <th>出库类型</th>
             <th>备注</th>
+            <th>预提单号</th>
         </tr>
         </thead>
         <tbody>
@@ -104,6 +105,7 @@
                 <td><s:property value="#deliver.deliverNumber"/></td>
                 <td><s:property value="#deliver.deliverType"/></td>
                 <td><s:property value="#deliver.remark"/></td>
+                <td><s:property value="#deliver.withholding.withholdingId"/></td>
             </tr>
         </s:iterator>
         </tbody>

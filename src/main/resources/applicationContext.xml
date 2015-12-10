@@ -222,11 +222,11 @@
         <property name="deliverBiz" ref="deliverBiz"/>
         <property name="goodsBiz" ref="goodsBiz"/>
         <property name="placeBiz" ref="placeBiz"/>
+        <property name="withholdingBiz" ref="withholdingBiz"/>
     </bean>
     <bean id="deliverEdit" class="com.DeliverManagerAction" scope="prototype">
         <property name="deliverBiz" ref="deliverBiz"/>
     </bean>
-
     <bean id="eventsDAO" class="com.springtest1.dao.EventsDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -235,19 +235,26 @@
     </bean>
     <bean id="eventsAdd" class="com.WithholdingManagerAction">
         <property name="eventsBiz" ref="eventsBiz"/>
-
-
     </bean>
-
     <bean id="withholdingDAO" class="com.springtest1.dao.WithholdingDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="withholdingBiz" class="com.springtest1.biz.WithholdingBizImpl">
         <property name="withholdingDAO" ref="withholdingDAO"/>
     </bean>
-
     <bean id="withholdingSelect" class="com.SearchManagerAction">
         <property name="searchBiz" ref="searchBiz"/>
+    </bean>
+    <bean id="withholdingAdd" class="com.WithholdingManagerAction">
+        <property name="withholdingBiz" ref="withholdingBiz"/>
+        <property name="goodsbiz" ref="goodsBiz"/>
+        <property name="placebiz" ref="placeBiz"/>
+    </bean>
+    <bean id="withholdingList" class="com.WithholdingManagerAction">
+        <property name="withholdingBiz" ref="withholdingBiz"/>
+    </bean>
+    <bean id="withholdingDeliverSelect" class="com.WithholdingManagerAction">
+        <property name="withholdingBiz" ref="withholdingBiz"/>
     </bean>
 
     <bean id="activityDAO" class="com.springtest1.dao.ActivityDAOImpl">

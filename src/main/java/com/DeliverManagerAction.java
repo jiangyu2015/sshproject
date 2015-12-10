@@ -1,12 +1,10 @@
 package com;
 
-import com.hibtest1.entity.Deliver;
-import com.hibtest1.entity.Goods;
-import com.hibtest1.entity.Place;
-import com.hibtest1.entity.Producer;
+import com.hibtest1.entity.*;
 import com.springtest1.biz.DeliverBiz;
 import com.springtest1.biz.GoodsBiz;
 import com.springtest1.biz.PlaceBiz;
+import com.springtest1.biz.WithholdingBiz;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import com.opensymphony.xwork2.ActionContext;
@@ -22,7 +20,12 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     DeliverBiz deliverBiz;
     GoodsBiz goodsBiz;
     PlaceBiz placeBiz;
+    WithholdingBiz withholdingBiz;
     Map<String, Object> request;
+
+    public void setWithholdingBiz(WithholdingBiz withholdingBiz) {
+        this.withholdingBiz = withholdingBiz;
+    }
 
     public String getPlaceName() {
         return placeName;
@@ -54,16 +57,17 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         this.goodsName = goodsName;
     }
 
-
     String placeName;  //出库地点
-  /*  Integer goodsId;   //商品id
+    Integer goodsId;
+    Integer placeId;
+    Integer withholdingId;
 
-    public Integer getGoodsId() {
-        return goodsId;
+    public Integer getWithholdingId() {
+        return withholdingId;
     }
 
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
+    public void setWithholdingId(Integer withholdingId) {
+        this.withholdingId = withholdingId;
     }
 
     public Integer getPlaceId() {
@@ -74,7 +78,13 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         this.placeId = placeId;
     }
 
-    Integer placeId;  //仓库id*/
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
 
     public void setDeliverBiz(DeliverBiz deliverBiz) {
         this.deliverBiz = deliverBiz;
@@ -148,23 +158,26 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             ActionContext.getContext().put("yesWords", "请输入仓库名称!");
             return "input";
         }*/
-        System.out.println("ok");
-
-        if (goodsName != null) {         //商品名称
-            String[] strs = goodsName.split("\\|");
-         //   String name = strs[0];
-            Integer id = Integer.parseInt(strs[1]);
+        System.out.println("addDeliver");
+        if (goodsId != null && !goodsId.equals("")) {          //商品id
             Goods g = new Goods();
-            g.setGoodsId(id);
+            g.setGoodsId(goodsId);
             Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
-            System.out.println(goods.getGoodsName());
             condition.setGoods(goods);
         }
-        if (placeName != null) {                     //仓库地址
-            Place place = placeBiz.getPlace(placeName).get(0);
-            System.out.println("输出仓库id" + place.getPlaceId());
+        if (placeId != null && !placeId.equals("")) {                     //仓库id
+            Place p = new Place();
+            p.setPlaceId(placeId);
+            Place place =(Place) placeBiz.getPlaceList(p).get(0);
             condition.setPlace(place);
         }
+      if( withholdingId!= null && ! withholdingId.equals("")){
+          Withholding w=new Withholding();
+          w.setWithholdingId(withholdingId);
+          Withholding withholding=(Withholding) withholdingBiz.search(w).get(0);
+          condition.setWithholding(withholding);
+          System.out.println(condition.getWithholding().getWithholdingId()+"withholdingId");
+      }
         if (deliver.getDeliverDate() != null)                      //实际出库时间
             condition.setDeliverDate(deliver.getDeliverDate());
         if (deliver.getExpecteNumber() != null)               //预期出库数量

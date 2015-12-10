@@ -21,8 +21,8 @@ public class PlaceBizImpl implements PlaceBiz {
         System.out.println("我经过这里AllPlace");
         return placeDAO.getAllPlace();
     }
-    public List getPlaceList( Place condition){
-        List list = placeDAO.search(condition);
+    public List<Place> getPlaceList( Place condition){
+        List<Place> list = placeDAO.search(condition);
         return list;
     }
 
