@@ -126,7 +126,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
                 condition.setTelOne(producer.getTelOne());
             if (producer.getTelTwo() != null)          //联系电话2
                 condition.setTelTwo(producer.getTelTwo());
-            condition.setState("ok");
+            condition.setState("no");
             producerBiz.add(condition);
             return "success";
         }

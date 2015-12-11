@@ -16,4 +16,6 @@ public interface ProducerDAO {
     public void editProducer(Producer producer); //修改AllList商品
     public List<Producer> getProducer(String name);  //模糊查询
 
+    public List<Producer> getProducerCheck();
+
 }

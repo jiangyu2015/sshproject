@@ -83,6 +83,17 @@
             });
         });
 
+        function check() {
+            var val = $("#item").val();
+            var val2 = $("#item2").val();
+            //   var selectId = $("[value='" + val + "']").eq(0).attr('id');
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            var selectId2 = $("[value='" + val2 + "']").eq(0).attr('value');
+            if (selectId == undefined ||selectId2 == undefined) {
+                alert("商品或商户未录入或未被审核通过，请与管理员联系");
+                return;
+            }
+        }
     </script>
 </head>
 <body>
@@ -133,7 +144,7 @@
               <div class="lable">处理状态：</div>
               <div class="input-div"><input placeholder="请输入处理状态" name="storageApp.state"/></div>
           </div>--%>
-        <input type="submit" value="提交" class="btn-submit"/>
+        <input type="submit" value="提交" class="btn-submit" onclick="check();"/>
     </form>
 </div>
 </body>

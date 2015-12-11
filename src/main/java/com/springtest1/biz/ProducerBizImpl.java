@@ -44,4 +44,9 @@ public class ProducerBizImpl implements ProducerBiz {
     public List<Producer> getProducer(String name) {
         return producerDAO.getProducer(name);
     }
+
+    @Transactional
+    public List<Producer> getProducerCheck(){
+        return  producerDAO.getProducerCheck();
+    }
 }

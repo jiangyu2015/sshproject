@@ -116,10 +116,9 @@
 
         <div class="line">
             <div class="lable">使用类型：</div>
-            <div class="input-div"><input id="type" name="withholding.useType" readonly="readonly"
+            <div class="input-div"><input id="type" name="deliver.deliverType" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
-
 
         <input type="submit" value="提交" class="btn-submit" />
     </form>

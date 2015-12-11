@@ -108,7 +108,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
 
         try {
-            List<Goods> goodslist = goodsBiz.getAllGoods();
+            List<Goods> goodslist = goodsBiz.getGoodsCheck();
             Goods g = goodslist.get(0);
             System.out.println(g.getGoodsId() + "传值JsonAction");
             JSONObject json = new JSONObject();
@@ -122,7 +122,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
     public String excuteProducerAjax() {    //商户
         try {
-            List<Producer> producerlist = producerBiz.getAllProducer();
+            List<Producer> producerlist = producerBiz.getProducerCheck();
             JSONObject json = new JSONObject();
             json.put("producerList", producerlist);
             result = json.toString();

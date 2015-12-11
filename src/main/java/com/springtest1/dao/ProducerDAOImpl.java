@@ -68,5 +68,18 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
             return producerList;
         }
     }
+    public List<Producer> getProducerCheck() {    //state=“ok”
+        String hql = "from Producer g where g.state='yesok'";
+
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+        List<Producer> producerlist = query.list();
+        if (producerlist.size() <= 0) return new ArrayList<Producer>();
+        else {
+            Producer g = (Producer) query.list().get(0);
+            System.out.println(g.getProducerName());
+            return producerlist;
+        }
+    }
 
 }

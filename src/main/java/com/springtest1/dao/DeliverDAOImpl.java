@@ -29,7 +29,6 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
             public List<Deliver> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Deliver.class);
                 if (condition != null) {
-
                         if (condition.getDeliverId() != null && !condition.getDeliverId().equals("")) {
                             c.add(Restrictions.eq("deliverId", condition.getDeliverId()));
                     }

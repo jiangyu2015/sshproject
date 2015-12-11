@@ -20,4 +20,6 @@ public interface ProducerBiz {
     public boolean editProducer(Producer producer); //修改AllList商品
 
      public List<Producer> getProducer(String name);
+
+    public List<Producer> getProducerCheck();
 }

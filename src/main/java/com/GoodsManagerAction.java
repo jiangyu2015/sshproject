@@ -127,7 +127,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             if (goods.getStandard() != null)
                 condition.setStandard(goods.getStandard());  //装箱规格
             //     goods.setState("no");
-            condition.setState("ok");
+            condition.setState("no");
             goodsBiz.add(condition);
             return "success";
         }

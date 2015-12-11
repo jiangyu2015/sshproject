@@ -20,7 +20,7 @@ public class Goods implements java.io.Serializable {
     private Date creationDate;
     private Integer baozhiqi;
     private Date expirationDate;
-    private String state;       //没啥用了，再见
+    private String state;
 
     public String getState() {
         return state;

@@ -126,36 +126,43 @@
                     </div>
                     <div class="line">
                         <div class="lable">商户名称：</div>
-                        <div class="input-div"><input placeholder="请输入商户" name="deliver.producer.producerName"/></div>
+                        <div class="input-div"><input  name="deliver.producer.producerName"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input placeholder="请输入商品" name="deliver.goods.goodsName"/></div>
+                        <div class="input-div"><input  name="deliver.goods.goodsName"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">仓库名称：</div>
-                        <div class="input-div"><input placeholder="请输入仓库" name="deliver.place.placeName"/></div>
+                        <div class="input-div"><input  name="deliver.place.placeName"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">实际出库时间：</div>
-                        <div class="input-div"><input placeholder="请输入实际出库时间" name="deliver.deliverDate"  type="date"/></div>
+                        <div class="input-div"><input  name="deliver.deliverDate"  type="date"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">预期出库数量：</div>
-                        <div class="input-div"><input placeholder="请输入实收数量" name="deliver.expecteNumber"/></div>
+                        <div class="input-div"><input name="deliver.expecteNumber"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">实际出库数量：</div>
-                        <div class="input-div"><input placeholder="请输入实收数量" name="deliver.deliverNumber"/></div>
+                        <div class="input-div"><input  name="deliver.deliverNumber"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
 
                     <div class="line">
                         <div class="lable">出库类型：</div>
-                        <div class="input-div"><input placeholder="请输入出库类型" name="deliver.deliverType"/></div>
+                        <div class="input-div"><input  name="deliver.deliverType"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">备注：</div>
