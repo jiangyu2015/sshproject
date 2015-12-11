@@ -105,17 +105,17 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         } catch (Exception e) {
             e.printStackTrace();
         } */
-
-
-        try {
-            List<Goods> goodslist = goodsBiz.getGoodsCheck();
-            Goods g = goodslist.get(0);
-            System.out.println(g.getGoodsId() + "传值JsonAction");
-            JSONObject json = new JSONObject();
-            json.put("goodsList", goodslist);
-            result = json.toString();//给result赋值，传递给页面
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<Goods> goodslist = goodsBiz.getGoodsCheck();
+        if (goodslist.size() > 0) {
+            try {
+                Goods g = goodslist.get(0);
+                System.out.println(g.getGoodsId() + "传值JsonAction");
+                JSONObject json = new JSONObject();
+                json.put("goodsList", goodslist);
+                result = json.toString();//给result赋值，传递给页面
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return SUCCESS;
     }
@@ -135,7 +135,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
     public String excutePlaceAjax() {
         try {
-            List<Place> placeList=placeBiz.getAllPlace();
+            List<Place> placeList = placeBiz.getAllPlace();
             JSONObject json = new JSONObject();
             json.put("placeList", placeList);
             result = json.toString();
@@ -148,82 +148,81 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     public String excuteCheck() {
         String id = request.getParameter("id");
         int storageAppId = Integer.valueOf(id);
-        System.out.println("JsonActionCheck传值"+storageAppId);
-        StorageApp condition=new StorageApp();
+        System.out.println("JsonActionCheck传值" + storageAppId);
+        StorageApp condition = new StorageApp();
         condition.setStorageAppId(storageAppId);
-        System.out.println(condition.getStorageAppId()+"condition.setStorageAppId");
+        System.out.println(condition.getStorageAppId() + "condition.setStorageAppId");
         List list = storageAppBiz.getStorageAppList(condition);
         System.out.println(list.size());
-        StorageApp storageApp=(StorageApp)list.get(0);
-        System.out.print(storageApp.getProducerName()+storageApp.getStoragePlace()+storageApp.getGoodsName());
+        StorageApp storageApp = (StorageApp) list.get(0);
+        System.out.print(storageApp.getProducerName() + storageApp.getStoragePlace() + storageApp.getGoodsName());
         storageApp.setState("yesno");                               //改申请state
         storageAppBiz.editStorageApp(storageApp);
 
         return SUCCESS;
     }
 
-    public String doWithholding(){
+    public String doWithholding() {
         String id = request.getParameter("id");
         int storageId = Integer.valueOf(id);
-        System.out.println(storageId+"流动的明细取到的id");
-        Storage condition=new Storage();
+        System.out.println(storageId + "流动的明细取到的id");
+        Storage condition = new Storage();
         condition.setStorageId(storageId);
-        List<Storage>storageList= storageBiz.getStorageList(condition);
-        Storage storage=storageList.get(0);
-        Integer goodsId=storage.getGoods().getGoodsId();
-        String goodsName=storage.getGoods().getGoodsName();
-        Integer placeId=storage.getPlace().getPlaceId();
-        String placeName=storage.getPlace().getPlaceName();
-        String type=storage.getStorageType();
+        List<Storage> storageList = storageBiz.getStorageList(condition);
+        Storage storage = storageList.get(0);
+        Integer goodsId = storage.getGoods().getGoodsId();
+        String goodsName = storage.getGoods().getGoodsName();
+        Integer placeId = storage.getPlace().getPlaceId();
+        String placeName = storage.getPlace().getPlaceName();
+        String type = storage.getStorageType();
 
-        Integer producerId=storage.getProducer().getProducerId();
-        String producerName=storage.getProducer().getProducerName();
+        Integer producerId = storage.getProducer().getProducerId();
+        String producerName = storage.getProducer().getProducerName();
         JSONObject json = new JSONObject();
-        json.put("goodsId",goodsId);
-        json.put("goodsName",goodsName);
-        json.put("placeId",placeId);
-        json.put("placeName",placeName);
-        json.put("producerId",producerId);
-        json.put("producerName",producerName);
-        json.put("type",type);
-        System.out.println(goodsId+goodsName+placeId+placeName+producerName);
+        json.put("goodsId", goodsId);
+        json.put("goodsName", goodsName);
+        json.put("placeId", placeId);
+        json.put("placeName", placeName);
+        json.put("producerId", producerId);
+        json.put("producerName", producerName);
+        json.put("type", type);
+        System.out.println(goodsId + goodsName + placeId + placeName + producerName);
         result = json.toString();
         return SUCCESS;
     }
 
-    public String  doWithholdingCheck(){      //检查是否可以预提，预提数小于等于预提后可用库存
+    public String doWithholdingCheck() {      //检查是否可以预提，预提数小于等于预提后可用库存
         return SUCCESS;
     }
 
-    public String doDeliver(){
+    public String doDeliver() {
         String id = request.getParameter("id");
         int withholdingId = Integer.valueOf(id);
-        System.out.println(withholdingId+"流动的明细取到的id");
-        Withholding  condition=new Withholding();
+        System.out.println(withholdingId + "流动的明细取到的id");
+        Withholding condition = new Withholding();
         condition.setWithholdingId(withholdingId);
-        List<Withholding>withholdingList= withholdingBiz.search(condition);
-        Withholding withholding=withholdingList.get(0);
-        Integer goodsId=withholding.getGoods().getGoodsId();
-        String goodsName=withholding.getGoods().getGoodsName();
-        Integer placeId=withholding.getPlace().getPlaceId();
-        String placeName=withholding.getPlace().getPlaceName();
-        String type=withholding.getUseType();
+        List<Withholding> withholdingList = withholdingBiz.search(condition);
+        Withholding withholding = withholdingList.get(0);
+        Integer goodsId = withholding.getGoods().getGoodsId();
+        String goodsName = withholding.getGoods().getGoodsName();
+        Integer placeId = withholding.getPlace().getPlaceId();
+        String placeName = withholding.getPlace().getPlaceName();
+        String type = withholding.getUseType();
 
-        Integer producerId=withholding.getProducer().getProducerId();
-        String producerName=withholding.getProducer().getProducerName();
+        Integer producerId = withholding.getProducer().getProducerId();
+        String producerName = withholding.getProducer().getProducerName();
         JSONObject json = new JSONObject();
-        json.put("goodsId",goodsId);
-        json.put("goodsName",goodsName);
-        json.put("placeId",placeId);
-        json.put("placeName",placeName);
-        json.put("producerId",producerId);
-        json.put("producerName",producerName);
-        json.put("type",type);
-        System.out.println(goodsId+goodsName+placeId+placeName+producerName);
+        json.put("goodsId", goodsId);
+        json.put("goodsName", goodsName);
+        json.put("placeId", placeId);
+        json.put("placeName", placeName);
+        json.put("producerId", producerId);
+        json.put("producerName", producerName);
+        json.put("type", type);
+        System.out.println(goodsId + goodsName + placeId + placeName + producerName);
         result = json.toString();
         return SUCCESS;
     }
-
 
 
 }
