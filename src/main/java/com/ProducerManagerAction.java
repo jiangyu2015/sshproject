@@ -88,7 +88,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         System.out.println(producerName);
         Producer condition = new Producer();
         condition.setProducerName(producerName);
-        List<Producer> list = producerBiz.getProducerList(condition);
+        List<Producer> list = producerBiz.getProducerList(condition);  //
         System.out.println(list.size());
         if (list.size() > 0) {
             Producer producer = new Producer();
