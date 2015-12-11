@@ -176,7 +176,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (placeId != null && !placeId.equals("")) {                     //仓库id
             Place p = new Place();
             p.setPlaceId(placeId);
-            Place place = (Place) placeBiz.getPlaceList(p).get(0);
+            Place place =(Place) placeBiz.getPlaceList(p).get(0);
             condition.setPlace(place);
         }
 
@@ -185,15 +185,15 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             p.setProducerId(producerId);
             Producer producer = (Producer) producerBiz.getProducerList(p).get(0);
             condition.setProducer(producer);
-            System.out.println("DeliverManegerAction" + condition.getProducer().getProducerName());
+            System.out.println("DeliverManegerAction"+condition.getProducer().getProducerName());
         }
-        if (withholdingId != null && !withholdingId.equals("")) {
-            Withholding w = new Withholding();
-            w.setWithholdingId(withholdingId);
-            Withholding withholding = (Withholding) withholdingBiz.search(w).get(0);
-            condition.setWithholding(withholding);
-            System.out.println(condition.getWithholding().getWithholdingId() + "withholdingId");
-        }
+      if( withholdingId!= null && ! withholdingId.equals("")){
+          Withholding w=new Withholding();
+          w.setWithholdingId(withholdingId);
+          Withholding withholding=(Withholding) withholdingBiz.search(w).get(0);
+          condition.setWithholding(withholding);
+          System.out.println(condition.getWithholding().getWithholdingId()+"withholdingId");
+      }
         if (deliver.getDeliverDate() != null)                      //实际出库时间
             condition.setDeliverDate(deliver.getDeliverDate());
         if (deliver.getExpecteNumber() != null)               //预期出库数量
@@ -206,17 +206,37 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             condition.setRemark(deliver.getRemark());
         deliverBiz.add(condition);
         return "success";
+
+
     }
 
-    public String editDeliver() {    //只能改备注 (づ￣3￣)づ╭❤～
+    public String editDeliver() {
         Deliver condition = new Deliver();
-        System.out.println(deliver.getDeliverId()+"deliver.getDeliverId()");
-        condition.setDeliverId(deliver.getDeliverId());
-        Deliver d = (Deliver) deliverBiz.getDeliverList(condition).get(0);
+        if (deliver.getDeliverId() != null && !deliver.getDeliverId().equals("")) {
+            condition.setDeliverId(deliver.getDeliverId());
+        }
+     /*   if (deliver.getGoodsId() != null && !deliver.getGoodsId().equals(""))  {      //商品id
+            System.out.println("Action商品id"+deliver.getGoodsId());
+            condition.setGoodsId(deliver.getGoodsId());
+        }
+        if (deliver.getPlaceId() != null && !deliver.getPlaceId().equals(""))  {               //仓库id
+            condition.setPlaceId(deliver.getPlaceId());
+            System.out.println("Action仓库id"+deliver.getPlaceId());
+        }*/
+        if (deliver.getDeliverDate() != null && !deliver.getDeliverDate().equals(""))                      //实际出库时间
+            condition.setDeliverDate(deliver.getDeliverDate());
+        if (deliver.getExpecteNumber() != null && !deliver.getExpecteNumber().equals(""))               //预期出库数量
+            condition.setExpecteNumber(deliver.getExpecteNumber());
+        if (deliver.getDeliverNumber() != null && !deliver.getDeliverNumber().equals("")) {             //出库数量
+            System.out.println("Action实收数量" + deliver.getDeliverNumber());
+            condition.setDeliverNumber(deliver.getDeliverNumber());
+        }
+        if (deliver.getDeliverType() != null && !deliver.getDeliverType().equals(""))          //出库类型
+            condition.setDeliverType(deliver.getDeliverType());
         if (deliver.getRemark() != null && !deliver.getRemark().equals(""))          //备注
-            d.setRemark(deliver.getRemark());
-        if (deliverBiz.editDeliver(d)) {
-            session.put("deliverlist", d);
+            condition.setRemark(deliver.getRemark());
+        if (deliverBiz.editDeliver(condition)) {
+            session.put("deliverlist", condition);
             return "success";
         } else return "input";
 
