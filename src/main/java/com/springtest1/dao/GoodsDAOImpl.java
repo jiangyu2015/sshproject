@@ -27,8 +27,16 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
                     if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
                         c.add(Restrictions.eq("goodsName", condition.getGoodsName()));
                     }
+                    if (condition.getState() != null && !condition.getState().equals("")) {
+                        c.add(Restrictions.eq("state", condition.getState()));
+                    }
                 }
-                return c.list();
+
+                if (c.list().size() <= 0) {
+                    return new ArrayList<Goods>();
+                } else {
+                    return c.list();
+                }
             }
         });
     }
@@ -57,7 +65,6 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
     }*/
 
     public void modifyGood(Goods good) {  //修改商品
-        System.out.println("DAO里面的" + good.getService());
         super.getHibernateTemplate().update(good);
     }
 

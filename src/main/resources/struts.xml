@@ -43,6 +43,15 @@
             <result type="redirect" name="success">/sp/test.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
         </action>
+        <action name="spCheck" class="goodsCheck" method="checkGoods">
+            <result type="redirect" name="goodsCheck">/sp/spCheckList.jsp</result>
+        <!--    <result type="redirect" name="input">/sp/fail.jsp</result>-->
+        </action>
+        <action name="spSelectCheck" class="goodsCheckSelect" method="checkGoodsSelect">
+            <result type="redirect" name="success">/sp/spSelectList.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>
+
         <action name="listSh" class="producerList" method="listProducer">
             <result type="redirect" name="producer">/sh/shAllList.jsp</result>
         </action>
@@ -62,6 +71,14 @@
             <result type="redirect" name="success">/sh/test.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
+        <action name="shCheck" class="producerCheck" method="checkProducer">
+            <result type="redirect" name="producerCheck">/sh/shCheckList.jsp</result>
+        </action>
+        <action name="shSelectCheck" class="producerCheckSelect" method="checkProducerSelect">
+            <result type="redirect" name="success">/sh/shSelectList.jsp</result>
+            <result type="redirect" name="input">/sh/fail.jsp</result>
+        </action>
+
         <action name="listPlace" class="placeList" method="listplace">
             <result type="redirect" name="place">/place/placeAllList.jsp</result>
         </action>

@@ -94,8 +94,8 @@
                             <ul>
                                 <li id="sp/spAddtest.jsp"> 增加</li>
                                 <li id="sp/spDel.jsp">删除</li>
-                                <li id="sp/spUpd.jsp">修改</li>
-                                <li id="sp/spSelect.jsp">查询</li>
+                              <!--  <li id="sp/spUpd.jsp">修改</li>-->
+                               <li id="sp/spSelect.jsp">查询</li>
                             </ul>
                         </li>
                         <li>
@@ -122,9 +122,16 @@
                     <span>业务</span>
                     <ul>
                         <li>
-                            <span><a href=" " target="t2">商品审核</a></span>
+                            <span><a href="spCheck.action" target="t2">商品审核</a></span>
                             <ul>
-                                <li>查询</li>
+                                <li id="sp/spCheckSelect.jsp">查询未审核商品</li> <!--要check再列表里的-->
+                            </ul>
+                        </li>
+
+                        <li>
+                            <span><a href="shCheck.action" target="t2">商户审核</a></span> <!--要check再列表里的-->
+                            <ul>
+                                <li id="sh/shCheckSelect.jsp">查询未审核商户</li>
                             </ul>
                         </li>
 

@@ -63,7 +63,6 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         List producer = producerBiz.getAllProducer();
         Producer producer1 = (Producer) producer.get(0);
         session.put("producerlistall", producer);
-
         return "producer";
     }
 
@@ -75,14 +74,15 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         List list = producerBiz.getProducerList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
-            Producer producer = new Producer();
-            producer = (Producer) list.get(0);
-
-            session.put("producerlist", producer);
+          /*  Producer producer = new Producer();
+            producer = (Producer) list.get(0);*/
+            session.put("producerlist",list);
             return "success";
         } else
             return "input";
     }
+    
+    
 
     public String delProducer() {
         System.out.println(producerName);
@@ -178,7 +178,29 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
             session.put("producerlist", condition);
             return "success";
         } else return "input";
+    }
 
+ 
+    public String  checkProducer() {               //得到所需审核的单子
+        Producer p = new Producer();
+        p.setState("no");
+        List<Producer> producer = producerBiz.getProducerList(p);
+        if (producer.size() > 0) {
+            session.put("producerlistcheck", producer);
+        }
+        return "producerCheck";
+    }
 
+    public String checkProducerSelect(){ //得到查询的信息来审核 与search一样
+        System.out.println(producerName);
+        Producer condition = new Producer();
+        condition.setProducerName(producerName);
+        List list = producerBiz.getProducerList(condition);
+        System.out.println(list.size());
+        if (list.size() > 0) {
+            session.put("producerlistcheck", list);
+            return "success";
+        } else
+            return "input";
     }
 }

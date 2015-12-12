@@ -110,6 +110,12 @@
     <bean id="goodsUpd" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
+    <bean id="goodsCheck" class="com.GoodsManagerAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
+    <bean id="goodsCheckSelect" class="com.GoodsManagerAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
 
     <bean id="producerDAO" class="com.springtest1.dao.ProducerDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -129,8 +135,13 @@
     <bean id="producerDel" class="com.ProducerManagerAction" scope="prototype">
         <property name="producerBiz" ref="producerBiz"/>
     </bean>
-
     <bean id="producerEdit" class="com.ProducerManagerAction" scope="prototype">
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="producerCheck" class="com.ProducerManagerAction" scope="prototype">
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="producerCheckSelect" class="com.ProducerManagerAction" scope="prototype">
         <property name="producerBiz" ref="producerBiz"/>
     </bean>
 

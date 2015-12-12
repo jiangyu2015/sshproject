@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: user
-  Date: 2015/11/25
-  Time: 11:38
+  User: dell
+  Date: 2015/12/12
+  Time: 16:19
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>查询商户</title>
+    <title>查询未审核商品</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
@@ -38,13 +38,12 @@
             });
         });
     </script>
-
 </head>
 
 <body>
-<div class="title">查询商户</div>
+<div class="title">查询未审核商户</div>
 <div class="content">
-    <form method="post" action="shSelect">
+    <form method="post" action="shSelectCheck">
         <div class="line">
             <div class="lable">商户名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商户名称" name="producerName"/>
@@ -56,3 +55,4 @@
 </div>
 </body>
 </html>
+

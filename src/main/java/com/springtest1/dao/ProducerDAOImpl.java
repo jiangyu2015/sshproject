@@ -29,9 +29,14 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
             public List<Producer> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(Producer.class);
                 if (condition != null) {
-                    System.out.println(condition.getProducerName() + "商户名称 DAOImpl");
                     if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
                         c.add(Restrictions.eq("producerName", condition.getProducerName()));
+                    }
+                    if (condition.getProducerId() != null && !condition.getProducerId().equals("")) {
+                        c.add(Restrictions.eq("producerId", condition.getProducerId()));
+                    }
+                    if (condition.getState() != null && !condition.getState().equals("")) {
+                        c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }
                 return c.list();
@@ -49,7 +54,6 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
     }
 
     public void editProducer(Producer producer) {
-        System.out.println("DAO里面的" + producer.getProducerName());
         super.getHibernateTemplate().update(producer);   //修改
     }
 
@@ -68,9 +72,8 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
             return producerList;
         }
     }
-    public List<Producer> getProducerCheck() {    //state=“ok”
+    public List<Producer> getProducerCheck() {    //state=“yesok”
         String hql = "from Producer g where g.state='yesok'";
-
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         List<Producer> producerlist = query.list();
@@ -81,5 +84,7 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
             return producerlist;
         }
     }
+
+
 
 }

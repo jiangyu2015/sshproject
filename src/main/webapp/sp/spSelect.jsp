@@ -11,7 +11,7 @@
         $(function () {
             $.ajax({
                 type: "post",
-                url: "excuteAjaxJsonAction",
+                url: "selectAllGoodsJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
                     var d = eval("(" + data + ")");

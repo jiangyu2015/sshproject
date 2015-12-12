@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: user
-  Date: 2015/11/25
-  Time: 11:38
+  User: dell
+  Date: 2015/12/12
+  Time: 14:56
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -11,22 +11,24 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>查询商户</title>
+    <title>查询未审核商品</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $.ajax({
                 type: "post",
-                url: "excuteProducerAjaxJsonAction",
+                url: "selectAllNoGoodsJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
-                    alert("sh");
                     var d = eval("(" + data + ")");
-                    var producer = d.producerList;
-                    console.log(producer);
-                    for (var i = 0; i < producer.length; i++) {
-                        str = str + "<option>" + producer[i].producerName + "</option>";
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+
+                        //      str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                        str = str + "<option>" + goods[i].goodsName + "</option>";
+                        //        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
                     }
                     $("#select").html(str);
 
@@ -37,17 +39,27 @@
                 dataType: 'json'
             });
         });
-    </script>
 
+        /*   function aaa() {
+         var val = $("#item").val();
+         var selectId = $("[value='" + val + "']").eq(0).attr('id');
+         if (selectId == undefined) {
+         console.log("该商品不存在");
+         return;
+         }
+         console.log("val: " + val);
+         console.log("Id: " + selectId);
+         }*/
+    </script>
 </head>
 
 <body>
-<div class="title">查询商户</div>
+<div class="title">查询未审核商品</div>
 <div class="content">
-    <form method="post" action="shSelect">
+    <form method="post" action="spSelectCheck">
         <div class="line">
-            <div class="lable">商户名称：</div>
-            <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商户名称" name="producerName"/>
+            <div class="lable">商品名称：</div>
+            <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商品名称" name="goodsName"/>
                 <datalist id="select"></datalist>
             </div>
         </div>
@@ -56,3 +68,4 @@
 </div>
 </body>
 </html>
+

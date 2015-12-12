@@ -86,7 +86,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
      *
      * @return SUCCESS
      */
-    public String excuteAjax() {            //商品
+    public String excuteAjax() {            //状态为yesko的商品
 
      /*   try {
             //获取数据
@@ -120,15 +120,53 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         return SUCCESS;
     }
 
-    public String excuteProducerAjax() {    //商户
+    public String selectAllNoGoods() {            //所有未审核的查询商品
+
         try {
-            List<Producer> producerlist = producerBiz.getProducerCheck();
-            JSONObject json = new JSONObject();
-            json.put("producerList", producerlist);
-            result = json.toString();
+            Goods g = new Goods();
+            g.setState("no");
+            List<Goods> goods = goodsBiz.getGoodsList(g);
+            if (goods.size() > 0) {
+                JSONObject json = new JSONObject();
+                json.put("goodsList", goods);
+                result = json.toString();
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        }
 
+        return SUCCESS;
+
+    }
+
+    public String selectProducer() {            //状态为yesok的商户
+        List<Producer> producerlist = producerBiz.getProducerCheck();
+        if (producerlist.size() > 0) {
+            try {
+                Producer g = producerlist.get(0);
+                System.out.println(g.getProducerId() + "传值JsonAction");
+                JSONObject json = new JSONObject();
+                json.put("producerList", producerlist);
+                result = json.toString();//给result赋值，传递给页面
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return SUCCESS;
+    }
+
+    public String excuteProducerAjax() {    //状态为no的查询未审核
+        try {
+            Producer p = new Producer();
+            p.setState("no");
+            List<Producer> producer = producerBiz.getProducerList(p);
+            if (producer.size() > 0) {
+                JSONObject json = new JSONObject();
+                json.put("producerList", producer);
+                result = json.toString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return SUCCESS;
     }
@@ -221,6 +259,73 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         json.put("type", type);
         System.out.println(goodsId + goodsName + placeId + placeName + producerName);
         result = json.toString();
+        return SUCCESS;
+    }
+
+    public String goodsCheck() {
+        String id = request.getParameter("id");
+        int goodsId = Integer.valueOf(id);
+        System.out.println("JsonActionCheck传值" + goodsId);
+        Goods condition = new Goods();
+        condition.setGoodsId(goodsId);
+
+        List list = goodsBiz.getGoodsList(condition);
+        if (list.size() > 0) {
+            System.out.println(list.size());
+            Goods goods = (Goods) list.get(0);
+            goods.setState("yesno");                               //改申请state
+            goodsBiz.modifyGood(goods);
+        }
+        return SUCCESS;
+    }
+
+    public String goodsCheckOk() {
+        String id = request.getParameter("id");
+        int goodsId = Integer.valueOf(id);
+        System.out.println("JsonActionCheck传值" + goodsId);
+        Goods condition = new Goods();
+        condition.setGoodsId(goodsId);
+
+        List list = goodsBiz.getGoodsList(condition);
+        if (list.size() > 0) {
+            System.out.println(list.size());
+            Goods goods = (Goods) list.get(0);
+            goods.setState("yesok");                               //改申请state
+            goodsBiz.modifyGood(goods);
+        }
+        return SUCCESS;
+    }
+
+    public String producerCheck() {     //没通过
+        String id = request.getParameter("id");
+        int producerId = Integer.valueOf(id);
+        System.out.println("JsonActionCheck传值" + producerId);
+        Producer condition = new Producer();
+        condition.setProducerId(producerId);
+        List list = producerBiz.getProducerList(condition);
+        if (list.size() > 0) {
+            System.out.println(list.size());
+            Producer producer = (Producer) list.get(0);
+            producer.setState("yesno");                               //改申请state
+            producerBiz.editProducer(producer);
+        }
+        return SUCCESS;
+    }
+
+    public String producerCheckOk() {
+        String id = request.getParameter("id");
+        int producerId = Integer.valueOf(id);
+        System.out.println("JsonActionCheck传值" + producerId);
+        Producer condition = new Producer();
+        condition.setProducerId(producerId);
+
+        List list = producerBiz.getProducerList(condition);
+        if (list.size() > 0) {
+            System.out.println(list.size());
+            Producer producer = (Producer) list.get(0);
+            producer.setState("yesok");                               //改申请state
+            producerBiz.editProducer(producer);
+        }
         return SUCCESS;
     }
 

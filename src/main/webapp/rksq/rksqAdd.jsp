@@ -40,8 +40,10 @@
 
             $.ajax({
                 type: "post",
-                url: "excuteProducerAjaxJsonAction",
+                url: "selectProducerJsonAction",
+                dataType: 'json',
                 success: function (data, xhrTxt) {
+                    alert("producer");
                     var str = "";
 //                    alert("sh");
                     var d = eval("(" + data + ")");
@@ -57,7 +59,10 @@
                         $("#select2").html(str);
                     });
                 },
-                dataType: 'json'
+                error: function () {
+                    alert("未查到商户");
+                }//这里不要加","
+
             });
 
             $.ajax({
