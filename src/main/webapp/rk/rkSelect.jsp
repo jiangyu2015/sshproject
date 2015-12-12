@@ -42,7 +42,7 @@
 
             $.ajax({
                 type: "post",
-                url: "excuteProducerAjaxJsonAction",
+                url: "selectProducerAjaxJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
 //                    alert("sh");
@@ -95,32 +95,47 @@
             console.log("Id: " + selectId);
         }
 
-      /*  function  find(){
+     /*   function check(form) {
             var val = $("#item").val();
-            var strs = val.split('|');
-            var value=strs[0];
-            var id=strs[1];
-            console.log(id + "," + value);
-            $.ajax({
-                type: "post",
-                url: "selectStorageJsonAction",
-                data: {
-                    goodId: id,
-                    goodNmae: value
-                },
-                success: function (data, xhrTxt) {
+            var val2 = $("#item2").val();
+            var val3 = $("#item3").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            if (selectId == undefined) {
+                alert("该商品不存在，请确认或重建");
+                return false;
+            }
 
-                },
-                dataType: 'json'
-            });
-        }*/
+            else {
+                return true;
+            }
+        }
+*/
+        /*  function  find(){
+              var val = $("#item").val();
+              var strs = val.split('|');
+              var value=strs[0];
+              var id=strs[1];
+              console.log(id + "," + value);
+              $.ajax({
+                  type: "post",
+                  url: "selectStorageJsonAction",
+                  data: {
+                      goodId: id,
+                      goodNmae: value
+                  },
+                  success: function (data, xhrTxt) {
+
+                  },
+                  dataType: 'json'
+              });
+          }*/
     </script>
 </head>
 
 <body>
 <div class="title">查询入库明细</div>
 <div class="content">
-    <form method="post" action="rkSelect.action">
+    <form method="post" action="rkSelect.action" <%--onsubmit="return check(this)"--%> >
         <div class="line">
             <div class="lable">商品名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的入库商品名称" name="goodsName"/>
@@ -142,7 +157,7 @@
         </div>
 
 
-        <input type="submit" value="查找" class="btn-submit" <%--onclick="find();"--%>/>
+        <input type="submit" value="查找" class="btn-submit"/>
     </form>
 </div>
 </body>

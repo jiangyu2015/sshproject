@@ -15,7 +15,7 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-                        $line.find('input').val($tds.eq(i).text());
+                    $line.find('input').val($tds.eq(i).text());
                 }
                 $("#dialog_edit").show();
             }
@@ -59,6 +59,18 @@
                 _move = false;
             });
         });
+
+        function check(form) {
+            var val = $("#state").val();
+            if (val == "yesok" || val == "yesno") {
+                alert("该商户已审核不能修改");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
     </script>
 </head>
 
@@ -103,10 +115,11 @@
         <div class="title">修改商户</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editSh" >
+                <form method="post" action="editSh" onsubmit="return check(this)">
                     <div class="line">
                         <div class="lable">商户id：</div>
-                        <div class="input-div"><input  name="producer.producerId" readonly="readonly" style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input name="producer.producerId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
 
                     </div>
                     <div class="line">
@@ -135,7 +148,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">商户可用状态：</div>
-                        <div class="input-div"><input placeholder="请输入备用联系电话" name="producer.state"/></div>
+                        <div class="input-div"><input id="state" name="producer.state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>

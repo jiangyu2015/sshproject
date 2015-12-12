@@ -134,7 +134,21 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return SUCCESS;
+    }
 
+
+    public String  selectAllGoods() {            //所有商品
+        try {
+            List<Goods> goods = goodsBiz.getAllGoods();
+            if (goods.size() > 0) {
+                JSONObject json = new JSONObject();
+                json.put("goodsList", goods);
+                result = json.toString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
 
     }
@@ -154,6 +168,8 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         }
         return SUCCESS;
     }
+
+
 
     public String excuteProducerAjax() {    //状态为no的查询未审核
         try {

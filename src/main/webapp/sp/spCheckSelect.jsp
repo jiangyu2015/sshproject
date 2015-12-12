@@ -27,8 +27,9 @@
                     for (var i = 0; i < goods.length; i++) {
 
                         //      str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
-                        str = str + "<option>" + goods[i].goodsName + "</option>";
-                        //        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
+                        /*  str = str + "<option>" + goods[i].goodsName + "</option>";*/
+                        str = str + "<option value='" + goods[i].goodsName + "'>";
+
                     }
                     $("#select").html(str);
 
@@ -39,6 +40,20 @@
                 dataType: 'json'
             });
         });
+
+
+        function check(form) {
+            var val = $("#item").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            if (selectId == undefined) {
+                alert("该商品已审核或不存在");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
 
         /*   function aaa() {
          var val = $("#item").val();
@@ -56,7 +71,7 @@
 <body>
 <div class="title">查询未审核商品</div>
 <div class="content">
-    <form method="post" action="spSelectCheck">
+    <form method="post" action="spSelectCheck" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商品名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商品名称" name="goodsName"/>

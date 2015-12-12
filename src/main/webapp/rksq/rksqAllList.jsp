@@ -70,6 +70,17 @@
                 _move = false;
             });
         });
+
+        function check(form) {
+            var val = $("#state").val();
+            if (val == "yesok" || val == "yesno") {
+                alert("该入库申请已审核不能修改");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     </script>
 </head>
 
@@ -77,8 +88,8 @@
 <div class="table-div">
     <div class="title">入库申请信息</div>
     <div class="btn-div">
-<%--        <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <input type="button" class="btn-eidt" value="修改" onclick="edit();">
+     <%--   <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -120,7 +131,7 @@
         <div class="title">修改入库申请</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editrksq">
+                <form method="post" action="editrksq" onsubmit="return check(this)">
                     <div class="line">
                         <div class="lable">入库申请id：</div>
                         <div class="input-div"><input name="storageApp.storageAppId" readonly="readonly"
@@ -164,7 +175,7 @@
                     </div>
                     <div class="line">
                         <div class="lable">处理状态：</div>
-                        <div class="input-div"><input name="storageApp.state" readonly="readonly"
+                        <div class="input-div"><input id="state" name="storageApp.state" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 

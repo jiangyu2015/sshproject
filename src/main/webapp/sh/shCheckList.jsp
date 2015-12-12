@@ -70,7 +70,6 @@
         });
 
         function btn() {
-            alert("no");
             $.ajax({
                 type: "post",
                 url: "producerCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
@@ -91,7 +90,6 @@
         }
 
         function btnOk() {
-            alert("yes"+$('#producerId').val());
             $.ajax({
                 type: "post",
                 url: "producerCheckOkJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
@@ -153,7 +151,7 @@
         <div class="title">修改商户</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" <%--action="editSh"--%>>
+                <form <%--method="post" action="editSh"--%>>
                     <div class="line">
                         <div class="lable">商户id：</div>
                         <div class="input-div"><input id="producerId" name="producer.producerId" readonly="readonly"

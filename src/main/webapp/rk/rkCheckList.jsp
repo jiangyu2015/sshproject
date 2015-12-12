@@ -196,7 +196,7 @@
 
                     <div style="position: relative; bottom: 0px;">
                         <input type="submit" value="确认" class="btn-submit" onclick="btn()"/>
-
+                        <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                     </div>
                 </form>
             </div>

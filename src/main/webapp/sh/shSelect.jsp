@@ -26,7 +26,8 @@
                     var producer = d.producerList;
                     console.log(producer);
                     for (var i = 0; i < producer.length; i++) {
-                        str = str + "<option>" + producer[i].producerName + "</option>";
+                      //  str = str + "<option>" + producer[i].producerName + "</option>";
+                        str = str + "<option value='" + producer[i].producerName + "'>";
                     }
                     $("#select").html(str);
 
@@ -37,6 +38,18 @@
                 dataType: 'json'
             });
         });
+
+        function check(form) {
+            var val = $("#item").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            if (selectId == undefined) {
+                alert("该商户不存在，请确认或重建");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     </script>
 
 </head>
@@ -44,7 +57,7 @@
 <body>
 <div class="title">查询商户</div>
 <div class="content">
-    <form method="post" action="shSelect">
+    <form method="post" action="shSelect" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商户名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商户名称" name="producerName"/>

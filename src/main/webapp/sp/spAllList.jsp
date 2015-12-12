@@ -13,7 +13,6 @@
             } else {
                 var $tds = $("tr.active").children();
                 var $lines = $("#dialog_edit").find('form').children();
-                alert("123" + $tds.length);
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
 
@@ -69,6 +68,17 @@
                 _move = false;
             });
         });
+
+        function check(form) {
+            var val = $("#state").val();
+            if (val == "yesok" || val == "yesno") {
+                alert("该商品已审核不能修改");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     </script>
 </head>
 
@@ -135,7 +145,7 @@
         <div class="title">修改商品</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="spEdit">
+                <form method="post" action="spEdit"  onsubmit="return check(this)">
                     <div class="line">
                         <div class="lable">商品id：</div>
                         <div class="input-div"><input name="goods.goodsId" readonly="readonly"
@@ -218,15 +228,9 @@
                     </div>
                     <div class="line">
                         <div class="lable">商品可用：</div>
-                        <div class="input-div"><input name="goods.state" readonly="readonly"
+                        <div class="input-div"><input id="state" name="goods.state" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-                 <%--   <div class="line">
-                        <div class="lable">商品可用：</div>
-                        <div class="input-div"><input name="goods.state" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;"/></div>
-                    </div>--%>
-
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
