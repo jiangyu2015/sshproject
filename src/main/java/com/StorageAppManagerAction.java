@@ -198,12 +198,14 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         }
         System.out.println("ok");
 
-        if (storageApp.getProducerName() != null)        //商户名称
+        if (storageApp.getProducerName() != null)        //商户名称   //有名称有id，要改,哎 多此一举，还有前台读出来也要改了
             condition.setProducerName(storageApp.getProducerName());
         if (storageApp.getGoodsName() != null) {          //商品名称
-            String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
-            String name = strs[0];
-            condition.setGoodsName(name);
+            if (storageApp.getGoodsName().indexOf("|") != -1) {
+                String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
+                String name = strs[0];
+                condition.setGoodsName(name);
+            } else return "input";
         }
         if (storageApp.getStoragePlace() != null) {                     //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
@@ -226,14 +228,17 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Date date = calendar.getTime();
         condition.setApplicationDate(date);
         System.out.println("当前时间" + date);
-        String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
-        String name = strs[0];
-        Integer id = Integer.parseInt(strs[1]);
-        Goods g = new Goods();
-        g.setGoodsId(id);
-        Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
-        System.out.println(goods.getGoodsName());
-        condition.setGoods(goods);
+        if (storageApp.getGoodsName().indexOf("|") != -1) {
+            String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
+            Integer id = Integer.parseInt(strs[1]);
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
+            System.out.println(goods.getGoodsName());
+            condition.setGoods(goods);
+        } else {
+            return "input";
+        }
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);       //增加商户
         condition.setProducer(producer);
         Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);

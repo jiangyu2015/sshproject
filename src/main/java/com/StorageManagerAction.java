@@ -110,6 +110,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     public String searchStorageList() {      //增加这个方法需要注入 biz别忘了
         Storage condition = new Storage();
         if (goodsName != null && !goodsName.equals("")) {
+
             String[] strs = goodsName.split("\\|");
             String name = strs[0];
             Integer id = Integer.parseInt(strs[1]);
@@ -268,19 +269,11 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         } else return "input";
     } */
 
-    public String editStorage() {
+    public String editStorage() {  //能改吗
         Storage condition = new Storage();
         if (storage.getStorageId() != null && !storage.getStorageId().equals("")) {
             condition.setStorageId(storage.getStorageId());
         }
-     /*   if (storage.getGoodsId() != null && !storage.getGoodsId().equals(""))  {      //商品id
-            System.out.println("Action商品id"+storage.getGoodsId());
-            condition.setGoodsId(storage.getGoodsId());
-        }
-        if (storage.getPlaceId() != null && !storage.getPlaceId().equals(""))  {               //仓库id
-            condition.setPlaceId(storage.getPlaceId());
-            System.out.println("Action仓库id"+storage.getPlaceId());
-        }*/
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals("")) {             //实收数量
