@@ -11,4 +11,6 @@ public interface SearchDAO  {
     public List<CommodityDto> searchInventoryFlow();   //查询没有预提的库存流动
 
     public List<CommodityDto> searchInventoryFlowGoods(String goodsName);  //查询商品的库存流动
+
+    public List<CommodityDto> searchAll(); //查所有
 }

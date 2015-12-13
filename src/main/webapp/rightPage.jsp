@@ -21,7 +21,7 @@
     <link type="text/css" rel="stylesheet" href="common.css"/>
     <script type="text/javascript">
         function init() {
-            window.location.href = "searchkcld.action";
+            window.location.href = "searchall.action";
         }
     </script>
 

@@ -290,4 +290,7 @@
     <bean id="searchInventoryFlow" class="com.SearchManagerAction" scope="prototype">
         <property name="searchBiz" ref="searchBiz"/>
     </bean>
+    <bean id="searchAll" class="com.SearchManagerAction" scope="prototype">
+        <property name="searchBiz" ref="searchBiz"/>
+    </bean>
 </beans>

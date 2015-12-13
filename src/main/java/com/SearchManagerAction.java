@@ -78,6 +78,16 @@ public class SearchManagerAction extends ActionSupport implements RequestAware, 
             return "fail";   //应该提示该商品未入库
     }
 
+    public String searchAll() {
+        List<CommodityDto> list = searchBiz.searchAll();
+        System.out.println(list.size());
+    if (list.size() > 0)  {
+            session.put("inventoryflowall", list);
+            return "success";
+        } else
+            return "fail";   //应该提示该商品未入库*/
+    }
+
 
 
 }
