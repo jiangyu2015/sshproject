@@ -125,6 +125,10 @@
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
 
+       <!-- <action name="ytSelect" class="withholdingSelect" method="searchInventoryFlowGoods">
+            <result type="redirect" name="success">/yt/ytsqGoodsList.jsp</result>
+            <result type="redirect" name="fail">/yt/fail.jsp</result>
+        </action>-->
         <action name="ytSelect" class="withholdingSelect" method="searchInventoryFlowGoods">
             <result type="redirect" name="success">/yt/ytsqGoodsList.jsp</result>
             <result type="redirect" name="fail">/yt/fail.jsp</result>

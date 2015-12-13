@@ -46,7 +46,7 @@
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.inventoryflowall}" var="inventoryflow">
+        <s:iterator value="%{#session.inventoryflowgoods}" var="inventoryflow">
             <tr>
                 <td><s:property value="#inventoryflow.producerId"/></td>
                 <td><s:property value="#inventoryflow.producerName"/></td>

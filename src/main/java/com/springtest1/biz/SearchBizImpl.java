@@ -18,16 +18,23 @@ public class SearchBizImpl extends HibernateDaoSupport implements SearchBiz {
     }
 
     @Transactional
-    public List<CommodityDto> searchInventoryFlow(){
+    public List<CommodityDto> searchInventoryFlow() {
         return searchDAO.searchInventoryFlow();
 
     }
+
     @Transactional
-    public List<CommodityDto> searchInventoryFlowGoods(String goodsName){
+    public List<CommodityDto> searchInventoryFlowGoods(String goodsName) {
         return searchDAO.searchInventoryFlowGoods(goodsName);
     }
+
     @Transactional
-    public List<CommodityDto> searchAll(){
+    public List<CommodityDto> searchAll() {
         return searchDAO.searchAll();  //
+    }
+
+    @Transactional
+    public List<CommodityDto> searchAllGoods(String goodsName) {
+        return searchDAO.searchAllGoods(goodsName);
     }
 }
