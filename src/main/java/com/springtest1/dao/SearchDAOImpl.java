@@ -338,6 +338,94 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
         }
         return commodityDtoList;
     }
+
+
+    public List<CommodityDto> searchWithholding(Integer goodsId,Integer producerId,Integer placeId){  //查当前预提
+        String sql = "SELECT " +
+            /*    "	zmkc.sh_id, " +
+                "	sh.sh_name AS producerName, " +   //1商户
+                "	zmkc.sp_id, " +
+                "	sp.sp_name AS goodsName, " + //3商品
+                "	zmkc.rk_place_id, " +
+                "	kc.place AS placeName, " +  //5库存地点
+                "	zmkc.ss_number AS totolStorage, " +  //6总入库
+                "	zmkc.ck_number AS totolDeliver, " +  //7总出库
+                "	zmkc.zmkc AS carryingExcessInventory, " +  //8账面剩余库存
+                "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
+                "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
+                "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, "  + //11剩余预提数*/
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory, "+  //12预提后可用库存
+          /*      "zmkc.rk_id " +  // 13明细id*/
+                "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
+                "			ifnull(zck.ck_number, 0) ck_number, " +
+                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id " +
+                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,sum(ss_number) ss_number,rk_id " +
+                "				FROM rk_detail WHERE state = 'ok' " +
+                "				GROUP BY sh_id, sp_id,rk_place_id " +
+                "			) zrk " +
+                "		LEFT JOIN ( " +
+                "			SELECT sp_id,sh_id,ck_place_id,sum(ck_number) ck_number " +
+                "			FROM " +
+                "				ck_detail " +
+                "			GROUP BY sp_id,sh_id,ck_place_id " +
+                "		) zck ON zrk.sp_id = zck.sp_id " +
+                "		AND zrk.sh_id = zck.sh_id " +
+                "		AND zrk.rk_place_id = zck.ck_place_id " +
+                "	) zmkc " +
+                "LEFT JOIN ( " +
+                "	SELECT " +
+                "		ytzs.sp_id,ytzs.sh_id,ytzs.place_id,ytzs.yt_number ytzs, " +
+                "		ifnull(ytzxx.ck_number, 0) ytzxx, " +
+                "		yt_number - ifnull(ytzxx.ck_number, 0) AS syyt " +
+                "	FROM ( " +
+                "			SELECT sp_id,sh_id,place_id,sum(yt_number) yt_number " +
+                "			FROM " +
+                "				yt_application " +
+                "			WHERE " +
+                "				dateline >= CURDATE() " +
+                "			GROUP BY " +
+                "				sp_id, " +
+                "				sh_id, " +
+                "				place_id " +
+                "		) ytzs " +
+                "	LEFT JOIN ( " +
+                "		SELECT ytxx.sp_id,ytxx.sh_id,ytxx.ck_place_id," +
+                "			ifnull(sum(ytxx.ck_number), 0) ck_number " +
+                "		FROM" +
+                "			(" +
+                "				SELECT a.yt_id,b.sp_id,b.sh_id,b.ck_place_id,b.ck_number " +
+                "				FROM(" +
+                "						SELECT yt_id FROM yt_application WHERE dateline >= CURDATE() " +
+                "					) a" +
+                "				INNER JOIN ( " +
+                "					SELECT sp_id,sh_id,ck_place_id,ck_number,yt_id " +
+                "					FROM ck_detail " +
+                "				) b ON a.yt_id = b.yt_id " +
+                "			) ytxx " +
+                "		GROUP BY ytxx.sp_id,ytxx.sh_id,ytxx.ck_place_id " +
+                "	) ytzxx ON ytzs.sp_id = ytzxx.sp_id " +
+                "	AND ytzs.sh_id = ytzxx.sh_id " +
+                "	AND ytzs.place_id = ytzxx.ck_place_id " +
+                ") syyt ON zmkc.sp_id = syyt.sp_id " +
+                "AND zmkc.sh_id = syyt.sh_id " +
+                "AND zmkc.rk_place_id = syyt.place_id " +
+                "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
+                "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
+                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id "+
+                "WHERE sp.sp_id='" + goodsId + "' and sh.sh_id='"+producerId+"' and kc.kc_id='"+placeId+"' ;";
+        Session session = this.getSessionFactory().getCurrentSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql);
+        List<Object[]> list = sqlQuery.list();
+        System.out.println("DAO"+list.size());
+        List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
+        for (Object[] row : list) {
+            System.out.println(row);
+            CommodityDto commodityDto = new CommodityDto();
+            commodityDto.setAvailableInventory((BigDecimal) row[0]);
+            commodityDtoList.add(commodityDto);
+        }
+        return commodityDtoList;
+    }
 }
 
 

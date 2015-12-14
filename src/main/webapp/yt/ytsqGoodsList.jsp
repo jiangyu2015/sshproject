@@ -12,7 +12,7 @@
                 alert('请选择要修改的行');
             } else {
                 var $tds = $("tr.active").children();
-                alert($tds.eq(0).text())
+             /*   alert($tds.eq(0).text())*/
                 $.ajax({
                     success: function () {
                         window.location.href = "ytsqAdd.jsp?id="+$tds.eq(0).text();

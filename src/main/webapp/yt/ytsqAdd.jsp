@@ -23,6 +23,7 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
         $(function () {
+
             $.ajax({
                 url: "doWithholdingJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                 data: {//设置数据源
@@ -30,6 +31,7 @@
                 },
                 dataType: "json",//设置需要返回的数据类型*/
                 success: function (data, xhrTxt) {
+
                     var str = "";
                     var d = eval("(" + data + ")");
                     var goodsId = str + d.goodsId;
@@ -52,30 +54,40 @@
                 }//这里不要加","
             });
         });
-        function check() {
-            alert("check");
+        function check(form) {
             $.ajax({
                 type: "post",
                 url: "doWithholdingCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                 data: {//设置数据源
                     goodsId: $("#goodsId").val(),
                     placeId: $("#placeId").val(),
-                    producerId: $("producerId").val(),
+                    producerId: $("#producerId").val(),
                     witholdingNumber: $("#witholdingNumber").val(),
-                    type: $("#type").val(),
-                    unit:$("#unit").val()
+                    /*     type: $("#type").val(),*/
+                    unit: $("#unit").val()
                 },
                 dataType: "json",//设置需要返回的数据类型
                 success: function () {
                     alert("预提成功");
+                    return true;
                     /*   window.location.href = "ytAdd.action";*/
                 },
-                error: function () {
-                    alert("预提不成功，当前预提后可用库存为");
+                fail: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goodsUnit = str + d.goodsUnit;
+                    alert("预提不成功，商品入库单位为"+goodsUnit+"请确认！");
+                    return false;
+                },
+                error: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var availableInventory = str + d.availableInventory;
+                    alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
+                    return false;
                 }//这里不要加","
             });
         }
-
 
         function GetQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -83,12 +95,14 @@
             if (r != null)return unescape(r[2]);
             return null;
         }
+
+
     </script>
 </head>
 <body>
 <div class="title">添加预提申请信息</div>
 <div class="content">
-    <form method="post" action="ytAdd">
+    <form method="post" action="ytAdd" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商户id：</div>
             <div class="input-div"><input id="producerId" name="producerId" readonly="readonly"

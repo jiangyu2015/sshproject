@@ -57,7 +57,7 @@
 <body>
 <div class="title">查询商品库存流动情况</div>
 <div class="content">
-    <form method="post" action="ytSelect">
+    <form method="post" action="ytSelect">  <%--需要加check--%>
         <div class="line">
             <div class="lable">商品名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商品名称" name="goodsName"/>

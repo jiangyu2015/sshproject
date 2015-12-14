@@ -1,11 +1,13 @@
 package com;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.dto.CommodityDto;
 import com.hibtest1.entity.*;
 
 import com.springtest1.biz.*;
@@ -45,13 +47,13 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     PlaceBiz placeBiz;
     StorageAppBiz storageAppBiz;
     StorageBiz storageBiz;
+    SearchBiz searchBiz;
+    DeliverBiz deliverBiz;
+    WithholdingBiz withholdingBiz;
 
     public void setWithholdingBiz(WithholdingBiz withholdingBiz) {
         this.withholdingBiz = withholdingBiz;
     }
-
-    DeliverBiz deliverBiz;
-    WithholdingBiz withholdingBiz;
 
     public void setDeliverBiz(DeliverBiz deliverBiz) {
         this.deliverBiz = deliverBiz;
@@ -79,6 +81,10 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public void setSearchBiz(SearchBiz searchBiz) {
+        this.searchBiz = searchBiz;
     }
 
     /**
@@ -138,7 +144,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     }
 
 
-    public String  selectAllGoods() {            //所有商品
+    public String selectAllGoods() {            //所有商品
         try {
             List<Goods> goods = goodsBiz.getAllGoods();
             if (goods.size() > 0) {
@@ -168,7 +174,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         }
         return SUCCESS;
     }
-
 
 
     public String excuteProducerAjax() {    //状态为no的查询未审核
@@ -246,13 +251,51 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     }
 
     public String doWithholdingCheck() {      //检查是否可以预提，预提数小于等于预提后可用库存
+        String gid = request.getParameter("goodsId");
+        System.out.println("商品id" + gid);
+        int goodsId = Integer.valueOf(gid);
+        String kid = request.getParameter("placeId");
+        System.out.println("placeId" + kid);
+        int placeId = Integer.valueOf(kid);
+        String pid = request.getParameter("producerId");
+        System.out.println("producerId" + pid);
+        int producerId = Integer.valueOf(pid);
+        String w = request.getParameter("witholdingNumber");
+        System.out.println("预提数" + w);
+        int witholdingNumber = Integer.valueOf(w);  //预提数
+        String unit = request.getParameter("unit");       //单位  与库存商品单位不一样不预提
+        List<CommodityDto> commodityDtoList = searchBiz.searchWithholding(goodsId, producerId, placeId);
+
+        if (commodityDtoList.size() > 0) {
+            CommodityDto commodityDto = commodityDtoList.get(0);
+            BigDecimal a = commodityDto.getAvailableInventory(); //预提后可用库存
+            int availableInventory = a.intValue();  //转换为int
+            if (availableInventory < witholdingNumber) {
+                JSONObject json = new JSONObject();
+                json.put("availableInventory", availableInventory);
+                result = json.toString();
+                return "error";
+            }
+        }
+        Goods g = new Goods();
+        g.setGoodsId(goodsId);
+        List<Goods> goodsList = goodsBiz.getGoodsList(g);
+        g = goodsList.get(0);
+        String goodsUnit = g.getUnit();
+        System.out.println("后台单位是" + g.getUnit());
+        if (!goodsUnit.equals(unit)) {        //与库存商品单位不一样不预提
+            JSONObject json = new JSONObject();
+            json.put("goodsUnit", goodsUnit);
+            result = json.toString();
+            return "fail";
+        }
         return SUCCESS;
     }
 
-    public String doDeliver() {
+    public String doDeliver() {                     //出库 点取预提表
         String id = request.getParameter("id");
         int withholdingId = Integer.valueOf(id);
-        System.out.println(withholdingId + "流动的明细取到的id");
+        System.out.println(withholdingId + "流动的明细取到的预提id");
         Withholding condition = new Withholding();
         condition.setWithholdingId(withholdingId);
         List<Withholding> withholdingList = withholdingBiz.search(condition);
@@ -284,7 +327,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         System.out.println("JsonActionCheck传值" + goodsId);
         Goods condition = new Goods();
         condition.setGoodsId(goodsId);
-
         List list = goodsBiz.getGoodsList(condition);
         if (list.size() > 0) {
             System.out.println(list.size());
@@ -301,7 +343,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         System.out.println("JsonActionCheck传值" + goodsId);
         Goods condition = new Goods();
         condition.setGoodsId(goodsId);
-
         List list = goodsBiz.getGoodsList(condition);
         if (list.size() > 0) {
             System.out.println(list.size());
@@ -334,7 +375,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         System.out.println("JsonActionCheck传值" + producerId);
         Producer condition = new Producer();
         condition.setProducerId(producerId);
-
         List list = producerBiz.getProducerList(condition);
         if (list.size() > 0) {
             System.out.println(list.size());
