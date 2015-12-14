@@ -154,11 +154,12 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
                 "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, "  + //11剩余预提数
-                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory " +  //12预提后可用库存
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id " +  //12预提后可用库存 13明细id
+
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
                 "			ifnull(zck.ck_number, 0) ck_number, " +
-                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc " +
-                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,sum(ss_number) ss_number " +
+                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id " +
+                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,sum(ss_number) ss_number,rk_id " +
                 "				FROM rk_detail WHERE state = 'ok' " +
                 "				GROUP BY sh_id, sp_id,rk_place_id " +
                 "			) zrk " +
@@ -232,6 +233,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             commodityDto.setWithholdingConsume((BigDecimal) row[10]); //预提消耗
             commodityDto.setSurplusWithholdingNumber((BigDecimal) row[11]); //剩余预提
             commodityDto.setAvailableInventory((BigDecimal) row[12]);//预提后可用库存
+            commodityDto.setId((Integer) row[13]);//明细id
             commodityDtoList.add(commodityDto);
         }
         return commodityDtoList;
@@ -251,11 +253,12 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
                 "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, "  + //11剩余预提数
-                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory " +  //12预提后可用库存
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id " +  //12预提后可用库存 13明细id
+
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
                 "			ifnull(zck.ck_number, 0) ck_number, " +
-                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc " +
-                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,sum(ss_number) ss_number " +
+                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id " +
+                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,sum(ss_number) ss_number,rk_id " +
                 "				FROM rk_detail WHERE state = 'ok' " +
                 "				GROUP BY sh_id, sp_id,rk_place_id " +
                 "			) zrk " +
@@ -307,7 +310,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "AND zmkc.rk_place_id = syyt.place_id " +
                 "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
                 "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
-                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id  "+
+                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id "+
                 "WHERE sp.sp_name='" + goodsName + "';";
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
@@ -330,6 +333,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             commodityDto.setWithholdingConsume((BigDecimal) row[10]); //预提消耗
             commodityDto.setSurplusWithholdingNumber((BigDecimal) row[11]); //剩余预提
             commodityDto.setAvailableInventory((BigDecimal) row[12]);//预提后可用库存
+            commodityDto.setId((Integer) row[13]);//明细id
             commodityDtoList.add(commodityDto);
         }
         return commodityDtoList;

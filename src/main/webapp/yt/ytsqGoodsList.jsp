@@ -44,6 +44,7 @@
     <table id="advSearch" class="table">
         <thead>
         <tr>
+            <th>id</th>
             <th>商户id</th>
             <th>商户名称</th>
             <th>商品id</th>
@@ -63,8 +64,9 @@
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.inventoryflowall}" var="inventoryflow">
+        <s:iterator value="%{#session.inventoryflowgoods}" var="inventoryflow">
             <tr>
+                <td><s:property value="#inventoryflow.id"/></td>
                 <td><s:property value="#inventoryflow.producerId"/></td>
                 <td><s:property value="#inventoryflow.producerName"/></td>
                 <td><s:property value="#inventoryflow.goodsId"/></td>
