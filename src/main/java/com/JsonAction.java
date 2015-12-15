@@ -265,7 +265,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         int witholdingNumber = Integer.valueOf(w);  //预提数
         String unit = request.getParameter("unit");       //单位  与库存商品单位不一样不预提
         List<CommodityDto> commodityDtoList = searchBiz.searchWithholding(goodsId, producerId, placeId);
-
+        System.out.println("搜查成功" + commodityDtoList.size());
         if (commodityDtoList.size() > 0) {
             CommodityDto commodityDto = commodityDtoList.get(0);
             BigDecimal a = commodityDto.getAvailableInventory(); //预提后可用库存

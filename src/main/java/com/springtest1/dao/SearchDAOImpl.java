@@ -354,7 +354,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
                 "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, "  + //11剩余预提数*/
-                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory, "+  //12预提后可用库存
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory  "+  //12预提后可用库存
           /*      "zmkc.rk_id " +  // 13明细id*/
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
                 "			ifnull(zck.ck_number, 0) ck_number, " +
@@ -412,7 +412,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
                 "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
                 "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id "+
-                "WHERE sp.sp_id='" + goodsId + "' and sh.sh_id='"+producerId+"' and kc.kc_id='"+placeId+"' ;";
+                "WHERE sp.sp_id='"+goodsId+"' and sh.sh_id='"+producerId+"' and kc.kc_id='"+placeId+"' ;";
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<Object[]> list = sqlQuery.list();
@@ -423,6 +423,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             CommodityDto commodityDto = new CommodityDto();
             commodityDto.setAvailableInventory((BigDecimal) row[0]);
             commodityDtoList.add(commodityDto);
+            System.out.println(commodityDto.getAvailableInventory());
         }
         return commodityDtoList;
     }
