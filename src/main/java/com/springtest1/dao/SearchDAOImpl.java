@@ -153,7 +153,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	zmkc.zmkc AS carryingExcessInventory, " +  //8账面剩余库存
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
-                "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, "  + //11剩余预提数
+                "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, " + //11剩余预提数
                 "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id " +  //12预提后可用库存 13明细id
 
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
@@ -215,7 +215,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<Object[]> list = sqlQuery.list();
-        System.out.println("DAO"+list.size());
+        System.out.println("DAO" + list.size());
         List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
         for (Object[] row : list) {
             System.out.println(row);
@@ -239,7 +239,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
         return commodityDtoList;
     }
 
-    public List<CommodityDto> searchAllGoods(String goodsName){  //查总库存流动 带商品名
+    public List<CommodityDto> searchAllGoods(String goodsName) {  //查总库存流动 带商品名
         String sql = "SELECT " +
                 "	zmkc.sh_id, " +
                 "	sh.sh_name AS producerName, " +   //1商户
@@ -252,7 +252,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	zmkc.zmkc AS carryingExcessInventory, " +  //8账面剩余库存
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
-                "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, "  + //11剩余预提数
+                "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, " + //11剩余预提数
                 "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id " +  //12预提后可用库存 13明细id
 
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
@@ -310,12 +310,12 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "AND zmkc.rk_place_id = syyt.place_id " +
                 "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
                 "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
-                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id "+
+                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id " +
                 "WHERE sp.sp_name='" + goodsName + "';";
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<Object[]> list = sqlQuery.list();
-        System.out.println("DAO"+list.size());
+        System.out.println("DAO" + list.size());
         List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
         for (Object[] row : list) {
             System.out.println(row);
@@ -340,7 +340,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
     }
 
 
-    public List<CommodityDto> searchWithholding(Integer goodsId,Integer producerId,Integer placeId){  //查当前预提
+    public List<CommodityDto> searchWithholding(Integer goodsId, Integer producerId, Integer placeId) {  //查当前预提
         String sql = "SELECT " +
             /*    "	zmkc.sh_id, " +
                 "	sh.sh_name AS producerName, " +   //1商户
@@ -354,7 +354,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
                 "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, "  + //11剩余预提数*/
-                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory  "+  //12预提后可用库存
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory  " +  //12预提后可用库存
           /*      "zmkc.rk_id " +  // 13明细id*/
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
                 "			ifnull(zck.ck_number, 0) ck_number, " +
@@ -411,17 +411,18 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "AND zmkc.rk_place_id = syyt.place_id " +
                 "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
                 "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
-                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id "+
-                "WHERE sp.sp_id='"+goodsId+"' and sh.sh_id='"+producerId+"' and kc.kc_id='"+placeId+"' ;";
+                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id " +
+                "WHERE sp.sp_id='" + goodsId + "' and sh.sh_id='" + producerId + "' and kc.kc_id='" + placeId + "' ;";
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
-        List<Object[]> list = sqlQuery.list();
-        System.out.println("DAO"+list.size());
+        List<BigDecimal> list = sqlQuery.list();
+        System.out.println("DAO" + list.size());
         List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
-        for (Object[] row : list) {
+        for (int i = 0; i < list.size(); i++) {
+            BigDecimal row = list.get(0);
             System.out.println(row);
             CommodityDto commodityDto = new CommodityDto();
-            commodityDto.setAvailableInventory((BigDecimal) row[0]);
+            commodityDto.setAvailableInventory(row);
             commodityDtoList.add(commodityDto);
             System.out.println(commodityDto.getAvailableInventory());
         }
