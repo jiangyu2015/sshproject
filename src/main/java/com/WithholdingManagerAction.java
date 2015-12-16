@@ -215,9 +215,9 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 Deliver d = new Deliver();
                 d.setWithholding(w);
                 List<Deliver> deliverList = deliverBiz.getDeliverList(d);
-                if (deliverList.size() > 0) {
+          // if (deliverList.size() > 0) {
                     session.put("deliverlist", deliverList);
-                }
+         //       }
                 return "success";
             } else
                 return "input";

@@ -12,6 +12,5 @@ public interface DeliverDAO {
     public List search(Deliver condition);   //查询
     public void add(Deliver condition);//add
     // public boolean delGoods(Deliver condition); //del
-
     public void editDeliver(Deliver deliver); //修改AllList
 }

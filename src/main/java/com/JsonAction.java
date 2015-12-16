@@ -304,6 +304,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         return SUCCESS;
     }
 
+
     public String doDeliver() {                     //出库 点取预提表
         String id = request.getParameter("id");
         int withholdingId = Integer.valueOf(id);
@@ -330,6 +331,11 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         json.put("type", type);
         System.out.println(goodsId + goodsName + placeId + placeName + producerName);
         result = json.toString();
+        return SUCCESS;
+    }
+
+    public String deliverSelect() {  //检测已出库多少，还可以预提多少
+
         return SUCCESS;
     }
 

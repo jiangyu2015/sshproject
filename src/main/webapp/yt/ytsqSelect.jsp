@@ -41,15 +41,16 @@
             });
         });
 
-        function check() {
+        function check(form) {
             var val = $("#item").val();
             //   var selectId = $("[value='" + val + "']").eq(0).attr('id');
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
 
             if (selectId == undefined) {
                 alert("该商品不存在");
-                return;
+                return false;
             }
+            else  return true;
         }
     </script>
 </head>
@@ -57,15 +58,14 @@
 <body>
 <div class="title">查询商品库存流动情况</div>
 <div class="content">
-    <form method="post" action="ytSelect">  <%--需要加check--%>
+    <form method="post" action="ytSelect" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商品名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的商品名称" name="goodsName"/>
                 <datalist id="select"></datalist>
             </div>
         </div>
-        <%-- <button  onclick="aaa();">sss</button>--%>
-        <input type="submit" value="查找" class="btn-submit" onclick="check();"/>
+        <input type="submit" value="查找" class="btn-submit"/>
 
 
     </form>

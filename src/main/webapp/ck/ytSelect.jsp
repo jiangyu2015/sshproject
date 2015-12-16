@@ -21,40 +21,54 @@
     <title>查询预提明细</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <%-- <script type="text/javascript">
+         function find() {
+             var to = document.f;
+             //      var pany=document.getElementsByName("bb")[0];
+
+             var params = to.withholding.withholdingId;
+             to.submit();
+         }
+         to.action = "Action_method2?pany=" + pany.value;
+         to.submit();
+         }
+         var id = $("#item").val();
+         window.location.href = "ytList.jsp?id=" + id + "";
+         }
+     </script>--%>
 </head>
 
 <body>
 <div class="title">查询预提明细</div>
 <div class="content">
-    <form method="post" action="ytSelectDeliver.action">
-       <%-- <div class="line">
-            <div class="lable">商品名称：</div>
-            <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的入库商品名称" name="goodsName"/>
-                <datalist id="select"></datalist>
+
+    <%-- <div class="line">
+         <div class="lable">商品名称：</div>
+         <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的入库商品名称" name="goodsName"/>
+             <datalist id="select"></datalist>
+         </div>
+     </div>
+     <div class="line">
+         <div class="lable">商户名称：</div>
+         <div class="input-div"><input id="item2" list="select2" placeholder="请输入要查询的入库商户名称" name="producerName"/>
+             <datalist id="select2"></datalist>
+         </div>
+     </div>
+
+     <div class="line">
+         <div class="lable">仓库地址：</div>
+         <div class="input-div"><input id="item3" list="select3" placeholder="请输入要查询的入库商户名称" name="storagePlace"/>
+             <datalist id="select3"></datalist>
+         </div>
+     </div>--%>
+    <form method="post" name="f" action="ytSelectDeliver.action">
+        <div class="line">
+            <div class="lable">预提单号：</div>
+            <div class="input-div"><input id="item" list="select" placeholder="请输入预提单号"
+                                          name="withholding.withholdingId"/>
+
             </div>
         </div>
-        <div class="line">
-            <div class="lable">商户名称：</div>
-            <div class="input-div"><input id="item2" list="select2" placeholder="请输入要查询的入库商户名称" name="producerName"/>
-                <datalist id="select2"></datalist>
-            </div>
-        </div>
-
-        <div class="line">
-            <div class="lable">仓库地址：</div>
-            <div class="input-div"><input id="item3" list="select3" placeholder="请输入要查询的入库商户名称" name="storagePlace"/>
-                <datalist id="select3"></datalist>
-            </div>
-        </div>--%>
-
-           <div class="line">
-               <div class="lable">预提单号：</div>
-               <div class="input-div"><input id="item" list="select" placeholder="请输入预提单号" name="withholding.withholdingId"/>
-
-               </div>
-           </div>
-
-
         <input type="submit" value="查找" class="btn-submit" <%--onclick="find();"--%>/>
     </form>
 </div>

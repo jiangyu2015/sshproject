@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,18 +39,20 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
                         }
                     }
                 }
-                return c.list();
+                if (c.list().size() <= 0) {
+                    return new ArrayList<Deliver>();
+                } else {
+                    return c.list();
+                }
             }
         });
     }
 
     public void add(Deliver deliver) {
-
         super.getHibernateTemplate().save(deliver);
     }
 
     public void editDeliver(Deliver deliver) {
-
         super.getHibernateTemplate().update(deliver);   //修改
     }
 }
