@@ -1,9 +1,7 @@
 package com;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -192,6 +190,22 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         return SUCCESS;
     }
 
+    public String selectAllProduecer() {            //所有商户
+        try {
+            List<Producer> producer = producerBiz.getAllProducer();
+            if (producer.size() > 0) {
+                JSONObject json = new JSONObject();
+                json.put("producerList", producer);
+                result = json.toString();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+
+    }
+
+
     public String excutePlaceAjax() {
         try {
             List<Place> placeList = placeBiz.getAllPlace();
@@ -204,7 +218,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         return SUCCESS;
     }
 
-    public String excuteCheck() {
+    public String excuteCheck() {   //入库申请审核未通过
         String id = request.getParameter("id");
         int storageAppId = Integer.valueOf(id);
         System.out.println("JsonActionCheck传值" + storageAppId);
@@ -216,6 +230,10 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         StorageApp storageApp = (StorageApp) list.get(0);
         System.out.print(storageApp.getProducerName() + storageApp.getStoragePlace() + storageApp.getGoodsName());
         storageApp.setState("yesno");                               //改申请state
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        storageApp.setAuditTime(date);
+
         storageAppBiz.editStorageApp(storageApp);
 
         return SUCCESS;
@@ -326,6 +344,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
             System.out.println(list.size());
             Goods goods = (Goods) list.get(0);
             goods.setState("yesno");                               //改申请state
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            goods.setAuditTime(date);
             goodsBiz.modifyGood(goods);
         }
         return SUCCESS;
@@ -342,6 +363,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
             System.out.println(list.size());
             Goods goods = (Goods) list.get(0);
             goods.setState("yesok");                               //改申请state
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            goods.setAuditTime(date);
             goodsBiz.modifyGood(goods);
         }
         return SUCCESS;
@@ -358,6 +382,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
             System.out.println(list.size());
             Producer producer = (Producer) list.get(0);
             producer.setState("yesno");                               //改申请state
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            producer.setAuditTime(date);
             producerBiz.editProducer(producer);
         }
         return SUCCESS;
@@ -374,6 +401,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
             System.out.println(list.size());
             Producer producer = (Producer) list.get(0);
             producer.setState("yesok");                               //改申请state
+            Calendar calendar = Calendar.getInstance();
+            Date date = calendar.getTime();
+            producer.setAuditTime(date);
             producerBiz.editProducer(producer);
         }
         return SUCCESS;

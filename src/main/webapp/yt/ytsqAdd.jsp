@@ -54,7 +54,7 @@
                 }//这里不要加","
             });
         });
-        function check() {
+        function check(form) {
             var result;
             $.ajax({
                 type: "post",
@@ -81,6 +81,7 @@
                     if (witholdingNumber > availableInventory || goodsUnit != unit) {
                         if (witholdingNumber > availableInventory) {
                             alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
+                            result = false;
                         }
                         if (goodsUnit != unit) {
                             alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
@@ -93,9 +94,11 @@
                     }
                 }
             });
-            if (!result) {
+            /*if (!result) {
                 return false;
-            }
+            }*/
+            return result;
+
         }
 
         function GetQueryString(name) {

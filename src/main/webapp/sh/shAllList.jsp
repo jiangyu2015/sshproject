@@ -79,7 +79,7 @@
     <div class="title">商户信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">
+     <%--   <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -91,6 +91,7 @@
             <th>联系电话1</th>
             <th>联系电话2</th>
             <th>商户可用</th>
+            <th>审核时间</th>
         </tr>
         </thead>
         <tbody>
@@ -103,6 +104,7 @@
                 <td><s:property value="#producer.telOne"/></td>
                 <td><s:property value="#producer.telTwo"/></td>
                 <td><s:property value="#producer.state"/></td>
+                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#producer.auditTime"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -150,6 +152,11 @@
                         <div class="lable">商户可用状态：</div>
                         <div class="input-div"><input id="state" name="producer.state" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">审核时间：</div>
+                        <div class="input-div"><input  name="producer.auditTime" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>

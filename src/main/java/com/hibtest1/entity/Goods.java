@@ -21,6 +21,15 @@ public class Goods implements java.io.Serializable {
     private Integer baozhiqi;
     private Date expirationDate;
     private String state;
+    private Date auditTime; //审核时间
+
+    public Date getAuditTime() {
+        return auditTime;
+    }
+
+    public void setAuditTime(Date auditTime) {
+        this.auditTime = auditTime;
+    }
 
     public String getState() {
         return state;

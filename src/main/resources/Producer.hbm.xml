@@ -28,5 +28,8 @@
         <property name="state" type="java.lang.String">
             <column name="state" length="15" not-null="true"/>
         </property>
+        <property name="auditTime" type="java.util.Date">
+            <column name="auditTime" length="30" not-null="false"/>
+        </property>
     </class>
 </hibernate-mapping>

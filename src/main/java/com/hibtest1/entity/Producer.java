@@ -1,6 +1,7 @@
 package com.hibtest1.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by user on 2015/11/25.
@@ -13,6 +14,15 @@ public class Producer  implements Serializable {
     private String telOne;
     private String telTwo;
     private String state;
+    private Date auditTime;
+
+    public Date getAuditTime() {
+        return auditTime;
+    }
+
+    public void setAuditTime(Date auditTime) {
+        this.auditTime = auditTime;
+    }
 
     public String getState() {
         return state;

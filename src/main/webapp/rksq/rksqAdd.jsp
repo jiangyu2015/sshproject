@@ -43,9 +43,7 @@
                 url: "selectProducerJsonAction",
                 dataType: 'json',
                 success: function (data, xhrTxt) {
-                    alert("producer");
                     var str = "";
-//                    alert("sh");
                     var d = eval("(" + data + ")");
                     var producer = d.producerList;
                     console.log(producer);

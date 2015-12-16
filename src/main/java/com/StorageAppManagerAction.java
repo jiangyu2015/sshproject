@@ -133,8 +133,11 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         List list = storageAppBiz.getStorageAppList(condition);
         System.out.println(list.size());
         StorageApp storageApp = (StorageApp) list.get(0);
-        storageApp.setState("yesok");
-        storageAppBiz.editStorageApp(storageApp);                //更改状态yesok
+        storageApp.setState("yesok");     //更改状态yesok
+        Calendar calendar = Calendar.getInstance();   //更改审核时间
+        Date date = calendar.getTime();
+        storageApp.setAuditTime(date);
+        storageAppBiz.editStorageApp(storageApp);
         Storage storage = new Storage();           //新建入库明细表
 
         Goods goods = (Goods) goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
@@ -158,7 +161,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         return "success";
     }
 
-    public String searchStorageList() {
+    public String searchStorageAppList() {  //改了
         System.out.println(producerName);
         StorageApp condition = new StorageApp();
         condition.setProducerName(producerName);
@@ -246,6 +249,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         System.out.println("输出仓库id" + place.getPlaceId());
         condition.setPlace(place);
         storageAppBiz.add(condition);
+        session.put("storageapplist", condition);  //两个地方用到，edit不知道会不会有问题
         return "success";
 
     }

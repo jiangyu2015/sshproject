@@ -18,10 +18,9 @@
         $(function () {
             $.ajax({
                 type: "post",
-                url: "excuteProducerAjaxJsonAction",
+                url: "selectAllProduecerJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
-                    alert("sh");
                     var d = eval("(" + data + ")");
                     var producer = d.producerList;
                     console.log(producer);

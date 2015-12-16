@@ -77,6 +77,7 @@
                 _move = false;
             });
         });
+
     </script>
 </head>
 
@@ -170,7 +171,7 @@
                     <div class="line">
                         <div class="lable">预期数量：</div>
                         <div class="input-div"><input name="storage.expectedNumber" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
@@ -181,7 +182,7 @@
                     <div class="line">
                         <div class="lable">入库类型：</div>
                         <div class="input-div"><input name="storage.storageType" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">备注：</div>
@@ -190,8 +191,8 @@
 
                     <div class="line">
                         <div class="lable">入库状态：</div>
-                        <div class="input-div"><input name="storage.state" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                        <div class="input-div"><input id="state" name="storage.state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div style="position: relative; bottom: 0px;">

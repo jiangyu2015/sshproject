@@ -105,6 +105,7 @@
             <th>入库类型</th>
             <th>申请时间</th>
             <th>处理状态</th>
+            <th>审核时间</th>
         </tr>
         </thead>
         <tbody>
@@ -121,6 +122,7 @@
                 <td><s:property value="#storageapp.storageType"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storageapp.applicationDate"/></td>
                 <td><s:property value="#storageapp.state"/></td>
+                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#storageapp.auditTime"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -184,6 +186,11 @@
                         <div class="lable">处理状态：</div>
                         <div class="input-div"><input id="state" name="storageApp.state" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">审核时间：</div>
+                        <div class="input-div"><input  name="storageApp.auditTime" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>

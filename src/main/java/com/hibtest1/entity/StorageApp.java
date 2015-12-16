@@ -21,6 +21,15 @@ public class StorageApp implements Serializable {
     private Goods goods;
     private Producer producer;
     private Place place;
+    private Date auditTime; //审核时间
+
+    public Date getAuditTime() {
+        return auditTime;
+    }
+
+    public void setAuditTime(Date auditTime) {
+        this.auditTime = auditTime;
+    }
 
     public Goods getGoods() {
         return goods;
