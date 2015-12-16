@@ -103,6 +103,7 @@
             <th>预期入库数量</th>
             <th>三联单编号</th>
             <th>入库类型</th>
+            <th>申请时间</th>
             <th>处理状态</th>
         </tr>
         </thead>
@@ -118,6 +119,7 @@
                 <td><s:property value="#storageapp.expectedNumber"/></td>
                 <td><s:property value="#storageapp.sldId"/></td>
                 <td><s:property value="#storageapp.storageType"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storageapp.applicationDate"/></td>
                 <td><s:property value="#storageapp.state"/></td>
             </tr>
         </s:iterator>
@@ -172,6 +174,11 @@
                     <div class="line">
                         <div class="lable">入库类型：</div>
                         <div class="input-div"><input placeholder="请输入入库类型" name="storageApp.storageType"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请时间：</div>
+                        <div class="input-div"><input  name="storageApp.applicationDate"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"//></div>
                     </div>
                     <div class="line">
                         <div class="lable">处理状态：</div>
