@@ -55,6 +55,7 @@
             });
         });
         function check(form) {
+
             $.ajax({
                 type: "post",
                 url: "doWithholdingCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
@@ -67,26 +68,36 @@
                     unit: $("#unit").val()
                 },
                 dataType: "json",//设置需要返回的数据类型
-                success: function () {
-                    alert("预提成功");
-                    return true;
-                    /*   window.location.href = "ytAdd.action";*/
-                },
-                fail: function (data, xhrTxt) {
+                success: function (data, xhrTxt) {
                     var str = "";
                     var d = eval("(" + data + ")");
-                    var goodsUnit = str + d.goodsUnit;
-                    alert("预提不成功，商品入库单位为"+goodsUnit+"请确认！");
-                    return false;
-                },
-                error: function (data, xhrTxt) {
-                    var str = "";
-                    var d = eval("(" + data + ")");
-                    var availableInventory = str + d.availableInventory;
-                    alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
-                    return false;
-                }//这里不要加","
+                    var witholdingNumber = $("#witholdingNumber").val();
+                    alert("预提数" + witholdingNumber);
+                    var unit = $("#unit").val();
+                    var goodsUnit = str + d.goodsUnit;  //商品入库单位
+                    alert("后台单位" + goodsUnit);
+                    var availableInventory = d.availableInventory;
+                    var a="";
+                    if (witholdingNumber > availableInventory || goodsUnit != unit) {
+                        if (witholdingNumber > availableInventory) {
+                            alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
+                            a=a+"false";
+                        }
+                        if (goodsUnit != unit) {
+                            alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为"+unit+"，请确认！");
+                            a=a+"false";
+                        }
+                    }
+                    else {
+                        alert("预提成功");
+                        a=a+"true";
+                    }
+                    return a;
+                }
+
+
             });
+
         }
 
         function GetQueryString(name) {
@@ -95,8 +106,6 @@
             if (r != null)return unescape(r[2]);
             return null;
         }
-
-
     </script>
 </head>
 <body>
@@ -160,7 +169,7 @@
             <div class="input-div"><input id="type" name="withholding.useType" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
-        <input type="submit" value="提交" class="btn-submit" <%--onclick="check();"--%>/>
+        <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>
 </body>

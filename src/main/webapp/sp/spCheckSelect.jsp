@@ -54,17 +54,6 @@
             }
         }
 
-
-        /*   function aaa() {
-         var val = $("#item").val();
-         var selectId = $("[value='" + val + "']").eq(0).attr('id');
-         if (selectId == undefined) {
-         console.log("该商品不存在");
-         return;
-         }
-         console.log("val: " + val);
-         console.log("Id: " + selectId);
-         }*/
     </script>
 </head>
 

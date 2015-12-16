@@ -90,10 +90,11 @@
         </action>
         <action name="rksqcheck" class="storageAppCheck" method="checkStorageApp">
             <result type="redirect" name="storageAppCheck">/rksq/rksqCheckList.jsp</result>
+            <result type="redirect" name="input">/rksq/fail.jsp</result>
         </action>
 
         <action name="rksqOk" class="storageAppOk" method="storageAppOk">
-            <result type="redirect" name="success">/rksq/test.jsp</result>
+            <result type="redirect" name="success">rksqcheck.action</result>
         </action>
 
         <action name="rksqAdd" class="storageAppAdd" method="addStorageApp">
@@ -135,6 +136,7 @@
         </action>
         <action name="ytAdd" class="withholdingAdd" method="addWithholding">
             <result type="redirect" name="success">/yt/test.jsp</result>
+            <result type="redirect" name="input">/yt/fail.jsp</result>
         </action>
         <action name="listyt" class="withholdingList" method="listWithholding">
             <result type="redirect" name="withholding">/yt/ytAllList.jsp</result>

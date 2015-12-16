@@ -118,10 +118,10 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String checkStorageApp() {               //得到所需审核的单子
         System.out.println("审核checkStorageApp");
         List<StorageApp> storageApp = storageAppBiz.getCheckStorageApp();
-        StorageApp storageApp1 = (StorageApp) storageApp.get(0);
-        System.out.println(storageApp1.getGoodsName());
+   if(storageApp.size()>0){
         session.put("storageapplistcheck", storageApp);
-        return "storageAppCheck";
+        return "storageAppCheck";}
+        else return "input";
     }
 
     public String storageAppOk() {               //通过          需要增加不能为空的提示
@@ -239,6 +239,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         } else {
             return "input";
         }
+
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);       //增加商户
         condition.setProducer(producer);
         Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
@@ -263,7 +264,10 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     } */
 
     public String editStorageApp() {
-        StorageApp condition = new StorageApp();
+        StorageApp s = new StorageApp();
+        s.setStorageAppId(storageApp.getStorageAppId());
+        StorageApp condition= new StorageApp();
+        condition=(StorageApp) storageAppBiz.getStorageAppList(s).get(0);
         if (storageApp.getStorageAppId() != null && !storageApp.getStorageAppId().equals("")) {
             condition.setStorageAppId(storageApp.getStorageAppId());
         }

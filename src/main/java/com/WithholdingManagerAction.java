@@ -127,9 +127,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         //    System.out.println(enteringWarehouseDto);
         System.out.println("addWithholding");
         Withholding condition = new Withholding();
-
         System.out.println("ok");
-
         if (goodsId != null && !goodsId.equals("")) {          //商品id
             System.out.println(goodsId + "预提申请我传过来了");
             Goods g = new Goods();

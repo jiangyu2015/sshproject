@@ -262,20 +262,17 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         int producerId = Integer.valueOf(pid);
         String w = request.getParameter("witholdingNumber");
         System.out.println("预提数" + w);
-        int witholdingNumber = Integer.valueOf(w);  //预提数
+        int witholdingNumber = Integer.valueOf(w);  //预提数  需要检测是不是字符 要不然会报错
         String unit = request.getParameter("unit");       //单位  与库存商品单位不一样不预提
         List<CommodityDto> commodityDtoList = searchBiz.searchWithholding(goodsId, producerId, placeId);
         System.out.println("搜查成功" + commodityDtoList.size());
+        JSONObject json = new JSONObject();
         if (commodityDtoList.size() > 0) {
             CommodityDto commodityDto = commodityDtoList.get(0);
             BigDecimal a = commodityDto.getAvailableInventory(); //预提后可用库存
-            int availableInventory = a.intValue();  //转换为int
-            if (availableInventory < witholdingNumber) {
-                JSONObject json = new JSONObject();
-                json.put("availableInventory", availableInventory);
-                result = json.toString();
-                return "error";
-            }
+            int availableInventory = a.intValue();
+            json.put("availableInventory", availableInventory);
+            result = json.toString();
         }
         Goods g = new Goods();
         g.setGoodsId(goodsId);
@@ -283,12 +280,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
         g = goodsList.get(0);
         String goodsUnit = g.getUnit();
         System.out.println("后台单位是" + g.getUnit());
-        if (!goodsUnit.equals(unit)) {        //与库存商品单位不一样不预提
-            JSONObject json = new JSONObject();
-            json.put("goodsUnit", goodsUnit);
-            result = json.toString();
-            return "fail";
-        }
+        json.put("goodsUnit", goodsUnit);
+        result = json.toString();
+
         return SUCCESS;
     }
 

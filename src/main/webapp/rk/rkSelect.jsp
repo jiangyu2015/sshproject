@@ -42,7 +42,7 @@
 
             $.ajax({
                 type: "post",
-                url: "selectProducerAjaxJsonAction",
+                url: "selectProducerJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
 //                    alert("sh");
