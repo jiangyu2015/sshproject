@@ -82,7 +82,7 @@
                     if (witholdingNumber > availableInventory || goodsUnit != unit) {
                         if (witholdingNumber > availableInventory) {
                             alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
-                            /* return false;*/
+
                             a = a + "false";
                         }
                         if (goodsUnit != unit) {
