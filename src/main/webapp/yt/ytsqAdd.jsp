@@ -58,6 +58,7 @@
 
             $.ajax({
                 type: "post",
+                async: false,
                 url: "doWithholdingCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                 data: {//设置数据源
                     goodsId: $("#goodsId").val(),
@@ -77,20 +78,23 @@
                     var goodsUnit = str + d.goodsUnit;  //商品入库单位
                     alert("后台单位" + goodsUnit);
                     var availableInventory = d.availableInventory;
-                    var a="";
+                    var a = "";
                     if (witholdingNumber > availableInventory || goodsUnit != unit) {
                         if (witholdingNumber > availableInventory) {
                             alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
-                            a=a+"false";
+                            /* return false;*/
+                            a = a + "false";
                         }
                         if (goodsUnit != unit) {
-                            alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为"+unit+"，请确认！");
-                            a=a+"false";
+                            alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
+                            a = a + "false";
+                            /* return false;*/
                         }
                     }
                     else {
                         alert("预提成功");
-                        a=a+"true";
+                        a = a + "true";
+                        /*    return true;*/
                     }
                     return a;
                 }
