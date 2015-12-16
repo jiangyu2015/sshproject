@@ -111,7 +111,7 @@
         <th>备注</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody1>
     <s:iterator value="%{#session.deliverlist}" var="deliver">
         <tr>
             <td><s:property value="#deliver.deliverId"/></td>
@@ -128,7 +128,7 @@
             <td><s:property value="#deliver.remark"/></td>
         </tr>
     </s:iterator>
-    </tbody>
+    </tbody1>
 </table>
 </body>
 </html>
