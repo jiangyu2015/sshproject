@@ -23,6 +23,12 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     PlaceBiz placebiz;
     ProducerBiz producerBiz;
 
+    public void setDeliverBiz(DeliverBiz deliverBiz) {
+        this.deliverBiz = deliverBiz;
+    }
+
+    DeliverBiz deliverBiz;
+
     public void setProducerBiz(ProducerBiz producerBiz) {
         this.producerBiz = producerBiz;
     }
@@ -169,11 +175,11 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
 
     public String listWithholding() {               //得到所有预提单
         List<Withholding> withholdinglist = withholdingBiz.getAllWithholding();
-        Withholding withholding1 = withholdinglist.get(0);
-        System.out.println(withholding1.getGoods().getGoodsId() + "得到所有预提单");
-        session.put("withholdinglistall", withholdinglist);
-
-        return "withholding";
+        if (withholdinglist.size() > 0) {
+            session.put("withholdinglistall", withholdinglist);
+            return "withholding";
+        } else
+            return "input";
     }
 
     public String searchWithholdingList() {      //增加这个方法需要注入 biz别忘了
@@ -200,14 +206,18 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         else */
         if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
             System.out.println(withholding.getWithholdingId());
-
             condition.setWithholdingId(withholding.getWithholdingId());
-
             List<Withholding> list = withholdingBiz.search(condition);
             System.out.println(list.size());
             if (list.size() > 0) {
-                //  session.put("goodslist", list);
-                session.put("withholdinglist", list);
+                session.put("withholdinglist", list);   //有了预提表
+                Withholding w = list.get(0);
+                Deliver d = new Deliver();
+                d.setWithholding(w);
+                List<Deliver> deliverList = deliverBiz.getDeliverList(d);
+                if (deliverList.size() > 0) {
+                    session.put("deliverlist", deliverList);
+                }
                 return "success";
             } else
                 return "input";

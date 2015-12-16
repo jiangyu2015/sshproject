@@ -20,13 +20,13 @@
 
         function doDeliver() {
             if ($(".active").length == 0) {
-                alert('请选择要修改的行');
+                alert('请选择要您的预提行');
             } else {
                 var $tds = $("tr.active").children();
-                alert("取到的值id"+$tds.eq(0).text());
+                alert("取到的值id" + $tds.eq(0).text());
                 $.ajax({
                     success: function () {
-                        window.location.href = "ckAdd.jsp?id="+$tds.eq(0).text()+"";
+                        window.location.href = "ckAdd.jsp?id=" + $tds.eq(0).text() + "";
                     },
                     error: function () {
                         alert("系统异常，请稍后重试！");
@@ -89,6 +89,43 @@
             <td><s:date format="yyyy-MM-dd" name="#withholding.deteline"/></td>
             <td><s:property value="#withholding.useType"/></td>
 
+        </tr>
+    </s:iterator>
+    </tbody>
+</table>
+<div class="title">该预提对应出库明细信息</div>
+<table id="advSearch" class="table">
+    <thead>
+    <tr>
+        <th>出库明细id</th>
+        <th>商户id</th>
+        <th>商户名称</th>
+        <th>商品id</th>
+        <th>商品名称</th>
+        <th>仓库id</th>
+        <th>仓库名称</th>
+        <th>实际出库时间</th>
+        <th>预期出库数量</th>
+        <th>实际出库数量</th>
+        <th>出库类型</th>
+        <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <s:iterator value="%{#session.deliverlist}" var="deliver">
+        <tr>
+            <td><s:property value="#deliver.deliverId"/></td>
+            <td><s:property value="#deliver.producer.producerId"/></td>
+            <td><s:property value="#deliver.producer.producerName"/></td>
+            <td><s:property value="#deliver.goods.goodsId"/></td>
+            <td><s:property value="#deliver.goods.goodsName"/></td>
+            <td><s:property value="#deliver.place.placeId"/></td>
+            <td><s:property value="#deliver.place.placeName"/></td>
+            <td><s:date format="yyyy-MM-dd" name="#deliver.deliverDate"/></td>
+            <td><s:property value="#deliver.expecteNumber"/></td>
+            <td><s:property value="#deliver.deliverNumber"/></td>
+            <td><s:property value="#deliver.deliverType"/></td>
+            <td><s:property value="#deliver.remark"/></td>
         </tr>
     </s:iterator>
     </tbody>
