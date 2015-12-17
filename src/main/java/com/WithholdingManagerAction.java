@@ -185,6 +185,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     }
 
     public String searchWithholdingList() {      //增加这个方法需要注入 biz别忘了
+        System.out.println(withholding.getWithholdingId()+"yutiId");
         Withholding condition = new Withholding();
        /* if (goodsName != null && !goodsName.equals("")) {
             String[] strs = goodsName.split("\\|");

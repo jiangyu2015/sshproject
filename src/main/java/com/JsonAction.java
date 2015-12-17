@@ -335,7 +335,19 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     }
 
     public String deliverSelect() {  //检测已出库多少，还可以预提多少
-
+        String yt = request.getParameter("withholdingNumber"); //预提数
+        System.out.println("yt"+yt);
+        int withholdingNumber = Integer.valueOf(yt);
+        String xh=request.getParameter("sumwithholdingdeliver"); //预提消耗总数
+        System.out.println("xh"+xh);
+        int sumwithholdingdeliver=Integer.valueOf(xh);
+        /*String ck=request.getParameter("deliverNumber"); //本次出库数
+        int deliverNumber=Integer.valueOf(ck);*/
+        int difference=withholdingNumber-sumwithholdingdeliver;  //剩余消耗数
+        System.out.println("剩余消耗数为"+difference);
+        JSONObject json = new JSONObject();
+        json.put("difference", difference);
+        result = json.toString();
         return SUCCESS;
     }
 

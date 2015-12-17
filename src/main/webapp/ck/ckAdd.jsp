@@ -54,13 +54,49 @@
             return null;
         }
 
+        function check(form) {
+            var result;
+            $.ajax({
+                type: "post",
+                async: false,
+                 url: "deliverSelectJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名*/
+                 data: {//设置数据源
+                    withholdingNumber: GetQueryString("withholdingNumber"),
+                    sumwithholdingdeliver: GetQueryString("sumwithholdingdeliver")
+                },
+                dataType: "json",//设置需要返回的数据类型
+                success: function (data, xhrTxt) {
+                    var withholdingNumber= GetQueryString("withholdingNumber");
+                    var sumwithholdingdeliver=GetQueryString("sumwithholdingdeliver");
+                    var deliverNumber=$('#deliverNumber').val();
+                    var d = eval("(" + data + ")");
+                    var difference= d.difference;
+                    alert("剩余消耗数"+difference+"本次消耗数"+deliverNumber);
+                    if (difference<deliverNumber) {
+                        alert("出库不成功!,您还可以消耗"+difference+"本次消耗为"+deliverNumber+"超出预提请确认！");
+                        result = false;
+
+                    }
+                    else {
+                        alert("出库成功");
+                        result = true;
+                    }
+                }
+            });
+            /*if (!result) {
+             return false;
+             }*/
+            return result;
+
+        }
+
     </script>
 </head>
 
 <body>
 <div class="title">添加出库信息</div>
 <div class="content">
-    <form method="post" action="ckAdd">
+    <form method="post" action="ckAdd" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">预提单id：</div>
             <div class="input-div"><input id="id" name="withholdingId" readonly="readonly"
@@ -105,7 +141,7 @@
         </div>
         <div class="line">
             <div class="lable">实发数量：</div>
-            <div class="input-div"><input  input name="deliver.deliverNumber"
+            <div class="input-div"><input  id="deliverNumber" input name="deliver.deliverNumber"
                                           placeholder="请输入实发数量"/></div>
         </div>
 

@@ -61,7 +61,7 @@
              <datalist id="select3"></datalist>
          </div>
      </div>--%>
-    <form method="post" name="f" action="ytSelectDeliver.action">
+    <form method="post" action="ytSelectDeliver.action">
         <div class="line">
             <div class="lable">预提单号：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入预提单号"

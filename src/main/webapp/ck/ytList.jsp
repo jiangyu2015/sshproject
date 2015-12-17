@@ -17,39 +17,24 @@
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $.ajax({
-                url: "deliverSelectJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
-                data: {//设置数据源
-                    id: GetQueryString("id")
-                },
-                dataType: "json",//设置需要返回的数据类型*/
-                success: function (data, xhrTxt) {
+        function doDeliver() {
+            if ($(".active").length == 0) {
+                alert('请选择要修改的行');
+            } else {
 
-                    var str = "";
-                    var d = eval("(" + data + ")");
-                    var goodsId = str + d.goodsId;
-                    var goodsName = str + d.goodsName;
-                    var placeId = str + d.placeId;
-                    var placeName = str + d.placeName;
-                    var producerId = str + d.producerId;
-                    var producerName = str + d.producerName;
-                    var type = str + d.type;
-                    $('#goodsId').val(goodsId);
-                    $('#goodsName').val(goodsName);
-                    $('#placeId').val(placeId);
-                    $('#placeName').val(placeName);
-                    $('#producerId').val(producerId);
-                    $('#producerName').val(producerName);
-                    $('#type').val(type);
-                },
-                error: function () {
-                    alert("系统异常，请稍后重试！");
-                }//这里不要加","
-            });
-        });
-
-
+                var $tds = $("tr.active").children();
+                /*   alert($tds.eq(0).text())*/
+                alert("预提"+$tds.eq(10).text()+"出库数"+$('#sumwithholdingdeliver').val());
+                $.ajax({
+                    success: function () {
+                        window.location.href = "ckAdd.jsp?id="+$tds.eq(0).text()+"&withholdingNumber="+$tds.eq(10).text()+"&sumwithholdingdeliver="+$('#sumwithholdingdeliver').val();
+                    },
+                    error: function () {
+                        alert("系统异常，请稍后重试！");
+                    }//这里不要加","
+                });
+            }
+        }
         $(function () {
             $("tbody tr").bind('click', function () {
                 $('table tr').removeClass('active');
@@ -69,9 +54,12 @@
 <body>
 <div class="title">预提信息</div>
 <div class="btn-div">
-   <%-- <td>  <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();"/></td>--%>
-    <td align="right"><label for="xm">当前预提消耗为：</label></td>
-    <td>  <s:textfield name="xm"  value="%{#session.sumwithholdingdeliver}" disabled="true"></s:textfield></td>
+
+    <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();"/>
+    <label>当前预提消耗为：</label>
+    <s:textfield id="sumwithholdingdeliver" value="%{#session.sumwithholdingdeliver}"
+                 style="border: none;-webkit-box-shadow: none;"></s:textfield>
+
 </div>
 
 <table id="advSearch" class="table">
