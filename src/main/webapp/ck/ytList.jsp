@@ -70,8 +70,8 @@
 <div class="title">预提信息</div>
 <div class="btn-div">
    <%-- <td>  <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();"/></td>--%>
-    <td align="right"><label for="xm">姓名：</label></td>
-    <td>  <s:textfield name="xm"  value="%{#session.sumwithholdingdeliver}"></s:textfield></td>
+    <td align="right"><label for="xm">当前预提消耗为：</label></td>
+    <td>  <s:textfield name="xm"  value="%{#session.sumwithholdingdeliver}" disabled="true"></s:textfield></td>
 </div>
 
 <table id="advSearch" class="table">
