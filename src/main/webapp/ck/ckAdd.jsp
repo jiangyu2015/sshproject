@@ -71,7 +71,6 @@
                     var deliverNumber=$('#deliverNumber').val();
                     var d = eval("(" + data + ")");
                     var difference= d.difference;
-                    alert("剩余消耗数"+difference+"本次消耗数"+deliverNumber);
                     if (difference<deliverNumber) {
                         alert("出库不成功!,您还可以消耗"+difference+"本次消耗为"+deliverNumber+"超出预提请确认！");
                         result = false;
@@ -83,9 +82,6 @@
                     }
                 }
             });
-            /*if (!result) {
-             return false;
-             }*/
             return result;
 
         }
