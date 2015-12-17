@@ -5,9 +5,11 @@ import com.hibtest1.entity.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.*;
+import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -215,9 +217,14 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 Deliver d = new Deliver();
                 d.setWithholding(w);
                 List<Deliver> deliverList = deliverBiz.getDeliverList(d);
-          // if (deliverList.size() > 0) {
-                    session.put("deliverlist", deliverList);
-         //       }
+                session.put("deliverlist", deliverList);
+                List<Deliver>delivers=deliverBiz.searchWithholdingDeliver(withholding.getWithholdingId());
+                if (delivers.size() > 0) {
+                    Deliver deliver = delivers.get(0);
+                    BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
+                    int sumDeliver = a.intValue();
+                    session.put("sumwithholdingdeliver",sumDeliver);
+                }
                 return "success";
             } else
                 return "input";

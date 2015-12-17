@@ -73,7 +73,6 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
     }
 
     public void add(Storage storage) {
-
         super.getHibernateTemplate().save(storage);
     }
 

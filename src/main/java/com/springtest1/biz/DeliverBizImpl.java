@@ -17,17 +17,23 @@ public class DeliverBizImpl implements DeliverBiz {
     }
 
     @Transactional
-    public List getAllDeliver() {
+    public List<Deliver> getAllDeliver() {
         return deliverDAO.getAllDeliver();
     }
 
-    public List getDeliverList(Deliver condition) {
+    public List<Deliver> getDeliverList(Deliver condition) {
         List list = deliverDAO.search(condition);
         return list;
     }
 
     public void add(Deliver condition) {
         deliverDAO.add(condition);
+    }
+
+    @Transactional
+    public List<Deliver> searchWithholdingDeliver(Integer withholdingId){
+        List<Deliver> list=deliverDAO.searchWithholdingDeliver(withholdingId);
+        return  list;
     }
 
   /*  public boolean delGoods(Deliver deliver) {

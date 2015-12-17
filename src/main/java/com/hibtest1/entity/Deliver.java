@@ -1,6 +1,7 @@
 package com.hibtest1.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,7 +13,21 @@ public class Deliver implements Serializable {
     private Goods goods;
     private Withholding withholding;
     private Producer producer;
+    private Date deliverDate;  //出库时间
 
+    public BigDecimal getSumDeliver() {
+        return sumDeliver;
+    }
+
+    public void setSumDeliver(BigDecimal sumDeliver) {
+        this.sumDeliver = sumDeliver;
+    }
+
+    private Integer expecteNumber;  //应发数量
+    private Integer deliverNumber;  //出库数量
+    private String deliverType="其他"; //出库类型
+    private String remark; //备注
+    private BigDecimal sumDeliver;//总出库
     public Producer getProducer() {
         return producer;
     }
@@ -44,12 +59,6 @@ public class Deliver implements Serializable {
     public void setWithholding(Withholding withholding) {
         this.withholding = withholding;
     }
-
-    private Date deliverDate;  //出库时间
-    private Integer expecteNumber;  //应发数量
-    private Integer deliverNumber;  //出库数量
-    private String deliverType="其他"; //出库类型
-    private String remark; //备注
 
     public Integer getDeliverId() {
         return deliverId;

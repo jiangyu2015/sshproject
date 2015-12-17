@@ -69,8 +69,11 @@
 <body>
 <div class="title">预提信息</div>
 <div class="btn-div">
-    <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();">
+   <%-- <td>  <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();"/></td>--%>
+    <td align="right"><label for="xm">姓名：</label></td>
+    <td>  <s:textfield name="xm"  value="%{#session.sumwithholdingdeliver}"></s:textfield></td>
 </div>
+
 <table id="advSearch" class="table">
     <thead>
     <tr>
@@ -107,13 +110,12 @@
             <td><s:date format="yyyy-MM-dd" name="#withholding.witholdingDate"/></td>
             <td><s:date format="yyyy-MM-dd" name="#withholding.deteline"/></td>
             <td><s:property value="#withholding.useType"/></td>
-
         </tr>
     </s:iterator>
     </tbody>
 </table>
 <div class="title">该预提对应出库明细信息</div>
-<table id="advSearch" class="table">
+<table id="advSearch1" class="table">
     <thead>
     <tr>
         <th>出库明细id</th>
