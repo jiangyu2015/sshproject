@@ -78,15 +78,23 @@
                     var goodsUnit = str + d.goodsUnit;  //商品入库单位
                     alert("后台单位" + goodsUnit);
                     var availableInventory = d.availableInventory;
-                    if (witholdingNumber > availableInventory || goodsUnit != unit) {
-                        if (witholdingNumber > availableInventory) {
-                            alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
-                            result = false;
-                        }
-                        if (goodsUnit != unit) {
-                            alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
-                            result = false;
-                        }
+                    /*  if (witholdingNumber > availableInventory || goodsUnit != unit) {
+                     if (witholdingNumber > availableInventory) {
+                     alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
+                     result = false;
+                     }
+                     if (goodsUnit != unit) {
+                     alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
+                     result = false;
+                     }
+                     }*/
+                    if (witholdingNumber > availableInventory) {
+                        alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
+                        result = false;
+                    }
+                    else if (goodsUnit != unit) {
+                        alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
+                        result = false;
                     }
                     else {
                         alert("预提成功");
@@ -95,8 +103,8 @@
                 }
             });
             /*if (!result) {
-                return false;
-            }*/
+             return false;
+             }*/
             return result;
 
         }

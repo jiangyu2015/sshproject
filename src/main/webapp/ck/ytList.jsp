@@ -24,10 +24,12 @@
 
                 var $tds = $("tr.active").children();
                 /*   alert($tds.eq(0).text())*/
-                alert("预提"+$tds.eq(10).text()+"出库数"+$('#sumwithholdingdeliver').val());
+                alert("预提" + $tds.eq(10).text() + "出库数" + $('#sumwithholdingdeliver').val());
                 $.ajax({
                     success: function () {
-                        window.location.href = "ckAdd.jsp?id="+$tds.eq(0).text()+"&withholdingNumber="+$tds.eq(10).text()+"&sumwithholdingdeliver="+$('#sumwithholdingdeliver').val();
+                        window.location.href = "ckAdd.jsp?id=" + $tds.eq(0).text() +
+                                "&withholdingNumber=" + $tds.eq(10).text() + "&sumwithholdingdeliver=" + $('#sumwithholdingdeliver').val()+
+                        "&deteline="+$tds.eq(12).text();
                     },
                     error: function () {
                         alert("系统异常，请稍后重试！");

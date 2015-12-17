@@ -59,22 +59,41 @@
             $.ajax({
                 type: "post",
                 async: false,
-                 url: "deliverSelectJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名*/
-                 data: {//设置数据源
+                url: "deliverSelectJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名*/
+                data: {//设置数据源
                     withholdingNumber: GetQueryString("withholdingNumber"),
                     sumwithholdingdeliver: GetQueryString("sumwithholdingdeliver")
                 },
                 dataType: "json",//设置需要返回的数据类型
                 success: function (data, xhrTxt) {
-                    var withholdingNumber= GetQueryString("withholdingNumber");
-                    var sumwithholdingdeliver=GetQueryString("sumwithholdingdeliver");
-                    var deliverNumber=$('#deliverNumber').val();
+                    var withholdingNumber = GetQueryString("withholdingNumber");   //预提数
+                    /*   var sumwithholdingdeliver=GetQueryString("sumwithholdingdeliver");*/
+                    alert(getToDay());
+                    var deteline = GetQueryString("deteline");
+                    var deliverNumber = $('#deliverNumber').val();
                     var d = eval("(" + data + ")");
-                    var difference= d.difference;
-                    if (difference<deliverNumber) {
-                        alert("出库不成功!,您还可以消耗"+difference+"本次消耗为"+deliverNumber+"超出预提请确认！");
+                    var difference = d.difference;   //预提消耗数
+                    var arr = deteline.split("-");                    //比较时间
+                    var overday = new Date(arr[0], arr[1], arr[2]);  //截止时间
+                    var overdays = overday.getTime();
+                    var arrs = getToDay().split("-");
+                    var today = new Date(arrs[0], arrs[1], arrs[2]);
+                    var todays = today.getTime();
+                    var arrss = $('#deliverDate').val().split("-"); //出库时间
+                    alert($('#deliverDate').val());
+                    var deliverDate = new Date(arrss[0], arrss[1], arrss[2]);
+                    var deliverDates = deliverDate.getTime();
+                    if (deliverDates > todays) {
+                        alert("出库时间大于今天？！请回去检查！拜拜！");
                         result = false;
-
+                    }
+                    else if (deliverDates > overdays) {   //要试试
+                        alert("出库时间大于了活动截止时间？");
+                        result = false;
+                    }
+                    else if (difference < deliverNumber) {
+                        alert("出库不成功!,您还可以消耗" + difference + "本次消耗为" + deliverNumber + "超出预提请确认！");
+                        result = false;
                     }
                     else {
                         alert("出库成功");
@@ -83,8 +102,27 @@
                 }
             });
             return result;
-
         }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
+        }
+
 
     </script>
 </head>
@@ -116,7 +154,7 @@
 
         <div class="line">
             <div class="lable">商品名称：</div>
-            <div class="input-div"><input id="goodsName"  readonly="readonly"
+            <div class="input-div"><input id="goodsName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
@@ -137,13 +175,14 @@
         </div>
         <div class="line">
             <div class="lable">实发数量：</div>
-            <div class="input-div"><input  id="deliverNumber" input name="deliver.deliverNumber"
+            <div class="input-div"><input id="deliverNumber" input name="deliver.deliverNumber"
                                           placeholder="请输入实发数量"/></div>
         </div>
 
         <div class="line">
             <div class="lable">出库时间：</div>
-            <div class="input-div"><input name="deliver.deliverDate" placeholder="请输入出库时间" type="date"/></div>
+            <div class="input-div"><input id="deliverDate" name="deliver.deliverDate" placeholder="请输入出库时间"
+                                          type="date"/></div>
         </div>
 
         <div class="line">
@@ -152,7 +191,7 @@
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
 
-        <input type="submit" value="提交" class="btn-submit" />
+        <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>
 </body>
