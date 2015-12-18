@@ -56,7 +56,7 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
     }
 
     public List<Deliver> searchWithholdingDeliver(Integer withholdingId){   //查询预提id对应的所有消耗
-        String sql = "select sum(ck_number) FROM ck_detail GROUP BY yt_id HAVING yt_id=" +withholdingId;
+        String sql = "select IFNULL(sum(ck_number), 0) FROM ck_detail GROUP BY yt_id HAVING yt_id=" +withholdingId;
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<BigDecimal> list = sqlQuery.list();

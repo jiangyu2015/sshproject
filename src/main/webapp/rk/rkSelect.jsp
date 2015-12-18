@@ -32,7 +32,6 @@
                         str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
                     }
                     $("#select").html(str);
-
                     $('#item').bind('input propertychange', function () {
                         $("#select").html(str);
                     });

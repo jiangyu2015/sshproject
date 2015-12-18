@@ -78,35 +78,44 @@
             });
         });
 
-     /*   function check(form) {
-            var result;
-            $.ajax({
-                success: function (data, xhrTxt) {
-                    var str = "";
-                    var d = eval("(" + data + ")");
-                    var witholdingNumber = $("#witholdingNumber").val();
-                    alert("预提数" + witholdingNumber);
-                    var unit = $("#unit").val();
-                    var goodsUnit = str + d.goodsUnit;  //商品入库单位
-                    alert("后台单位" + goodsUnit);
-                    var availableInventory = d.availableInventory;
-                    if (witholdingNumber > availableInventory) {
-                        alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
-                        result = false;
-                    }
-                    else if (goodsUnit != unit) {
-                        alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
-                        result = false;
-                    }
-                    else {
-                        alert("预提成功");
-                        result = true;
-                    }
-                }
-            });
-            return result;
+        function check(form) {
+            var storageDate = $("#storageDate").val();  //实际入库时间
+            var expectedNumber = $("#expectedNumber").val(); //预期入库数
+            var storageNumber = $("#storageNumber").val(); //实收数量    实收数量和预期入库数到时候再说
+            var arr = getToDay().split("-");    //比较时间
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
+            var arrs = storageDate.split("-");
+            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
+            var storagedays = storageday.getTime();
+            if (storagedays > todays) {
+                alert("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
+               return  false;
+            }
+            else {
+                alert("预提成功");
+               return true;
+            }
+        }
 
-        }*/
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
+        }
 
     </script>
 </head>
@@ -188,25 +197,28 @@
 
                     <div class="line">
                         <div class="lable">预期入库时间：</div>
-                        <div class="input-div"><input name="storage.expectedDate" readonly="readonly"
+                        <div class="input-div"><input id="expectedDate" name="storage.expectedDate" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;" type="date"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">实际入库时间：</div>
-                        <div class="input-div"><input placeholder="请输入实际入库时间" name="storage.storageDate" type="date"/>
+                        <div class="input-div"><input id="storageDate" placeholder="请输入实际入库时间"
+                                                      name="storage.storageDate" type="date"/>
                         </div>
                     </div>
 
                     <div class="line">
                         <div class="lable">预期数量：</div>
-                        <div class="input-div"><input name="storage.expectedNumber" readonly="readonly"
+                        <div class="input-div"><input id="expectedNumber" name="storage.expectedNumber"
+                                                      readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">实收数量：</div>
-                        <div class="input-div"><input placeholder="请输入实收数量" name="storage.storageNumber"/></div>
+                        <div class="input-div"><input id="storageNumber" placeholder="请输入实收数量"
+                                                      name="storage.storageNumber"/></div>
                     </div>
 
                     <div class="line">

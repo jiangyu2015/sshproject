@@ -110,24 +110,34 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     public String searchStorageList() {      //增加这个方法需要注入 biz别忘了
         Storage condition = new Storage();
         if (goodsName != null && !goodsName.equals("")) {
+        /*    if (storageApp.getGoodsName().indexOf("|") != -1) {
+                String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
+                String name = strs[0];
+                condition.setGoodsName(name);
+            } else return "input";*/
+            if (goodsName.indexOf("|") != -1) {
+                String[] strs = goodsName.split("\\|");
+                String name = strs[0];
+                Integer id = Integer.parseInt(strs[1]);
 
-            String[] strs = goodsName.split("\\|");
-            String name = strs[0];
-            Integer id = Integer.parseInt(strs[1]);
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
+                System.out.println(goods.getGoodsName());
+                condition.setGoods(goods);
 
-            Goods g = new Goods();
-            g.setGoodsId(id);
-            Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
-            System.out.println(goods.getGoodsName());
-            condition.setGoods(goods);
-            List list = storageBiz.getStorageList(condition);
-            System.out.println(list.size());
-            if (list.size() > 0) {
-                //  session.put("goodslist", list);
-                session.put("storagelist", list);
-                return "success";
-            } else
+                List list = storageBiz.getStorageList(condition);
+                System.out.println(list.size());
+                if (list.size() > 0) {
+                    //  session.put("goodslist", list);
+                    session.put("storagelist", list);
+                    return "success";
+                } else {
+                    return "input";
+                }
+            } else {
                 return "input";
+            } //输错提示
         } else if (producerName != null && !producerName.equals("")) {
             System.out.println("22");
             Producer producer = producerBiz.getProducer(producerName).get(0);
@@ -142,8 +152,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
                 return "success";
             } else
                 return "input";
-        }
-        else if(storagePlace!= null && !storagePlace.equals("")){
+        } else if (storagePlace != null && !storagePlace.equals("")) {
             System.out.println("33");
             Place place = placeBiz.getPlace(storagePlace).get(0);
             System.out.println(place.getPlaceId() + "PlaceId");
