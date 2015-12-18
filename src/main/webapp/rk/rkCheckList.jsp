@@ -78,6 +78,36 @@
             });
         });
 
+        function check(form) {
+            var result;
+            $.ajax({
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var witholdingNumber = $("#witholdingNumber").val();
+                    alert("预提数" + witholdingNumber);
+                    var unit = $("#unit").val();
+                    var goodsUnit = str + d.goodsUnit;  //商品入库单位
+                    alert("后台单位" + goodsUnit);
+                    var availableInventory = d.availableInventory;
+                    if (witholdingNumber > availableInventory) {
+                        alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
+                        result = false;
+                    }
+                    else if (goodsUnit != unit) {
+                        alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
+                        result = false;
+                    }
+                    else {
+                        alert("预提成功");
+                        result = true;
+                    }
+                }
+            });
+            return result;
+
+        }
+
     </script>
 </head>
 
@@ -130,7 +160,7 @@
         <div class="title">确认收货</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="rkOk">
+                <form method="post" action="rkOk" onsubmit="return check(this)">
                     <div class="line">
                         <div class="lable">入库明细id：</div>
                         <div class="input-div"><input name="storage.storageId" readonly="readonly"
