@@ -78,7 +78,7 @@
             });
         });
 
-        function check(form) {
+     /*   function check(form) {
             var result;
             $.ajax({
                 success: function (data, xhrTxt) {
@@ -106,7 +106,7 @@
             });
             return result;
 
-        }
+        }*/
 
     </script>
 </head>
