@@ -13,9 +13,11 @@
         <property name="loginName" type="java.lang.String">
             <column name="uname" length="20" not-null="true"/>
         </property>
-
         <property name="loginPwd" type="java.lang.String">
             <column name="upwd" length="10" not-null="true"/>
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="name" length="30" not-null="false"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -113,6 +113,9 @@
             <th>保质期截止日期</th>
             <th>商品可用</th>
             <th>审核时间</th>
+            <th>新建人</th>
+            <th>修改人</th>
+            <th>审核人</th>
         </tr>
         </thead>
         <tbody>
@@ -137,6 +140,9 @@
                 <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
                 <td><s:property value="#goods.state"/></td>
                 <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#goods.auditTime"/></td>
+                <td><s:property value="#goods.adduser"/></td>
+                <td><s:property value="#goods.edituser"/></td>
+                <td><s:property value="#goods.checkuser"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -237,6 +243,23 @@
                     <div class="line">
                         <div class="lable">审核时间：</div>
                         <div class="input-div"><input name="goods.auditTime" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">新增人：</div>
+                        <div class="input-div"><input name="goods.adduser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">修改人：</div>
+                        <div class="input-div"><input name="goods.edituser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">审核人：</div>
+                        <div class="input-div"><input name="goods.checkuser" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>

@@ -26,9 +26,12 @@
         <property name="remark" type="java.lang.String">
             <column name="remark" length="30" not-null="false"/>
         </property>
+        <property name="adduser" type="java.lang.String">
+            <column name="adduser" length="30" not-null="false"/>
+        </property>
 
         <many-to-one name="goods" column="sp_id" class="com.hibtest1.entity.Goods" lazy="false"/>
-        <many-to-one name="place" column="ck_place_id" class="com.hibtest1.entity.Place"  lazy="false"/>
+        <many-to-one name="place" column="ck_place_id" class="com.hibtest1.entity.Place" lazy="false"/>
         <many-to-one name="withholding" column="yt_id" class="com.hibtest1.entity.Withholding" lazy="false"/>
         <many-to-one name="producer" column="sh_id" class="com.hibtest1.entity.Producer" lazy="false"/>
     </class>

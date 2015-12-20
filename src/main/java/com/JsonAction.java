@@ -16,15 +16,20 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
-public class JsonAction extends ActionSupport implements ServletRequestAware {
+public class JsonAction extends ActionSupport implements ServletRequestAware, SessionAware {
     private static final long serialVersionUID = 1L;
 
     private HttpServletRequest request;
+    Map<String, Object> session;
     private String result;
     private Goods goods;
 
     public void setGoodsBiz(GoodsBiz goodsBiz) {
         this.goodsBiz = goodsBiz;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
     }
 
     public Goods getGoods() {
@@ -83,6 +88,11 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
     public void setSearchBiz(SearchBiz searchBiz) {
         this.searchBiz = searchBiz;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 
     /**
@@ -336,15 +346,15 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
 
     public String deliverSelect() {  //检测已出库多少，还可以预提多少
         String yt = request.getParameter("withholdingNumber"); //预提数
-        System.out.println("yt"+yt);
+        System.out.println("yt" + yt);
         int withholdingNumber = Integer.valueOf(yt);
-        String xh=request.getParameter("sumwithholdingdeliver"); //预提消耗总数
-        System.out.println("xh"+xh);
-        int sumwithholdingdeliver=Integer.valueOf(xh);
+        String xh = request.getParameter("sumwithholdingdeliver"); //预提消耗总数
+        System.out.println("xh" + xh);
+        int sumwithholdingdeliver = Integer.valueOf(xh);
         /*String ck=request.getParameter("deliverNumber"); //本次出库数
         int deliverNumber=Integer.valueOf(ck);*/
-        int difference=withholdingNumber-sumwithholdingdeliver;  //剩余消耗数
-        System.out.println("剩余消耗数为"+difference);
+        int difference = withholdingNumber - sumwithholdingdeliver;  //剩余消耗数
+        System.out.println("剩余消耗数为" + difference);
         JSONObject json = new JSONObject();
         json.put("difference", difference);
         result = json.toString();
@@ -354,17 +364,19 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
     public String goodsCheck() {
         String id = request.getParameter("id");
         int goodsId = Integer.valueOf(id);
-        System.out.println("JsonActionCheck传值" + goodsId);
         Goods condition = new Goods();
         condition.setGoodsId(goodsId);
         List list = goodsBiz.getGoodsList(condition);
         if (list.size() > 0) {
-            System.out.println(list.size());
             Goods goods = (Goods) list.get(0);
             goods.setState("yesno");                               //改申请state
             Calendar calendar = Calendar.getInstance();
             Date date = calendar.getTime();
             goods.setAuditTime(date);
+            if (session.get("name") != null) {
+                condition.setCheckuser(session.get("name").toString()); //新增审核人
+                System.out.println(session.get("name"));
+            }
             goodsBiz.modifyGood(goods);
         }
         return SUCCESS;
@@ -384,6 +396,8 @@ public class JsonAction extends ActionSupport implements ServletRequestAware {
             Calendar calendar = Calendar.getInstance();
             Date date = calendar.getTime();
             goods.setAuditTime(date);
+            if (session.get("name") != null)
+                condition.setCheckuser(session.get("name").toString()); //新增审核人
             goodsBiz.modifyGood(goods);
         }
         return SUCCESS;

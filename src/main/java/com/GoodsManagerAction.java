@@ -126,7 +126,9 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
                 condition.setVweight(goods.getVweight()); //体积重量
             if (goods.getStandard() != null)
                 condition.setStandard(goods.getStandard());  //装箱规格
-            //     goods.setState("no");
+            if (session.get("name") != null) {
+                condition.setAdduser(session.get("name").toString()); //得到增加人
+            }
             condition.setState("no");
             goodsBiz.add(condition);
             return "success";
@@ -219,6 +221,9 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setStandard(goods.getStandard());  //装箱规格
         if (goods.getState() != null && !goods.getState().equals(""))
             condition.setState(goods.getState());  //开放状态
+        if (session.get("name") != null) {
+            condition.setEdituser(session.get("name").toString()); //得到修改人
+        }
         if (goodsBiz.modifyGood(condition)) {
             session.put("goodslist", condition);
             request.put("message", "修改成功");  //先放着
@@ -229,11 +234,10 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
     }
 
     public String editGoods() {
-        Goods condition = new Goods();
+        Goods g=new Goods();
+        g.setGoodsId(goods.getGoodsId());
+        Goods condition = (Goods) goodsBiz.getGoodsList(g).get(0);
         System.out.println("修改的商品id" + goods.getGoodsId());
-        if (goods.getGoodsId() != null && !goods.getGoodsId().equals("")) {
-            condition.setGoodsId(goods.getGoodsId());
-        }
         if (goods.getGoodsBackName() != null && !goods.getGoodsBackName().equals(""))        //后台名字
             condition.setGoodsBackName(goods.getGoodsBackName());
         if (goods.getBaozhiqi() != null && !goods.getBaozhiqi().equals(""))                      //保质期
@@ -249,8 +253,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         if (goods.getMweight() != null && !goods.getMweight().equals(""))                  //毛重
             condition.setMweight(goods.getMweight());
         if (goods.getPrice() != null && !goods.getPrice().equals(""))              //价格
-            System.out.println(goods.getPrice() + "更新的价格");
-        condition.setPrice(goods.getPrice());
+            condition.setPrice(goods.getPrice());
         if (goods.getTall() != null && !goods.getTall().equals(""))                   //高
             condition.setTall(goods.getTall());
         if (goods.getValue() != null && !goods.getValue().equals(""))                   //价值
@@ -269,6 +272,9 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setStandard(goods.getStandard());  //装箱规格
         if (goods.getState() != null && !goods.getState().equals(""))
             condition.setState(goods.getState());  //开放状态
+        if (session.get("name") != null) {
+            condition.setEdituser(session.get("name").toString()); //得到修改人
+        }
         if (goodsBiz.modifyGood(condition)) {
             session.put("goodslist", condition);
             request.put("message", "修改成功");  //先放着
@@ -290,18 +296,18 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         return "goodsCheck";
     }
 
-    public String checkGoodsSelect(){ //得到查询的信息来审核 与search一样
-    System.out.println(goodsName);
-    Goods condition = new Goods();
-    condition.setGoodsName(goodsName);
-    List list = goodsBiz.getGoodsList(condition);
-    System.out.println(list.size());
-    if (list.size() > 0) {
-        Goods goods = (Goods) list.get(0);
-        //  session.put("goodslist", list);
-        session.put("goodslistcheck", list);
-        return "success";
-    } else
+    public String checkGoodsSelect() { //得到查询的信息来审核 与search一样
+        System.out.println(goodsName);
+        Goods condition = new Goods();
+        condition.setGoodsName(goodsName);
+        List list = goodsBiz.getGoodsList(condition);
+        System.out.println(list.size());
+        if (list.size() > 0) {
+            Goods goods = (Goods) list.get(0);
+            //  session.put("goodslist", list);
+            session.put("goodslistcheck", list);
+            return "success";
+        } else
             return "input";
     }
 }

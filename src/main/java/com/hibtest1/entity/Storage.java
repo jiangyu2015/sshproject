@@ -8,9 +8,6 @@ import java.util.Date;
  */
 public class Storage implements Serializable {
     private Integer storageId; //id
-  /*  private Integer placeId; //仓库id
-    private Integer goodsId; //商品id
-    private Integer producerId; //商户id*/
     private Goods goods;
     private Producer producer;
     private Place place;
@@ -21,6 +18,8 @@ public class Storage implements Serializable {
     private Integer storageNumber;  //实际入库数量
     private String storageType; //入库类型
     private String remark; //备注
+    private String adduser; //添加人
+    private String checkuser; //确认收货人
 
     public Goods getGoods() {
         return goods;
@@ -71,14 +70,6 @@ public class Storage implements Serializable {
         this.expectedNumber = expectedNumber;
     }
 
-  /*  public Integer getProducerId() {
-        return producerId;
-    }
-
-    public void setProducerId(Integer producerId) {
-        this.producerId = producerId;
-    }*/
-
     public Integer getStorageId() {
         return storageId;
     }
@@ -86,22 +77,6 @@ public class Storage implements Serializable {
     public void setStorageId(Integer storageId) {
         this.storageId = storageId;
     }
-
- /*   public Integer getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Integer placeId) {
-        this.placeId = placeId;
-    }
-
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }*/
 
     public Date getStorageDate() {
         return storageDate;
@@ -133,5 +108,21 @@ public class Storage implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getAdduser() {
+        return adduser;
+    }
+
+    public void setAdduser(String adduser) {
+        this.adduser = adduser;
+    }
+
+    public String getCheckuser() {
+        return checkuser;
+    }
+
+    public void setCheckuser(String checkuser) {
+        this.checkuser = checkuser;
     }
 }

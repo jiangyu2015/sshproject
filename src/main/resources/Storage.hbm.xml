@@ -40,6 +40,12 @@
         <property name="state" type="java.lang.String">
             <column name="state" length="30" not-null="false"/>
         </property>
+        <property name="adduser" type="java.lang.String">
+            <column name="adduser" length="30" not-null="false"/>
+        </property>
+        <property name="checkuser" type="java.lang.String">
+            <column name="checkuser" length="30" not-null="false"/>
+        </property>
         <many-to-one name="goods" column="sp_id" class="com.hibtest1.entity.Goods" lazy="false"/>
         <many-to-one name="place" column="rk_place_id" class="com.hibtest1.entity.Place"  lazy="false"/>
         <many-to-one name="producer" column="sh_id" class="com.hibtest1.entity.Producer" lazy="false"/>

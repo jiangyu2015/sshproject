@@ -6,15 +6,18 @@ import java.util.Date;
 /**
  * Created by user on 2015/11/25.
  */
-public class Producer  implements Serializable {
+public class Producer implements Serializable {
     private Integer producerId;
-    private String  producerName;
+    private String producerName;
     private String producerAddress;
     private String linkman;
     private String telOne;
     private String telTwo;
     private String state;
     private Date auditTime;
+    private String adduser; //添加人
+    private String edituser; //修改人
+    private String checkuser; //审核人
 
     public Date getAuditTime() {
         return auditTime;
@@ -79,5 +82,29 @@ public class Producer  implements Serializable {
 
     public void setProducerId(Integer producerId) {
         this.producerId = producerId;
+    }
+
+    public String getAdduser() {
+        return adduser;
+    }
+
+    public void setAdduser(String adduser) {
+        this.adduser = adduser;
+    }
+
+    public String getEdituser() {
+        return edituser;
+    }
+
+    public void setEdituser(String edituser) {
+        this.edituser = edituser;
+    }
+
+    public String getCheckuser() {
+        return checkuser;
+    }
+
+    public void setCheckuser(String checkuser) {
+        this.checkuser = checkuser;
     }
 }

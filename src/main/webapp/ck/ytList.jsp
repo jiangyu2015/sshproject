@@ -56,11 +56,10 @@
 <body>
 <div class="title">预提信息</div>
 <div class="btn-div">
-
     <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();"/>
-    <label>当前预提消耗为：</label>
-    <s:textfield id="sumwithholdingdeliver" value="%{#session.sumwithholdingdeliver}"
-                 style="border: none;-webkit-box-shadow: none;"></s:textfield>
+   当前预提消耗为：<%=session.getAttribute("sumwithholdingdeliver")%>
+  <%--  <s:textfield id="sumwithholdingdeliver" value="%{#session.sumwithholdingdeliver}"
+                 style="border: none;-webkit-box-shadow: none;"></s:textfield>--%>
 
 </div>
 

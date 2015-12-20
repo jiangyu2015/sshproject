@@ -22,6 +22,9 @@ public class Goods implements java.io.Serializable {
     private Date expirationDate;
     private String state;
     private Date auditTime; //审核时间
+    private String adduser; //添加人
+    private String edituser; //修改人
+    private String checkuser; //审核人
 
     public Date getAuditTime() {
         return auditTime;
@@ -175,5 +178,27 @@ public class Goods implements java.io.Serializable {
         this.expirationDate = expirationDate;
     }
 
+    public String getAdduser() {
+        return adduser;
+    }
 
+    public void setAdduser(String adduser) {
+        this.adduser = adduser;
+    }
+
+    public String getEdituser() {
+        return edituser;
+    }
+
+    public void setEdituser(String edituser) {
+        this.edituser = edituser;
+    }
+
+    public String getCheckuser() {
+        return checkuser;
+    }
+
+    public void setCheckuser(String checkuser) {
+        this.checkuser = checkuser;
+    }
 }

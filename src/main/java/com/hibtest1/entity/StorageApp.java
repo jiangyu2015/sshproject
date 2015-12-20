@@ -22,6 +22,9 @@ public class StorageApp implements Serializable {
     private Producer producer;
     private Place place;
     private Date auditTime; //审核时间
+    private String adduser; //添加人
+    private String edituser; //修改人
+    private String checkuser; //审核人
 
     public Date getAuditTime() {
         return auditTime;
@@ -143,4 +146,27 @@ public class StorageApp implements Serializable {
         this.state = state;
     }
 
+    public String getAdduser() {
+        return adduser;
+    }
+
+    public void setAdduser(String adduser) {
+        this.adduser = adduser;
+    }
+
+    public String getEdituser() {
+        return edituser;
+    }
+
+    public void setEdituser(String edituser) {
+        this.edituser = edituser;
+    }
+
+    public String getCheckuser() {
+        return checkuser;
+    }
+
+    public void setCheckuser(String checkuser) {
+        this.checkuser = checkuser;
+    }
 }

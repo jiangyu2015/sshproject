@@ -64,6 +64,9 @@ public class UserManagerAction extends ActionSupport implements RequestAware,Ses
 		condition.setLoginPwd(loginPwd);		
 		List list=userBiz.login(condition);
 		if(list.size()>0){
+			Users users=(Users)list.get(0);
+			String name=users.getName();
+			session.put("name", name);
 			return "success"; 
 		}else{		
 			return "error";   

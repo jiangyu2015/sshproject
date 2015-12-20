@@ -24,10 +24,10 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
                     if (condition.getGoodsId() != null && !condition.getGoodsId().equals("")) {
                         c.add(Restrictions.eq("goodsId", condition.getGoodsId()));
                     }
-                    if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
+                    else if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
                         c.add(Restrictions.eq("goodsName", condition.getGoodsName()));
                     }
-                    if (condition.getState() != null && !condition.getState().equals("")) {
+                    else if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }

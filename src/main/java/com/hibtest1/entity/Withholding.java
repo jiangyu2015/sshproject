@@ -12,15 +12,6 @@ public class Withholding implements Serializable {
     private Integer withholdingId; //id
     private Place place;
     private Producer producer;
-
-    public Producer getProducer() {
-        return producer;
-    }
-
-    public void setProducer(Producer producer) {
-        this.producer = producer;
-    }
-
     private Goods goods;
     private Date witholdingDate;//预提时间
     private Date deteline; //截止时间
@@ -31,6 +22,14 @@ public class Withholding implements Serializable {
     private String events;//事件
     private String activityId;//活动id
     private String unit;//单位
+    private String adduser; //添加人
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
 
     public String getUnit() {
         return unit;
@@ -120,5 +119,11 @@ public class Withholding implements Serializable {
         this.useType = useType;
     }
 
+    public String getAdduser() {
+        return adduser;
+    }
 
+    public void setAdduser(String adduser) {
+        this.adduser = adduser;
+    }
 }
