@@ -185,7 +185,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     }
 
     public String searchWithholdingList() {      //增加这个方法需要注入 biz别忘了
-        System.out.println(withholding.getWithholdingId()+"yutiId");
+        System.out.println(withholding.getWithholdingId() + "yutiId");
         Withholding condition = new Withholding();
        /* if (goodsName != null && !goodsName.equals("")) {
             String[] strs = goodsName.split("\\|");
@@ -208,10 +208,8 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         }
         else */
         if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
-            System.out.println(withholding.getWithholdingId());
             condition.setWithholdingId(withholding.getWithholdingId());
             List<Withholding> list = withholdingBiz.search(condition);
-            System.out.println(list.size());
             if (list.size() > 0) {
                 session.put("withholdinglist", list);   //有了预提表
                 Withholding w = list.get(0);
@@ -219,12 +217,43 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 d.setWithholding(w);
                 List<Deliver> deliverList = deliverBiz.getDeliverList(d);
                 session.put("deliverlist", deliverList);
-                List<Deliver>delivers=deliverBiz.searchWithholdingDeliver(withholding.getWithholdingId());
+                List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(withholding.getWithholdingId());
                 if (delivers.size() > 0) {
                     Deliver deliver = delivers.get(0);
                     BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
                     int sumDeliver = a.intValue();
-                    session.put("sumwithholdingdeliver",sumDeliver);
+                    System.out.println("出库总数"+sumDeliver);
+                    session.put("sumwithholdingdeliver", sumDeliver);
+                }
+                else{
+                    int sumDeliver = 0;
+                    session.put("sumwithholdingdeliver", sumDeliver);
+                }
+                return "success";
+            } else
+                return "input";
+        }
+        if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
+            condition.setActivityId(withholding.getActivityId());
+            List<Withholding> list = withholdingBiz.search(condition);
+            if (list.size() > 0) {
+                session.put("withholdinglist", list);   //有了预提表
+                Withholding w = list.get(0);
+                Deliver d = new Deliver();
+                d.setWithholding(w);
+                List<Deliver> deliverList = deliverBiz.getDeliverList(d);
+                session.put("deliverlist", deliverList);
+                List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(w.getWithholdingId());
+                if (delivers.size() > 0) {
+                    Deliver deliver = delivers.get(0);
+                    BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
+                    int sumDeliver = a.intValue();
+                    System.out.println("出库总数"+sumDeliver);
+                    session.put("sumwithholdingdeliver", sumDeliver);
+                }
+                else{
+                    int sumDeliver = 0;
+                    session.put("sumwithholdingdeliver", sumDeliver);
                 }
                 return "success";
             } else

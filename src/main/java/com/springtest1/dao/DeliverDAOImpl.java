@@ -71,6 +71,24 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
             System.out.println(deliver.getSumDeliver());
         }
         return delivers;
-
     }
+
+   /* public List<Deliver> searchActivityDeliver(String  activityId){   //查询活动id对应的所有消耗
+        String sql = "select IFNULL(sum(ck_number), 0) FROM ck_detail GROUP BY hd_id HAVING hd_id='" +activityId+"'";
+        Session session = this.getSessionFactory().getCurrentSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql);
+        List<BigDecimal> list = sqlQuery.list();
+        System.out.println("DAO" + list.size());
+        List<Deliver> delivers = new ArrayList<>(list.size());
+        for (int i = 0; i < list.size(); i++) {
+            BigDecimal row = list.get(0);
+            System.out.println(row);
+            Deliver deliver = new Deliver();
+            deliver.setSumDeliver(row);
+            delivers.add(deliver);
+            System.out.println(deliver.getSumDeliver());
+        }
+        return delivers;
+
+    }*/
 }

@@ -21,21 +21,6 @@
     <title>查询预提明细</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
-    <%-- <script type="text/javascript">
-         function find() {
-             var to = document.f;
-             //      var pany=document.getElementsByName("bb")[0];
-
-             var params = to.withholding.withholdingId;
-             to.submit();
-         }
-         to.action = "Action_method2?pany=" + pany.value;
-         to.submit();
-         }
-         var id = $("#item").val();
-         window.location.href = "ytList.jsp?id=" + id + "";
-         }
-     </script>--%>
 </head>
 
 <body>
@@ -64,8 +49,14 @@
     <form method="post" action="ytSelectDeliver.action">
         <div class="line">
             <div class="lable">预提单号：</div>
-            <div class="input-div"><input id="item" list="select" placeholder="请输入预提单号"
+            <div class="input-div"><input placeholder="请输入预提单号"
                                           name="withholding.withholdingId"/>
+            </div>
+        </div>
+        <div class="line">
+            <div class="lable">活动号：</div>
+            <div class="input-div"><input placeholder="请输入预提时填写的活动号"
+                                          name="withholding.activityId"/>
 
             </div>
         </div>

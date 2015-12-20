@@ -18,4 +18,5 @@ public interface DeliverBiz {
 
     public boolean editDeliver(Deliver deliver); //修改AllList
     public List<Deliver> searchWithholdingDeliver(Integer withholdingId);
+  //  public List<Deliver> searchActivityDeliver(String activityId);
 }

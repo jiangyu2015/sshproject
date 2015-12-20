@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,13 +67,20 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
                     }
-                    if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
+                    else if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
                         System.out.println("DAO" + condition.getWithholdingId());
                         c.add(Restrictions.eq("withholdingId", condition.getWithholdingId()));
                     }
+                    else if(condition.getActivityId()!=null&& !condition.getActivityId().equals("")){
+                        c.add(Restrictions.eq("activityId", condition.getActivityId()));
+                    }
 
                 }
-                return c.list();
+                if (c.list().size() <= 0) {
+                    return new ArrayList<Withholding>();
+                } else {
+                    return c.list();
+                }
 
             }
         });

@@ -102,7 +102,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
 
     public String listStorage() {
         List storage = storageBiz.getAllStorage();
-        Storage storage1 = (Storage) storage.get(0);
         session.put("storagelistall", storage);
         return "storage";
     }
@@ -297,6 +296,13 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
             session.put("storagelist", condition);
             return "success";
         } else return "input";
+    }
 
+    public String listOkStorage(){
+        Storage s=new Storage();
+        s.setState("ok");
+        List storage = storageBiz.getStorageList(s);
+        session.put("storagelistok", storage);
+        return "success";
     }
 }

@@ -26,10 +26,10 @@
                     console.log(goods);
                     for (var i = 0; i < goods.length; i++) {
                         //   str = str + "<option>" + goods[i].goodsName + "</option>";
-                         /*     str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsId + "'>"+ goods[i].goodsName+"</option>";*/
-                    //  str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
-                    //    str = str + "<option value='" + goods[i].goodsName + "'data-id='"+goods[i].goodsId+"'>"+ goods[i].goodsId+"</option>";
-                        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
+                        /*     str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsId + "'>"+ goods[i].goodsName+"</option>";*/
+                        //  str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
+                        //    str = str + "<option value='" + goods[i].goodsName + "'data-id='"+goods[i].goodsId+"'>"+ goods[i].goodsId+"</option>";
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
                     }
                     $("#select").html(str);
                     $('#item').bind('input propertychange', function () {
@@ -72,7 +72,7 @@
                     console.log(place);
                     for (var i = 0; i < place.length; i++) {
                         // str = str + "<option>" + place[i].placeName + "</option>";
-                        str = str + "<option id='" + place[i].placeId  + "' value='" + place[i].placeName  + "'>";
+                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
                     }
                     $("#select3").html(str);
 
@@ -83,58 +83,41 @@
                 dataType: 'json'
             });
         });
-        function aaa(){
-            var val = $("#item").val();
-            var selectId = $("[value='" + val + "']").eq(0).attr('id');
-            if(selectId == undefined){
-                console.log("该商品不存在");
-                return;
-            }
-            console.log("val: " + val);
-            console.log("Id: " + selectId);
-        }
-
-     /*   function check(form) {
+        function check(form) {
             var val = $("#item").val();
             var val2 = $("#item2").val();
             var val3 = $("#item3").val();
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
-            if (selectId == undefined) {
-                alert("该商品不存在，请确认或重建");
-                return false;
-            }
+            var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
+            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
 
-            else {
-                return true;
+            if (val != null & val != "") {
+                if (selectId == undefined) {
+                    alert("商品未建或未通过审核，请选择选项框内带“|数字”的商品");
+                    return false;
+                }
+            }
+            else if (val2 != null & val2 != "") {
+                if (selectId2 == undefined) {
+                    alert("商户未建或未通过审核，请选择选项框内的商户");
+                    return false;
+                }
+            }
+            else if (val3 != null & val3 != "") {
+                if (selectId3 == undefined) {
+                    alert("仓库未建，请选择选项框内的仓库");
+                    return false;
+                }
             }
         }
-*/
-        /*  function  find(){
-              var val = $("#item").val();
-              var strs = val.split('|');
-              var value=strs[0];
-              var id=strs[1];
-              console.log(id + "," + value);
-              $.ajax({
-                  type: "post",
-                  url: "selectStorageJsonAction",
-                  data: {
-                      goodId: id,
-                      goodNmae: value
-                  },
-                  success: function (data, xhrTxt) {
 
-                  },
-                  dataType: 'json'
-              });
-          }*/
     </script>
 </head>
 
 <body>
 <div class="title">查询入库明细</div>
 <div class="content">
-    <form method="post" action="rkSelect.action" <%--onsubmit="return check(this)"--%> >
+    <form method="post" action="rkSelect.action" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商品名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的入库商品名称" name="goodsName"/>

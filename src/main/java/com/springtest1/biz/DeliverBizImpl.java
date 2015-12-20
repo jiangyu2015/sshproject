@@ -31,10 +31,16 @@ public class DeliverBizImpl implements DeliverBiz {
     }
 
     @Transactional
-    public List<Deliver> searchWithholdingDeliver(Integer withholdingId){
-        List<Deliver> list=deliverDAO.searchWithholdingDeliver(withholdingId);
-        return  list;
+    public List<Deliver> searchWithholdingDeliver(Integer withholdingId) {
+        List<Deliver> list = deliverDAO.searchWithholdingDeliver(withholdingId);
+        return list;
     }
+
+  /*  @Transactional
+    public List<Deliver> searchActivityDeliver(String  activityId) {
+        List<Deliver> list = deliverDAO.searchActivityDeliver(activityId);
+        return list;
+    }*/
 
   /*  public boolean delGoods(Deliver deliver) {
         return deliverDAO.delGoods(deliver);

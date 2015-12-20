@@ -118,11 +118,10 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String checkStorageApp() {               //得到所需审核的单子
         System.out.println("审核checkStorageApp");
         List<StorageApp> storageApp = storageAppBiz.getCheckStorageApp();
-   if(storageApp.size()>0){
         session.put("storageapplistcheck", storageApp);
-        return "storageAppCheck";}
-        else return "input";
-    }
+        return "storageAppCheck";
+
+}
 
     public String storageAppOk() {               //通过          需要增加不能为空的提示
         System.out.println("通过checkStorageApp");
@@ -270,8 +269,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String editStorageApp() {
         StorageApp s = new StorageApp();
         s.setStorageAppId(storageApp.getStorageAppId());
-        StorageApp condition= new StorageApp();
-        condition=(StorageApp) storageAppBiz.getStorageAppList(s).get(0);
+        StorageApp condition = new StorageApp();
+        condition = (StorageApp) storageAppBiz.getStorageAppList(s).get(0);
         if (storageApp.getStorageAppId() != null && !storageApp.getStorageAppId().equals("")) {
             condition.setStorageAppId(storageApp.getStorageAppId());
         }

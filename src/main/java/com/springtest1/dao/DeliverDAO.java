@@ -14,4 +14,5 @@ public interface DeliverDAO {
     // public boolean delGoods(Deliver condition); //del
     public void editDeliver(Deliver deliver); //修改AllList
     public List<Deliver> searchWithholdingDeliver(Integer withholdingId);//
+  //  public List<Deliver> searchActivityDeliver(String activityId);
 }
