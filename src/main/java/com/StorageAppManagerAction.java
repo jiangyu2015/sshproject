@@ -228,8 +228,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setSldId(storageApp.getSldId());
         if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
             condition.setStorageType(storageApp.getStorageType());
-      /*  if (storageApp.getState() != null)          //处理状态
-            condition.setState(storageApp.getState());*/
         condition.setState("no");  //处理状态新增默认为no 待审核
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
