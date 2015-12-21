@@ -127,6 +127,9 @@
             <th>联系电话1</th>
             <th>联系电话2</th>
             <th>商户可用</th>
+            <th>新建人</th>
+            <th>修改人</th>
+            <th>审核人</th>
         </tr>
         </thead>
         <tbody>
@@ -139,6 +142,9 @@
                 <td><s:property value="#producer.telOne"/></td>
                 <td><s:property value="#producer.telTwo"/></td>
                 <td><s:property value="#producer.state"/></td>
+                <td><s:property value="#producer.adduser"/></td>
+                <td><s:property value="#producer.edituser"/></td>
+                <td><s:property value="#producer.checkuser"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -191,6 +197,23 @@
                         <div class="lable">商户可用状态：</div>
                         <div class="input-div"><input name="producer.state" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">新增人：</div>
+                        <div class="input-div"><input  name="producer.adduser" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">修改人：</div>
+                        <div class="input-div"><input  name="producer.edituser" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">审核人：</div>
+                        <div class="input-div"><input  name="producer.checkuser" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <input type="button" value="通过" class="btn-submit" onclick="btnOk()"/>
                     <input type="button" value="不通过" class="btn" onclick="btn()"/>

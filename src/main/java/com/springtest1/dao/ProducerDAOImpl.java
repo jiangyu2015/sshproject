@@ -32,10 +32,10 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
                     if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
                         c.add(Restrictions.eq("producerName", condition.getProducerName()));
                     }
-                    if (condition.getProducerId() != null && !condition.getProducerId().equals("")) {
+                    else if (condition.getProducerId() != null && !condition.getProducerId().equals("")) {
                         c.add(Restrictions.eq("producerId", condition.getProducerId()));
                     }
-                    if (condition.getState() != null && !condition.getState().equals("")) {
+                    else if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }

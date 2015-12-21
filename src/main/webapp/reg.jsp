@@ -23,8 +23,11 @@
 				<td><s:password label="密码" name="users.loginPwd" /></td>
 			</tr>
 			<tr>
-				<td><s:password label="确认密码" name="reloginPwd" /></td>
-			</tr>		
+				<td><s:password label="确认密码" name="reLoginPwd" /></td>
+			</tr>
+			<tr>
+				<td><s:textfield label="你的大名" name="users.name" /></td>
+			</tr>
 			<tr>
 				<td><s:submit align="left" value="确认" /></td>
 				

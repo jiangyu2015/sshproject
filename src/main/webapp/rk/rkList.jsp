@@ -82,6 +82,42 @@
             else {
                 return true;
             }
+            var storageDate = $("#storageDate").val();  //实际入库时间
+            var expectedNumber = $("#expectedNumber").val(); //预期入库数
+            var storageNumber = $("#storageNumber").val(); //实收数量    实收数量和预期入库数到时候再说
+            var arr = getToDay().split("-");    //比较时间
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
+            var arrs = storageDate.split("-");
+            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
+            var storagedays = storageday.getTime();
+            if (storagedays > todays) {
+                alert("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
+                return false;
+            }
+            else {
+                alert("确认收货成功");
+                return true;
+            }
+        }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
         }
     </script>
 </head>
@@ -107,6 +143,8 @@
             <th>入库类型</th>
             <th>备注</th>
             <th>入库状态</th>
+            <th>申请人</th>
+            <th>确认收货人</th>
         </tr>
         </thead>
         <tbody>
@@ -123,6 +161,8 @@
                 <td><s:property value="#storage.storageType"/></td>
                 <td><s:property value="#storage.remark"/></td>
                 <td><s:property value="#storage.state"/></td>
+                <td><s:property value="#storage.adduser"/></td>
+                <td><s:property value="#storage.checkuser"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -135,7 +175,7 @@
         <div class="title">确认收货</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="rkOk"  onsubmit="return check(this)">
+                <form method="post" action="rkOk" onsubmit="return check(this)">
                     <div class="line">
                         <div class="lable">入库明细id：</div>
                         <div class="input-div"><input name="storage.storageId" readonly="readonly"
@@ -197,6 +237,17 @@
                     <div class="line">
                         <div class="lable">入库状态：</div>
                         <div class="input-div"><input id="state" name="storage.state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请人：</div>
+                        <div class="input-div"><input name="storage.adduser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">确认收货人：</div>
+                        <div class="input-div"><input name="storage.checkuser" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 

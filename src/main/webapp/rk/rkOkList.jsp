@@ -102,6 +102,8 @@
             <th>入库类型</th>
             <th>备注</th>
             <th>入库状态</th>
+            <th>申请人</th>
+            <th>确认收货人</th>
         </tr>
         </thead>
         <tbody>
@@ -124,6 +126,8 @@
                 <td><s:property value="#storage.storageType"/></td>
                 <td><s:property value="#storage.remark"/></td>
                 <td><s:property value="#storage.state"/></td>
+                <td><s:property value="#storage.adduser"/></td>
+                <td><s:property value="#storage.checkuser"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -219,6 +223,17 @@
                     <div class="line">
                         <div class="lable">入库状态：</div>
                         <div class="input-div"><input name="storage.state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请人：</div>
+                        <div class="input-div"><input name="storage.adduser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">确认收货人：</div>
+                        <div class="input-div"><input name="storage.checkuser" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 

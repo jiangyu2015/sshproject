@@ -74,8 +74,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         List list = producerBiz.getProducerList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
-          /*  Producer producer = new Producer();
-            producer = (Producer) list.get(0);*/
+
             session.put("producerlist",list);
             return "success";
         } else
@@ -99,9 +98,8 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         } else return "input";
     }
 
-    public String addProducer() throws Exception {                  //增加商品
+    public String addProducer() throws Exception {                  //增加商户
         Producer condition = new Producer();
-        System.out.println(producer.getProducerName() + "我传过来了");
         if (producer.getProducerName() != null && !producer.getProducerName().equals(""))
             condition.setProducerName(producer.getProducerName());
         else {
@@ -126,6 +124,9 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
                 condition.setTelOne(producer.getTelOne());
             if (producer.getTelTwo() != null)          //联系电话2
                 condition.setTelTwo(producer.getTelTwo());
+            if (session.get("name") != null) {
+                condition.setAdduser(session.get("name").toString()); //得到增加人
+            }
             condition.setState("no");
             producerBiz.add(condition);
             return "success";
@@ -146,7 +147,9 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
     }
 
     public String editProducer() {
-        Producer condition = new Producer();
+        Producer p=new Producer();
+        p.setProducerId(producer.getProducerId());
+        Producer condition = (Producer) producerBiz.getProducerList(p).get(0);
         if (producer.getProducerId() != null && !producer.getProducerId().equals("")) {
             condition.setProducerId(producer.getProducerId());
             System.out.println(producer.getProducerId());
@@ -171,6 +174,9 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         }
         if (producer.getState() != null && !producer.getState().equals("")) {
             condition.setState(producer.getState());
+        }
+        if (session.get("name") != null) {
+            condition.setEdituser(session.get("name").toString()); //得到修改人
         }
         if (producerBiz.editProducer(condition)) {
             System.out.println("condition" + condition.getProducerName());

@@ -144,6 +144,9 @@
             <th>保质期</th>
             <th>保质期截止日期</th>
             <th>商品可用</th>
+            <th>新建人</th>
+            <th>修改人</th>
+            <th>审核人</th>
         </tr>
         </thead>
         <tbody>
@@ -167,6 +170,9 @@
                 <td><s:property value="#goods.baozhiqi"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
                 <td><s:property value="#goods.state"/></td>
+                <td><s:property value="#goods.adduser"/></td>
+                <td><s:property value="#goods.edituser"/></td>
+                <td><s:property value="#goods.checkuser"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -272,6 +278,23 @@
                         <div class="lable">商品可用：</div>
                         <div class="input-div"><input name="goods.state" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">新增人：</div>
+                        <div class="input-div"><input  name="goods.adduser" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">修改人：</div>
+                        <div class="input-div"><input  name="goods.edituser" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">审核人：</div>
+                        <div class="input-div"><input  name="goods.checkuser" readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <input type="button" value="通过" class="btn-submit" onclick="btnOk()"/>
                     <input type="button" value="不通过" class="btn" onclick="btn()"/>

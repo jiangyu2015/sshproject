@@ -121,7 +121,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         session.put("storageapplistcheck", storageApp);
         return "storageAppCheck";
 
-}
+    }
 
     public String storageAppOk() {               //通过          需要增加不能为空的提示
         System.out.println("通过checkStorageApp");
@@ -136,6 +136,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Calendar calendar = Calendar.getInstance();   //更改审核时间
         Date date = calendar.getTime();
         storageApp.setAuditTime(date);
+        if (session.get("name") != null) {
+            storageApp.setCheckuser(session.get("name").toString()); //得到审核人
+        }
         storageAppBiz.editStorageApp(storageApp);
         Storage storage = new Storage();           //新建入库明细表
 
@@ -155,6 +158,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             storage.setExpectedNumber(storageApp.getExpectedNumber());
         if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
             storage.setStorageType(storageApp.getStorageType());
+        if (storageApp.getAdduser() != null && !storageApp.getAdduser().equals("")) //入库申请人加入到入库明细中
+            storage.setAdduser(storageApp.getAdduser());
         storage.setState("no");
         storageBiz.add(storage);
         return "success";
@@ -247,6 +252,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
         System.out.println("输出仓库id" + place.getPlaceId());
         condition.setPlace(place);
+        if (session.get("name") != null) {                   //得到增加人
+            condition.setAdduser(session.get("name").toString());
+        }
         storageAppBiz.add(condition);
         session.put("storageapplist", condition);  //两个地方用到，edit不知道会不会有问题
         return "success";
@@ -292,6 +300,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setState(storageApp.getState());
         if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
             condition.setStorageType(storageApp.getStorageType());
+        if (session.get("name") != null) {
+            condition.setEdituser(session.get("name").toString()); //得到修改人
+        }
         if (storageAppBiz.editStorageApp(condition)) {
             System.out.println("condition" + condition.getProducerName());
             System.out.println(condition.getGoodsName());

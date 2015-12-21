@@ -48,8 +48,8 @@
 <div class="table-div">
     <div class="title">仓库信息</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">
+    <%--    <input type="button" class="btn-eidt" value="修改" onclick="edit();">
+        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>

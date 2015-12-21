@@ -243,7 +243,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         storageApp.setAuditTime(date);
-
+        if (session.get("name") != null) {
+            storageApp.setCheckuser(session.get("name").toString()); //得到审核人
+        }
         storageAppBiz.editStorageApp(storageApp);
 
         return SUCCESS;
@@ -374,7 +376,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
             Date date = calendar.getTime();
             goods.setAuditTime(date);
             if (session.get("name") != null) {
-                condition.setCheckuser(session.get("name").toString()); //新增审核人
+                goods.setCheckuser(session.get("name").toString()); //新增审核人
                 System.out.println(session.get("name"));
             }
             goodsBiz.modifyGood(goods);
@@ -397,7 +399,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
             Date date = calendar.getTime();
             goods.setAuditTime(date);
             if (session.get("name") != null)
-                condition.setCheckuser(session.get("name").toString()); //新增审核人
+                goods.setCheckuser(session.get("name").toString()); //新增审核人
             goodsBiz.modifyGood(goods);
         }
         return SUCCESS;
@@ -417,6 +419,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
             Calendar calendar = Calendar.getInstance();
             Date date = calendar.getTime();
             producer.setAuditTime(date);
+            if (session.get("name") != null) {
+                producer.setCheckuser(session.get("name").toString()); //得到审核人
+            }
             producerBiz.editProducer(producer);
         }
         return SUCCESS;
@@ -436,6 +441,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
             Calendar calendar = Calendar.getInstance();
             Date date = calendar.getTime();
             producer.setAuditTime(date);
+            if (session.get("name") != null) {
+                producer.setCheckuser(session.get("name").toString()); //得到审核人
+            }
             producerBiz.editProducer(producer);
         }
         return SUCCESS;

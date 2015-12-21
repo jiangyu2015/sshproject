@@ -176,10 +176,9 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         return "storageCheck";
     }
 
-    public String storageOk() {               //通过
+    public String storageOk() {               //确认入库
         System.out.println("通过checkStorage");
         Storage condition = new Storage();
-        System.out.println(storage.getStorageId());
         condition.setStorageId(storage.getStorageId());
         List list = storageBiz.getStorageList(condition);
         System.out.println(list.size());
@@ -193,6 +192,9 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         }
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
             storage2.setRemark(storage.getRemark());
+        if (session.get("name") != null) {
+            storage2.setCheckuser(session.get("name").toString()); //得到入库确认人
+        }
         storageBiz.editStorage(storage2);                //更改状态ok1
 
         return "success";
@@ -277,7 +279,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         } else return "input";
     } */
 
-    public String editStorage() {  //能改吗
+    public String editStorage() {  //能改吗 不能
         Storage condition = new Storage();
         if (storage.getStorageId() != null && !storage.getStorageId().equals("")) {
             condition.setStorageId(storage.getStorageId());
