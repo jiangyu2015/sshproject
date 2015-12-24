@@ -33,6 +33,7 @@
             <th>预提时间</th>
             <th>截止时间</th>
             <th>入库类型</th>
+            <th>预提人</th>
 
         </tr>
         </thead>
@@ -51,6 +52,7 @@
                 <td><s:date format="yyyy-MM-dd" name="#withholding.witholdingDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#withholding.deteline"/></td>
                 <td><s:property value="#withholding.useType"/></td>
+                <td><s:property value="#withholding.adduser"/></td>
 
             </tr>
         </s:iterator>

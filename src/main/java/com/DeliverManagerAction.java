@@ -204,6 +204,9 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             condition.setDeliverType(deliver.getDeliverType());
         if (deliver.getRemark() != null)          //备注
             condition.setRemark(deliver.getRemark());
+        if (session.get("name") != null) {
+            condition.setAdduser(session.get("name").toString()); //得到出库人
+        }
         deliverBiz.add(condition);
         return "success";
 

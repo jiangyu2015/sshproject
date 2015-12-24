@@ -38,7 +38,7 @@
             }
         }
         $(function () {
-            $("tbody tr").bind('click', function () {
+            $("#advSearch tbody tr").bind('click', function () {
                 $('table tr').removeClass('active');
                 $(this).addClass('active');
             });
@@ -56,10 +56,9 @@
 <body>
 <div class="title">预提信息</div>
 <div class="btn-div">
-    <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();"/>
-   当前预提消耗为：<%=session.getAttribute("sumwithholdingdeliver")%>
-  <%--  <s:textfield id="sumwithholdingdeliver" value="%{#session.sumwithholdingdeliver}"
-                 style="border: none;-webkit-box-shadow: none;"></s:textfield>--%>
+    <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();" style="position: relative; width: 90px;"/>
+<%--   当前预提消耗为：<%=session.getAttribute("sumwithholdingdeliver")%>--%>
+    <span id="sumwithholdingdeliver">当前预提消耗为：<%=session.getAttribute("sumwithholdingdeliver")%></span>
 
 </div>
 
@@ -80,6 +79,7 @@
         <th>预提时间</th>
         <th>截止时间</th>
         <th>入库类型</th>
+        <th>预提人</th>
     </tr>
     </thead>
     <tbody>
@@ -99,6 +99,8 @@
             <td><s:date format="yyyy-MM-dd" name="#withholding.witholdingDate"/></td>
             <td><s:date format="yyyy-MM-dd" name="#withholding.deteline"/></td>
             <td><s:property value="#withholding.useType"/></td>
+            <td><s:property value="#withholding.adduser"/></td>
+
         </tr>
     </s:iterator>
     </tbody>
@@ -119,6 +121,7 @@
         <th>实际出库数量</th>
         <th>出库类型</th>
         <th>备注</th>
+        <th>出库填写人</th>
         <th>预提id</th>
     </tr>
     </thead>
@@ -137,6 +140,7 @@
                 <td><s:property value="#deliver.deliverNumber"/></td>
                 <td><s:property value="#deliver.deliverType"/></td>
                 <td><s:property value="#deliver.remark"/></td>
+                <td><s:property value="#deliver.adduser"/></td>
                 <td><s:property value="#deliver.withholding.withholdingId"/></td>
             </tr>
         </s:iterator>

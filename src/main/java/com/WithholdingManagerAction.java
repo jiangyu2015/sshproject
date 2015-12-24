@@ -131,7 +131,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         return "success";
     }
 
-    public String addWithholding() throws Exception {                  //增加入库申请
+    public String addWithholding() throws Exception {                  //增加预提申请
         //    System.out.println(enteringWarehouseDto);
         System.out.println("addWithholding");
         Withholding condition = new Withholding();
@@ -167,6 +167,9 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             condition.setDeteline(withholding.getDeteline());
         if (withholding.getWitholdingNumber() != null && !withholding.getWitholdingNumber().equals(""))          //预提数量
             condition.setWitholdingNumber(withholding.getWitholdingNumber());
+        if (session.get("name") != null) {
+            condition.setAdduser(session.get("name").toString()); //得到增加人
+        }
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         condition.setWitholdingDate(date);
