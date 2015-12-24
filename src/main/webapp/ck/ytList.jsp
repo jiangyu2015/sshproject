@@ -24,11 +24,11 @@
 
                 var $tds = $("tr.active").children();
                 /*   alert($tds.eq(0).text())*/
-                alert("预提" + $tds.eq(10).text() + "出库数" + $('#sumwithholdingdeliver').val());
+                alert("预提" + $tds.eq(10).text() + "出库数" + $('#sumwithholdingdeliver').html());
                 $.ajax({
                     success: function () {
                         window.location.href = "ckAdd.jsp?id=" + $tds.eq(0).text() +
-                                "&withholdingNumber=" + $tds.eq(10).text() + "&sumwithholdingdeliver=" + $('#sumwithholdingdeliver').val()+
+                                "&withholdingNumber=" + $tds.eq(10).text() + "&sumwithholdingdeliver=" +  $('#sumwithholdingdeliver').html()+
                         "&deteline="+$tds.eq(12).text();
                     },
                     error: function () {
@@ -57,8 +57,7 @@
 <div class="title">预提信息</div>
 <div class="btn-div">
     <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();" style="position: relative; width: 90px;"/>
-<%--   当前预提消耗为：<%=session.getAttribute("sumwithholdingdeliver")%>--%>
-    <span id="sumwithholdingdeliver">当前预提消耗为：<%=session.getAttribute("sumwithholdingdeliver")%></span>
+    当前预提消耗为： <span id="sumwithholdingdeliver"><%=session.getAttribute("sumwithholdingdeliver")%></span>
 
 </div>
 

@@ -200,21 +200,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         return "success";
     }
 
- /*   public String delStorage() {
-        System.out.println(storageName);
-        Storage condition = new Storage();
-        condition.setStorageName(storageName);
-        List<Storage> list = storageBiz.getStorageList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            Storage storage = new Storage();
-            storage = (Storage) list.get(0);
-            boolean e = storageBiz.delGoods(storage);
-            if (e) return "success";
-            else return "input";
-        } else return "input";
-    }  */
-
     public String addStorage() throws Exception {                  //增加入库申请
         System.out.println("addStorage");
         Storage condition = new Storage();
