@@ -34,6 +34,9 @@
         <property name="storageType" type="java.lang.String">
             <column name="rk_type" length="30" not-null="false"/>
         </property>
+        <property name="category" type="java.lang.String">
+            <column name="category" length="30" not-null="false"/>
+        </property>
         <property name="remark" type="java.lang.String">
             <column name="remark" length="30" not-null="false"/>
         </property>

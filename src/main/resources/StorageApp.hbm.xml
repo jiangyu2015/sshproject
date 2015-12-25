@@ -32,7 +32,7 @@
             <column name="rk_place_add" length="30" not-null="true"/>
         </property>
         <property name="storageType" type="java.lang.String">
-            <column name="rk_type" length="50" not-null="false"/>
+            <column name="rk_type" length="30" not-null="false"/>
         </property>
         <property name="state" type="java.lang.String">
             <column name="state" length="50" not-null="false"/>

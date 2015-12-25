@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface StorageAppDAO {
     public List getAllStorageApp();
+
     public List search(StorageApp condition);   //查询
+
     public void add(StorageApp condition);//add
-   // public boolean delGoods(StorageApp condition); //del
 
     public void editStorageApp(StorageApp storageApp); //修改AllList\
 
     public List<StorageApp> getCheckStorageApp();
-/*     public void changeState(String state,Integer id);*/
 
 }

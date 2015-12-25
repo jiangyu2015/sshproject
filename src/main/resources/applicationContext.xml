@@ -64,6 +64,8 @@
                 <value>Withholding.hbm.xml</value>
                 <value>Activity.hbm.xml</value>
                 <value>Events.hbm.xml</value>
+                <value>AllotApp.hbm.xml</value>
+                <value>TransferApp.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -161,6 +163,20 @@
     <bean id="storageAppBiz" class="com.springtest1.biz.StorageAppBizImpl">
         <property name="storageAppDAO" ref="storageAppDAO"/>
     </bean>
+    <bean id="allotAppDAO" class="com.springtest1.dao.AllotAppDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="allotAppBiz" class="com.springtest1.biz.AllotAppBizImpl">
+        <property name="allotAppDAO" ref="allotAppDAO"/>
+    </bean>
+    <bean id="transferAppDAO" class="com.springtest1.dao.TransferAppDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="transferAppBiz" class="com.springtest1.biz.TransferAppBizImpl">
+        <property name="transferAppDAO" ref="transferAppDAO"/>
+    </bean>
+
+
     <bean id="storageAppEdit" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
     </bean>

@@ -17,6 +17,7 @@ public class Storage implements Serializable {
     private String state = "no";  //处理状态 no就是未收货
     private Integer storageNumber;  //实际入库数量
     private String storageType; //入库类型
+    private String category="正常入库"; //入库类别
     private String remark; //备注
     private String adduser; //添加人
     private String checkuser; //确认收货人
@@ -124,5 +125,13 @@ public class Storage implements Serializable {
 
     public void setCheckuser(String checkuser) {
         this.checkuser = checkuser;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -16,7 +16,8 @@ public class Deliver implements Serializable {
     private Date deliverDate;  //出库时间
     private Integer expecteNumber;  //应发数量
     private Integer deliverNumber;  //出库数量
-    private String deliverType="其他"; //出库类型
+    private String deliverType="任意配置"; //出库类型
+    private String category="正常出库"; //出库类别
     private String remark; //备注
     private BigDecimal sumDeliver;//总出库
     private String adduser; //添加人
@@ -115,5 +116,13 @@ public class Deliver implements Serializable {
 
     public void setAdduser(String adduser) {
         this.adduser = adduser;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

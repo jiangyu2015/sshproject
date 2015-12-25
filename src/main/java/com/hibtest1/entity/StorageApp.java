@@ -15,7 +15,7 @@ public class StorageApp implements Serializable {
     private String commodityRating; //商品评级
     private String sldId; //三联单编号
     private String storagePlace;  //入库地点
-    private String storageType = "任意调配"; //入库类型
+    private String storageType = "任意配置"; //入库类型
     private String state = "no";  //处理状态
     private Date applicationDate; //申请录入时间
     private Goods goods;

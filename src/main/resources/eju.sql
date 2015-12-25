@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-12-18 17:30:09
+Date: 2015-12-25 17:30:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -59,7 +59,8 @@ CREATE TABLE `ck_detail` (
   `ck_place_id` int(10) DEFAULT NULL,
   `ck_place` varchar(30) DEFAULT NULL,
   `yf_number` int(10) DEFAULT NULL,
-  `ck_type` enum('调出','其他','同城会','一元购','社区特卖','社区礼包','定时开','老虎机','正常出库','福利','摇一摇') DEFAULT NULL,
+  `ck_type` enum('任意配置','一元购','社区特卖','物业礼包','其他','福利') DEFAULT '任意配置',
+  `category` enum('正常转库','正常调拨','借领','正常出库') DEFAULT '正常出库',
   `remark` varchar(30) DEFAULT NULL,
   `yt_id` int(4) DEFAULT NULL,
   `adduser` varchar(30) DEFAULT NULL,
@@ -68,37 +69,67 @@ CREATE TABLE `ck_detail` (
   KEY `出库库存地点id` (`ck_place_id`),
   CONSTRAINT `出库商品id` FOREIGN KEY (`sp_id`) REFERENCES `sp_info` (`sp_id`),
   CONSTRAINT `出库库存地点id` FOREIGN KEY (`ck_place_id`) REFERENCES `kc_place` (`kc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ck_detail
 -- ----------------------------
-INSERT INTO `ck_detail` VALUES ('62', '1101', '1', '2015-11-03', '75', '2', '一楼仓库', null, '老虎机', '调至昆山', '3', null);
-INSERT INTO `ck_detail` VALUES ('63', '1102', '2', '2015-11-03', '52', '2', '一楼仓库', null, '老虎机', '调至昆山', '3', null);
-INSERT INTO `ck_detail` VALUES ('91', '1', '2', '2015-12-01', '50', '2', '一楼仓库', null, '老虎机', '悲伤', '3', null);
-INSERT INTO `ck_detail` VALUES ('92', '3', '3', '2015-12-30', '20', '7', '373号领奖处', null, '老虎机', '啦啦22', '3', null);
-INSERT INTO `ck_detail` VALUES ('93', '1', '4', '2015-12-03', '10', '2', '一楼仓库', null, '老虎机', null, '3', null);
-INSERT INTO `ck_detail` VALUES ('94', '1', '1', '2015-12-21', '30', '2', '一楼仓库', null, '老虎机', null, '3', null);
-INSERT INTO `ck_detail` VALUES ('95', '4', '2', '2015-12-01', '40', '5', '一楼仓库/虚拟入库', null, '老虎机', null, '3', null);
-INSERT INTO `ck_detail` VALUES ('96', '1234', '3', '2015-11-06', '888', '2', '一楼仓库', null, '老虎机', null, '3', null);
-INSERT INTO `ck_detail` VALUES ('97', '1', '4', '2015-11-30', '20', '1', null, null, '老虎机', null, '3', null);
-INSERT INTO `ck_detail` VALUES ('98', '4', '1', '2015-11-30', '1000', '4', null, '1000', '老虎机', '', '3', null);
-INSERT INTO `ck_detail` VALUES ('99', '3', '2', '2015-12-10', '20', '7', null, '20', '摇一摇', null, '1', null);
-INSERT INTO `ck_detail` VALUES ('100', '3', '3', '2015-12-10', '30', '7', null, '30', '摇一摇', null, '1', null);
-INSERT INTO `ck_detail` VALUES ('101', '1234', '1', '2015-12-10', '30', '2', null, '30', '摇一摇', null, '1', null);
-INSERT INTO `ck_detail` VALUES ('102', '7', '1', '2015-12-10', '10', '1', null, '10', '一元购', null, '9', null);
-INSERT INTO `ck_detail` VALUES ('103', '3', '1', '2015-12-11', '2', '7', null, '2', '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('104', '3', '1', '2015-12-11', '5', '7', null, '5', '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('111', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('112', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('113', '3', '1', '2015-12-17', '30', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('114', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('115', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('116', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('117', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('118', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('119', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', null, '8', null);
-INSERT INTO `ck_detail` VALUES ('120', '3', '1', '2015-12-19', '12', '7', null, '12', '社区特卖', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('62', '1101', '1', '2015-11-03', '75', '2', '一楼仓库', null, '一元购', '正常出库', '调至昆山', '3', null);
+INSERT INTO `ck_detail` VALUES ('63', '1102', '2', '2015-11-03', '52', '2', '一楼仓库', null, '一元购', '正常出库', '调至昆山', '3', null);
+INSERT INTO `ck_detail` VALUES ('91', '1', '2', '2015-12-01', '50', '2', '一楼仓库', null, '一元购', '正常出库', '悲伤', '3', null);
+INSERT INTO `ck_detail` VALUES ('92', '3', '3', '2015-12-30', '20', '7', '373号领奖处', null, '一元购', '正常出库', '啦啦22', '3', null);
+INSERT INTO `ck_detail` VALUES ('93', '1', '4', '2015-12-03', '10', '2', '一楼仓库', null, '一元购', '正常出库', null, '3', null);
+INSERT INTO `ck_detail` VALUES ('94', '1', '1', '2015-12-21', '30', '2', '一楼仓库', null, '一元购', '正常出库', null, '3', null);
+INSERT INTO `ck_detail` VALUES ('95', '4', '2', '2015-12-01', '40', '5', '一楼仓库/虚拟入库', null, '一元购', '正常出库', null, '3', null);
+INSERT INTO `ck_detail` VALUES ('96', '1234', '3', '2015-11-06', '888', '2', '一楼仓库', null, '一元购', '正常出库', null, '3', null);
+INSERT INTO `ck_detail` VALUES ('97', '1', '4', '2015-11-30', '20', '1', null, null, '一元购', '正常出库', null, '3', null);
+INSERT INTO `ck_detail` VALUES ('98', '4', '1', '2015-11-30', '1000', '4', null, '1000', '一元购', '正常出库', '', '3', null);
+INSERT INTO `ck_detail` VALUES ('99', '3', '2', '2015-12-10', '20', '7', null, '20', '一元购', '正常出库', null, '1', null);
+INSERT INTO `ck_detail` VALUES ('100', '3', '3', '2015-12-10', '30', '7', null, '30', '一元购', '正常出库', null, '1', null);
+INSERT INTO `ck_detail` VALUES ('101', '1234', '1', '2015-12-10', '30', '2', null, '30', '一元购', '正常出库', null, '1', null);
+INSERT INTO `ck_detail` VALUES ('102', '7', '1', '2015-12-10', '10', '1', null, '10', '一元购', '正常出库', null, '9', null);
+INSERT INTO `ck_detail` VALUES ('103', '3', '1', '2015-12-11', '2', '7', null, '2', '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('104', '3', '1', '2015-12-11', '5', '7', null, '5', '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('111', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('112', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('113', '3', '1', '2015-12-17', '30', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('114', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('115', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('116', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('117', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('118', '3', '1', '2015-12-17', '2', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('119', '3', '1', '2015-12-17', '10', '7', null, null, '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('120', '3', '1', '2015-12-19', '12', '7', null, '12', '社区特卖', '正常出库', null, '8', null);
+INSERT INTO `ck_detail` VALUES ('121', '1254', '28', '2015-12-30', '30', '1', null, '30', '福利', '正常出库', null, '53', '王瑜佳');
+INSERT INTO `ck_detail` VALUES ('122', '1234', '1', '2015-12-31', '10', '2', null, '10', '一元购', '正常出库', null, '1', '王瑜佳');
+INSERT INTO `ck_detail` VALUES ('123', '3', '1', '2015-12-31', '1', '7', null, null, '社区特卖', '正常出库', null, '8', '王瑜佳');
+INSERT INTO `ck_detail` VALUES ('124', '3', '1', '2015-12-31', '1', '7', null, '1', '社区特卖', '正常出库', null, '8', '王瑜佳');
+INSERT INTO `ck_detail` VALUES ('125', '1254', '28', '2015-12-31', '30', '1', null, '30', '福利', '正常出库', null, '53', '王瑜佳');
+INSERT INTO `ck_detail` VALUES ('126', '1254', '28', '2015-12-31', '10', '1', null, '10', '福利', '正常出库', null, '53', '王瑜佳');
+
+-- ----------------------------
+-- Table structure for db_application
+-- ----------------------------
+DROP TABLE IF EXISTS `db_application`;
+CREATE TABLE `db_application` (
+  `db_application_id` int(8) NOT NULL AUTO_INCREMENT,
+  `db_in` int(4) NOT NULL,
+  `db_out` int(4) NOT NULL,
+  `sp_id` int(8) NOT NULL,
+  `sh_id` int(8) NOT NULL,
+  `db_number` int(8) NOT NULL,
+  `rk_type` enum('福利','物业礼包','社区特卖','一元购','任意配置') DEFAULT '任意配置',
+  `adduser` varchar(30) DEFAULT NULL,
+  `edituser` varchar(30) DEFAULT NULL,
+  `checkuser` varchar(30) DEFAULT NULL,
+  `auditTime` datetime DEFAULT NULL,
+  `state` enum('yesno','yesok','no') DEFAULT 'no',
+  PRIMARY KEY (`db_application_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of db_application
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for events
@@ -217,7 +248,7 @@ CREATE TABLE `rk_application` (
   `sld_id` varchar(10) DEFAULT NULL,
   `rk_place_id` int(4) DEFAULT NULL,
   `rk_place_add` varchar(30) DEFAULT NULL,
-  `rk_type` enum('调入','任意调配','一元购','社区特卖','物业礼包','福利') DEFAULT '任意调配',
+  `rk_type` enum('任意配置','一元购','社区特卖','物业礼包','福利') DEFAULT '任意配置',
   `state` enum('yesok','yesno','no') DEFAULT 'no',
   `applicationDate` date DEFAULT NULL,
   `auditTime` datetime DEFAULT NULL,
@@ -232,7 +263,7 @@ CREATE TABLE `rk_application` (
   CONSTRAINT `rk_place_add` FOREIGN KEY (`rk_place_add`) REFERENCES `kc_place` (`place`),
   CONSTRAINT `sh_name` FOREIGN KEY (`sh_name`) REFERENCES `sh_info` (`sh_name`),
   CONSTRAINT `sp_name` FOREIGN KEY (`sp_name`) REFERENCES `sp_info` (`sp_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rk_application
@@ -258,15 +289,17 @@ INSERT INTO `rk_application` VALUES ('20', '26', '小地方', '4', '实惠早餐
 INSERT INTO `rk_application` VALUES ('21', '26', '小地方', '3', '下午茶饼干', '2015-12-16', '1000', 'A', '12', '1', '昆山仓库', '一元购', 'yesok', '2015-12-16', null, null, null, null);
 INSERT INTO `rk_application` VALUES ('22', null, '波奇宠物', null, '松江原生态大米（2斤装）', '2015-12-26', '1000', 'AAA', '1213', null, '一楼仓库', '社区特卖', 'yesok', '2015-12-16', null, null, null, null);
 INSERT INTO `rk_application` VALUES ('23', '26', '小地方', '4', '实惠早餐蛋糕', '2015-12-31', '100', 'AAA', '123', '2', '一楼仓库', '一元购', 'yesok', '2015-12-16', null, null, null, null);
-INSERT INTO `rk_application` VALUES ('24', '1', '首道养生', '1', '松江原生态大米（2斤装）', '2015-12-31', '200', 'AAA', '123', '2', '一楼仓库', '任意调配', 'yesok', '2015-12-16', null, null, null, null);
-INSERT INTO `rk_application` VALUES ('25', '26', '小地方', '4', '实惠早餐蛋糕', '2015-12-16', '200', 'B+', '123', '2', '一楼仓库', '任意调配', 'no', '2015-12-16', null, null, null, null);
+INSERT INTO `rk_application` VALUES ('24', '1', '首道养生', '1', '松江原生态大米（2斤装）', '2015-12-31', '200', 'AAA', '123', '2', '一楼仓库', '任意配置', 'yesok', '2015-12-16', null, null, null, null);
+INSERT INTO `rk_application` VALUES ('25', '26', '小地方', '4', '实惠早餐蛋糕', '2015-12-16', '200', 'B+', '123', '2', '一楼仓库', '任意配置', 'no', '2015-12-16', null, null, null, null);
 INSERT INTO `rk_application` VALUES ('26', '1', '首道养生', '4', '实惠早餐蛋糕', '2015-12-31', '200', 'AAA', '123', '2', '一楼仓库', '物业礼包', 'no', '2015-12-16', null, null, null, null);
 INSERT INTO `rk_application` VALUES ('27', '26', '小地方', '5', '查理氏果汁饮料', '2015-12-16', '1000', 'AAAA', '120', '3', '宝山仓库', '福利', 'no', '2015-12-16', null, null, null, null);
-INSERT INTO `rk_application` VALUES ('28', '4', '波奇宠物', '2', '松江原生态大米（2斤装）', '2015-12-25', '200', 'AAAA', '123', '2', '一楼仓库', '任意调配', 'no', '2015-12-16', null, null, null, null);
-INSERT INTO `rk_application` VALUES ('29', '2', '斯锐凯博（上海）健身服务有限公司', '3', '下午茶饼干', '2015-12-16', '200', 'AAA', '123', '2', '一楼仓库', '任意调配', 'no', '2015-12-16', null, null, null, null);
-INSERT INTO `rk_application` VALUES ('30', '2', '斯锐凯博（上海）健身服务有限公司', '3', '下午茶饼干', '2015-12-16', '100', 'AAA', '1213', '2', '一楼仓库', '任意调配', 'no', '2015-12-16', null, null, null, null);
-INSERT INTO `rk_application` VALUES ('31', '1', '首道养生', '6', '卡依之黑莓葡萄汁', '2015-12-17', '100', 'AAA', '123', '2', '一楼仓库', '任意调配', 'yesno', '2015-12-16', '2015-12-18 16:31:04', null, null, null);
+INSERT INTO `rk_application` VALUES ('28', '4', '波奇宠物', '2', '松江原生态大米（2斤装）', '2015-12-25', '200', 'AAAA', '123', '2', '一楼仓库', '任意配置', 'no', '2015-12-16', null, null, null, null);
+INSERT INTO `rk_application` VALUES ('29', '2', '斯锐凯博（上海）健身服务有限公司', '3', '下午茶饼干', '2015-12-16', '200', 'AAA', '123555', '2', '一楼仓库', '任意配置', 'yesok', '2015-12-16', '2015-12-21 17:21:20', null, '王瑜佳', '王瑜佳');
+INSERT INTO `rk_application` VALUES ('30', '2', '斯锐凯博（上海）健身服务有限公司', '3', '下午茶饼干', '2015-12-16', '100', 'AAA', '1213', '2', '一楼仓库', '任意配置', 'no', '2015-12-16', null, null, null, null);
+INSERT INTO `rk_application` VALUES ('31', '1', '首道养生', '6', '卡依之黑莓葡萄汁', '2015-12-17', '100', 'AAA', '123', '2', '一楼仓库', '任意配置', 'yesno', '2015-12-16', '2015-12-18 16:31:04', null, null, null);
 INSERT INTO `rk_application` VALUES ('32', '28', '大陆大葱培育有限公司', '1254', '我是一根葱', '2015-12-18', '10000000', 'A++', '0058888', '1', '昆山仓库', '福利', 'yesok', '2015-12-18', '2015-12-18 16:30:53', null, null, null);
+INSERT INTO `rk_application` VALUES ('33', '30', '悲伤的商户2', '1254', '我是一根葱', '2015-12-31', '100', 'BBB', '1234', '1', '昆山仓库', '一元购', 'yesok', '2015-12-21', '2015-12-21 17:17:55', '王瑜佳', '王瑜佳', '王瑜佳');
+INSERT INTO `rk_application` VALUES ('34', '26', '小地方', '10', '荷高全脂牛奶', '2015-12-31', '100', 'A+', '123', '2', '一楼仓库', '任意配置', 'yesok', '2015-12-24', '2015-12-24 16:39:02', null, null, null);
 
 -- ----------------------------
 -- Table structure for rk_detail
@@ -282,7 +315,8 @@ CREATE TABLE `rk_detail` (
   `expect_rk_number` int(10) DEFAULT NULL,
   `ss_number` int(10) DEFAULT NULL,
   `remark` varchar(30) DEFAULT NULL,
-  `rk_type` enum('调入','任意调配','一元购','社区特卖','物业礼包','福利') DEFAULT '任意调配',
+  `rk_type` enum('一元购','社区特卖','物业礼包','任意配置','福利') DEFAULT '任意配置',
+  `category` enum('正常转库','正常调拨','正常入库') DEFAULT '正常入库',
   `state` enum('no','ok') DEFAULT 'no',
   `checkuser` varchar(30) DEFAULT NULL,
   `adduser` varchar(30) DEFAULT NULL,
@@ -291,49 +325,52 @@ CREATE TABLE `rk_detail` (
   KEY `rk_plcae_id` (`rk_place_id`),
   CONSTRAINT `rksp_id` FOREIGN KEY (`sp_id`) REFERENCES `sp_info` (`sp_id`),
   CONSTRAINT `rk_plcae_id` FOREIGN KEY (`rk_place_id`) REFERENCES `kc_place` (`kc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rk_detail
 -- ----------------------------
-INSERT INTO `rk_detail` VALUES ('1', '1234', '1', null, '2015-10-02', '2', null, '1000', null, '任意调配', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('2', '1235', '2', null, '2015-10-05', '1', null, '500', '', '任意调配', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('3', '1237', '3', null, '2015-10-06', '2', null, '2000', '', '社区特卖', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('4', '1', '4', null, '2015-11-05', '2', null, '200', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('5', '3', '5', null, '2015-12-01', '7', null, '200', null, '社区特卖', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('6', '1', '6', null, '2015-11-06', '7', null, '50', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('7', '1', '1', null, '2015-11-20', '2', null, '40', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('8', '3', '2', null, '2015-11-03', '7', null, '20', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('9', '4', '3', null, '2015-11-10', '5', null, '30', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('10', '1234', '4', null, '2015-11-06', '3', null, '888', null, '调入', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('11', '4', '5', null, '2015-12-16', '2', null, '40', null, '福利', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('12', '1', '6', null, '2015-11-30', '1', null, '1000', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('13', '1', '1', null, '2015-12-04', '1', null, '1000', null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('14', '2', '2', null, '2015-11-30', '2', null, '1000', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('15', '3', '1', null, '2015-11-27', '3', null, '1000', '', '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('16', '4', '2', null, '2015-11-30', '4', null, '1000', '', '物业礼包', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('17', '1', '1', null, '2015-12-01', '4', null, '1000', '', '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('18', '1127', '3', null, '2015-12-01', null, null, null, '', '调入', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('19', '1', '5', null, '2015-12-04', '7', null, '100', null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('20', '1', '27', null, '2015-12-04', '2', null, '1000', null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('21', '1', '2', '2015-12-04', '2015-12-05', '2', '100', '1000', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('22', '1252', '27', '2015-11-02', '2015-12-09', '1', '100', '100', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('23', '7', '17', '2015-12-12', '2015-12-13', '1', '100', '100', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('24', '1253', '1', '2015-12-15', '2015-12-15', '2', '200', '200', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('25', '1', '1', '2015-11-20', '2015-12-19', '2', '40', '40', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('26', '3', '1', '2015-11-30', null, '2', '100', null, null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('27', '1241', '4', '2015-11-30', null, '1', '1000', null, null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('28', '1241', '4', '2015-11-30', null, '1', '1000', null, null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('29', '1', '3', '2015-12-03', null, '2', '1000', null, null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('30', '1', '1', '2015-12-16', '2015-12-16', '1', '1000', '1000', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('31', '3', '26', '2015-12-16', '2015-12-16', '1', '1000', '1000', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('32', '1', '4', '2015-12-26', '2015-12-16', '2', '1000', '1000', null, '社区特卖', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('33', '4', '26', '2015-12-31', null, '2', '100', null, null, '一元购', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('34', '4', '26', '2015-12-31', null, '1', '1000', null, null, '社区特卖', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('35', '3', '1', '2015-11-03', null, '7', '20', null, null, '物业礼包', 'no', null, null);
-INSERT INTO `rk_detail` VALUES ('36', '3', '1', '2015-12-19', '2015-12-16', '2', '100', '1000', null, '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('37', '4', '3', '2015-12-03', null, '4', '1000', '1000', 'no', '一元购', 'ok', null, null);
-INSERT INTO `rk_detail` VALUES ('38', '1254', '28', '2015-12-18', '2015-12-19', '1', '10000000', '9999999', null, '福利', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('1', '1234', '1', null, '2015-10-02', '2', null, '1000', null, '任意配置', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('2', '1235', '2', null, '2015-10-05', '1', null, '500', '', '任意配置', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('3', '1237', '3', null, '2015-10-06', '2', null, '2000', '', '社区特卖', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('4', '1', '4', null, '2015-11-05', '2', null, '200', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('5', '3', '5', null, '2015-12-01', '7', null, '200', null, '社区特卖', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('6', '1', '6', null, '2015-11-06', '7', null, '50', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('7', '1', '1', null, '2015-11-20', '2', null, '40', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('8', '3', '2', null, '2015-11-03', '7', null, '20', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('9', '4', '3', null, '2015-11-10', '5', null, '30', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('10', '1234', '4', null, '2015-11-06', '3', null, '888', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('11', '4', '5', null, '2015-12-16', '2', null, '40', null, '福利', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('12', '1', '6', null, '2015-11-30', '1', null, '1000', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('13', '1', '1', null, '2015-12-04', '1', null, '1000', null, '一元购', '正常入库', 'ok', '王瑜佳', null);
+INSERT INTO `rk_detail` VALUES ('14', '2', '2', null, '2015-11-30', '2', null, '1000', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('15', '3', '1', null, '2015-11-27', '3', null, '1000', '', '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('16', '4', '2', null, '2015-11-30', '4', null, '1000', '', '物业礼包', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('17', '1', '1', null, '2015-12-01', '4', null, '1000', '', '一元购', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('18', '1127', '3', null, '2015-12-01', null, null, null, '', '一元购', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('19', '1', '5', null, '2015-12-04', '7', null, '100', null, '一元购', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('20', '1', '27', null, '2015-12-04', '2', null, '1000', null, '一元购', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('21', '1', '2', '2015-12-04', '2015-12-05', '2', '100', '1000', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('22', '1252', '27', '2015-11-02', '2015-12-09', '1', '100', '100', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('23', '7', '17', '2015-12-12', '2015-12-13', '1', '100', '100', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('24', '1253', '1', '2015-12-15', '2015-12-15', '2', '200', '200', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('25', '1', '1', '2015-11-20', '2015-12-19', '2', '40', '40', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('26', '3', '1', '2015-11-30', '2015-12-21', '2', '100', '100', null, '一元购', '正常入库', 'ok', '王瑜佳', null);
+INSERT INTO `rk_detail` VALUES ('27', '1241', '4', '2015-11-30', '2015-12-05', '1', '1000', '1000', null, '一元购', '正常入库', 'ok', '王瑜佳', null);
+INSERT INTO `rk_detail` VALUES ('28', '1241', '4', '2015-11-30', '2015-12-01', '1', '1000', '998', null, '一元购', '正常入库', 'ok', '王瑜佳', null);
+INSERT INTO `rk_detail` VALUES ('29', '1', '3', '2015-12-03', null, '2', '1000', null, null, '一元购', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('30', '1', '1', '2015-12-16', '2015-12-16', '1', '1000', '1000', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('31', '3', '26', '2015-12-16', '2015-12-16', '1', '1000', '1000', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('32', '1', '4', '2015-12-26', '2015-12-16', '2', '1000', '1000', null, '社区特卖', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('33', '4', '26', '2015-12-31', null, '2', '100', null, null, '一元购', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('34', '4', '26', '2015-12-31', null, '1', '1000', null, null, '社区特卖', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('35', '3', '1', '2015-11-03', null, '7', '20', null, null, '物业礼包', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('36', '3', '1', '2015-12-19', '2015-12-16', '2', '100', '1000', null, '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('37', '4', '3', '2015-12-03', null, '4', '1000', '1000', 'no', '一元购', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('38', '1254', '28', '2015-12-18', '2015-12-19', '1', '10000000', '9999999', null, '福利', '正常入库', 'ok', null, null);
+INSERT INTO `rk_detail` VALUES ('39', '1254', '30', '2015-12-31', null, '1', '100', null, null, '一元购', '正常入库', 'no', null, '王瑜佳');
+INSERT INTO `rk_detail` VALUES ('40', '3', '2', '2015-12-16', null, '2', '200', null, null, '任意配置', '正常入库', 'no', null, null);
+INSERT INTO `rk_detail` VALUES ('41', '10', '26', '2015-12-31', '2015-12-24', '2', '100', '100', null, '任意配置', '正常入库', 'ok', null, null);
 
 -- ----------------------------
 -- Table structure for sh_info
@@ -354,7 +391,7 @@ CREATE TABLE `sh_info` (
   PRIMARY KEY (`sh_id`,`sh_name`),
   KEY `商户名称` (`sh_name`),
   KEY `sh_id` (`sh_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sh_info
@@ -367,10 +404,10 @@ INSERT INTO `sh_info` VALUES ('5', '诗灵菲', 'beiju', 'lala', '121312321', nu
 INSERT INTO `sh_info` VALUES ('6', '好慷在线', '', '', '', '', 'yesno', '2015-12-16 15:52:47', null, null, null);
 INSERT INTO `sh_info` VALUES ('7', '实惠上海', '', '', '', '', 'yesok', '2015-12-16 15:52:43', null, null, null);
 INSERT INTO `sh_info` VALUES ('8', '鞋博士皮具修护中心', '', '', '', '', 'yesok', '2015-12-16 15:52:50', null, null, null);
-INSERT INTO `sh_info` VALUES ('9', '卡拉丁(上海)汽车技术服务有限公司', '破地方', '破人', '38383', '747474', 'no', null, null, null, null);
-INSERT INTO `sh_info` VALUES ('10', '金生烘培DIY生活馆', '', '', '', '', 'no', null, null, null, null);
+INSERT INTO `sh_info` VALUES ('9', '卡拉丁(上海)汽车技术服务有限公司', '破地方', '破人', '12124135', '747474', 'yesno', '2015-12-21 16:00:36', null, '王瑜佳', null);
+INSERT INTO `sh_info` VALUES ('10', '金生烘培DIY生活馆', '', '', '', '', 'yesok', '2015-12-21 16:00:39', null, '王瑜佳', null);
 INSERT INTO `sh_info` VALUES ('11', '上海臻缘茶叶经营部', '', '', '', '', 'yesno', '2015-12-16 16:09:02', null, null, null);
-INSERT INTO `sh_info` VALUES ('12', '大匠火锅', '', '', '', '', 'no', null, null, null, null);
+INSERT INTO `sh_info` VALUES ('12', '大匠火锅', '', '', '', '', 'yesno', '2015-12-21 16:35:02', null, null, '王瑜佳');
 INSERT INTO `sh_info` VALUES ('13', '海码头', 'Aa', 'aa', 'aa', 'aa', 'yesok', '2015-12-16 16:09:07', null, null, null);
 INSERT INTO `sh_info` VALUES ('14', '摩之家健康咨询(上海)有限公司', '', '', '', '', 'no', null, null, null, null);
 INSERT INTO `sh_info` VALUES ('15', '夏末摄影', '', '', '', '', 'yesok', '2015-12-16 16:09:49', null, null, null);
@@ -382,10 +419,12 @@ INSERT INTO `sh_info` VALUES ('20', '皓谷实业（上海）有限公司', '', 
 INSERT INTO `sh_info` VALUES ('22', '泰壹商贸有限公司', '', '', '', '', 'no', null, null, null, null);
 INSERT INTO `sh_info` VALUES ('23', '上海纯K量贩KTV', '', '', '', '', 'no', null, null, null, null);
 INSERT INTO `sh_info` VALUES ('24', '上海中优智慧医疗科技有限公司', '', '', '', '', 'no', null, null, null, null);
-INSERT INTO `sh_info` VALUES ('25', '浦屹投资管理(上海)有限公司', '', '', '', '', 'no', null, null, null, null);
+INSERT INTO `sh_info` VALUES ('25', '浦屹投资管理(上海)有限公司', '', '', '', '', 'yesno', '2015-12-21 16:05:28', null, null, '王瑜佳');
 INSERT INTO `sh_info` VALUES ('26', '小地方', '虹口区恒业路啦啦啦', '我', '15221550239', '18768105782', 'yesok', null, null, null, null);
 INSERT INTO `sh_info` VALUES ('27', '商户A', 'AA', 'joey', '1213', '057585152114', 'yesok', null, null, null, null);
 INSERT INTO `sh_info` VALUES ('28', '大陆大葱培育有限公司', '上海市浦东新区浦东南路2000号', '陆先生', '1111111111', '', 'yesok', '2015-12-18 16:26:45', null, null, null);
+INSERT INTO `sh_info` VALUES ('29', '悲伤的商户', '我在测试新增人', '哈哈', '12312412431', '132143124121', 'yesno', '2015-12-21 16:01:57', null, '王瑜佳', '王瑜佳');
+INSERT INTO `sh_info` VALUES ('30', '悲伤的商户2', '试试', 'aa', '1213124', '18768105782', 'yesok', '2015-12-21 16:02:01', '王瑜佳', null, '王瑜佳');
 
 -- ----------------------------
 -- Table structure for sp_info
@@ -416,7 +455,7 @@ CREATE TABLE `sp_info` (
   `checkuser` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`sp_id`),
   KEY `商品名称` (`sp_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1255 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1256 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sp_info
@@ -434,8 +473,8 @@ INSERT INTO `sp_info` VALUES ('10', '荷高全脂牛奶', '荷高全脂牛奶', 
 INSERT INTO `sp_info` VALUES ('11', '安怡金装高钙低脂奶粉', '安怡低脂高钙奶粉一袋', '45.00', '45.00', null, null, null, null, null, null, null, '包', '实物', '2014-12-01', null, null, 'yesno', '2015-12-16 15:23:53', null, null, null);
 INSERT INTO `sp_info` VALUES ('12', '安怡™金装高钙低脂配方奶粉300g', '高钙低脂配方奶粉300g', '45.00', '45.00', null, null, null, null, null, null, '', '包', '实物', null, null, null, 'yesok', '2015-12-16 15:30:49', null, null, null);
 INSERT INTO `sp_info` VALUES ('13', '非非水', null, '3.00', '3.00', '1.00', '2.00', '3.00', '4.00', '5.00', '11.00', '上山', '瓶', '实物', '2015-12-16', '20', null, 'yesok', '2015-12-17 15:47:36', null, null, null);
-INSERT INTO `sp_info` VALUES ('14', '派米盐焗开心果', '爱芬乐希腊进口年货', '20.00', '20.00', null, null, null, null, null, null, '', '包', '实物', null, null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('15', '上海国际车展门票', '', '100.00', '100.00', null, null, null, null, null, null, '', '张', '实物', null, null, null, 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('14', '派米盐焗开心果', '爱芬乐希腊进口年货', '20.00', '20.00', null, null, null, null, null, null, '', '包', '实物', null, null, null, 'yesno', '2015-12-21 16:39:09', null, null, '王瑜佳');
+INSERT INTO `sp_info` VALUES ('15', '上海国际车展门票', '', '100.00', '100.00', null, null, null, null, null, null, '', '张', '实物', null, null, null, 'yesok', '2015-12-21 16:39:29', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('16', 'wills健身周卡', '', '468.00', '468.00', null, null, null, null, null, null, '', '张', '服务', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('17', '咔萨哇牌木薯片40g', '', '8.90', '8.90', null, null, null, null, null, null, '', '包\n', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('18', '咔萨哇牌木薯片120g', '咔萨哇木薯片', '24.00', '24.00', null, null, null, null, null, null, '', '包', '实物', null, null, null, 'no', null, null, null, null);
@@ -448,7 +487,7 @@ INSERT INTO `sp_info` VALUES ('1103', '蓝氏鸡肉芝士全价成猫粮', '', n
 INSERT INTO `sp_info` VALUES ('1104', '它时代宠物期刊杂志', '', null, '25.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1105', '好慷七彩布（7条/包）', '', null, '30.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1106', '易存网紫水晶手链2A，8mm，2串/份', '', null, '35.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('1107', '乐扣乐扣Ye Dr.Fresh Fine600ml漱口水', '', null, '40.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('1107', '乐扣乐扣Ye Dr.Fresh Fine600ml漱口水', '', null, '40.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'yesok', '2015-12-21 16:39:23', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('1108', '瑞砂汉方足浴', '', null, '45.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1109', '仁爱医院早早孕检测试纸（好运测试纸/笔型）', '', null, '50.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1110', '米仔玉米儿童餐具', '', null, '55.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
@@ -475,18 +514,19 @@ INSERT INTO `sp_info` VALUES ('1234', '太太乐五福临门礼盒', '太太乐�
 INSERT INTO `sp_info` VALUES ('1235', '滁州贡菊', '滁州贡菊', '25.00', '25.00', '30.00', '20.00', '10.00', '0.50', '0.01', '1.00', '60*40*30', '盒', '实物', '2015-11-03', '180', null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1237', '现代牧业纯牛奶', '现代牧业纯牛奶', '5.50', '5.50', '20.00', '10.00', '10.00', '0.40', '0.00', '0.33', '40*30*20', '盒', '实物', null, '90', '2015-12-25', 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1239', '啦啦啦', null, '12.00', '12.00', '12.00', '12.30', '978.30', '123.22', '12.00', '344.00', '123*1323*12', '包', '实物', '2015-11-20', '12', null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('1241', '我是商品1', null, null, null, null, null, null, null, null, null, '', '', '实物', null, null, '2015-12-30', 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('1241', '我是商品1', null, null, null, null, null, null, null, null, null, '', '', '实物', null, null, '2015-12-30', 'yesok', '2015-12-21 17:35:44', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('1242', '我是商品2', null, null, null, null, null, null, null, null, null, '', '', '实物', null, null, '2015-12-30', 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1245', '商品444', '', null, null, null, null, null, null, null, null, '', '', '服务', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1246', '商品4444', '', null, null, null, null, null, null, null, null, '', '', '', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1247', '商品777', '商品777', null, null, null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1248', '我是一个小商品2', '我是试试', '20000.00', '30.00', '30.00', '20000.00', '10.00', '100.00', '300.00', '200.00', '比比', '个', '实物', '2015-11-25', '365', '2016-11-25', 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1249', '我是商品n', 'aaaaa', '10000.00', '10000.00', '10000.00', '100.30', '30000.00', '10000.00', '100000.00', '100000.00', '20******啦啦啦00000', '个', '实物', null, null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('1250', '商品A', 'A', '10.00', '10.00', '10.00', '10.00', '10.00', '10.00', '10.00', '1000.00', '1312321', '个', '实物', '2015-11-18', null, '2015-12-03', 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('1250', '商品A', 'A', '10.00', '10.00', '10.00', '10.00', '10.00', '10.00', '10.00', '1000.00', '1312321', '个', '实物', '2015-11-18', null, '2015-12-03', 'yesok', '2015-12-21 17:39:28', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('1251', '杯具', 'AAA', '12.00', '123.00', '12.00', '11.00', '978.30', '123.22', '100.00', null, '', '个', '实物', '2015-12-03', null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('1252', '测试商品1', '测试商品1', '100.00', '30.00', '10.00', '11.00', '11.00', '11.00', '11.00', '11.00', '11', '个', '实物', '2015-11-01', null, '2015-12-09', 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('1252', '测试商品1', '测试商品1', '100.00', '30.00', '10.00', '11.00', '11.00', '11.00', '11.00', '11.00', '11', '个', '实物', '2015-11-01', null, '2015-12-09', 'yesok', '2015-12-21 15:37:04', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('1253', '商品AA', 'a', '10.00', '10.00', '10.00', '11.00', '978.30', '10.00', '12.00', '11.00', '试试1213', '只', '实物', '2015-12-15', null, '2015-12-18', 'yesok', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1254', '我是一根葱', '', '10.00', null, null, null, null, null, null, null, '', '根', '实物', '2015-12-18', '10', '2015-12-27', 'yesok', '2015-12-18 16:25:47', null, null, null);
+INSERT INTO `sp_info` VALUES ('1255', '我可以增加人', '我可以增加人', '10.00', '10.00', '1.00', '2.00', '4.00', '123.00', '121312.00', '222.00', '试试1213', '个', '实物', '2015-12-21', '12', '2016-01-03', 'yesno', '2015-12-21 15:36:48', '王瑜佳', '王瑜佳', '王瑜佳');
 
 -- ----------------------------
 -- Table structure for sp_kind
@@ -532,20 +572,20 @@ CREATE TABLE `user` (
   `upwd` varchar(10) NOT NULL,
   `name` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'a', '123', null);
-INSERT INTO `user` VALUES ('2', 'b', '123', null);
-INSERT INTO `user` VALUES ('3', 'wangyujia', '1234', null);
-INSERT INTO `user` VALUES ('4', 'wangyujia', '1234', null);
-INSERT INTO `user` VALUES ('5', 'zhijie', '1234', null);
-INSERT INTO `user` VALUES ('8', 'lushifeng', '111', null);
-INSERT INTO `user` VALUES ('11', 'do123', '123', null);
-INSERT INTO `user` VALUES ('12', 'do123', '1234', null);
-INSERT INTO `user` VALUES ('13', 'ai', 'ai', null);
+INSERT INTO `user` VALUES ('1', 'a', '123', '诶');
+INSERT INTO `user` VALUES ('2', 'b', '123', '笔');
+INSERT INTO `user` VALUES ('3', 'wangyujia', '1234', '王瑜佳');
+INSERT INTO `user` VALUES ('5', 'zhijie', '1234', '支捷');
+INSERT INTO `user` VALUES ('8', 'lushifeng', '111', '陆世峰');
+INSERT INTO `user` VALUES ('11', 'do123', '123', '读');
+INSERT INTO `user` VALUES ('12', 'do123', '1234', '百');
+INSERT INTO `user` VALUES ('13', 'ai', 'ai', '爱╮(╯▽╰)╭');
+INSERT INTO `user` VALUES ('14', 'liyiyin', '123456', '李奕寅');
 
 -- ----------------------------
 -- Table structure for yt_application
@@ -574,7 +614,7 @@ CREATE TABLE `yt_application` (
   KEY `place_id` (`place_id`),
   CONSTRAINT `place_id` FOREIGN KEY (`place_id`) REFERENCES `kc_place` (`kc_id`),
   CONSTRAINT `yt_sp_id` FOREIGN KEY (`sp_id`) REFERENCES `sp_info` (`sp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yt_application
@@ -628,3 +668,31 @@ INSERT INTO `yt_application` VALUES ('50', '3', '5', null, '7', null, '包', nul
 INSERT INTO `yt_application` VALUES ('51', '3', '5', null, '7', null, '包', null, null, null, null, '28', '2015-12-16', '2015-12-16', '社区特卖', null, null);
 INSERT INTO `yt_application` VALUES ('52', '1', '1', null, '1', null, '包', null, null, null, null, '2', '2015-12-17', '2015-12-17', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('53', '1254', '28', null, '1', null, '根', null, null, null, '11223344', '1000', '2015-12-18', '2015-12-24', '福利', null, null);
+INSERT INTO `yt_application` VALUES ('54', '10', '26', null, '2', null, '份', null, null, null, null, '40', '2015-12-24', '2015-12-31', '任意调配', null, null);
+INSERT INTO `yt_application` VALUES ('55', '10', '26', null, '2', null, '份', null, null, null, null, '10', '2015-12-24', '2015-12-31', '任意调配', null, null);
+INSERT INTO `yt_application` VALUES ('56', '10', '26', null, '2', null, '份', null, null, null, null, '4', '2015-12-24', '2015-12-31', '任意调配', null, '王瑜佳');
+INSERT INTO `yt_application` VALUES ('57', '10', '26', null, '2', null, '份', null, null, null, null, '4', '2015-12-24', '2015-12-31', '任意调配', null, '王瑜佳');
+
+-- ----------------------------
+-- Table structure for zk_application
+-- ----------------------------
+DROP TABLE IF EXISTS `zk_application`;
+CREATE TABLE `zk_application` (
+  `zk_application_id` int(8) NOT NULL AUTO_INCREMENT,
+  `ck_id` int(8) DEFAULT NULL,
+  `sp_id` int(8) DEFAULT NULL,
+  `sh_id` int(8) DEFAULT NULL,
+  `type_in` enum('福利','物业礼包','社区特卖','一元购','任意配置') DEFAULT NULL,
+  `type_out` enum('福利','物业礼包','社区特卖','一元购','任意配置') DEFAULT NULL,
+  `zk_number` int(8) DEFAULT NULL,
+  `auditTime` datetime DEFAULT NULL,
+  `adduser` varchar(30) DEFAULT NULL,
+  `edituser` varchar(30) DEFAULT NULL,
+  `checkuser` varchar(30) DEFAULT NULL,
+  `state` enum('yesno','yesok','no') DEFAULT 'no',
+  PRIMARY KEY (`zk_application_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of zk_application
+-- ----------------------------
