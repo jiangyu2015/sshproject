@@ -19,6 +19,9 @@
         <property name="transferNumber" type="java.lang.Integer">
             <column name="zk_number" length="8" not-null="false"/>
         </property>
+        <property name="applicationDate" type="java.util.Date">
+            <column name="applicationDate" length="50" not-null="false"/>
+        </property>
         <property name="auditTime" type="java.util.Date">
             <column name="auditTime" length="30" not-null="false"/>
         </property>

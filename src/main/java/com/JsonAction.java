@@ -264,7 +264,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         Integer placeId = storage.getPlace().getPlaceId();
         String placeName = storage.getPlace().getPlaceName();
         String type = storage.getStorageType();
-
         Integer producerId = storage.getProducer().getProducerId();
         String producerName = storage.getProducer().getProducerName();
         JSONObject json = new JSONObject();

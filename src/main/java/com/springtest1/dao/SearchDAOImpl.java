@@ -253,12 +253,13 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
                 "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, " + //11剩余预提数
-                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id " +  //12预提后可用库存 13明细id
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id,zmkc.rk_type " +  //12预提后可用库存 13明细id 14入库类型
 
-                "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
+
+                "FROM (	SELECT zrk.rk_type,zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.ss_number, " +
                 "			ifnull(zck.ck_number, 0) ck_number, " +
                 "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id " +
-                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,sum(ss_number) ss_number,rk_id " +
+                "		FROM ( 	SELECT rk_type,sp_id,sh_id,rk_place_id,sum(ss_number) ss_number,rk_id " +
                 "				FROM rk_detail WHERE state = 'ok' " +
                 "				GROUP BY sh_id, sp_id,rk_place_id " +
                 "			) zrk " +
@@ -334,6 +335,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             commodityDto.setSurplusWithholdingNumber((BigDecimal) row[11]); //剩余预提
             commodityDto.setAvailableInventory((BigDecimal) row[12]);//预提后可用库存
             commodityDto.setId((Integer) row[13]);//明细id
+            commodityDto.setType((String) row[14]);  //入库类型
             commodityDtoList.add(commodityDto);
         }
         return commodityDtoList;

@@ -19,6 +19,15 @@ public class TransferApp implements Serializable {
     private String edituser; //修改人
     private String checkuser; //审核人
     private String state = "no";  //处理状态
+    private Date applicationDate; //申请录入时间
+
+    public Date getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(Date applicationDate) {
+        this.applicationDate = applicationDate;
+    }
 
     public String getState() {
         return state;

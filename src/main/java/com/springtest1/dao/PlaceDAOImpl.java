@@ -34,7 +34,7 @@ public class PlaceDAOImpl extends HibernateDaoSupport implements PlaceDAO {
                     if (condition.getPlaceName() != null && !condition.getPlaceName().equals("")) {
                         c.add(Restrictions.eq("placeName", condition.getPlaceName()));
                     }
-                    if (condition.getPlaceId() != null && !condition.getPlaceId().equals("")) {
+                   else if (condition.getPlaceId() != null && !condition.getPlaceId().equals("")) {
                         c.add(Restrictions.eq("placeId", condition.getPlaceId()));
                     }
                 }

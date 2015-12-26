@@ -5,7 +5,6 @@ import com.hibtest1.entity.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.*;
-import net.sf.json.JSONObject;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 

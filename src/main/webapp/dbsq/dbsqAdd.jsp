@@ -1,15 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: user
-  Date: 2015/12/9
-  Time: 10:08
-  To change this template use File | Settings | File Templates.
---%>
-<%--
-  Created by IntelliJ IDEA.
   User: dell
-  Date: 2015/11/26
-  Time: 20:38
+  Date: 2015/12/26
+  Time: 16:19
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -18,40 +11,25 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>添加预提信息</title>
+    <title>添加调拨信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
         $(function () {
-
             $.ajax({
-                url: "doWithholdingJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
-                data: {//设置数据源
-                    id: GetQueryString("id")
-                },
-                dataType: "json",//设置需要返回的数据类型*/
-                success: function (data, xhrTxt) {
-
-                    var str = "";
-                    var d = eval("(" + data + ")");
-                    var goodsId = str + d.goodsId;
-                    var goodsName = str + d.goodsName;
-                    var placeId = str + d.placeId;
-                    var placeName = str + d.placeName;
-                    var producerId = str + d.producerId;
-                    var producerName = str + d.producerName;
-                    var type = str + d.type;
+                success: function () {
+                    var producerName = GetQueryString("producerName");
+                    var goodsId = GetQueryString("goodsId");
+                    var goodsName = GetQueryString("goodsName");
+                    var placeName = GetQueryString("placeName");
+                    var type = GetQueryString("type");
+                    var availableInventory = GetQueryString("availableInventory");
                     $('#goodsId').val(goodsId);
                     $('#goodsName').val(goodsName);
-                    $('#placeId').val(placeId);
                     $('#placeName').val(placeName);
-                    $('#producerId').val(producerId);
                     $('#producerName').val(producerName);
                     $('#type').val(type);
-                },
-                error: function () {
-                    alert("系统异常，请稍后重试！");
-                }//这里不要加","
+                }
             });
         });
         function check(form) {
@@ -94,7 +72,7 @@
                         alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
                         result = false;
                     }
-                    else if(overdays<todays){
+                    else if (overdays < todays) {
                         alert("活动截止时间不能小于今天")
                         result = false;
                     }
@@ -108,6 +86,7 @@
         }
 
         var newdate = null;
+
         function getToDay() {   //获取今天的日子
             var now = new Date();
             var nowYear = now.getFullYear();
@@ -135,17 +114,12 @@
     </script>
 </head>
 <body>
-<div class="title">添加预提申请信息</div>
+<div class="title">添加调拨申请信息</div>
 <div class="content">
     <form method="post" action="ytAdd" onsubmit="return check(this)">
         <div class="line">
-            <div class="lable">商户id：</div>
-            <div class="input-div"><input id="producerId" name="producerId" readonly="readonly"
-                                          style="border: none;-webkit-box-shadow: none;"/></div>
-        </div>
-        <div class="line">
             <div class="lable">商户名称：</div>
-            <div class="input-div"><input id="producerName" readonly="readonly"
+            <div class="input-div"><input id="producerName" name="producerName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
@@ -153,48 +127,27 @@
             <div class="input-div"><input id="goodsId" name="goodsId" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
-
         <div class="line">
             <div class="lable">商品名称：</div>
             <div class="input-div"><input id="goodsName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">仓库id：</div>
-            <div class="input-div"><input id="placeId" name="placeId" readonly="readonly"
+            <div class="lable">原仓库地址：</div>
+            <div class="input-div"><input id="placeName" name="placeName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">仓库地址：</div>
-            <div class="input-div"><input id="placeName" readonly="readonly"
-                                          style="border: none;-webkit-box-shadow: none;"/></div>
+            <div class="lable">目标仓库地址：</div>
+            <div class="input-div"><input placeholder="请输入目标仓库地址" name="placeName2"/></div>
         </div>
         <div class="line">
-            <div class="lable">使用原由：</div>
-            <div class="input-div"><input name="withholding.events" placeholder="请输入预提出库事件原由"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">活动id：</div>
-            <div class="input-div"><input name="withholding.activityId" placeholder="如该活动有id请输入"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">单位：</div>
-            <div class="input-div"><input id="unit" name="withholding.unit" placeholder="请确认预提商品单位，如不一致会失败"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">预提数：</div>
-            <div class="input-div"><input id="witholdingNumber" input name="withholding.witholdingNumber"
-                                          placeholder="请输入预提数"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">截止日期：</div>
-            <div class="input-div"><input id="deteline" name="withholding.deteline" placeholder="请输入截止日期" type="date"/>
-            </div>
+            <div class="lable">调拨数量：</div>
+            <div class="input-div"><input placeholder="请输入调拨数量" name="allot.allotNumber"/></div>
         </div>
         <div class="line">
             <div class="lable">使用类型：</div>
-            <div class="input-div"><input id="type" name="withholding.useType" readonly="readonly"
-                                          style="border: none;-webkit-box-shadow: none;"/></div>
+            <div class="input-div"><input id="type" name="allot.allotType"/></div>
         </div>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
