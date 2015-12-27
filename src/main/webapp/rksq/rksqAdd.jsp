@@ -145,7 +145,7 @@
 
             <div class="input-div">
                 <select  name="storageApp.storageType">
-                    <option value="任意调配">任意调配</option>
+                    <option value="任意配置">任意配置</option>
                     <option value="一元购">一元购</option>
                     <option value="社区特卖">社区特卖</option>
                     <option value="物业礼包">物业礼包</option>

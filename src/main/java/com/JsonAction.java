@@ -289,10 +289,11 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         String pid = request.getParameter("producerId");
         System.out.println("producerId" + pid);
         int producerId = Integer.valueOf(pid);
-        String w = request.getParameter("witholdingNumber");
+     /*   String w = request.getParameter("witholdingNumber");
+
         System.out.println("预提数" + w);
         int witholdingNumber = Integer.valueOf(w);  //预提数  需要检测是不是字符 要不然会报错
-        String unit = request.getParameter("unit");       //单位  与库存商品单位不一样不预提
+        String unit = request.getParameter("unit");       //单位  与库存商品单位不一样不预提*/
         List<CommodityDto> commodityDtoList = searchBiz.searchWithholding(goodsId, producerId, placeId);
         System.out.println("搜查成功" + commodityDtoList.size());
         JSONObject json = new JSONObject();

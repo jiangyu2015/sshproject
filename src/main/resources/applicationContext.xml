@@ -180,12 +180,24 @@
     <bean id="storageAppEdit" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
     </bean>
+    <bean id="allotAppEdit" class="com.AllotManagerAction" scope="prototype">
+        <property name="allotAppBiz" ref="allotAppBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+    </bean>
+    <bean id="transferAppEdit" class="com.TransferAppManagerAction" scope="prototype">
+        <property name="transferAppBiz" ref="transferAppBiz"/>
+    </bean>
+
     <bean id="storageAppList" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
-     <!--   <property name="goodsBiz" ref="goodsBiz"/>
-        <property name="placeBiz" ref="placeBiz"/>
-        <property name="producerBiz" ref="producerBiz"/>-->
     </bean>
+    <bean id="allotAppList" class="com.AllotManagerAction" scope="prototype">
+        <property name="allotAppBiz" ref="allotAppBiz"/>
+    </bean>
+    <bean id="transferAppList" class="com.TransferAppManagerAction" scope="prototype">
+        <property name="transferAppBiz" ref="transferAppBiz"/>
+    </bean>
+
     <bean id="storageAppCheck" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
 
@@ -200,6 +212,18 @@
 
     <bean id="storageAppAdd" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="allotAppAdd" class="com.AllotManagerAction" scope="prototype">
+        <property name="allotAppBiz" ref="allotAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="transferAppAdd" class="com.TransferAppManagerAction" scope="prototype">
+        <property name="transferAppBiz" ref="transferAppBiz"/>
         <property name="goodsBiz" ref="goodsBiz"/>
         <property name="placeBiz" ref="placeBiz"/>
         <property name="producerBiz" ref="producerBiz"/>

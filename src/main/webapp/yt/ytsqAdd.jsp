@@ -31,7 +31,6 @@
                 },
                 dataType: "json",//设置需要返回的数据类型*/
                 success: function (data, xhrTxt) {
-
                     var str = "";
                     var d = eval("(" + data + ")");
                     var goodsId = str + d.goodsId;
@@ -63,10 +62,10 @@
                 data: {//设置数据源
                     goodsId: $("#goodsId").val(),
                     placeId: $("#placeId").val(),
-                    producerId: $("#producerId").val(),
-                    witholdingNumber: $("#witholdingNumber").val(),
+                    producerId: $("#producerId").val()
+                  /*  witholdingNumber: $("#witholdingNumber").val(),*/
                     /*     type: $("#type").val(),*/
-                    unit: $("#unit").val()
+                 /*   unit: $("#unit").val()  这个恢复上面的加逗号*/
                 },
                 dataType: "json",//设置需要返回的数据类型
                 success: function (data, xhrTxt) {

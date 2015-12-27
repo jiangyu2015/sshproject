@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: dell
-  Date: 2015/12/26
-  Time: 16:19
+  Date: 2015/12/27
+  Time: 20:47
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -13,7 +13,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>添加调拨申请信息</title>
+    <title>添加转库申请信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
@@ -31,7 +31,7 @@
                     $('#goodsName').val(goodsName);
                     $('#placeName').val(placeName);
                     $('#producerName').val(producerName);
-                    $('#type').val(type);
+                    $('#typeOut').val(type);
                 }
             });
             $.ajax({
@@ -75,26 +75,18 @@
                     var d = eval("(" + data + ")");
                     var availableInventory = d.availableInventory;
                     var allotNumber = $("#allotNumber").val();
-                    var placeName = $("#placeName").val();
-                    var placeName2 = $("#item3").val();
-                    var val3 = $("#item3").val();
-                    var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+                    var typeOut = $("#typeOut").val();
+                    var typeIn = $("#typeIn").val();
                     if (allotNumber > availableInventory) {
-                        alert("调拨申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
+                        alert("转库申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
                         result = false;
                     }
-                    else if (placeName == placeName2) {
-                        alert("调拨申请不成功，目标仓库地址与原仓库地址相同！");
+                    else if (typeIn == typeOut) {
+                        alert("转库申请不成功，目标使用类型与原先一样！");
                         result = false;
-                    }
-                    else if (val3 != null & val3 != "") {
-                        if (selectId3 == undefined) {
-                            alert("调拨申请不成功,仓库未建，请选择选项框内的仓库");
-                            result = false;
-                        }
                     }
                     else {
-                        alert("调拨申请成功");
+                        alert("转库申请成功");
                         result = true;
                     }
                 }
@@ -113,7 +105,7 @@
 <body>
 <div class="title">添加调拨申请信息</div>
 <div class="content">
-    <form method="post" action="dbAdd" onsubmit="return check(this)">
+    <form method="post" action="zkAdd" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商户名称：</div>
             <div class="input-div"><input id="producerName" name="producerName" readonly="readonly"
@@ -130,24 +122,33 @@
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">原仓库地址：</div>
+            <div class="lable">仓库地址：</div>
             <div class="input-div"><input id="placeName" name="placeName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">目标仓库地址：</div>
-            <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址" name="placeName2"/></div>
-            <datalist id="select3"></datalist>
+            <div class="lable">转库数量：</div>
+            <div class="input-div"><input id="allotNumber" placeholder="请输入转库数量" name="transferApp.transferNumber"/>
+            </div>
         </div>
         <div class="line">
-            <div class="lable">调拨数量：</div>
-            <div class="input-div"><input id="allotNumber" placeholder="请输入调拨数量" name="allotApp.allotNumber"/></div>
-        </div>
-        <div class="line">
-            <div class="lable">使用类型：</div>
-            <div class="input-div"><input id="type" name="allotApp.allotType" readonly="readonly"
+            <div class="lable">原使用类型：</div>
+            <div class="input-div"><input id="typeOut" name="transferApp.typeOut" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
+        <div class="line">
+            <div class="lable">目标使用类型：</div>
+            <div class="input-div">
+                <select id="typeIn" name="transferApp.typeIn">
+                    <option value="任意配置">任意配置</option>
+                    <option value="一元购">一元购</option>
+                    <option value="社区特卖">社区特卖</option>
+                    <option value="物业礼包">物业礼包</option>
+                    <option value="福利">福利</option>
+                </select>
+            </div>
+        </div>
+
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>

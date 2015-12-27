@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: dell
-  Date: 2015/12/26
-  Time: 15:11
+  Date: 2015/12/27
+  Time: 20:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -30,7 +30,7 @@
                 else {
                     $.ajax({
                         success: function () {
-                            window.location.href =encodeURI(encodeURI( "dbsqAdd.jsp?id=" + $tds.eq(0).text() + "&producerId="
+                            window.location.href =encodeURI(encodeURI( "zksqAdd.jsp?id=" + $tds.eq(0).text() + "&producerId="
                                     + $tds.eq(1).text() + "&producerName=" + $tds.eq(2).text() + "&goodsId=" + $tds.eq(3).text() + "&goodsName=" + $tds.eq(4).text()
                                     + "&placeId="+$tds.eq(5).text()+"&placeName=" + $tds.eq(6).text()+"&type="+$tds.eq(14).text()));
                         },
@@ -56,7 +56,7 @@
 <div class="table-div">
     <div class="title">库存仓库信息</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="调拨申请" onclick="doWithholding();"
+        <input type="button" class="btn-eidt" value="转库申请" onclick="doWithholding();"
                style="position: relative; width: 90px;"/>
 
     </div>
@@ -106,5 +106,8 @@
         </tbody>
     </table>
 </div>
+
+
 </body>
 </html>
+

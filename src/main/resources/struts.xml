@@ -45,7 +45,7 @@
         </action>
         <action name="spCheck" class="goodsCheck" method="checkGoods">
             <result type="redirect" name="goodsCheck">/sp/spCheckList.jsp</result>
-        <!--    <result type="redirect" name="input">/sp/fail.jsp</result>-->
+            <!--    <result type="redirect" name="input">/sp/fail.jsp</result>-->
         </action>
         <action name="spSelectCheck" class="goodsCheckSelect" method="checkGoodsSelect">
             <result type="redirect" name="success">/sp/spSelectList.jsp</result>
@@ -78,16 +78,29 @@
             <result type="redirect" name="success">/sh/shSelectList.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
-
         <action name="listPlace" class="placeList" method="listplace">
             <result type="redirect" name="place">/place/placeAllList.jsp</result>
         </action>
+
         <action name="listrksq" class="storageAppList" method="listStorageApp">
             <result type="redirect" name="storageApp">/rksq/rksqAllList.jsp</result>
+        </action>
+        <action name="listdbsq" class="allotAppList" method="listAllotApp">
+            <result type="redirect" name="allotApp">/dbsq/dbsqAllList.jsp</result>
+        </action>
+        <action name="listzksq" class="transferAppList" method="listTransferApp">
+            <result type="redirect" name="transferApp">/zksq/zksqAllList.jsp</result>
         </action>
         <action name="editrksq" class="storageAppEdit" method="editStorageApp">
             <result type="redirect" name="success">/rksq/rksqList.jsp</result>
         </action>
+        <action name="editdbsq" class="allotAppEdit" method="editAllotApp">
+            <result type="redirect" name="success">/dbsq/dbsqList.jsp</result>
+        </action>
+        <action name="editzksq" class="transferAppEdit" method="editTransferApp">
+            <result type="redirect" name="success">/zksq/zksqList.jsp</result>
+        </action>
+
         <action name="rksqcheck" class="storageAppCheck" method="checkStorageApp">
             <result type="redirect" name="storageAppCheck">/rksq/rksqCheckList.jsp</result>
         </action>
@@ -100,9 +113,22 @@
         </action>
 
         <action name="dbSelect" class="withholdingSelect" method="searchInventoryFlowGoods">
-        <result type="redirect" name="success">/dbsq/dbsqGoodsList.jsp</result>
-        <result type="redirect" name="fail">/dbsq/fail.jsp</result>
-    </action>
+            <result type="redirect" name="success">/dbsq/dbsqGoodsList.jsp</result>
+            <result type="redirect" name="fail">/dbsq/fail.jsp</result>
+        </action>
+        <action name="dbAdd" class="allotAppAdd" method="addAllotApp">
+            <result type="redirect" name="success">/dbsq/dbsqList.jsp</result>
+            <result type="redirect" name="fail">/dbsq/fail.jsp</result>
+        </action>
+        <action name="zkAdd" class="transferAppAdd" method="addTransferApp">
+            <result type="redirect" name="success">/zksq/zksqList.jsp</result>
+            <result type="redirect" name="fail">/zksq/fail.jsp</result>
+        </action>
+
+        <action name="zkSelect" class="withholdingSelect" method="searchInventoryFlowGoods">
+            <result type="redirect" name="success">/zksq/zksqGoodsList.jsp</result>
+            <result type="redirect" name="fail">/zksq/fail.jsp</result>
+        </action>
 
         <action name="listrk" class="storageList" method="listStorage">
             <result type="redirect" name="storage">/rk/rkAllList.jsp</result>
@@ -126,11 +152,9 @@
         <action name="rkOk" class="storageOk" method="storageOk">
             <result type="redirect" name="success">listrk.action</result>
         </action>
-
         <action name="eventsAdd" class="eventsAdd" method="addEvents">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
-
         <action name="ytSelect" class="withholdingSelect" method="searchInventoryFlowGoods">
             <result type="redirect" name="success">/yt/ytsqGoodsList.jsp</result>
             <result type="redirect" name="fail">/yt/fail.jsp</result>

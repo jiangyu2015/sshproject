@@ -151,7 +151,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         System.out.println("输出仓库id" + place.getPlaceId());
         storage.setPlace(place);
 
-
         if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))                      //预期入库时间
             storage.setExpectedDate(storageApp.getExpectedDate());
         if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))               //预收数量
@@ -278,9 +277,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         s.setStorageAppId(storageApp.getStorageAppId());
         StorageApp condition = new StorageApp();
         condition = (StorageApp) storageAppBiz.getStorageAppList(s).get(0);
-        if (storageApp.getStorageAppId() != null && !storageApp.getStorageAppId().equals("")) {
+     /*   if (storageApp.getStorageAppId() != null && !storageApp.getStorageAppId().equals("")) {
             condition.setStorageAppId(storageApp.getStorageAppId());
-        }
+        }*/
         if (storageApp.getProducerName() != null && !storageApp.getProducerName().equals(""))        //商户名称
             condition.setProducerName(storageApp.getProducerName());
         if (storageApp.getStoragePlace() != null && !storageApp.getStoragePlace().equals(""))                      //仓库地址
