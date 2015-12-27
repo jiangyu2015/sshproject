@@ -27,9 +27,9 @@
                 else {
                     $.ajax({
                         success: function () {
-                            window.location.href = "dbsqAdd.jsp?id=" + $tds.eq(0).text() + "&availableInventory="
+                            window.location.href =encodeURI( "dbsqAdd.jsp?id=" + $tds.eq(0).text() + "&availableInventory="
                                     + $tds.eq(13).text() + "&producerName=" + $tds.eq(2).text() + "&goodsId=" + $tds.eq(3).text() + "&goodsName=" + $tds.eq(4).text()
-                                    + "&placeName=" + $tds.eq(6).text()+"&type="+$tds.eq(14).text();
+                                    + "&placeName=" + $tds.eq(6).text()+"&type="+$tds.eq(14).text());
                         },
                         error: function () {
                             alert("系统异常，请稍后重试！");

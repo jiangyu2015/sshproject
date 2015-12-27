@@ -18,9 +18,10 @@
         $(function () {
             $.ajax({
                 success: function () {
-                    var producerName = GetQueryString("producerName");
+                    var producerName = decodeURI(GetQueryString("producerName"));
+                    alert(producerName);
                     var goodsId = GetQueryString("goodsId");
-                    var goodsName = GetQueryString("goodsName");
+                    var goodsName = decodeURI(GetQueryString("goodsName"));
                     var placeName = GetQueryString("placeName");
                     var type = GetQueryString("type");
                     var availableInventory = GetQueryString("availableInventory");

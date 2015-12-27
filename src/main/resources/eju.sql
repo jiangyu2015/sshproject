@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-12-25 17:30:16
+Date: 2015-12-27 12:08:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -123,6 +123,7 @@ CREATE TABLE `db_application` (
   `edituser` varchar(30) DEFAULT NULL,
   `checkuser` varchar(30) DEFAULT NULL,
   `auditTime` datetime DEFAULT NULL,
+  `applicationDate` datetime DEFAULT NULL,
   `state` enum('yesno','yesok','no') DEFAULT 'no',
   PRIMARY KEY (`db_application_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -517,7 +518,6 @@ INSERT INTO `sp_info` VALUES ('1239', '啦啦啦', null, '12.00', '12.00', '12.0
 INSERT INTO `sp_info` VALUES ('1241', '我是商品1', null, null, null, null, null, null, null, null, null, '', '', '实物', null, null, '2015-12-30', 'yesok', '2015-12-21 17:35:44', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('1242', '我是商品2', null, null, null, null, null, null, null, null, null, '', '', '实物', null, null, '2015-12-30', 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1245', '商品444', '', null, null, null, null, null, null, null, null, '', '', '服务', null, null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('1246', '商品4444', '', null, null, null, null, null, null, null, null, '', '', '', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1247', '商品777', '商品777', null, null, null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1248', '我是一个小商品2', '我是试试', '20000.00', '30.00', '30.00', '20000.00', '10.00', '100.00', '300.00', '200.00', '比比', '个', '实物', '2015-11-25', '365', '2016-11-25', 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1249', '我是商品n', 'aaaaa', '10000.00', '10000.00', '10000.00', '100.30', '30000.00', '10000.00', '100000.00', '100000.00', '20******啦啦啦00000', '个', '实物', null, null, null, 'no', null, null, null, null);
@@ -614,7 +614,7 @@ CREATE TABLE `yt_application` (
   KEY `place_id` (`place_id`),
   CONSTRAINT `place_id` FOREIGN KEY (`place_id`) REFERENCES `kc_place` (`kc_id`),
   CONSTRAINT `yt_sp_id` FOREIGN KEY (`sp_id`) REFERENCES `sp_info` (`sp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yt_application
@@ -672,6 +672,7 @@ INSERT INTO `yt_application` VALUES ('54', '10', '26', null, '2', null, '份', n
 INSERT INTO `yt_application` VALUES ('55', '10', '26', null, '2', null, '份', null, null, null, null, '10', '2015-12-24', '2015-12-31', '任意调配', null, null);
 INSERT INTO `yt_application` VALUES ('56', '10', '26', null, '2', null, '份', null, null, null, null, '4', '2015-12-24', '2015-12-31', '任意调配', null, '王瑜佳');
 INSERT INTO `yt_application` VALUES ('57', '10', '26', null, '2', null, '份', null, null, null, null, '4', '2015-12-24', '2015-12-31', '任意调配', null, '王瑜佳');
+INSERT INTO `yt_application` VALUES ('58', '4', '3', null, '5', null, '盒', null, null, null, null, '30', '2015-12-26', '2016-01-31', '一元购', null, '诶');
 
 -- ----------------------------
 -- Table structure for zk_application
@@ -689,6 +690,7 @@ CREATE TABLE `zk_application` (
   `adduser` varchar(30) DEFAULT NULL,
   `edituser` varchar(30) DEFAULT NULL,
   `checkuser` varchar(30) DEFAULT NULL,
+  `applicationDate` datetime DEFAULT NULL,
   `state` enum('yesno','yesok','no') DEFAULT 'no',
   PRIMARY KEY (`zk_application_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
