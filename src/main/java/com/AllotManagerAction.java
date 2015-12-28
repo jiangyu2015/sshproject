@@ -120,10 +120,17 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
     public String listAllotApp() {               //得到所有调拨申请单
         List allotApp = allotAppBiz.getAllAllotApp();
         session.put("allotapplistall", allotApp);
-
         return "allotApp";
     }
 
+    public String checkAllotApp() {               //得到所需审核的单子
+        AllotApp condition=new AllotApp();
+        condition.setState("no");
+        List<AllotApp> allotApp = allotAppBiz.getAllotAppList(condition);
+        session.put("allotapplischeck", allotApp);
+        return "allotAppCheck";
+
+    }
     public String addAllotApp() throws Exception {                  //增加调拨申请
         System.out.println("addAllotApp");
         AllotApp condition = new AllotApp();

@@ -44,9 +44,15 @@ public class AllotAppDAOImpl extends HibernateDaoSupport implements AllotAppDAO{
                     if (condition.getAllotAppId() != null && !condition.getAllotAppId().equals("")) {
                         System.out.println("DAO" + condition.getAllotAppId());
                         c.add(Restrictions.eq("allotAppId", condition.getAllotAppId()));
+                    }else if (condition.getState() != null && !condition.getState().equals("")) {
+                        c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }
-                return c.list();
+                if (c.list().size() <= 0) {
+                    return new ArrayList<AllotApp>();
+                } else {
+                    return c.list();
+                }
             }
         });
     }

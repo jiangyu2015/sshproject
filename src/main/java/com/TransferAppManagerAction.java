@@ -1,9 +1,6 @@
 package com;
 
-import com.hibtest1.entity.TransferApp;
-import com.hibtest1.entity.Goods;
-import com.hibtest1.entity.Place;
-import com.hibtest1.entity.Producer;
+import com.hibtest1.entity.*;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.*;
 import org.apache.struts2.interceptor.RequestAware;
@@ -112,6 +109,15 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
         session.put("transferapplistall", transferApp);
 
         return "transferApp";
+    }
+
+    public String checkTransferApp() {               //得到所需审核的单子！为了保存
+        TransferApp condition=new TransferApp();
+        condition.setState("no");
+        List<TransferApp> transferApp = transferAppBiz.getTransferAppList(condition);
+        session.put("transferapplischeck", transferApp);
+        return "transferAppCheck";
+
     }
 
     public String addTransferApp() throws Exception {                  //增加转库申请
