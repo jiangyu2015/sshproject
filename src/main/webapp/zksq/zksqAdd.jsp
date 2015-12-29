@@ -148,6 +148,10 @@
                 </select>
             </div>
         </div>
+        <div class="line">
+            <div class="lable">期望时间：</div>
+            <div class="input-div"><input placeholder="请输入期望转库时间" name="transferApp.expectDate" type="date"/></div>
+        </div>
 
         <input type="submit" value="提交" class="btn-submit"/>
     </form>

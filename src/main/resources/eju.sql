@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2015-12-27 12:08:51
+Date: 2015-12-29 17:45:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -118,6 +118,7 @@ CREATE TABLE `db_application` (
   `sp_id` int(8) NOT NULL,
   `sh_id` int(8) NOT NULL,
   `db_number` int(8) NOT NULL,
+  `expectDate` date DEFAULT NULL,
   `rk_type` enum('福利','物业礼包','社区特卖','一元购','任意配置') DEFAULT '任意配置',
   `adduser` varchar(30) DEFAULT NULL,
   `edituser` varchar(30) DEFAULT NULL,
@@ -126,11 +127,15 @@ CREATE TABLE `db_application` (
   `applicationDate` datetime DEFAULT NULL,
   `state` enum('yesno','yesok','no') DEFAULT 'no',
   PRIMARY KEY (`db_application_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of db_application
 -- ----------------------------
+INSERT INTO `db_application` VALUES ('1', '1', '4', '4', '3', '23', null, '一元购', '王瑜佳', '王瑜佳', '王瑜佳', '2015-12-29 13:58:15', '2015-12-29 13:31:44', 'yesno');
+INSERT INTO `db_application` VALUES ('2', '5', '1', '1', '6', '201', '2016-01-27', '一元购', '王瑜佳', '王瑜佳', '王瑜佳', '2015-12-29 15:35:27', '2015-12-29 15:16:06', 'yesno');
+INSERT INTO `db_application` VALUES ('3', '4', '2', '10', '26', '20', '2016-01-31', '任意配置', '王瑜佳', null, null, null, '2015-12-29 15:17:03', 'no');
+INSERT INTO `db_application` VALUES ('4', '5', '7', '3', '5', '100', '2016-01-27', '社区特卖', '诶', null, null, null, '2015-12-29 17:13:16', 'no');
 
 -- ----------------------------
 -- Table structure for events
@@ -476,11 +481,11 @@ INSERT INTO `sp_info` VALUES ('12', '安怡™金装高钙低脂配方奶粉300g
 INSERT INTO `sp_info` VALUES ('13', '非非水', null, '3.00', '3.00', '1.00', '2.00', '3.00', '4.00', '5.00', '11.00', '上山', '瓶', '实物', '2015-12-16', '20', null, 'yesok', '2015-12-17 15:47:36', null, null, null);
 INSERT INTO `sp_info` VALUES ('14', '派米盐焗开心果', '爱芬乐希腊进口年货', '20.00', '20.00', null, null, null, null, null, null, '', '包', '实物', null, null, null, 'yesno', '2015-12-21 16:39:09', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('15', '上海国际车展门票', '', '100.00', '100.00', null, null, null, null, null, null, '', '张', '实物', null, null, null, 'yesok', '2015-12-21 16:39:29', null, null, '王瑜佳');
-INSERT INTO `sp_info` VALUES ('16', 'wills健身周卡', '', '468.00', '468.00', null, null, null, null, null, null, '', '张', '服务', null, null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('17', '咔萨哇牌木薯片40g', '', '8.90', '8.90', null, null, null, null, null, null, '', '包\n', '实物', null, null, null, 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('16', 'wills健身周卡', '', '468.00', '468.00', null, null, null, null, null, null, '', '张', '服务', null, null, null, 'yesno', '2015-12-29 16:33:47', null, null, '诶');
+INSERT INTO `sp_info` VALUES ('17', '咔萨哇牌木薯片40g', '', '8.90', '8.90', null, null, null, null, null, null, '', '包\n', '实物', null, null, null, 'yesok', '2015-12-29 16:33:53', null, null, '诶');
 INSERT INTO `sp_info` VALUES ('18', '咔萨哇牌木薯片120g', '咔萨哇木薯片', '24.00', '24.00', null, null, null, null, null, null, '', '包', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('19', '吃吃看鱼松', '吃吃看三文鱼松', '39.90', '39.90', null, null, null, null, null, null, '', '袋', '实物', null, null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('20', '拜尔口腔家庭卡（价值8580元）', '拜尔口腔家庭卡', '8580.00', '8580.00', null, null, null, null, null, null, '', '张', '服务', null, null, null, 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('20', '拜尔口腔家庭卡（价值8580元）', '拜尔口腔家庭卡', '8580.00', '8580.00', null, null, null, null, null, null, '', '张', '服务', null, null, null, 'yesok', '2015-12-29 16:33:59', null, null, '诶');
 INSERT INTO `sp_info` VALUES ('21', '加多宝凉茶（500ml）\r\n', null, '5.00', '5.00', null, null, null, null, null, null, null, '瓶', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1101', '新版梦5辣味', '', null, '10.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1102', '新版梦5原味', '', null, '15.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
@@ -511,7 +516,7 @@ INSERT INTO `sp_info` VALUES ('1126', '百家益腕表式激光治疗仪，HA-02
 INSERT INTO `sp_info` VALUES ('1127', '水果味棒棒糖（4种口味）①', '', null, '140.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1128', '降雪儿南瓜酒（每瓶450ml）', '', null, '145.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1129', '俪兰水母变色唇霜（15g）', '', null, '150.00', null, null, null, null, null, null, '', '', '实物', null, null, null, 'no', null, null, null, null);
-INSERT INTO `sp_info` VALUES ('1234', '太太乐五福临门礼盒', '太太乐五福临门礼盒', '29.00', '30.00', '40.00', '30.00', '20.00', '0.80', '0.02', '4.00', '', '', '实物', '2015-10-07', '40', null, 'no', null, null, null, null);
+INSERT INTO `sp_info` VALUES ('1234', '太太乐五福临门礼盒', '太太乐五福临门礼盒', '29.00', '30.00', '40.00', '30.00', '20.00', '0.80', '0.02', '4.00', '', '', '实物', '2015-10-07', '40', null, 'yesok', '2015-12-29 15:15:37', null, null, '王瑜佳');
 INSERT INTO `sp_info` VALUES ('1235', '滁州贡菊', '滁州贡菊', '25.00', '25.00', '30.00', '20.00', '10.00', '0.50', '0.01', '1.00', '60*40*30', '盒', '实物', '2015-11-03', '180', null, 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1237', '现代牧业纯牛奶', '现代牧业纯牛奶', '5.50', '5.50', '20.00', '10.00', '10.00', '0.40', '0.00', '0.33', '40*30*20', '盒', '实物', null, '90', '2015-12-25', 'no', null, null, null, null);
 INSERT INTO `sp_info` VALUES ('1239', '啦啦啦', null, '12.00', '12.00', '12.00', '12.30', '978.30', '123.22', '12.00', '344.00', '123*1323*12', '包', '实物', '2015-11-20', '12', null, 'no', null, null, null, null);
@@ -686,6 +691,7 @@ CREATE TABLE `zk_application` (
   `type_in` enum('福利','物业礼包','社区特卖','一元购','任意配置') DEFAULT NULL,
   `type_out` enum('福利','物业礼包','社区特卖','一元购','任意配置') DEFAULT NULL,
   `zk_number` int(8) DEFAULT NULL,
+  `expectDate` date DEFAULT NULL,
   `auditTime` datetime DEFAULT NULL,
   `adduser` varchar(30) DEFAULT NULL,
   `edituser` varchar(30) DEFAULT NULL,
@@ -693,8 +699,13 @@ CREATE TABLE `zk_application` (
   `applicationDate` datetime DEFAULT NULL,
   `state` enum('yesno','yesok','no') DEFAULT 'no',
   PRIMARY KEY (`zk_application_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zk_application
 -- ----------------------------
+INSERT INTO `zk_application` VALUES ('1', '4', '4', '3', '任意配置', '一元购', '20', '2016-01-19', null, '王瑜佳', '王瑜佳', null, '2015-12-29 15:44:27', 'no');
+INSERT INTO `zk_application` VALUES ('2', '2', '4', '5', '任意配置', '福利', '30', '2015-12-31', null, '王瑜佳', '诶', null, '2015-12-29 15:46:31', 'no');
+INSERT INTO `zk_application` VALUES ('3', '3', '3', '1', '任意配置', '一元购', '50', '2016-02-25', null, '王瑜佳', '诶', null, '2015-12-29 15:47:40', 'no');
+INSERT INTO `zk_application` VALUES ('4', '2', '1234', '1', '社区特卖', '任意配置', '50', '2015-12-31', null, '王瑜佳', '诶', null, '2015-12-29 15:48:52', 'no');
+INSERT INTO `zk_application` VALUES ('5', '1', '1', '1', '任意配置', '一元购', '20', '2015-12-29', null, null, null, null, '2015-12-29 15:55:37', 'no');

@@ -140,6 +140,10 @@
             <datalist id="select3"></datalist>
         </div>
         <div class="line">
+            <div class="lable">期望时间：</div>
+            <div class="input-div"><input placeholder="请输入期望调拨时间" name="allotApp.expectDate" type="date"/></div>
+        </div>
+        <div class="line">
             <div class="lable">调拨数量：</div>
             <div class="input-div"><input id="allotNumber" placeholder="请输入调拨数量" name="allotApp.allotNumber"/></div>
         </div>

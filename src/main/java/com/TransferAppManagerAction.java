@@ -129,6 +129,9 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
             condition.setTypeOut(transferApp.getTypeOut());
         if (transferApp.getTypeIn() != null)          //转库类型  目标
             condition.setTypeIn(transferApp.getTypeIn());
+        if (transferApp.getExpectDate() != null) { //期望日期
+            condition.setExpectDate(transferApp.getExpectDate());
+        }
         condition.setState("no");  //处理状态新增默认为no 待审核
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
@@ -158,13 +161,14 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
     public String editTransferApp() {
         TransferApp s = new TransferApp();
         s.setTransferAppId(transferApp.getTransferAppId());
-        TransferApp condition = new TransferApp();
-        condition = (TransferApp) transferAppBiz.getTransferAppList(s).get(0);
-
+        TransferApp condition =(TransferApp) transferAppBiz.getTransferAppList(s).get(0);
         if (transferApp.getTransferNumber() != null && !transferApp.getTransferNumber().equals(""))               //转库数量
             condition.setTransferNumber(transferApp.getTransferNumber());
         if (transferApp.getTypeIn() != null && !transferApp.getTypeIn().equals(""))          //转库类型目标
             condition.setTypeIn(transferApp.getTypeIn());
+        if (transferApp.getExpectDate() != null && !transferApp.getExpectDate().equals("")) { //期望日期
+            condition.setExpectDate(transferApp.getExpectDate());
+        }
         if (session.get("name") != null) {
             condition.setEdituser(session.get("name").toString()); //得到修改人
         }

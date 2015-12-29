@@ -49,6 +49,8 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
     ProducerBiz producerBiz;
     PlaceBiz placeBiz;
     StorageAppBiz storageAppBiz;
+    AllotAppBiz allotAppBiz;
+    TransferAppBiz transferAppBiz;
     StorageBiz storageBiz;
     SearchBiz searchBiz;
     DeliverBiz deliverBiz;
@@ -62,7 +64,16 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         this.deliverBiz = deliverBiz;
     }
 
+    public void setAllotAppBiz(AllotAppBiz allotAppBiz) {
+        this.allotAppBiz = allotAppBiz;
+    }
+
+    public void setTransferAppBiz(TransferAppBiz transferAppBiz) {
+        this.transferAppBiz = transferAppBiz;
+    }
+
     public void setStorageAppBiz(StorageAppBiz storageAppBiz) {
+
         this.storageAppBiz = storageAppBiz;
     }
 
@@ -248,6 +259,43 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         }
         storageAppBiz.editStorageApp(storageApp);
 
+        return SUCCESS;
+    }
+
+    public String allotCheck() {   //调拨申请审核未通过
+        String id = request.getParameter("id");
+        int allotAppId = Integer.valueOf(id);
+        AllotApp condition = new AllotApp();
+        condition.setAllotAppId(allotAppId);
+        List list = allotAppBiz.getAllotAppList(condition);
+        AllotApp allotApp = (AllotApp) list.get(0);
+
+        allotApp.setState("yesno");                               //改申请state
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        allotApp.setAuditTime(date);
+        if (session.get("name") != null) {
+            allotApp.setCheckuser(session.get("name").toString()); //得到审核人
+        }
+        allotAppBiz.editAllotApp(allotApp);
+        return SUCCESS;
+    }
+
+    public String transferCheck() {   //转库申请审核未通过
+        String id = request.getParameter("id");
+        int transferAppId = Integer.valueOf(id);
+        TransferApp condition = new TransferApp();
+        condition.setTransferAppId(transferAppId);
+        List list = transferAppBiz.getTransferAppList(condition);
+        TransferApp transferApp = (TransferApp) list.get(0);
+        transferApp.setState("yesno");                               //改申请state
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        transferApp.setAuditTime(date);
+        if (session.get("name") != null) {
+            transferApp.setCheckuser(session.get("name").toString()); //得到审核人
+        }
+        transferAppBiz.editTransferApp(transferApp);
         return SUCCESS;
     }
 

@@ -124,13 +124,9 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     }
 
     public String storageAppOk() {               //通过          需要增加不能为空的提示
-        System.out.println("通过checkStorageApp");
         StorageApp condition = new StorageApp();
-        System.out.println(storageApp.getStorageAppId());
         condition.setStorageAppId(storageApp.getStorageAppId());
-        System.out.println(condition.getGoodsName() + "商户" + condition.getProducerName() + condition.getStoragePlace());
         List list = storageAppBiz.getStorageAppList(condition);
-        System.out.println(list.size());
         StorageApp storageApp = (StorageApp) list.get(0);
         storageApp.setState("yesok");     //更改状态yesok
         Calendar calendar = Calendar.getInstance();   //更改审核时间
@@ -143,12 +139,10 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Storage storage = new Storage();           //新建入库明细表
 
         Goods goods = (Goods) goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
-        System.out.println("StorageApp通过时传入的商品id是" + goods.getGoodsId());
         storage.setGoods(goods);
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
         storage.setProducer(producer);
         Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
-        System.out.println("输出仓库id" + place.getPlaceId());
         storage.setPlace(place);
 
         if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))                      //预期入库时间

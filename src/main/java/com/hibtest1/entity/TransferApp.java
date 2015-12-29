@@ -20,6 +20,15 @@ public class TransferApp implements Serializable {
     private String checkuser; //审核人
     private String state = "no";  //处理状态
     private Date applicationDate; //申请录入时间
+    private Date  expectDate; //期望日期
+
+    public Date getExpectDate() {
+        return expectDate;
+    }
+
+    public void setExpectDate(Date expectDate) {
+        this.expectDate = expectDate;
+    }
 
     public Date getApplicationDate() {
         return applicationDate;

@@ -21,11 +21,13 @@
     <table id="advSearch" class="table">
         <thead>
         <tr>
+            <th>调拨申请id</th>
             <th>商户名称</th>
             <th>商品id</th>
             <th>商品名称</th>
             <th>原仓库地点</th>
             <th>目标仓库地点</th>
+            <th>期望时间</th>
             <th>调拨数</th>
             <th>使用类型</th>
             <th>申请时间</th>
@@ -39,11 +41,13 @@
         <tbody>
         <s:iterator value="%{#session.allotapplist}" var="allotapp">
             <tr>
+                <td><s:property value="#allotapp.allotAppId"/></td>
                 <td><s:property value="#allotapp.producer.producerName"/></td>
                 <td><s:property value="#allotapp.goods.goodsId"/></td>
                 <td><s:property value="#allotapp.goods.goodsName"/></td>
                 <td><s:property value="#allotapp.placeOut.placeName"/></td>
                 <td><s:property value="#allotapp.placeIn.placeName"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#allotapp.expectDate"/></td>
                 <td><s:property value="#allotapp.allotNumber"/></td>
                 <td><s:property value="#allotapp.allotType"/></td>
                 <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#allotapp.applicationDate"/></td>

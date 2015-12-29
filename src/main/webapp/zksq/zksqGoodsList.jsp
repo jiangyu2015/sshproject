@@ -24,7 +24,7 @@
             } else {
                 var $tds = $("tr.active").children();
                 if ($tds.eq(13).text() == 0) {
-                    alert("可用库存为0，不可调拨");
+                    alert("可用库存为0，不可转库");
                     return;
                 }
                 else {

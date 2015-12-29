@@ -134,6 +134,7 @@
             <th>商品名称</th>
             <th>原仓库地点</th>
             <th>目标仓库地点</th>
+            <th>期望时间</th>
             <th>调拨数</th>
             <th>使用类型</th>
             <th>申请时间</th>
@@ -153,13 +154,14 @@
                 <td><s:property value="#allotapp.goods.goodsName"/></td>
                 <td><s:property value="#allotapp.placeOut.placeName"/></td>
                 <td><s:property value="#allotapp.placeIn.placeName"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#allotapp.expectDate"/></td>
                 <td><s:property value="#allotapp.allotNumber"/></td>
                 <td><s:property value="#allotapp.allotType"/></td>
-                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#allotapp.applicationDate"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#allotapp.applicationDate"/></td>
                 <td><s:property value="#allotapp.adduser"/></td>
                 <td><s:property value="#allotapp.edituser"/></td>
                 <td><s:property value="#allotapp.state"/></td>
-                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#allotapp.auditTime"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#allotapp.auditTime"/></td>
                 <td><s:property value="#allotapp.checkuser"/></td>
             </tr>
         </s:iterator>
@@ -181,7 +183,7 @@
                     </div>
                     <div class="line">
                         <div class="lable">商户名称：</div>
-                        <div class="input-div"><input id="producerName" name="producerName" readonly="readonly"
+                        <div class="input-div"><input id="producerName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
@@ -206,6 +208,10 @@
                         <datalist id="select3"></datalist>
                     </div>
                     <div class="line">
+                        <div class="lable">期望时间：</div>
+                        <div class="input-div"><input placeholder="请输入期望调拨时间" name="allotApp.expectDate" type="date"/></div>
+                    </div>
+                    <div class="line">
                         <div class="lable">调拨数量：</div>
                         <div class="input-div"><input id="allotNumber" placeholder="请输入调拨数量"
                                                       name="allotApp.allotNumber"/></div>
@@ -213,6 +219,37 @@
                     <div class="line">
                         <div class="lable">使用类型：</div>
                         <div class="input-div"><input id="type" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请时间：</div>
+                        <div class="input-div"><input type="datetime" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请人：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">修改人：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">处理状态：</div>
+                        <div class="input-div"><input id="state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">审核时间：</div>
+                        <div class="input-div"><input type="datetime" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">审核人：</div>
+                        <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <input type="submit" value="提交" class="btn-submit"/>

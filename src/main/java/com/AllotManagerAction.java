@@ -127,7 +127,7 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
         AllotApp condition=new AllotApp();
         condition.setState("no");
         List<AllotApp> allotApp = allotAppBiz.getAllotAppList(condition);
-        session.put("allotapplischeck", allotApp);
+        session.put("allotapplischeck",allotApp);
         return "allotAppCheck";
 
     }
@@ -161,7 +161,9 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
             Place place = placeBiz.getPlace(placeName2).get(0);
             condition.setPlaceIn(place);
         }
-
+        if (allotApp.getExpectDate() != null) { //期望日期
+            condition.setExpectDate(allotApp.getExpectDate());
+        }
         if (session.get("name") != null)   //得到增加人
             condition.setAdduser(session.get("name").toString());
         allotAppBiz.add(condition);
@@ -181,6 +183,9 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
             Place place = placeBiz.getPlace(placeName2).get(0);
             condition.setPlaceIn(place);
         }
+        if (allotApp.getExpectDate() != null&& !allotApp.getExpectDate().equals("")) { //期望日期
+            condition.setExpectDate(allotApp.getExpectDate());
+        }
         if (session.get("name") != null) {
             condition.setEdituser(session.get("name").toString()); //得到修改人
         }
@@ -188,7 +193,42 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
             session.put("allotapplist", condition);
             return "success";
         } else return "input";
-
     }
 
-}
+    public String allotAppOk() {
+        AllotApp condition = new AllotApp();
+        condition.setAllotAppId(allotApp.getAllotAppId());
+        List list = allotAppBiz.getAllotAppList(condition);
+        AllotApp allotApp = (AllotApp) list.get(0);
+        allotApp.setState("yesok");     //更改状态yesok
+        Calendar calendar = Calendar.getInstance();   //更改审核时间
+        Date date = calendar.getTime();
+        storageApp.setAuditTime(date);
+        if (session.get("name") != null) {
+            storageApp.setCheckuser(session.get("name").toString()); //得到审核人
+        }
+        storageAppBiz.editStorageApp(storageApp);
+        Storage storage = new Storage();           //新建入库明细表
+
+        Goods goods = (Goods) goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
+        storage.setGoods(goods);
+        Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
+        storage.setProducer(producer);
+        Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
+        storage.setPlace(place);
+
+        if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))                      //预期入库时间
+            storage.setExpectedDate(storageApp.getExpectedDate());
+        if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))               //预收数量
+            storage.setExpectedNumber(storageApp.getExpectedNumber());
+        if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
+            storage.setStorageType(storageApp.getStorageType());
+        if (storageApp.getAdduser() != null && !storageApp.getAdduser().equals("")) //入库申请人加入到入库明细中
+            storage.setAdduser(storageApp.getAdduser());
+        storage.setCategory("正常入库");
+        storage.setState("no");
+        storageBiz.add(storage);
+        return "success";
+    }
+
+    }

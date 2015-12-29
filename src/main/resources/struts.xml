@@ -113,6 +113,12 @@
         <action name="rksqOk" class="storageAppOk" method="storageAppOk">
             <result type="redirect" name="success">rksqcheck.action</result>
         </action>
+        <action name="qbsqOk" class="allotAppOk" method="allotAppOk">
+            <result type="redirect" name="success">qbsqcheck.action</result>
+        </action>
+        <action name="zksqOk" class="transferAppOk" method="transferAppOk">
+            <result type="redirect" name="success">zksqcheck.action</result>
+        </action>
         <action name="rksqAdd" class="storageAppAdd" method="addStorageApp">
             <result type="redirect" name="success">/rksq/rksqList.jsp</result>
             <result type="redirect" name="input">/rksq/fail.jsp</result>

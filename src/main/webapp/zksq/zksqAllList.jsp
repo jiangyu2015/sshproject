@@ -109,6 +109,7 @@
             <th>转库数</th>
             <th>原使用类型</th>
             <th>目标使用类型</th>
+            <th>期望时间</th>
             <th>申请时间</th>
             <th>申请人</th>
             <th>修改人</th>
@@ -128,11 +129,12 @@
                 <td><s:property value="#transferapp.transferNumber"/></td>
                 <td><s:property value="#transferapp.typeOut"/></td>
                 <td><s:property value="#transferapp.typeIn"/></td>
-                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#transferapp.applicationDate"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#transferapp.expectDate"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#transferapp.applicationDate"/></td>
                 <td><s:property value="#transferapp.adduser"/></td>
                 <td><s:property value="#transferapp.edituser"/></td>
                 <td><s:property value="#transferapp.state"/></td>
-                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#transferapp.auditTime"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#transferapp.auditTime"/></td>
                 <td><s:property value="#transferapp.checkuser"/></td>
             </tr>
         </s:iterator>
@@ -149,7 +151,7 @@
                 <form method="post" action="editzksq" onsubmit="return check(this)">
                     <div class="line">
                         <div class="lable">转库申请id：</div>
-                        <div class="input-div"><input readonly="readonly"
+                        <div class="input-div"><input readonly="readonly" name="transferApp.transferAppId"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
@@ -195,6 +197,43 @@
                             </select>
                         </div>
                     </div>
+                    <div class="line">
+                        <div class="lable">期望时间：</div>
+                        <div class="input-div"><input  name="transferApp.expectDate"
+                                                      type="date"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请时间：</div>
+                        <div class="input-div"><input type="datetime" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请人：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">修改人：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">处理状态：</div>
+                        <div class="input-div"><input id="state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">审核时间：</div>
+                        <div class="input-div"><input type="datetime" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">审核人：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
                     <input type="submit" value="提交" class="btn-submit"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>

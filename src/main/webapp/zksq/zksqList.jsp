@@ -21,6 +21,7 @@
     <table id="advSearch" class="table">
         <thead>
         <tr>
+            <th>转库申请id</th>
             <th>商户名称</th>
             <th>商品id</th>
             <th>商品名称</th>
@@ -28,6 +29,7 @@
             <th>转库数</th>
             <th>原使用类型</th>
             <th>目标使用类型</th>
+            <th>期望时间</th>
             <th>申请时间</th>
             <th>申请人</th>
             <th>修改人</th>
@@ -39,6 +41,7 @@
         <tbody>
         <s:iterator value="%{#session.transferapplist}" var="transferapp">
             <tr>
+                <td><s:property value="#transferapp.transferAppId"/></td>
                 <td><s:property value="#transferapp.producer.producerName"/></td>
                 <td><s:property value="#transferapp.goods.goodsId"/></td>
                 <td><s:property value="#transferapp.goods.goodsName"/></td>
@@ -46,6 +49,7 @@
                 <td><s:property value="#transferapp.transferNumber"/></td>
                 <td><s:property value="#transferapp.typeOut"/></td>
                 <td><s:property value="#transferapp.typeIn"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#transferapp.expectDate"/></td>
                 <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#transferapp.applicationDate"/></td>
                 <td><s:property value="#transferapp.adduser"/></td>
                 <td><s:property value="#transferapp.edituser"/></td>

@@ -19,6 +19,9 @@
         <property name="applicationDate" type="java.util.Date">
             <column name="applicationDate" length="50" not-null="false"/>
         </property>
+        <property name="expectDate" type="java.util.Date">
+            <column name="expectDate" length="50" not-null="false"/>
+        </property>
         <property name="auditTime" type="java.util.Date">
             <column name="auditTime" length="30" not-null="false"/>
         </property>
