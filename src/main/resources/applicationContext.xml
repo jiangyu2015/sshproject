@@ -214,6 +214,22 @@
         <property name="placeBiz" ref="placeBiz"/>
         <property name="producerBiz" ref="producerBiz"/>
     </bean>
+    <bean id="allotAppOk" class="com.AllotManagerAction" scope="prototype">
+        <property name="allotAppBiz" ref="allotAppBiz"/>
+        <property name="storageBiz" ref="storageBiz"/>
+        <property name="deliverBiz" ref="deliverBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
+    <bean id="transferAppOk" class="com.TransferAppManagerAction" scope="prototype">
+        <property name="transferAppBiz" ref="transferAppBiz"/>
+        <property name="storageBiz" ref="storageBiz"/>
+        <property name="deliverBiz" ref="deliverBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+        <property name="placeBiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
+    </bean>
 
     <bean id="storageAppAdd" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>

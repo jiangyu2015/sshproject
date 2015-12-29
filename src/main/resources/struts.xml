@@ -114,7 +114,7 @@
             <result type="redirect" name="success">rksqcheck.action</result>
         </action>
         <action name="qbsqOk" class="allotAppOk" method="allotAppOk">
-            <result type="redirect" name="success">qbsqcheck.action</result>
+            <result type="redirect" name="success">dbsqcheck.action</result>
         </action>
         <action name="zksqOk" class="transferAppOk" method="transferAppOk">
             <result type="redirect" name="success">zksqcheck.action</result>

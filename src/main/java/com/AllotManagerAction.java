@@ -1,9 +1,6 @@
 package com;
 
-import com.hibtest1.entity.AllotApp;
-import com.hibtest1.entity.Goods;
-import com.hibtest1.entity.Place;
-import com.hibtest1.entity.Producer;
+import com.hibtest1.entity.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.*;
@@ -124,13 +121,14 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
     }
 
     public String checkAllotApp() {               //得到所需审核的单子
-        AllotApp condition=new AllotApp();
+        AllotApp condition = new AllotApp();
         condition.setState("no");
         List<AllotApp> allotApp = allotAppBiz.getAllotAppList(condition);
-        session.put("allotapplischeck",allotApp);
+        session.put("allotapplischeck", allotApp);
         return "allotAppCheck";
 
     }
+
     public String addAllotApp() throws Exception {                  //增加调拨申请
         System.out.println("addAllotApp");
         AllotApp condition = new AllotApp();
@@ -183,7 +181,7 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
             Place place = placeBiz.getPlace(placeName2).get(0);
             condition.setPlaceIn(place);
         }
-        if (allotApp.getExpectDate() != null&& !allotApp.getExpectDate().equals("")) { //期望日期
+        if (allotApp.getExpectDate() != null && !allotApp.getExpectDate().equals("")) { //期望日期
             condition.setExpectDate(allotApp.getExpectDate());
         }
         if (session.get("name") != null) {
@@ -203,32 +201,44 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
         allotApp.setState("yesok");     //更改状态yesok
         Calendar calendar = Calendar.getInstance();   //更改审核时间
         Date date = calendar.getTime();
-        storageApp.setAuditTime(date);
+        allotApp.setAuditTime(date);
         if (session.get("name") != null) {
-            storageApp.setCheckuser(session.get("name").toString()); //得到审核人
+            allotApp.setCheckuser(session.get("name").toString()); //得到审核人
         }
-        storageAppBiz.editStorageApp(storageApp);
+        allotAppBiz.editAllotApp(allotApp);
         Storage storage = new Storage();           //新建入库明细表
-
-        Goods goods = (Goods) goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
+        Deliver deliver = new Deliver(); // 出库明细
+        Goods goods = goodsBiz.getGoodsList(allotApp.getGoods()).get(0);
         storage.setGoods(goods);
-        Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
+        deliver.setGoods(goods);
+        Producer producer = producerBiz.getProducerList(allotApp.getProducer()).get(0);
         storage.setProducer(producer);
-        Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
-        storage.setPlace(place);
-
-        if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))                      //预期入库时间
-            storage.setExpectedDate(storageApp.getExpectedDate());
-        if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))               //预收数量
-            storage.setExpectedNumber(storageApp.getExpectedNumber());
-        if (storageApp.getStorageType() != null && !storageApp.getStorageType().equals(""))          //入库类型
-            storage.setStorageType(storageApp.getStorageType());
-        if (storageApp.getAdduser() != null && !storageApp.getAdduser().equals("")) //入库申请人加入到入库明细中
-            storage.setAdduser(storageApp.getAdduser());
-        storage.setCategory("正常入库");
-        storage.setState("no");
+        deliver.setProducer(producer);
+        Place placeIn = placeBiz.getPlaceList(allotApp.getPlaceIn()).get(0);
+        Place placeOut = placeBiz.getPlaceList(allotApp.getPlaceOut()).get(0);
+        storage.setPlace(placeIn);
+        deliver.setPlace(placeOut);
+        if (allotApp.getExpectDate() != null && !allotApp.getExpectDate().equals("")) {                   //期望调拨时间
+            storage.setExpectedDate(allotApp.getExpectDate());
+        }
+        if (allotApp.getAllotType() != null && !allotApp.getAllotType().equals("")) {  //入库类型
+            storage.setStorageType(allotApp.getAllotType());
+            deliver.setDeliverType(allotApp.getAllotType());
+        }
+        if (allotApp.getAdduser() != null && !allotApp.getAdduser().equals("")) {//入库申请人加入到入库明细中
+            storage.setAdduser(allotApp.getAdduser());  //申请人
+            deliver.setAdduser(allotApp.getAdduser());
+        }
+        if(allotApp.getAllotNumber() != null && !allotApp.getAllotNumber().equals("")){
+            storage.setStorageNumber(allotApp.getAllotNumber());  //调拨数
+            deliver.setDeliverNumber(allotApp.getAllotNumber());
+        }
+        storage.setCategory("正常调拨");
+        deliver.setCategory("正常调拨");
+        storage.setState("ok");
         storageBiz.add(storage);
+        deliverBiz.add(deliver);
         return "success";
     }
 
-    }
+}

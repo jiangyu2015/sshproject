@@ -176,7 +176,51 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
             session.put("transferapplist", condition);
             return "success";
         } else return "input";
+    }
 
+    public String transferAppOk() {
+        TransferApp condition = new TransferApp();
+        condition.setTransferAppId(transferApp.getTransferAppId());
+        List list = transferAppBiz.getTransferAppList(condition);
+        TransferApp transferApp = (TransferApp) list.get(0);
+        transferApp.setState("yesok");     //更改状态yesok
+        Calendar calendar = Calendar.getInstance();   //更改审核时间
+        Date date = calendar.getTime();
+        transferApp.setAuditTime(date);
+        if (session.get("name") != null) {
+            transferApp.setCheckuser(session.get("name").toString()); //得到审核人
+        }
+        transferAppBiz.editTransferApp(transferApp);
+        Storage storage = new Storage();           //新建入库明细表
+        Deliver deliver = new Deliver(); // 新建出库明细
+        Goods goods = goodsBiz.getGoodsList(transferApp.getGoods()).get(0);
+        storage.setGoods(goods);
+        deliver.setGoods(goods);
+        Producer producer = producerBiz.getProducerList(transferApp.getProducer()).get(0);
+        storage.setProducer(producer);
+        deliver.setProducer(producer);
+        Place place = placeBiz.getPlaceList(transferApp.getPlace()).get(0);
+        storage.setPlace(place);
+        deliver.setPlace(place);
+        if (transferApp.getExpectDate() != null && !transferApp.getExpectDate().equals("")) {                   //期望调拨时间
+            storage.setExpectedDate(transferApp.getExpectDate());
+        }
+        if (transferApp.getTypeIn() != null && !transferApp.getTypeIn().equals("")) {  //入库类型
+            storage.setStorageType(transferApp.getTypeIn());
+        }
+        if (transferApp.getTypeOut() != null && !transferApp.getTypeOut().equals("")) {  //出库类型
+            deliver.setDeliverType(transferApp.getTypeOut());
+        }
+        if (transferApp.getAdduser() != null && !transferApp.getAdduser().equals("")) {//入库申请人加入到入库明细中
+            storage.setAdduser(transferApp.getAdduser());  //申请人
+            deliver.setAdduser(transferApp.getAdduser());
+        }
+        storage.setCategory("正常转库");
+        deliver.setCategory("正常转库");
+        storage.setState("ok");
+        storageBiz.add(storage);
+        deliverBiz.add(deliver);
+        return "success";
     }
 
 }

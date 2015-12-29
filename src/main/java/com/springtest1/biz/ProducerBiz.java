@@ -11,7 +11,7 @@ import com.hibtest1.entity.Producer;
 public interface ProducerBiz {
     public List getAllProducer();
 
-    public List getProducerList(Producer condition);
+    public List <Producer>getProducerList(Producer condition);
 
     public void add(Producer condition);
 
