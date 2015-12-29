@@ -215,6 +215,10 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
             storage.setAdduser(transferApp.getAdduser());  //申请人
             deliver.setAdduser(transferApp.getAdduser());
         }
+        if(transferApp.getTransferNumber() != null && !transferApp.getTransferNumber().equals("")){
+            storage.setStorageNumber(transferApp.getTransferNumber());  //调拨数
+            deliver.setDeliverNumber(transferApp.getTransferNumber());
+        }
         storage.setCategory("正常转库");
         deliver.setCategory("正常转库");
         storage.setState("ok");
