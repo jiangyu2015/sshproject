@@ -131,7 +131,36 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         return "deliver";
     }
 
-    public String searchDeliverList() {
+    public String checkDeliver() {               //得到所需出库的单子
+       Deliver condition=new Deliver();
+        condition.setState("no");
+        List<Deliver> deliver = deliverBiz.getDeliverList(condition);
+        session.put("deliverlistcheck", deliver);
+        return "deliverCheck";
+    }
+
+    public String deliverOk() {               //确认出库
+        Deliver condition = new Deliver();
+        condition.setDeliverId(deliver.getDeliverId());
+        List list = deliverBiz.getDeliverList(condition);
+        Deliver deliver2 = (Deliver) list.get(0);
+        deliver2.setState("ok");
+        if (deliver.getDeliverDate() != null && !deliver.getDeliverDate().equals(""))                      //实际入库时间
+            deliver2.setDeliverDate(deliver.getDeliverDate());
+        if (deliver.getDeliverNumber() != null && !deliver.getDeliverNumber().equals("")) {             //实收数量
+            System.out.println("Action实收数量" + deliver.getDeliverNumber());
+            deliver2.setDeliverNumber(deliver.getDeliverNumber());
+        }
+        if (deliver.getRemark() != null && !deliver.getRemark().equals(""))          //备注
+            deliver2.setRemark(deliver.getRemark());
+        if (session.get("name") != null) {
+            deliver2.setCheckuser(session.get("name").toString()); //得到入库确认人
+        }
+        deliverBiz.editDeliver(deliver2);                //更改状态ok1
+        return "success";
+    }
+
+    public String searchDeliverList() {  //没用
         Deliver condition = new Deliver();
         // condition.setGoodsName(goodsName);
         List list = deliverBiz.getDeliverList(condition);
@@ -183,16 +212,14 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (producerId != null && !producerId.equals("")) {          //商户id
             Producer p = new Producer();
             p.setProducerId(producerId);
-            Producer producer = (Producer) producerBiz.getProducerList(p).get(0);
+            Producer producer = producerBiz.getProducerList(p).get(0);
             condition.setProducer(producer);
-            System.out.println("DeliverManegerAction"+condition.getProducer().getProducerName());
         }
       if( withholdingId!= null && ! withholdingId.equals("")){
           Withholding w=new Withholding();
           w.setWithholdingId(withholdingId);
-          Withholding withholding=(Withholding) withholdingBiz.search(w).get(0);
+          Withholding withholding= withholdingBiz.search(w).get(0);
           condition.setWithholding(withholding);
-          System.out.println(condition.getWithholding().getWithholdingId()+"withholdingId");
       }
         if (deliver.getDeliverDate() != null)                      //实际出库时间
             condition.setDeliverDate(deliver.getDeliverDate());
@@ -207,6 +234,8 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (session.get("name") != null) {
             condition.setAdduser(session.get("name").toString()); //得到出库人
         }
+        condition.setState("ok");
+        condition.setCategory("正常出库");
         deliverBiz.add(condition);
         return "success";
 

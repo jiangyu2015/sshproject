@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: dell
-  Date: 2015/11/28
-  Time: 14:03
+  User: user
+  Date: 2015/12/30
+  Time: 16:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>出库明细信息</title>
+    <title>入库明细信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
@@ -24,7 +24,9 @@
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
                     $line.find('input').val($tds.eq(i).text());
+
                 }
+
                 $("#dialog_edit").show();
             }
         }
@@ -68,15 +70,55 @@
                 _move = false;
             });
         });
+
+        function check(form) {
+            var storageDate = $("#storageDate").val();  //实际入库时间
+            var expectedNumber = $("#expectedNumber").val(); //预期入库数
+            var storageNumber = $("#storageNumber").val(); //实收数量    实收数量和预期入库数到时候再说
+            var arr = getToDay().split("-");    //比较时间
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
+            var arrs = storageDate.split("-");
+            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
+            var storagedays = storageday.getTime();
+            if (storagedays > todays) {
+                alert("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
+                return false;
+            }
+            else {
+                alert("确认收货成功");
+                return true;
+            }
+        }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
+        }
+
     </script>
 </head>
 
 <body>
 <div class="table-div">
-    <div class="title">出库明细信息</div>
+    <div class="title">确认收货</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="修改备注" onclick="edit();">
-        <%--   <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();">
+        <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -97,7 +139,7 @@
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.deliverlistall}" var="deliver">
+        <s:iterator value="%{#session.deliverlistcheck}" var="deliver">
             <tr>
                 <td><s:property value="#deliver.deliverId"/></td>
                 <td><s:property value="#deliver.producer.producerName"/></td>
@@ -121,10 +163,10 @@
 <div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
-        <div class="title">修改出库明细信息</div>
+        <div class="title">确认出货</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editck">
+                <form method="post" action="ckOk" onsubmit="return check(this)">
                     <div class="line">
                         <div class="lable">出库明细id：</div>
                         <div class="input-div"><input name="deliver.deliverId" readonly="readonly"
@@ -149,8 +191,7 @@
 
                     <div class="line">
                         <div class="lable">实际出库时间：</div>
-                        <div class="input-div"><input name="deliver.deliverDate" type="date" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input id="deliverDate" name="deliver.deliverDate" type="date"/></div>
                     </div>
 
                     <div class="line">
@@ -160,8 +201,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">实际出库数量：</div>
-                        <div class="input-div"><input name="deliver.deliverNumber" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input id="deliverNumber" placeholder="请输入实收数量"
+                                                      name="storage.storageNumber" name="deliver.deliverNumber"/></div>
                     </div>
 
 

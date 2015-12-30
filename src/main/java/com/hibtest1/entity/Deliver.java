@@ -21,6 +21,24 @@ public class Deliver implements Serializable {
     private String remark; //备注
     private BigDecimal sumDeliver;//总出库
     private String adduser; //添加人
+    private String checkuser; //确认出货人
+    private String state = "no";  //处理状态 no就是未出货
+
+    public String getCheckuser() {
+        return checkuser;
+    }
+
+    public void setCheckuser(String checkuser) {
+        this.checkuser = checkuser;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public BigDecimal getSumDeliver() {
         return sumDeliver;

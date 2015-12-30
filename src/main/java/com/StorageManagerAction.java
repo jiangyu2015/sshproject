@@ -177,11 +177,9 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String storageOk() {               //确认入库
-        System.out.println("通过checkStorage");
         Storage condition = new Storage();
         condition.setStorageId(storage.getStorageId());
         List list = storageBiz.getStorageList(condition);
-        System.out.println(list.size());
         Storage storage2 = (Storage) list.get(0);
         storage2.setState("ok");
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间

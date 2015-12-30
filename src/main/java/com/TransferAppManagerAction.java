@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by dell on 2015/12/26.
  */
-public class TransferAppManagerAction  extends ActionSupport implements RequestAware, SessionAware {
+public class TransferAppManagerAction extends ActionSupport implements RequestAware, SessionAware {
     StorageBiz storageBiz;
     GoodsBiz goodsBiz;
     PlaceBiz placeBiz;
@@ -111,8 +111,8 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
         return "transferApp";
     }
 
-    public String checkTransferApp() {               //得到所需审核的单子！为了保存
-        TransferApp condition=new TransferApp();
+    public String checkTransferApp() {               //得到所需审核的单子！
+        TransferApp condition = new TransferApp();
         condition.setState("no");
         List<TransferApp> transferApp = transferAppBiz.getTransferAppList(condition);
         session.put("transferapplischeck", transferApp);
@@ -161,7 +161,7 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
     public String editTransferApp() {
         TransferApp s = new TransferApp();
         s.setTransferAppId(transferApp.getTransferAppId());
-        TransferApp condition =(TransferApp) transferAppBiz.getTransferAppList(s).get(0);
+        TransferApp condition = (TransferApp) transferAppBiz.getTransferAppList(s).get(0);
         if (transferApp.getTransferNumber() != null && !transferApp.getTransferNumber().equals(""))               //转库数量
             condition.setTransferNumber(transferApp.getTransferNumber());
         if (transferApp.getTypeIn() != null && !transferApp.getTypeIn().equals(""))          //转库类型目标
@@ -202,7 +202,7 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
         Place place = placeBiz.getPlaceList(transferApp.getPlace()).get(0);
         storage.setPlace(place);
         deliver.setPlace(place);
-        if (transferApp.getExpectDate() != null && !transferApp.getExpectDate().equals("")) {                   //期望调拨时间
+        if (transferApp.getExpectDate() != null && !transferApp.getExpectDate().equals("")) {                   //期望转库时间
             storage.setExpectedDate(transferApp.getExpectDate());
         }
         if (transferApp.getTypeIn() != null && !transferApp.getTypeIn().equals("")) {  //入库类型
@@ -211,21 +211,25 @@ public class TransferAppManagerAction  extends ActionSupport implements RequestA
         if (transferApp.getTypeOut() != null && !transferApp.getTypeOut().equals("")) {  //出库类型
             deliver.setDeliverType(transferApp.getTypeOut());
         }
-        if (transferApp.getAdduser() != null && !transferApp.getAdduser().equals("")) {//入库申请人加入到入库明细中
+        if (transferApp.getAdduser() != null && !transferApp.getAdduser().equals("")) {//转库申请人加入到入库明细中
             storage.setAdduser(transferApp.getAdduser());  //申请人
             deliver.setAdduser(transferApp.getAdduser());
         }
-        if(transferApp.getTransferNumber() != null && !transferApp.getTransferNumber().equals("")){
-            storage.setStorageNumber(transferApp.getTransferNumber());  //调拨数
-            deliver.setDeliverNumber(transferApp.getTransferNumber());
+        if (transferApp.getTransferNumber() != null && !transferApp.getTransferNumber().equals("")) {
+         /*   storage.setExpectedNumber(transferApp.getTransferNumber());  //转库数
+            deliver.setExpecteNumber(transferApp.getTransferNumber());*/
+            storage.setStorageNumber(transferApp.getTransferNumber());
+            deliver.setDeliverNumber(transferApp.getTransferNumber());  //直接实际出入库了
         }
         storage.setCategory("正常转库");
         deliver.setCategory("正常转库");
         storage.setState("ok");
+        deliver.setState("ok");
         storageBiz.add(storage);
         deliverBiz.add(deliver);
         return "success";
     }
+
 
 }
 

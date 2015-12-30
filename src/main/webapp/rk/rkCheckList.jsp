@@ -5,13 +5,6 @@
   Time: 17:26
   To change this template use File | Settings | File Templates.
 --%>
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2015/11/27
-  Time: 13:53
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
@@ -143,6 +136,7 @@
             <th>入库状态</th>
             <th>申请人</th>
             <th>确认收货人</th>
+            <th>入库类别</th>
         </tr>
         </thead>
         <tbody>
@@ -161,6 +155,7 @@
                 <td><s:property value="#storage.state"/></td>
                 <td><s:property value="#storage.adduser"/></td>
                 <td><s:property value="#storage.checkuser"/></td>
+                <td><s:property value="#storage.category"/></td>
             </tr>
         </s:iterator>
         </tbody>
@@ -250,6 +245,11 @@
                         <div class="lable">确认收货人：</div>
                         <div class="input-div"><input name="storage.checkuser" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">入库类别：</div>
+                        <div class="input-div"><input  readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div style="position: relative; bottom: 0px;">

@@ -23,8 +23,11 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-                    $line.find('input').val($tds.eq(i).text());
-
+					if(i == 7) {
+    					$('#typeIn option[value="'+$tds.eq(i).text()+'"]').prop('selected', true);
+    				}else {
+    					 $line.find('input').val($tds.eq(i).text());
+    				}
                 }
 
                 $("#dialog_edit").show();

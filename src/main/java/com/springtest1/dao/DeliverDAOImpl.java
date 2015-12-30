@@ -32,10 +32,13 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
                     if (condition.getDeliverId() != null && !condition.getDeliverId().equals("")) {
                         c.add(Restrictions.eq("deliverId", condition.getDeliverId()));
                     }
-                    if (condition.getWithholding() != null) {   //通过预提id查询所有的出库明细
+                    else if (condition.getWithholding() != null) {   //通过预提id查询所有的出库明细
                         if (condition.getWithholding().getWithholdingId() != null && !condition.getWithholding().getWithholdingId().equals("")) {
                             c.add(Restrictions.eq("withholding.withholdingId", condition.getWithholding().getWithholdingId()));
                         }
+                    }
+                    else if (condition.getState() != null && !condition.getState().equals("")) {
+                        c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }
                 if (c.list().size() <= 0) {

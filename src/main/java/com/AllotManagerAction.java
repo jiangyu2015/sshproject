@@ -230,12 +230,13 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
             deliver.setAdduser(allotApp.getAdduser());
         }
         if(allotApp.getAllotNumber() != null && !allotApp.getAllotNumber().equals("")){
-            storage.setStorageNumber(allotApp.getAllotNumber());  //调拨数
-            deliver.setDeliverNumber(allotApp.getAllotNumber());
+            storage.setExpectedNumber(allotApp.getAllotNumber());  //调拨数
+            deliver.setExpecteNumber(allotApp.getAllotNumber());
         }
         storage.setCategory("正常调拨");
         deliver.setCategory("正常调拨");
-        storage.setState("ok");
+        storage.setState("no");
+        deliver.setState("no");
         storageBiz.add(storage);
         deliverBiz.add(deliver);
         return "success";

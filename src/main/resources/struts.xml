@@ -161,8 +161,14 @@
         <action name="rkcheck" class="storageCheck" method="checkStorage">
             <result type="redirect" name="storageCheck">/rk/rkCheckList.jsp</result>
         </action>
+        <action name="ckcheck" class="deliverCheck" method="checkDeliver">
+            <result type="redirect" name="deliverCheck">/ck/ckCheckList.jsp</result>
+        </action>
         <action name="rkOk" class="storageOk" method="storageOk">
             <result type="redirect" name="success">listrk.action</result>
+        </action>
+        <action name="ckOk" class="deliverOk" method="deliverOk">
+            <result type="redirect" name="success">listck.action</result>
         </action>
         <action name="eventsAdd" class="eventsAdd" method="addEvents">
             <result type="redirect" name="success">/rk/test.jsp</result>

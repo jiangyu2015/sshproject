@@ -280,8 +280,14 @@
     <bean id="storageCheck" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
+    <bean id="deliverCheck" class="com.DeliverManagerAction" scope="prototype">
+        <property name="deliverBiz" ref="deliverBiz"/>
+    </bean>
     <bean id="storageOk" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
+    </bean>
+    <bean id="deliverOk" class="com.DeliverManagerAction" scope="prototype">
+        <property name="deliverBiz" ref="deliverBiz"/>
     </bean>
 
     <bean id="deliverDAO" class="com.springtest1.dao.DeliverDAOImpl">

@@ -19,8 +19,6 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
         String sql = "SELECT ccin.rk_id as id, " +
                 " sp.sp_name  AS goodsName, " +
                 " kc.place AS placeName, " +
-                /*" ccin.sp_id AS goodsId, " +
-                " ccin.rk_place_id AS placeId, " +*/
                 " ccin.sj_stock_date AS firstStorageTime, " +
                 " ccin.ss_number AS firstStorageNumber, " +
                 " ccin.total_in AS totolStorage, " +
@@ -37,10 +35,10 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "  SELECT *, " +
                 "    sum(cout.ck_number) AS total_out " +
                 "  FROM " +
-                "    ck_detail cout " +
+                "    ck_detail cout where cout.state='ok'" +
                 "  GROUP BY " +
                 "    cout.sp_id, " +
-                "    cout.ck_place_id,cout.sh_id,cout.ck_type " +
+                "    cout.ck_place_id,cout.sh_id,cout.ck_type  " +
                 ") AS ccout ON ccin.sp_id = ccout.sp_id " +
                 "AND ccin.rk_place_id = ccout.ck_place_id AND ccin.sh_id = ccout.sh_id And ccin.rk_type=ccout.ck_type " +
                 "LEFT JOIN kc_place AS kc ON ccin.rk_place_id = kc.kc_id " +
@@ -98,7 +96,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "  SELECT *, " +
                 "    sum(cout.ck_number) AS total_out " +
                 "  FROM " +
-                "    ck_detail cout " +
+                "    ck_detail cout where cout.state='ok' " +
                 "  GROUP BY " +
                 "    cout.sp_id, " +
                 "    cout.ck_place_id,cout.sh_id,cout.ck_type " +
@@ -166,7 +164,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "		LEFT JOIN ( " +
                 "			SELECT sp_id,sh_id,ck_place_id,sum(ck_number) ck_number " +
                 "			FROM " +
-                "				ck_detail " +
+                "				ck_detail where state='ok'" +
                 "			GROUP BY sp_id,sh_id,ck_place_id " +
                 "		) zck ON zrk.sp_id = zck.sp_id " +
                 "		AND zrk.sh_id = zck.sh_id " +
