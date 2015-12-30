@@ -61,10 +61,13 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     }
 
     String placeName;  //出库地点
+
+    String producerName;
     Integer goodsId;
     Integer placeId;
     Integer withholdingId;
     Integer producerId;
+
 
     public Integer getWithholdingId() {
         return withholdingId;
@@ -126,7 +129,6 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
 
     public String listDeliver() {
         List deliver = deliverBiz.getAllDeliver();
-        Deliver deliver1 = (Deliver) deliver.get(0);
         session.put("deliverlistall", deliver);
         return "deliver";
     }
@@ -148,7 +150,6 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (deliver.getDeliverDate() != null && !deliver.getDeliverDate().equals(""))                      //实际入库时间
             deliver2.setDeliverDate(deliver.getDeliverDate());
         if (deliver.getDeliverNumber() != null && !deliver.getDeliverNumber().equals("")) {             //实收数量
-            System.out.println("Action实收数量" + deliver.getDeliverNumber());
             deliver2.setDeliverNumber(deliver.getDeliverNumber());
         }
         if (deliver.getRemark() != null && !deliver.getRemark().equals(""))          //备注
@@ -160,7 +161,57 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         return "success";
     }
 
-    public String searchDeliverList() {  //没用
+    public String searchDeliverList() {      //增加这个方法需要注入 biz别忘了
+        Deliver condition = new Deliver();
+        if (goodsName != null && !goodsName.equals("")) {
+        /*    if (deliverApp.getGoodsName().indexOf("|") != -1) {
+                String[] strs = deliverApp.getGoodsName().split("\\|");      //增加goods
+                String name = strs[0];
+                condition.setGoodsName(name);
+            } else return "input";*/
+            if (goodsName.indexOf("|") != -1) {
+                String[] strs = goodsName.split("\\|");
+                String name = strs[0];
+                Integer id = Integer.parseInt(strs[1]);
+
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsBiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
+                List list = deliverBiz.getDeliverList(condition);
+                if (list.size() > 0) {
+                    session.put("deliverlist", list);
+                    return "success";
+                } else {
+                    return "input";
+                }
+            } else {
+                return "input";
+            } //输错提示
+        } else if (producerName != null && !producerName.equals("")) {
+            Producer producer = producerBiz.getProducer(producerName).get(0);
+            condition.setProducer(producer);
+            List list = deliverBiz.getDeliverList(condition);
+            System.out.println(list.size());
+            if (list.size() > 0) {
+                session.put("deliverlist", list);
+                return "success";
+            } else
+                return "input";
+        } else if (placeName != null && !placeName.equals("")) {
+            Place place = placeBiz.getPlace(placeName).get(0);
+            condition.setPlace(place);
+            List list = deliverBiz.getDeliverList(condition);
+            if (list.size() > 0) {
+                session.put("deliverlist", list);
+                return "success";
+            } else
+                return "input";
+        }
+        return "success";
+    }
+    
+   /* public String searchDeliverList() {  //没用
         Deliver condition = new Deliver();
         // condition.setGoodsName(goodsName);
         List list = deliverBiz.getDeliverList(condition);
@@ -171,7 +222,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             return "success";
         } else
             return "input";
-    }
+    }*/
 
     public String addDeliver() throws Exception {                  //增加出库申请
         System.out.println("addDeliver");
@@ -195,7 +246,6 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             ActionContext.getContext().put("yesWords", "请输入仓库名称!");
             return "input";
         }*/
-        System.out.println("addDeliver");
         if (goodsId != null && !goodsId.equals("")) {          //商品id
             Goods g = new Goods();
             g.setGoodsId(goodsId);

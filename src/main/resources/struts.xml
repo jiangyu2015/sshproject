@@ -155,6 +155,10 @@
             <result type="redirect" name="success">/rk/rkList.jsp</result>
             <result type="redirect" name="input">/rk/fail.jsp</result>
         </action>
+        <action name="ckSelect" class="deliverSelect" method="searchDeliverList">
+            <result type="redirect" name="success">/ck/ckList.jsp</result>
+            <result type="redirect" name="input">/ck/fail.jsp</result>
+        </action>
         <action name="rkAdd" class="storageAdd" method="addStorage">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
@@ -165,10 +169,10 @@
             <result type="redirect" name="deliverCheck">/ck/ckCheckList.jsp</result>
         </action>
         <action name="rkOk" class="storageOk" method="storageOk">
-            <result type="redirect" name="success">listrk.action</result>
+            <result type="redirect" name="success">rkcheck.action</result>
         </action>
         <action name="ckOk" class="deliverOk" method="deliverOk">
-            <result type="redirect" name="success">listck.action</result>
+            <result type="redirect" name="success">ckcheck.action</result>
         </action>
         <action name="eventsAdd" class="eventsAdd" method="addEvents">
             <result type="redirect" name="success">/rk/test.jsp</result>

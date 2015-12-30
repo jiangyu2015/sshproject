@@ -40,6 +40,19 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
                     else if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
                     }
+                    else if (condition.getGoods() != null) {
+                        if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
+                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                        }
+                    } else if (condition.getProducer() != null) {
+                        if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
+                            c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                        }
+                    } else if (condition.getPlace() != null) {
+                        if (condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
+                            c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                        }
+                    }
                 }
                 if (c.list().size() <= 0) {
                     return new ArrayList<Deliver>();

@@ -68,6 +68,10 @@
                 _move = false;
             });
         });
+
+        function search() {
+            window.location.href = "ckSelect.jsp";
+        }
     </script>
 </head>
 
@@ -75,8 +79,8 @@
 <div class="table-div">
     <div class="title">出库明细信息</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="修改备注" onclick="edit();">
-        <%--   <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+       <%-- <input type="button" class="btn-eidt" value="修改备注" onclick="edit();">--%>
+        <input type="button" class="btn-remove" value="查询" onclick="search();">
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -118,7 +122,7 @@
     </table>
 </div>
 
-<div id="dialog_edit" class="dialog-div">
+<%--<div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
         <div class="title">修改出库明细信息</div>
@@ -192,6 +196,6 @@
             </div>
         </div>
     </div>
-</div>
+</div>--%>
 </body>
 </html>
