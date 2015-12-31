@@ -39,7 +39,6 @@
                 url: "excutePlaceAjaxJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
-//                    alert("ck");
                     var d = eval("(" + data + ")");
                     var place = d.placeList;
                     console.log(place);
@@ -77,12 +76,25 @@
                     var allotNumber = $("#allotNumber").val();
                     var typeOut = $("#typeOut").val();
                     var typeIn = $("#typeIn").val();
+
+                    var expectedDate = $("#expectDate").val();  //期望入库时间  比较时间
+                    var arrs = expectedDate.split("-");
+                    var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
+                    var storagedays = storageday.getTime();
+
+                    var arr = getToDay().split("-");
+                    var today = new Date(arr[0], arr[1], arr[2]);  //今天
+                    var todays = today.getTime();
                     if (allotNumber > availableInventory) {
                         alert("转库申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
                         result = false;
                     }
                     else if (typeIn == typeOut) {
                         alert("转库申请不成功，目标使用类型与原先一样！");
+                        result = false;
+                    }
+                    else if (storagedays <todays) {
+                        alert("期望转库时间不能比今天小");
                         result = false;
                     }
                     else {
@@ -94,16 +106,37 @@
             return result;
         }
 
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
+        }
+
         function GetQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null)return unescape(r[2]);
             return null;
         }
+
+
     </script>
 </head>
 <body>
-<div class="title">添加调拨申请信息</div>
+<div class="title">添加转库申请信息</div>
 <div class="content">
     <form method="post" action="zkAdd" onsubmit="return check(this)">
         <div class="line">
@@ -150,7 +183,7 @@
         </div>
         <div class="line">
             <div class="lable">期望时间：</div>
-            <div class="input-div"><input placeholder="请输入期望转库时间" name="transferApp.expectDate" type="date"/></div>
+            <div class="input-div"><input id="expectDate" placeholder="请输入期望转库时间" name="transferApp.expectDate" type="date"/></div>
         </div>
 
         <input type="submit" value="提交" class="btn-submit"/>

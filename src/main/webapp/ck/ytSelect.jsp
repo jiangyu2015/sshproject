@@ -21,6 +21,29 @@
     <title>查询预提明细</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        str = str + "<option value='" + goods[i].goodsName + "'>";
+                    }
+                    $("#select").html(str);
+
+                    $('#item').bind('input propertychange', function () {
+                        $("#select").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -58,6 +81,12 @@
             <div class="input-div"><input placeholder="请输入预提时填写的活动号"
                                           name="withholding.activityId"/>
 
+            </div>
+        </div>
+        <div class="line">
+            <div class="lable">商品名称：</div>
+            <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的入库商品名称" name="goodsName"/>
+                <datalist id="select"></datalist>
             </div>
         </div>
         <input type="submit" value="查找" class="btn-submit" <%--onclick="find();"--%>/>

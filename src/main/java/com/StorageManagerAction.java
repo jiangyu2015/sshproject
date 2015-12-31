@@ -138,27 +138,18 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
                 return "input";
             } //输错提示
         } else if (producerName != null && !producerName.equals("")) {
-            System.out.println("22");
             Producer producer = producerBiz.getProducer(producerName).get(0);
-            System.out.println(producer.getProducerId() + "ProducerId(");
             condition.setProducer(producer);
-            // condition.setGoodsName(goodsName);
             List list = storageBiz.getStorageList(condition);
-            System.out.println(list.size());
             if (list.size() > 0) {
-                //  session.put("goodslist", list);
                 session.put("storagelist", list);
                 return "success";
             } else
                 return "input";
         } else if (storagePlace != null && !storagePlace.equals("")) {
-            System.out.println("33");
             Place place = placeBiz.getPlace(storagePlace).get(0);
-            System.out.println(place.getPlaceId() + "PlaceId");
             condition.setPlace(place);
-            // condition.setGoodsName(goodsName);
             List list = storageBiz.getStorageList(condition);
-            System.out.println(list.size());
             if (list.size() > 0) {
                 //  session.put("goodslist", list);
                 session.put("storagelist", list);
@@ -184,7 +175,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             storage2.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals("")) {             //实收数量
-            System.out.println("Action实收数量" + storage.getStorageNumber());
             storage2.setStorageNumber(storage.getStorageNumber());
         }
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
@@ -198,7 +188,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String addStorage() throws Exception {                  //增加入库申请
-        System.out.println("addStorage");
         Storage condition = new Storage();
 
  /*       if (storage.getProducerName() != null && !storage.getProducerName().equals(""))
@@ -223,7 +212,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
        /* if (storage.getGoodsId() != null)        //商品id
             condition.setGoodsId(storage.getGoodsId());
         if (storage.getPlaceId() != null)   {              //仓库id
-            System.out.println("入库明细添加仓库id我传过来了"+storage.getPlaceId());
             condition.setPlaceId(storage.getPlaceId());}*/
 
         Goods goods = goodsBiz.getGoods(goodsName).get(0);
@@ -231,9 +219,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         Producer producer = producerBiz.getProducer(storagePlace).get(0);
         condition.setProducer(producer);
         Place place = placeBiz.getPlace(storagePlace).get(0);
-
         condition.setPlace(place);
-
         if (storage.getStorageDate() != null)                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null)               //实收数量
@@ -252,7 +238,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         Storage condition = new Storage();
         condition.setStorageName(storageName);
         List list = storageBiz.getStorageList(condition);
-        System.out.println(list.size());
         if (list.size() > 0) {
             Storage storage = new Storage();
             storage = (Storage) list.get(0);
@@ -269,7 +254,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             condition.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals("")) {             //实收数量
-            System.out.println("Action实收数量" + storage.getStorageNumber());
             condition.setStorageNumber(storage.getStorageNumber());
         }
         if (storage.getStorageType() != null && !storage.getStorageType().equals(""))          //入库类型
@@ -282,24 +266,24 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         } else return "input";
     }
 
-    public String listOkStorage(){   //查询已经入库state='ok'的
-        Storage s=new Storage();
+    public String listOkStorage() {   //查询已经入库state='ok'的
+        Storage s = new Storage();
         s.setState("ok");
         List storage = storageBiz.getStorageList(s);
         session.put("storagelistok", storage);
         return "success";
     }
 
-    public String storageAllot(){   //查询类别是正常调拨的
-        Storage s=new Storage();
+    public String storageAllot() {   //查询类别是正常调拨的
+        Storage s = new Storage();
         s.setCategory("正常调拨");
         List storage = storageBiz.getStorageList(s);
         session.put("storagelistcheck", storage);
         return "success";
     }
 
-    public String storageTransfer(){   //查询类别是正常入库的
-        Storage s=new Storage();
+    public String storageTransfer() {   //查询类别是正常入库的
+        Storage s = new Storage();
         s.setCategory("正常入库");
         List storage = storageBiz.getStorageList(s);
         session.put("storagelistcheck", storage);

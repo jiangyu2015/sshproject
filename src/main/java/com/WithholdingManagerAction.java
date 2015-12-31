@@ -235,7 +235,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             } else
                 return "input";
         }
-        if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
+        else if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
             condition.setActivityId(withholding.getActivityId());
             List<Withholding> list = withholdingBiz.search(condition);
             if (list.size() > 0) {
@@ -261,7 +261,11 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             } else
                 return "input";
         }
-        return "success";
+
+        else if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")){
+
+        }
+            return "success";
     }
 
 

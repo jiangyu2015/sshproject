@@ -90,7 +90,6 @@
             var val = $("#item").val();
             var val2 = $("#item2").val();
             //   var selectId = $("[value='" + val + "']").eq(0).attr('id');
-
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('value');
 

@@ -43,7 +43,7 @@
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
 
             if (selectId == undefined) {
-                alert("该商品不存在，没有通过审核或没有入库，请确认");
+                alert("该商品不存在，没有通过审核或没有建立，请确认");
                 return false;
             }
             else  return true;

@@ -111,7 +111,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
      *
      * @return SUCCESS
      */
-    public String excuteAjax() {            //状态为yesko的商品
+    public String excuteAjax() {            //状态为yesok的商品
 
      /*   try {
             //获取数据
@@ -134,7 +134,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         if (goodslist.size() > 0) {
             try {
                 Goods g = goodslist.get(0);
-                System.out.println(g.getGoodsId() + "传值JsonAction");
                 JSONObject json = new JSONObject();
                 json.put("goodsList", goodslist);
                 result = json.toString();//给result赋值，传递给页面

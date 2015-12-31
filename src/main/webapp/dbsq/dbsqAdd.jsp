@@ -25,8 +25,6 @@
                     var goodsName = decodeURI(GetQueryString("goodsName"));
                     var placeName = decodeURI(GetQueryString("placeName"));
                     var type = decodeURI(GetQueryString("type"));
-                    /*    var producerId = GetQueryString("producerId");
-                     var placeId = GetQueryString("placeId");*/
                     $('#goodsId').val(goodsId);
                     $('#goodsName').val(goodsName);
                     $('#placeName').val(placeName);
@@ -79,6 +77,15 @@
                     var placeName2 = $("#item3").val();
                     var val3 = $("#item3").val();
                     var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+
+                    var expectedDate = $("#expectDate").val();  //期望入库时间  比较时间
+                    var arrs = expectedDate.split("-");
+                    var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
+                    var storagedays = storageday.getTime();
+
+                    var arr = getToDay().split("-");
+                    var today = new Date(arr[0], arr[1], arr[2]);  //今天
+                    var todays = today.getTime();
                     if (allotNumber > availableInventory) {
                         alert("调拨申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
                         result = false;
@@ -87,11 +94,19 @@
                         alert("调拨申请不成功，目标仓库地址与原仓库地址相同！");
                         result = false;
                     }
-                    else if (val3 != null & val3 != "") {
-                        if (selectId3 == undefined) {
-                            alert("调拨申请不成功,仓库未建，请选择选项框内的仓库");
-                            result = false;
-                        }
+                    /* else if (val3 != null & val3 != "") {
+                     if (selectId3 == undefined) {
+                     alert("调拨申请不成功,仓库未建，请选择选项框内的仓库");
+                     result = false;
+                     }
+                     }*/  //这样写一定会进来 后面就不走了，只能放最后
+                    else if (storagedays <= todays) {
+                        alert("期望调拨时间不能比今天小，今天也来不及");
+                        result = false;
+                    }
+                    else if (selectId3 == undefined) {
+                        alert("调拨申请不成功,仓库未建，请选择选项框内的仓库");
+                        result = false;
                     }
                     else {
                         alert("调拨申请成功");
@@ -100,6 +115,25 @@
                 }
             });
             return result;
+        }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
         }
 
         function GetQueryString(name) {
@@ -141,7 +175,8 @@
         </div>
         <div class="line">
             <div class="lable">期望时间：</div>
-            <div class="input-div"><input id="expectDate" placeholder="请输入期望调拨时间" name="allotApp.expectDate" type="date"/></div>
+            <div class="input-div"><input id="expectDate" placeholder="请输入期望调拨时间" name="allotApp.expectDate"
+                                          type="date"/></div>
         </div>
         <div class="line">
             <div class="lable">调拨数量：</div>
