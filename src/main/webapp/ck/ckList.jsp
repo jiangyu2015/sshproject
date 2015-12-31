@@ -23,34 +23,36 @@
     <thead>
     <tr>
         <th>出库明细id</th>
-        <th>商户id</th>
         <th>商户名称</th>
-        <th>商品id</th>
         <th>商品名称</th>
-        <th>仓库id</th>
-        <th>仓库名称</th>
+        <th>仓库地点</th>
         <th>实际出库时间</th>
         <th>预期出库数量</th>
         <th>实际出库数量</th>
         <th>出库类型</th>
         <th>备注</th>
+        <th>出库填写人</th>
+        <th>预提单号</th>
+        <th>出库类别</th>
+        <th>出库状态</th>
     </tr>
     </thead>
     <tbody>
     <s:iterator value="%{#session.deliverlist}" var="deliver">
         <tr>
             <td><s:property value="#deliver.deliverId"/></td>
-            <td><s:property value="#deliver.producer.producerId"/></td>
             <td><s:property value="#deliver.producer.producerName"/></td>
-            <td><s:property value="#deliver.goods.goodsId"/></td>
             <td><s:property value="#deliver.goods.goodsName"/></td>
-            <td><s:property value="#deliver.place.placeId"/></td>
             <td><s:property value="#deliver.place.placeName"/></td>
             <td><s:date format="yyyy-MM-dd" name="#deliver.deliverDate"/></td>
             <td><s:property value="#deliver.expecteNumber"/></td>
             <td><s:property value="#deliver.deliverNumber"/></td>
             <td><s:property value="#deliver.deliverType"/></td>
             <td><s:property value="#deliver.remark"/></td>
+            <td><s:property value="#deliver.adduser"/></td>
+            <td><s:property value="#deliver.withholding.withholdingId"/></td>
+            <td><s:property value="#deliver.category"/></td>
+            <td><s:property value="#deliver.state"/></td>
         </tr>
     </s:iterator>
     </tbody>

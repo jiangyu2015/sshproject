@@ -321,7 +321,14 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             session.put("deliverlist", condition);
             return "success";
         } else return "input";
+    }
 
+    public String listOkDeliver(){
+        Deliver s=new Deliver();
+        s.setState("ok");
+        List deliver = deliverBiz.getDeliverList(s);
+        session.put("deliverlistok", deliver);
+        return "success";
     }
 
 }

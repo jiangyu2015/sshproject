@@ -25,9 +25,9 @@
                     var goods = d.goodsList;
                     console.log(goods);
                     for (var i = 0; i < goods.length; i++) {
-                     //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
-                     //   str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
-                        str = str + "<option value='" + goods[i].goodsName +"|"+goods[i].goodsId +"'>";
+                        //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                        //   str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
                     }
                     $("#select").html(str);
 
@@ -48,8 +48,8 @@
                     var producer = d.producerList;
                     console.log(producer);
                     for (var i = 0; i < producer.length; i++) {
-                      //  str = str + "<option>" + producer[i].producerName + "</option>";
-                              str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
+                        //  str = str + "<option>" + producer[i].producerName + "</option>";
+                        str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
                     }
                     $("#select2").html(str);
 
@@ -73,8 +73,8 @@
                     var place = d.placeList;
                     console.log(place);
                     for (var i = 0; i < place.length; i++) {
-                       // str = str + "<option>" + place[i].placeName + "</option>";
-                              str = str + "<option id='" + place[i].placeId  + "' value='" + place[i].placeName  + "'>";
+                        // str = str + "<option>" + place[i].placeName + "</option>";
+                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
                     }
                     $("#select3").html(str);
 
@@ -90,13 +90,46 @@
             var val = $("#item").val();
             var val2 = $("#item2").val();
             //   var selectId = $("[value='" + val + "']").eq(0).attr('id');
+
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('value');
-            if (selectId == undefined ||selectId2 == undefined) {
+
+            var expectedDate = $("#expectedDate").val();  //期望入库时间  比较时间
+            var arrs = expectedDate.split("-");
+            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
+            var storagedays = storageday.getTime();
+
+            var arr = getToDay().split("-");
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
+            if (selectId == undefined || selectId2 == undefined) {
                 alert("商品或商户未录入或未被审核通过，请与管理员联系");
                 return false;
             }
+            else if (storagedays < todays) {
+                alert("期望入库时间不能比今天小");
+                return false;
+            }
             else  return true;
+        }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
         }
     </script>
 </head>
@@ -130,7 +163,8 @@
         </div>
         <div class="line">
             <div class="lable">预期入库时间：</div>
-            <div class="input-div"><input placeholder="请输入预期入库时间" name="storageApp.expectedDate" type="date"/></div>
+            <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间" name="storageApp.expectedDate"
+                                          type="date"/></div>
         </div>
         <div class="line">
             <div class="lable">预期入库数量：</div>
@@ -144,14 +178,14 @@
             <div class="lable">入库类型：</div>
 
             <div class="input-div">
-                <select  name="storageApp.storageType">
+                <select name="storageApp.storageType">
                     <option value="任意配置">任意配置</option>
                     <option value="一元购">一元购</option>
                     <option value="社区特卖">社区特卖</option>
                     <option value="物业礼包">物业礼包</option>
                     <option value="福利">福利</option>
                 </select>
-                </div>
+            </div>
         </div>
         <%--  <div class="line">
               <div class="lable">处理状态：</div>

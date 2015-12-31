@@ -148,6 +148,9 @@
         <action name="listokrk" class="storageOkList" method="listOkStorage">
             <result type="redirect" name="success">/rk/rkOkList.jsp</result>
         </action>
+        <action name="listokck" class="deliverOkList" method="listOkDeliver">
+            <result type="redirect" name="success">/ck/ckOkList.jsp</result>
+        </action>
         <action name="editrk" class="storageEdit" method="editStorage">
             <result type="redirect" name="success">/rk/rkList.jsp</result>
         </action>

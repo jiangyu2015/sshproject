@@ -100,7 +100,7 @@
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.deliverlistall}" var="deliver">
+        <s:iterator value="%{#session.deliverlistok}" var="deliver">
             <tr>
                 <td><s:property value="#deliver.deliverId"/></td>
                 <td><s:property value="#deliver.producer.producerName"/></td>

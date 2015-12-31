@@ -262,6 +262,10 @@
     <bean id="storageOkList" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
+    <bean id="deliverOkList" class="com.DeliverManagerAction" scope="prototype">
+        <property name="deliverBiz" ref="deliverBiz"/>
+    </bean>
+
     <bean id="storageEdit" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
