@@ -16,13 +16,13 @@ public class Deliver implements Serializable {
     private Date deliverDate;  //出库时间
     private Integer expecteNumber;  //应发数量
     private Integer deliverNumber;  //出库数量
-    private String deliverType="任意配置"; //出库类型
-    private String category="正常出库"; //出库类别
+    private String deliverType; //出库类型
+    private String category; //出库类别
     private String remark; //备注
     private BigDecimal sumDeliver;//总出库
     private String adduser; //添加人
     private String checkuser; //确认出货人
-    private String state = "no";  //处理状态 no就是未出货
+    private String state ;  //处理状态 no就是未出货
 
     public String getCheckuser() {
         return checkuser;

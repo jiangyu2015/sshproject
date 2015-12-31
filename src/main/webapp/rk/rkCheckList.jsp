@@ -112,8 +112,7 @@
 
 		function selectCategory(){
             var type=$("#type").val();
-        	alert("选择了:"+type);
-            if(type="入库类型"){
+            if(type=="入库类型"){
                 window.location.href="rkcheck.action";
             }else if(type=="正常调拨"){
                 window.location.href="zcdbstorage.action";

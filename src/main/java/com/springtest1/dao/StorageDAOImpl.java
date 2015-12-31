@@ -47,34 +47,25 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
                 if (condition != null) {
                     if (condition.getGoods() != null) {
                         if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
-                            System.out.println("1");
                             c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                         }
                     } else if (condition.getProducer() != null) {
                         if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
-                            System.out.println("2");
                             c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
                         }
                     } else if (condition.getPlace() != null) {
                         if (condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
-                            System.out.println("3");
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
-                    }
-                    else if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
+                    } else if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
                         System.out.println("DAO" + condition.getStorageId());
                         c.add(Restrictions.eq("storageId", condition.getStorageId()));
-                    }
-                    else if (condition.getState() != null && !condition.getState().equals("")) {
+                    } else if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
-
-                    }
-                    else if(condition.getCategory()!= null && !condition.getCategory().equals("")){
-                        System.out.println("condition.getCategory()"+condition.getCategory());
+                    } else if (condition.getCategory() != null && !condition.getCategory().equals("")) {
                         c.add(Restrictions.eq("category", condition.getCategory()));
                     }
                 }
-
                 if (c.list().size() <= 0) {
                     return new ArrayList<Storage>();
                 } else {

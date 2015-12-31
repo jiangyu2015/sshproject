@@ -14,10 +14,10 @@ public class Storage implements Serializable {
     private Date storageDate;  //实际入库时间
     private Date expectedDate;  //预期时间
     private Integer expectedNumber;  //预期数量
-    private String state = "no";  //处理状态 no就是未收货
+    private String state;  //处理状态 no就是未收货
     private Integer storageNumber;  //实际入库数量
     private String storageType; //入库类型
-    private String category="正常入库"; //入库类别
+    private String category; //入库类别
     private String remark; //备注
     private String adduser; //添加人
     private String checkuser; //确认收货人
