@@ -110,6 +110,18 @@
             return month;
         }
 
+		function selectCategory(){
+            var type=$("#type").val();
+        	alert("选择了:"+type);
+            if(type="入库类型"){
+                window.location.href="rkcheck.action";
+            }else if(type=="正常调拨"){
+                window.location.href="zcdbstorage.action";
+            }
+            else if(type=="正常入库"){
+                window.location.href="zcrkstorage.action";
+            }
+        }
     </script>
 </head>
 
@@ -136,7 +148,14 @@
             <th>入库状态</th>
             <th>申请人</th>
             <th>确认收货人</th>
-            <th>入库类别</th>
+            <th>
+				<select id="type" style="background: none; border: none; -webkit-box-shadow: none; width: auto; 
+            			font-size: 14px; color: #4d4d4d; font-weight: bold;" onchange="selectCategory();" >
+                    <option>入库类型</option>
+	            	<option>正常入库</option>
+	            	<option>正常调拨</option>
+            	</select>
+			</th>
         </tr>
         </thead>
         <tbody>

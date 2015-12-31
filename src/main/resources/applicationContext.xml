@@ -290,6 +290,13 @@
     <bean id="storageCheck" class="com.StorageManagerAction" scope="prototype">
         <property name="storageBiz" ref="storageBiz"/>
     </bean>
+    <bean id="storageAllot" class="com.StorageManagerAction" scope="prototype">
+        <property name="storageBiz" ref="storageBiz"/>
+    </bean>
+    <bean id="storageTransfer" class="com.StorageManagerAction" scope="prototype">
+        <property name="storageBiz" ref="storageBiz"/>
+    </bean>
+
     <bean id="deliverCheck" class="com.DeliverManagerAction" scope="prototype">
         <property name="deliverBiz" ref="deliverBiz"/>
     </bean>

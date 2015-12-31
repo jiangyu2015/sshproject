@@ -165,18 +165,27 @@
         <action name="rkAdd" class="storageAdd" method="addStorage">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>
-        <action name="rkcheck" class="storageCheck" method="checkStorage">
+        <action name="rkcheck" class="storageCheck" method="checkStorage">    <!--确认收货查询所有未确认的-->
             <result type="redirect" name="storageCheck">/rk/rkCheckList.jsp</result>
         </action>
+        <action name="zcdbstorage" class="storageAllot" method="storageAllot">  <!--确认收货查询正常调拨的-->
+            <result type="redirect" name="success">/rk/rkCheckList.jsp</result>
+        </action>
+        <action name="zcrkstorage" class="storageTransfer" method="storageTransfer">  <!--确认收货查询正常入库的-->
+            <result type="redirect" name="success">/rk/rkCheckList.jsp</result>
+        </action>
+
         <action name="ckcheck" class="deliverCheck" method="checkDeliver">
             <result type="redirect" name="deliverCheck">/ck/ckCheckList.jsp</result>
         </action>
+
         <action name="rkOk" class="storageOk" method="storageOk">
             <result type="redirect" name="success">rkcheck.action</result>
         </action>
         <action name="ckOk" class="deliverOk" method="deliverOk">
             <result type="redirect" name="success">ckcheck.action</result>
         </action>
+
         <action name="eventsAdd" class="eventsAdd" method="addEvents">
             <result type="redirect" name="success">/rk/test.jsp</result>
         </action>

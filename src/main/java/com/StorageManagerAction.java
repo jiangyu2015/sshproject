@@ -170,7 +170,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String checkStorage() {               //得到所需入库的单子
-        System.out.println("审核checkStorage");
         List<Storage> storage = storageBiz.getCheckStorage();
         session.put("storagelistcheck", storage);
         return "storageCheck";
@@ -283,11 +282,27 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         } else return "input";
     }
 
-    public String listOkStorage(){
+    public String listOkStorage(){   //查询已经入库state='ok'的
         Storage s=new Storage();
         s.setState("ok");
         List storage = storageBiz.getStorageList(s);
         session.put("storagelistok", storage);
+        return "success";
+    }
+
+    public String storageAllot(){   //查询类别是正常调拨的
+        Storage s=new Storage();
+        s.setCategory("正常调拨");
+        List storage = storageBiz.getStorageList(s);
+        session.put("storagelistcheck", storage);
+        return "success";
+    }
+
+    public String storageTransfer(){   //查询类别是正常入库的
+        Storage s=new Storage();
+        s.setCategory("正常入库");
+        List storage = storageBiz.getStorageList(s);
+        session.put("storagelistcheck", storage);
         return "success";
     }
 }
