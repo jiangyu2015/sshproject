@@ -5,13 +5,29 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>添加商品</title>
-    <link type="text/css" rel="stylesheet" href="../common.css" />
+    <link type="text/css" rel="stylesheet" href="../common.css"/>
+    <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript">
+        function check(form) {
+
+            var loginName = $('#loginName').val();
+            var loginPwd = $('#loginPwd').val();
+            if (loginName == "") {
+                document.getElementById("div_loginName").innerHTML = "请输入用户名!";
+                return false;
+            }
+            if (loginPwd == "") {
+                document.getElementById("div_loginPwd").innerHTML = "请输入密码!";
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
 <div class="title">添加商品</div>
 <div class="content">
-    <form method="post" action="addGoods" >
+    <form method="post" action="addGoods" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商品名称：</div>
             <div class="input-div"><input placeholder="请输入商品名称" name="goods.goodsName"/></div>
@@ -24,32 +40,40 @@
 
         <div class="line">
             <div class="lable">参考价值：</div>
-            <div class="input-div"><input placeholder="请输入参考价值" name="goods.value"/></div>
+            <div class="input-div"><input placeholder="请输入参考价值(只能输入数字和小数点)" name="goods.value"
+                                          onkeyup="value=value.replace(/[^\d.]/g,'') "
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d.]/g,''))"/>
+            </div>
         </div>
 
         <div class="line">
             <div class="lable">单价：</div>
-            <div class="input-div"><input placeholder="请输入单价" name="goods.price"/></div>
+            <div class="input-div"><input placeholder="请输入单价(只能输入数字和小数点)" name="goods.price" onkeyup="value=value.replace(/[^\d.]/g,'') "
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d.]/g,''))"/></div>
         </div>
 
         <div class="line">
             <div class="lable">长cm：</div>
-            <div class="input-div"><input placeholder="请输入长cm" name="goods.length"/></div>
+            <div class="input-div"><input placeholder="请输入长cm(只能输入数字和小数点)" name="goods.length" onkeyup="value=value.replace(/[^\d.]/g,'') "
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d.]/g,''))"/></div>
         </div>
 
         <div class="line">
             <div class="lable">宽cm：</div>
-            <div class="input-div"><input placeholder="请输入宽cm"  name="goods.wide"/></div>
+            <div class="input-div"><input placeholder="请输入宽cm(只能输入数字和小数点)" name="goods.wide" onkeyup="value=value.replace(/[^\d.]/g,'') "
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d.]/g,''))"/></div>
         </div>
 
         <div class="line">
             <div class="lable">高cm：</div>
-            <div class="input-div"><input placeholder="请输入高cm" name="goods.tall"/></div>
+            <div class="input-div"><input placeholder="请输入高cm(只能输入数字和小数点)" name="goods.tall" onkeyup="value=value.replace(/[^\d.]/g,'') "
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d.]/g,''))"/></div>
         </div>
 
         <div class="line">
             <div class="lable">毛重kg：</div>
-            <div class="input-div"><input placeholder="请输入毛重kg" name="goods.mweight"/></div>
+            <div class="input-div"><input placeholder="请输入毛重kg(只能输入数字和小数点)" name="goods.mweight" onkeyup="value=value.replace(/[^\d.]/g,'') "
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d.]/g,''))"/></div>
         </div>
 
         <div class="line">
@@ -59,7 +83,8 @@
 
         <div class="line">
             <div class="lable">体积重量kg：</div>
-            <div class="input-div"><input placeholder="请输入体积重量kg" name="goods.vweight"/></div>
+            <div class="input-div"><input placeholder="请输入体积重量kg" name="goods.vweight" onkeyup="value=value.replace(/[^\d.]/g,'') "
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d.]/g,''))"/></div>
         </div>
 
         <div class="line">
@@ -75,7 +100,7 @@
         <div class="line">
             <div class="input-div">
                 <div class="lable-left">
-                    <input type="radio" name="goods.service" value="服务" id="radio_service" />
+                    <input type="radio" name="goods.service" value="服务" id="radio_service"/>
                     <label for="radio_service">服务</lable>
                 </div>
                 <div class="lable-right">
