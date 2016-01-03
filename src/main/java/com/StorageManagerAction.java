@@ -277,6 +277,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     public String storageAllot() {   //查询类别是正常调拨的
         Storage s = new Storage();
         s.setCategory("正常调拨");
+        s.setState("no");
         List storage = storageBiz.getStorageList(s);
         session.put("storagelistcheck", storage);
         return "success";
@@ -285,6 +286,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     public String storageTransfer() {   //查询类别是正常入库的
         Storage s = new Storage();
         s.setCategory("正常入库");
+        s.setState("no");
         List storage = storageBiz.getStorageList(s);
         session.put("storagelistcheck", storage);
         return "success";

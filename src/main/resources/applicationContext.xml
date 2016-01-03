@@ -356,6 +356,7 @@
     <bean id="withholdingDeliverSelect" class="com.WithholdingManagerAction">
         <property name="withholdingBiz" ref="withholdingBiz"/>
         <property name="deliverBiz" ref="deliverBiz"/>
+        <property name="goodsbiz" ref="goodsBiz"/>
     </bean>
 
     <bean id="activityDAO" class="com.springtest1.dao.ActivityDAOImpl">

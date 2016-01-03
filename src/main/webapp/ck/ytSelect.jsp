@@ -32,7 +32,7 @@
                     var goods = d.goodsList;
                     console.log(goods);
                     for (var i = 0; i < goods.length; i++) {
-                        str = str + "<option value='" + goods[i].goodsName + "'>";
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
                     }
                     $("#select").html(str);
 

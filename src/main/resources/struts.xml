@@ -203,6 +203,7 @@
         </action>
         <action name="ytSelectDeliver" class="withholdingDeliverSelect" method="searchWithholdingList">
             <result type="redirect" name="success">/ck/ytList.jsp</result>
+            <result type="redirect" name="s">/ck/ytGoodsList.jsp</result>
             <result type="redirect" name="input">/ck/fail.jsp</result>
         </action>
 

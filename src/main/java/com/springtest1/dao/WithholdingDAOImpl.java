@@ -59,7 +59,6 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
                 if (condition != null) {
                     if (condition.getGoods() != null) {
                         if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
-                            System.out.println("1");
                             c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                         }
                     } else if (condition.getPlace() != null) {
@@ -85,7 +84,4 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
         });
     }
 
-   /* public List<Withholding> searchAllWithholding(String goodsName) {
-        String sql ="select "
-    }*/
 }

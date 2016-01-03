@@ -97,10 +97,19 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         this.producerId = producerId;
     }
 
+    Integer id;
     Integer goodsId;
     Integer placeId;
     Integer producerId;
     String goodsName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getPlaceId() {
         return placeId;
@@ -140,15 +149,12 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     }
 
     public String addWithholding() throws Exception {                  //增加预提申请
-        //    System.out.println(enteringWarehouseDto);
-        System.out.println("addWithholding");
         Withholding condition = new Withholding();
-        System.out.println("ok");
         if (goodsId != null && !goodsId.equals("")) {          //商品id
             System.out.println(goodsId + "预提申请我传过来了");
             Goods g = new Goods();
             g.setGoodsId(goodsId);
-            Goods goods = (Goods) goodsbiz.getGoodsList(g).get(0);
+            Goods goods = goodsbiz.getGoodsList(g).get(0);
             condition.setGoods(goods);
         }
         if (placeId != null && !placeId.equals("")) {                     //仓库id
@@ -160,7 +166,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         if (producerId != null && !producerId.equals("")) {          //商户id
             Producer p = new Producer();
             p.setProducerId(producerId);
-            Producer producer = (Producer) producerBiz.getProducerList(p).get(0);
+            Producer producer = producerBiz.getProducerList(p).get(0);
             condition.setProducer(producer);
         }
         if (withholding.getEvents() != null && !withholding.getEvents().equals(""))               //预提原由
@@ -196,28 +202,15 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     }
 
     public String searchWithholdingList() {      //增加这个方法需要注入 biz别忘了
-        System.out.println(withholding.getWithholdingId() + "yutiId");
-        Withholding condition = new Withholding();
-       /* if (goodsName != null && !goodsName.equals("")) {
-            String[] strs = goodsName.split("\\|");
-            String name = strs[0];
-            Integer id = Integer.parseInt(strs[1]);
 
-            Goods g = new Goods();
-            g.setGoodsId(id);
-            Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
-            System.out.println(goods.getGoodsName());
-            condition.setGoods(goods);
-            List list = storageBiz.getStorageList(condition);
-            System.out.println(list.size());
-            if (list.size() > 0) {
-                //  session.put("goodslist", list);
-                session.put("storagelist", list);
-                return "success";
-            } else
-                return "input";
+        session.put("deliverytlist", null);
+        session.put("withholdinglist", null);
+        session.put("sumwithholdingdeliver", null);
+        Withholding condition = new Withholding();
+        if (id != null && !id.equals("")) {
+            withholding.setWithholdingId(id);
+            id=null;
         }
-        else */
         if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
             condition.setWithholdingId(withholding.getWithholdingId());
             List<Withholding> list = withholdingBiz.search(condition);
@@ -233,18 +226,16 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     Deliver deliver = delivers.get(0);
                     BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
                     int sumDeliver = a.intValue();
-                    System.out.println("出库总数"+sumDeliver);
+                    System.out.println("出库总数" + sumDeliver);
                     session.put("sumwithholdingdeliver", sumDeliver);
-                }
-                else{
+                } else {
                     int sumDeliver = 0;
                     session.put("sumwithholdingdeliver", sumDeliver);
                 }
                 return "success";
             } else
                 return "input";
-        }
-        else if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
+        } else if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
             condition.setActivityId(withholding.getActivityId());
             List<Withholding> list = withholdingBiz.search(condition);
             if (list.size() > 0) {
@@ -259,33 +250,33 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     Deliver deliver = delivers.get(0);
                     BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
                     int sumDeliver = a.intValue();
-                    System.out.println("出库总数"+sumDeliver);
+                    System.out.println("出库总数" + sumDeliver);
                     session.put("sumwithholdingdeliver", sumDeliver);
-                }
-                else{
+                } else {
                     int sumDeliver = 0;
                     session.put("sumwithholdingdeliver", sumDeliver);
                 }
                 return "success";
             } else
                 return "input";
+        } else if (goodsName != null && !goodsName.equals("")) {
+            if (goodsName.indexOf("|") != -1) {
+                String[] strs = goodsName.split("\\|");
+                String name = strs[0];
+                Integer id = Integer.parseInt(strs[1]);
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsbiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
+                List list = withholdingBiz.search(condition);
+                if (list.size() > 0) {
+                    session.put("withholdinglist", list);
+                    return "s";
+                } else
+                    return "input";
+            } else return "input";
         }
-
-    /*    else if (goodsName != null && !goodsName.equals("")){
-            Goods g = new Goods();
-            g.setGoodsName(goodsName);
-            List<Goods> goodsList = goodsbiz.getGoodsList(g);
-            condition.setGoods(g);
-            List list = storageBiz.getStorageList(condition);
-            System.out.println(list.size());
-            if (list.size() > 0) {
-                //  session.put("goodslist", list);
-                session.put("storagelist", list);
-                return "success";
-            } else
-                return "input";
-        }*/
-            return "success";
+        return "success";
     }
 
 
