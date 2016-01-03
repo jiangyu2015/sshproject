@@ -100,6 +100,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     Integer goodsId;
     Integer placeId;
     Integer producerId;
+    String goodsName;
 
     public Integer getPlaceId() {
         return placeId;
@@ -115,6 +116,14 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
     public String addEvents() {
@@ -218,7 +227,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 Deliver d = new Deliver();
                 d.setWithholding(w);
                 List<Deliver> deliverList = deliverBiz.getDeliverList(d);
-                session.put("deliverlist", deliverList);
+                session.put("deliverytlist", deliverList);
                 List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(withholding.getWithholdingId());
                 if (delivers.size() > 0) {
                     Deliver deliver = delivers.get(0);
@@ -244,7 +253,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 Deliver d = new Deliver();
                 d.setWithholding(w);
                 List<Deliver> deliverList = deliverBiz.getDeliverList(d);
-                session.put("deliverlist", deliverList);
+                session.put("deliverytlist", deliverList);
                 List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(w.getWithholdingId());
                 if (delivers.size() > 0) {
                     Deliver deliver = delivers.get(0);
@@ -262,9 +271,20 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 return "input";
         }
 
-        else if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")){
-
-        }
+    /*    else if (goodsName != null && !goodsName.equals("")){
+            Goods g = new Goods();
+            g.setGoodsName(goodsName);
+            List<Goods> goodsList = goodsbiz.getGoodsList(g);
+            condition.setGoods(g);
+            List list = storageBiz.getStorageList(condition);
+            System.out.println(list.size());
+            if (list.size() > 0) {
+                //  session.put("goodslist", list);
+                session.put("storagelist", list);
+                return "success";
+            } else
+                return "input";
+        }*/
             return "success";
     }
 

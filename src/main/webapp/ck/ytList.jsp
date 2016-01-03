@@ -21,7 +21,6 @@
             if ($(".active").length == 0) {
                 alert('请选择要修改的行');
             } else {
-
                 var $tds = $("tr.active").children();
                 /*   alert($tds.eq(0).text())*/
                 alert("预提" + $tds.eq(10).text() + "出库数" + $('#sumwithholdingdeliver').html());
@@ -125,7 +124,7 @@
     </tr>
     </thead>
     <tbody1>
-        <s:iterator value="%{#session.deliverlist}" var="deliver">
+        <s:iterator value="%{#session.deliverytlist}" var="deliver">
             <tr>
                 <td><s:property value="#deliver.deliverId"/></td>
                 <td><s:property value="#deliver.producer.producerId"/></td>

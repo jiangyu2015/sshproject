@@ -57,12 +57,6 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
         return query.list();
     }
 
- /*   public List getAllGoods() {         //试试左连接
-        String hql = "from Goods";
-        Session session = this.getSessionFactory().getCurrentSession();
-        Query query = session.createQuery(hql);
-        return query.list();
-    }*/
 
     public void modifyGood(Goods good) {  //修改商品
         super.getHibernateTemplate().update(good);

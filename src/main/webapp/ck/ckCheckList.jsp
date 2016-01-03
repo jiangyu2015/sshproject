@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>入库明细信息</title>
+    <title>出库明细信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
@@ -82,11 +82,11 @@
             var deliverday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
             var deliverdays = deliverday.getTime();
             if (deliverdays > todays) {
-                alert("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
+                alert("确认出库不成功，实际出库时间比今天大？真的出库了再来填，拜拜！");
                 return false;
             }
             else {
-                alert("确认收货成功");
+                alert("确认出库成功");
                 return true;
             }
         }
@@ -115,9 +115,9 @@
 
 <body>
 <div class="table-div">
-    <div class="title">确认收货</div>
+    <div class="title">确认出库</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();">
+        <input type="button" class="btn-eidt" value="确认出库" onclick="edit();">
         <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
@@ -133,7 +133,8 @@
             <th>出库类型</th>
             <th>备注</th>
             <th>出库填写人</th>
-            <th>预提单号</th>
+            <th>出库确认人</th>
+          <%--  <th>预提单号</th>  //这是调拨申请的出库 没有预提单号--%>
             <th>出库类别</th>
             <th>出库状态</th>
         </tr>
@@ -151,7 +152,8 @@
                 <td><s:property value="#deliver.deliverType"/></td>
                 <td><s:property value="#deliver.remark"/></td>
                 <td><s:property value="#deliver.adduser"/></td>
-                <td><s:property value="#deliver.withholding.withholdingId"/></td>
+                <td><s:property value="#deliver.checkuser"/></td>
+          <%--      <td><s:property value="#deliver.withholding.withholdingId"/></td>--%>
                 <td><s:property value="#deliver.category"/></td>
                 <td><s:property value="#deliver.state"/></td>
             </tr>
@@ -215,6 +217,22 @@
                         <div class="lable">备注：</div>
                         <div class="input-div"><input placeholder="请输入备注" name="deliver.remark"/></div>
                     </div>
+                    <div class="line">
+                        <div class="lable">出库填写人：</div>
+                        <div class="input-div"><input  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">确认出库人：</div>
+                        <div class="input-div"><input  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                  <%--  <div class="line">
+                        <div class="lable">预提单号：</div>
+                        <div class="input-div"><input  readonly="readonly"
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>--%>
                     <div class="line">
                         <div class="lable">出库类别：</div>
                         <div class="input-div"><input readonly="readonly"

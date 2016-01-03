@@ -14,6 +14,11 @@
     <title>查询未审核商品</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <style type="text/css">
+        span {
+            color: red
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $.ajax({

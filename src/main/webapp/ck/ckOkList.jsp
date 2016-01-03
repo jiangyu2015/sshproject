@@ -94,6 +94,7 @@
             <th>出库类型</th>
             <th>备注</th>
             <th>出库填写人</th>
+            <th>出库确认人</th>
             <th>预提单号</th>
             <th>出库类别</th>
             <th>出库状态</th>
@@ -112,6 +113,7 @@
                 <td><s:property value="#deliver.deliverType"/></td>
                 <td><s:property value="#deliver.remark"/></td>
                 <td><s:property value="#deliver.adduser"/></td>
+                <td><s:property value="#deliver.checkuser"/></td>
                 <td><s:property value="#deliver.withholding.withholdingId"/></td>
                 <td><s:property value="#deliver.category"/></td>
                 <td><s:property value="#deliver.state"/></td>

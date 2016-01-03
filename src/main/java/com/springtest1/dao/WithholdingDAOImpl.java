@@ -1,5 +1,6 @@
 package com.springtest1.dao;
 
+import com.dto.CommodityDto;
 import com.hibtest1.entity.Withholding;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -66,12 +67,10 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
                             System.out.println("3");
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
-                    }
-                    else if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
+                    } else if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
                         System.out.println("DAO" + condition.getWithholdingId());
                         c.add(Restrictions.eq("withholdingId", condition.getWithholdingId()));
-                    }
-                    else if(condition.getActivityId()!=null&& !condition.getActivityId().equals("")){
+                    } else if (condition.getActivityId() != null && !condition.getActivityId().equals("")) {
                         c.add(Restrictions.eq("activityId", condition.getActivityId()));
                     }
 
@@ -85,4 +84,8 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
             }
         });
     }
+
+   /* public List<Withholding> searchAllWithholding(String goodsName) {
+        String sql ="select "
+    }*/
 }

@@ -6,6 +6,11 @@
     <title>登陆系统</title>
     <link type="text/css" rel="stylesheet" href="css.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+    <style type="text/css">
+        span {
+            color: red
+        }
+    </style>
     <script type="text/javascript">
         function check(form) {
             var loginName = $('#loginName').val();
@@ -34,6 +39,7 @@
             <br> <label for="loginPwd">Password</label>
             <input id="loginPwd" name="loginPwd" class="input-block" type="password"/>&nbsp;<span
                 id="div_loginPwd"></span>
+            </br>
             <input class="button" type="submit" value="登陆"/>
         </div>
     </form>

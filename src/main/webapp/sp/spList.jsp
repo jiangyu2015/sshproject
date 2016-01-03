@@ -13,7 +13,8 @@
         function edit() {
             if ($(".active").length == 0) {
                 alert('请选择要修改的行');
-            } else {
+            }
+            else {
                 var $tds = $("tr.active").children();
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
@@ -89,7 +90,7 @@
     <div class="title">商品信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-<%--        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <%--        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
