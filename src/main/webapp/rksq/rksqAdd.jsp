@@ -59,6 +59,7 @@
                 },
                 error: function () {
                     alert("未查到商户");
+                    $("#div_item2").html("未查到商户");
                 }//这里不要加","
 
             });
@@ -103,10 +104,12 @@
             var todays = today.getTime();
             if (selectId == undefined || selectId2 == undefined) {
                 alert("商品或商户未录入或未被审核通过，请与管理员联系");
+                $("#div_alert").html("商品或商户未录入或未被审核通过，请与管理员联系");
                 return false;
             }
             else if (storagedays < todays) {
                 alert("期望入库时间不能比今天小");
+                $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
             }
             else  return true;
@@ -141,6 +144,7 @@
             <div class="input-div"><input id="item2" list="select2" placeholder="请输入商户名称"
                                           name="storageApp.producerName"/>
                 <datalist id="select2"></datalist>
+                <span id="div_item2"></span>
             </div>
         </div>
         <div class="line">
@@ -163,11 +167,11 @@
         <div class="line">
             <div class="lable">预期入库时间：</div>
             <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间" name="storageApp.expectedDate"
-                                          type="date"/></div>
+                                          type="date"/> <span id="div_expectedDate"></span></div>
         </div>
         <div class="line">
             <div class="lable">预期入库数量：</div>
-            <div class="input-div"><input placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/></div>
+            <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/></div>
         </div>
         <div class="line">
             <div class="lable">三联单编号：</div>
@@ -190,6 +194,7 @@
               <div class="lable">处理状态：</div>
               <div class="input-div"><input placeholder="请输入处理状态" name="storageApp.state"/></div>
           </div>--%>
+        <span id="div_alert"></span><br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>

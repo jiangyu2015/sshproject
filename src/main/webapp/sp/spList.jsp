@@ -74,13 +74,81 @@
 
         function check(form) {
             var val = $("#state").val();
+            var goodsName = $('#goodsName').val();
+            var price = $('#price').val();
+            var unit = $('#unit').val();
+            var creationDate = $('#creationDate').val();
+            var baozhiqi = $('#baozhiqi').val();
+            var expirationDate = $('#expirationDate').val();
+            var val = $("#state").val();
             if (val == "yesok" || val == "yesno") {
                 alert("该商品已审核不能修改");
                 return false;
             }
             else {
-                return true;
+                if (goodsName == "") {
+                    $("#div_goodsName").html("请输入商品名称!");
+                    $('#dialog_edit').show();
+                    return false;
+                }
+                if (price == "") {
+                    $("#div_price").html("请输入商品单价!");
+                    $('#dialog_edit').show();
+                    return false;
+                }
+                if (unit == "") {
+                    $("#div_unit").html("请输入商品单位!");
+                    $('#dialog_edit').show();
+                    return false;
+                }
+                if ((creationDate == "" && baozhiqi == "") || (creationDate == "" && expirationDate == "") || (baozhiqi == "" && expirationDate == "")) {
+                    $("#div_alert").html("请输入至少两个（生产日期、保质期、保质期截止日期）");
+                    $('#dialog_edit').show();
+                    return false;
+                }
+                if (baozhiqi < 0) {
+                    $("#div_alert").html("生产日期必须小于保质期截止日期!");
+                    $('#dialog_edit').show();
+                    return false;
+                }
             }
+        }
+
+        function calculate() {
+            var creationDate = $('#creationDate').val();
+            var baozhiqi = $('#baozhiqi').val();
+            var expirationDate = $('#expirationDate').val();
+
+            if (creationDate != "" && expirationDate != "") {
+                $("#baozhiqi").val(GetDateDiff(creationDate, expirationDate));
+            } else if (creationDate != "" && baozhiqi != "") {
+                $("#expirationDate").val(addOrReduceDate(creationDate, baozhiqi));
+            } else if (expirationDate != "" && baozhiqi != "") {
+                $("#creationDate").val(addOrReduceDate(expirationDate, -baozhiqi));
+            }
+        }
+
+        //日期加减天数
+        function addOrReduceDate(initDate, days) {
+            var date = new Date(initDate);
+            date.setDate(date.getDate() + parseInt(days));
+
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+
+            month = month < 10 ? ("0" + month) : month;
+            day = day < 10 ? ("0" + day) : day;
+
+            return year + "-" + month + "-" + day;
+        }
+
+        //两个时间算间隔天数
+        function GetDateDiff(startDate, endDate) {
+            var startTime = new Date(Date.parse(startDate.replace(/-/g, "/"))).getTime();
+            var endTime = new Date(Date.parse(endDate.replace(/-/g, "/"))).getTime();
+            var dates = (endTime - startTime) / (1000 * 60 * 60 * 24);
+            return dates;
         }
     </script>
 </head>
@@ -163,7 +231,9 @@
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input placeholder="请输入商品名称" name="goods.goodsName"/></div>
+                        <div class="input-div"><input id="goodsName" placeholder="请输入商品名称" name="goods.goodsName"/>
+                        </div>
+                        <span id="div_goodsName"></span>
                     </div>
                     <div class="line">
                         <div class="lable">商品后台名称：</div>
@@ -175,7 +245,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">单价：</div>
-                        <div class="input-div"><input placeholder="请输入单价" name="goods.price"/></div>
+                        <div class="input-div"><input id="price" placeholder="请输入单价" name="goods.price"/></div>
+                        <span id="div_price"></span>
                     </div>
                     <div class="line">
                         <div class="lable">长cm：</div>
@@ -207,7 +278,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">单位：</div>
-                        <div class="input-div"><input placeholder="请输入单位" name="goods.unit"/></div>
+                        <div class="input-div"><input id="unit" placeholder="请输入单位" name="goods.unit"/></div>
+                        <span id="div_unit"></span>
                     </div>
                     <div class="line">
                         <div class="input-div">
@@ -224,16 +296,18 @@
                     </div>
                     <div class="line">
                         <div class="lable">生产日期：</div>
-                        <div class="input-div"><input placeholder="请输入生产日期" name="goods.creationDate" type="date"/>
+                        <div class="input-div"><input id="creationDate" placeholder="请输入生产日期" name="goods.creationDate"
+                                                      type="date"/>
                         </div>
                     </div>
                     <div class="line">
                         <div class="lable">保质期：</div>
-                        <div class="input-div"><input placeholder="请输入保质期" name="goods.baozhiqi"/></div>
+                        <div class="input-div"><input id="baozhiqi" placeholder="请输入保质期" name="goods.baozhiqi"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">保质期截止日期：</div>
-                        <div class="input-div"><input placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date"/>
+                        <div class="input-div"><input id="expirationDate" placeholder="请输入保质期截止日期"
+                                                      name="goods.expirationDate" type="date"/>
                         </div>
                     </div>
                     <div class="line">
@@ -263,6 +337,7 @@
                         <div class="input-div"><input name="goods.checkuser" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
+                    <span id="div_alert"></span><br>
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>

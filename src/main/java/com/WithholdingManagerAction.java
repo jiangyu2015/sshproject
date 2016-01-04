@@ -202,7 +202,6 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     }
 
     public String searchWithholdingList() {      //增加这个方法需要注入 biz别忘了
-
         session.put("deliverytlist", null);
         session.put("withholdinglist", null);
         session.put("sumwithholdingdeliver", null);

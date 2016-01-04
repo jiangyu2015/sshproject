@@ -43,6 +43,7 @@
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             if (selectId == undefined) {
                 alert("该商户已审核或不存在");
+                document.getElementById("div_item").innerHTML = "该商户已审核或不存在!";
                 return false;
             }
             else  return true;
@@ -61,6 +62,7 @@
                 <datalist id="select"></datalist>
             </div>
         </div>
+        <span id="div_item"></span><br>
         <input type="submit" value="查找" class="btn-submit"/>
     </form>
 </div>

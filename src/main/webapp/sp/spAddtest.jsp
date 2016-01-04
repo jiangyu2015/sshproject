@@ -18,7 +18,7 @@
             
             $(".input-div span").html("");
             $("#div_alert").html("");
-            if (goodsName == "") {
+            if (goodsName == null||goodsName.length == 0 || goodsName.replace(/(^s*)|(s*$)/g, "").length ==0|| !isNull(goodsName)) {
             	$("#div_goodsName").html("请输入商品名称!");
                 return false;
             }
@@ -39,6 +39,12 @@
             	return false;
             }
             
+        }
+        function isNull( str ){
+            if ( str == "" ) return true;
+            var regu = "^[ ]+$";
+            var re = new RegExp(regu);
+            return re.test(str);
         }
 
         function calculate() {
@@ -186,7 +192,6 @@
             	<input id="expirationDate" placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date" onblur="calculate()"/>
             </div>
         </div>
-        
 		<span id="div_alert"></span><br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>

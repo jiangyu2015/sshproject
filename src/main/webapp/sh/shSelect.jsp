@@ -43,6 +43,7 @@
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             if (selectId == undefined) {
                 alert("该商户不存在，请确认或重建");
+                document.getElementById("div_item").innerHTML = "该商户不存在，请确认或重建!";
                 return false;
             }
             else {
@@ -63,6 +64,7 @@
                 <datalist id="select"></datalist>
             </div>
         </div>
+        <span id="div_item"></span><br>
         <input type="submit" value="查找" class="btn-submit"/>
     </form>
 </div>
