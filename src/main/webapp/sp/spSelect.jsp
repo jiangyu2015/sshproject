@@ -69,7 +69,7 @@
                 <datalist id="select"></datalist>
             </div>
         </div>
-        </br><span id="div_item"></span>
+        <span id="div_item"></span><br>
         <input type="submit" value="查找" class="btn-submit"/>
     </form>
 </div>
