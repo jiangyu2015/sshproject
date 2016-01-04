@@ -40,36 +40,6 @@
             }
             
         }
-        function addExpirationDate(str) {  //截止日期跳出鼠标后算其他两个
-            var creationDate = $('#creationDate').val();
-            alert("creationDate" + creationDate);
-            var baozhiqi = $('#baozhiqi').val();
-            var expirationDate = $('#expirationDate').val();
-
-            var newDate, sDate, eDate, iDays
-            //js月份默认是从0开始的所以月份要-1
-            var a = creationDate.split("-")
-            sDate = new Date(a[2], a[1] - 1, a[0])
-
-            var b = expirationDate.split("-")
-            eDate = new Date(b[2], b[1] - 1, b[0])
-            //(1000 * 60 * 60 * 24) 得到分钟除60000就好了
-            c = (eDate - sDate);
-            alert(c);
-            iDays = Math.floor((eDate - sDate) / 86400000)
-            alert("shishi" + iDays);
-
-
-            /*    if (baozhiqi == "" && creationDate != null && str != null) {
-             baozhiqi = ( str.getTime() - creationDate.getTime()) / (1000 * 60 * 60 * 24);
-             $('#baozhiqi').val(baozhiqi);
-             alert(baozhiqi);
-             }*/
-            /* if (baozhiqi != null && creationDate == "" && str != null) {
-             creationDate=sdf.format(datetime+baozhiqi*24*60*60*1000);
-             $('#creationDate').val(creationDate);
-             }*/
-        }
 
         function calculate() {
             var creationDate = $('#creationDate').val();
@@ -212,10 +182,6 @@
 
         <div class="line">
             <div class="lable"><span>* </span>保质期截止日期：</div>
-            <!-- <div class="input-div">
-            	<input id="expirationDate" placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date" onblur="addExpirationDate(this.value)"/>
-            </div> -->
-
             <div class="input-div">
             	<input id="expirationDate" placeholder="请输入保质期截止日期" name="goods.expirationDate" type="date" onblur="calculate()"/>
             </div>
