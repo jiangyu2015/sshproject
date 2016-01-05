@@ -69,8 +69,6 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         List list = goodsBiz.getGoodsList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
-            Goods goods = (Goods) list.get(0);
-            //  session.put("goodslist", list);
             session.put("goodslist", list);
             return "success";
         } else
@@ -84,8 +82,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setGoodsName(goods.getGoodsName());
         List list = goodsBiz.isGoods(goods);
         if (list.size() > 0) {
-          /*  session.put("nowords", "已有该商品，无法添加!");*/
-            request.put("nowords", "已有该商品，无法添加!");
+            session.put("nowords", "已有该商品，无法添加!");
             return "input";
         } else
 

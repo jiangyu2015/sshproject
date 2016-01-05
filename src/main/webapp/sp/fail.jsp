@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-   操作失败！<%--<%=session.getAttribute("nowords")%>--%>  <%--${requestScope.nowords}--%> <%=request.getAttribute("nowords")%>
+   操作失败！<%=session.getAttribute("nowords")%>
 </body>
 </html>
