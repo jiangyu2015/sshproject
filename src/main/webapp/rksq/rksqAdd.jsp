@@ -90,9 +90,12 @@
         function check(form) {
             var val = $("#item").val();
             var val2 = $("#item2").val();
-            //   var selectId = $("[value='" + val + "']").eq(0).attr('id');
+            var val3 = $("#item3").val();
+
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('value');
+            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('value');
+            var expectedNumber = $('#expectedNumber').val();
 
             var expectedDate = $("#expectedDate").val();  //期望入库时间  比较时间
             var arrs = expectedDate.split("-");
@@ -102,9 +105,37 @@
             var arr = getToDay().split("-");
             var today = new Date(arr[0], arr[1], arr[2]);  //今天
             var todays = today.getTime();
-            if (selectId == undefined || selectId2 == undefined) {
-                alert("商品或商户未录入或未被审核通过，请与管理员联系");
-                $("#div_alert").html("商品或商户未录入或未被审核通过，请与管理员联系");
+
+            $(".input-div span").html("");  //清空
+
+            if (selectId2 == undefined) {
+                alert("商户未录入或未被审核通过，请与管理员联系");
+                $("#div_item2").html("商户未录入或未被审核通过，请与管理员联系");
+                return false;
+            }
+            else if (selectId == undefined || val.indexOf("|") == -1) {
+                alert("商品未录入或未被审核通过，请与管理员联系，并且请选择带|商品id的选项");
+                $("#div_item").html("商品未录入或未被审核通过，请与管理员联系，并且请选择带|商品id的选项，请先确认商品id");
+                return false;
+            }
+            else if (selectId3 == undefined) {
+                alert("仓库未录入");
+                $("#div_item3").html("仓库未录入");
+                return false;
+            }
+            else if (expectedDate == null || expectedDate.length == 0) {
+                alert("预期入库时间不能为空");
+                $("#div_expectedDate").html("预期入库时间不能为空");
+                return false;
+            }
+            else if (expectedNumber == null || expectedNumber.length == 0 || isNull(expectedNumber)) {
+                alert("预期入库数量不能为空");
+                $("#div_expectedNumber").html("预期入库数量不能为空");
+                return false;
+            }
+            else if (expectedNumber <= 0) {
+                alert("预期入库数量需大于0");
+                $("#div_expectedNumber").html("预期入库数量需大于0");
                 return false;
             }
             else if (storagedays < todays) {
@@ -112,7 +143,13 @@
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
             }
-            else  return true;
+        }
+
+        function isNull(str) {
+            if (str == "") return true;
+            var regu = "^[ ]+$";
+            var re = new RegExp(regu);
+            return re.test(str);
         }
 
         var newdate = null;
@@ -140,45 +177,49 @@
 <div class="content">
     <form method="post" action="rksqAdd" onsubmit="return check(this)">
         <div class="line">
-            <div class="lable">商户名称：</div>
+            <div class="lable"><span>* </span>商户名称：</div>
             <div class="input-div"><input id="item2" list="select2" placeholder="请输入商户名称"
-                                          name="storageApp.producerName"/>
-                <datalist id="select2"></datalist>
-                <span id="div_item2"></span>
-            </div>
+                                          name="storageApp.producerName"/> <span id="div_item2"></span></div>
+            <datalist id="select2"></datalist>
+
+        </div>
+
+        <div class="line">
+            <div class="lable"><span>* </span>商品名称：</div>
+            <div class="input-div"><input id="item" list="select" placeholder="请输入商品名称"
+                                          name="storageApp.goodsName"/> <span
+                    id="div_item"></span></div>
+            <datalist id="select"></datalist>
+
+
         </div>
         <div class="line">
-            <div class="lable">商品名称：</div>
-            <div class="input-div"><input id="item" list="select" placeholder="请输入商品名称" name="storageApp.goodsName"/>
-                <datalist id="select"></datalist>
-            </div>
-        </div>
-        <div class="line">
-            <div class="lable">入库地点：</div>
+            <div class="lable"><span>* </span>入库地点：</div>
             <div class="input-div"><input id="item3" list="select3" placeholder="请输入入库地点"
-                                          name="storageApp.storagePlace"/>
-                <datalist id="select3"></datalist>
-            </div>
+                                          name="storageApp.storagePlace"/><span id="div_item3"></span></div>
+            <datalist id="select3"></datalist>
+
         </div>
         <div class="line">
             <div class="lable">商品评级：</div>
             <div class="input-div"><input placeholder="请输入商品评级" name="storageApp.commodityRating"/></div>
         </div>
         <div class="line">
-            <div class="lable">预期入库时间：</div>
+            <div class="lable"><span>* </span>预期入库时间：</div>
             <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间" name="storageApp.expectedDate"
                                           type="date"/> <span id="div_expectedDate"></span></div>
         </div>
         <div class="line">
-            <div class="lable">预期入库数量：</div>
-            <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/></div>
+            <div class="lable"><span>* </span>预期入库数量：</div>
+            <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/><span
+                    id="div_expectedNumber"></span></div>
         </div>
         <div class="line">
             <div class="lable">三联单编号：</div>
             <div class="input-div"><input placeholder="请输入三联单编号" name="storageApp.sldId"/></div>
         </div>
         <div class="line">
-            <div class="lable">入库类型：</div>
+            <div class="lable"><span>* </span>入库类型：</div>
 
             <div class="input-div">
                 <select name="storageApp.storageType">
@@ -190,11 +231,8 @@
                 </select>
             </div>
         </div>
-        <%--  <div class="line">
-              <div class="lable">处理状态：</div>
-              <div class="input-div"><input placeholder="请输入处理状态" name="storageApp.state"/></div>
-          </div>--%>
-        <span id="div_alert"></span><br>
+
+
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>

@@ -160,14 +160,10 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     }
 
     public String searchStorageAppList() {  //改了
-        System.out.println(producerName);
         StorageApp condition = new StorageApp();
         condition.setProducerName(producerName);
-        // condition.setGoodsName(goodsName);
         List list = storageAppBiz.getStorageAppList(condition);
-        System.out.println(list.size());
         if (list.size() > 0) {
-
             session.put("storageapplist", list);
             return "success";
         } else
@@ -176,29 +172,13 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
 
     public String addStorageApp() throws Exception {                  //增加入库申请
-        System.out.println("addStorageApp");
         StorageApp condition = new StorageApp();
-        System.out.println(storageApp.getProducerName() + "入库申请我传过来了");
         if (storageApp.getProducerName() != null && !storageApp.getProducerName().equals(""))
             condition.setProducerName(storageApp.getProducerName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商户名称!");
-            return "input";
-        }
         if (storageApp.getGoodsName() != null && !storageApp.getGoodsName().equals(""))
             condition.setGoodsName(storageApp.getGoodsName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商品名称!");
-            return "input";
-        }
         if (storageApp.getStoragePlace() != null && !storageApp.getStoragePlace().equals(""))
             condition.setStoragePlace(storageApp.getStoragePlace());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入仓库名称!");
-            return "input";
-        }
-        System.out.println("ok");
-
         if (storageApp.getProducerName() != null)        //商户名称   //有名称有id，要改,哎 多此一举，还有前台读出来也要改了
             condition.setProducerName(storageApp.getProducerName());
         if (storageApp.getGoodsName() != null) {          //商品名称
@@ -210,7 +190,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         }
         if (storageApp.getStoragePlace() != null) {                     //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
-            System.out.print("传入仓库地址" + storageApp.getStoragePlace());
         }
         if (storageApp.getCommodityRating() != null)               //商品评级
             condition.setCommodityRating(storageApp.getCommodityRating());
