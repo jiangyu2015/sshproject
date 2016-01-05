@@ -72,15 +72,46 @@
             });
         });
 
-        function check(form) {
+        function check( ) {
+            var producerName = $('#producerName').val().replace(/\s/g, "");
+            $('#producerName').val(producerName);
+            var producerAddress = $('#producerAddress').val();
+            var linkman = $('#linkman').val();
+            $(".input-div span").html("");
+            $("#div_alert").html("");
+
             var val = $("#state").val();
             if (val == "yesok" || val == "yesno") {
                 alert("该商品已审核不能修改");
                 return false;
             }
-            else {
-                return true;
+            else
+            {
+                if (producerName == null || producerName.length == 0 || isNull(producerName)) {
+                    $("#div_producerName").html("请输入商户名称!");
+                    return false;
+                }
+                if (producerAddress ==null || producerAddress.length == 0 || isNull(producerAddress)) {
+                    $("#div_producerAddress").html("请输入商户地址!");
+                    return false;
+                }
+                if (linkman ==null || linkman.length == 0 || isNull(linkman)) {
+                    $("#div_linkman").html("请输入联系人!");
+                    return false;
+                }
+                if ($('#telOne').val() == "" && $('#telTwo').val() == "") {
+                    $("#div_alert").html("请输入至少一个联系电话!");
+                    return false;
+                }
             }
+            $('#dialog_edit').hide();
+            return true;
+        }
+        function isNull(str) {
+            if (str == "") return true;
+            var regu = "^[ ]+$";
+            var re = new RegExp(regu);
+            return re.test(str);
         }
     </script>
 </head>
@@ -135,7 +166,7 @@
         <div class="title">修改商户</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editSh" onsubmit="return check(this)">
+                <form method="post" action="editSh"  >
                     <div class="line">
                         <div class="lable">商户id：</div>
                         <div class="input-div"><input name="producer.producerId" readonly="readonly"
@@ -143,29 +174,34 @@
 
                     </div>
                     <div class="line">
-                        <div class="lable">商户名称：</div>
-                        <div class="input-div"><input placeholder="请输入商户名称" name="producer.producerName"/></div>
+                        <div class="lable"><span>* </span>商户名称：</div>
+                        <div class="input-div"><input id="producerName" name="producer.producerName"/> <span
+                                id="div_producerName"></span></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">商户地址：</div>
-                        <div class="input-div"><input placeholder="请输入商户地址" name="producer.producerAddress"/></div>
+                        <div class="lable"><span>* </span>商户地址：</div>
+                        <div class="input-div"><input id="producerAddress" name="producer.producerAddress"/> <span
+                                id="div_producerAddress"></span></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">联系人：</div>
-                        <div class="input-div"><input placeholder="请输入联系人" name="producer.linkman"/></div>
+                        <div class="lable"><span>* </span>联系人：</div>
+                        <div class="input-div"><input id="linkman" name="producer.linkman"/><span
+                                id="div_linkman"></span></div>
+
                     </div>
 
                     <div class="line">
                         <div class="lable">联系电话1：</div>
-                        <div class="input-div"><input placeholder="请输入联系电话" name="producer.telOne"/></div>
+                        <div class="input-div"><input id="telOne" placeholder="请输入联系电话" name="producer.telOne"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">联系电话2：</div>
-                        <div class="input-div"><input placeholder="请输入备用联系电话" name="producer.telTwo"/></div>
+                        <div class="input-div"><input id="telTwo" placeholder="请输入备用联系电话" name="producer.telTwo"/></div>
                     </div>
+
                     <div class="line">
                         <div class="lable">商户可用状态：</div>
                         <div class="input-div"><input id="state" name="producer.state" readonly="readonly"
@@ -193,7 +229,8 @@
                         <div class="input-div"><input name="producer.checkuser" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-                    <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
+                    <span id="div_alert"></span></br>
+                    <input type="submit" value="确定" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>
             </div>

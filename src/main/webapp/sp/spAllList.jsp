@@ -95,7 +95,7 @@
                     $("#div_price").html("请输入商品单价!");
                     return false;
                 }
-                if (unit == "") {
+                if (unit == null || unit.length == 0 || isNull(unit)) {
                     $("#div_unit").html("请输入商品单位!");
                     return false;
                 }
@@ -108,7 +108,6 @@
                     return false;
                 }
             }
-
             $('#dialog_edit').hide();
             return true;
         }

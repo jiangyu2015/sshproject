@@ -13,18 +13,17 @@
             $('#producerName').val(producerName);
             var producerAddress = $('#producerAddress').val();
             var linkman = $('#linkman').val();
-
             $(".input-div span").html("");
             $("#div_alert").html("");
-            if (producerName == "" || producerName.length == 0 || isNull(producerName)) {
+            if (producerName == null || producerName.length == 0 || isNull(producerName)) {
                 $("#div_producerName").html("请输入商户名称!");
                 return false;
             }
-            if (producerAddress == "") {
+            if (producerAddress ==null || producerAddress.length == 0 || isNull(producerAddress)) {
                 $("#div_producerAddress").html("请输入商户地址!");
                 return false;
             }
-            if (linkman == "") {
+            if (linkman ==null || linkman.length == 0 || isNull(linkman)) {
                 $("#div_linkman").html("请输入联系人!");
                 return false;
             }
