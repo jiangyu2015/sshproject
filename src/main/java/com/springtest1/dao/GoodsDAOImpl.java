@@ -7,8 +7,12 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -93,6 +97,26 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
     public List<Goods> getGoodsCheck() {    //state=“yesok”
         String hql = "from Goods g where g.state='yesok'";
         System.out.println("GOODSDAOIMPL" + hql);
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+        List<Goods> goodslist = query.list();
+        if (goodslist.size() <= 0) return new ArrayList<Goods>();
+        else {
+            Goods g = (Goods) query.list().get(0);
+            System.out.println(g.getGoodsName());
+            return goodslist;
+        }
+    }
+
+    public List<Goods> isGoods(final Goods condition) {
+        Date date=condition.getCreationDate();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String creationDate=df.format(date);
+
+        String hql = "from Goods g where g.goodsName='"+condition.getGoodsName()+"' and g.price='"+condition.getPrice()
+                +"' and g.unit='"+condition.getUnit()+"'and g.service='"+condition.getService()+"' and g.creationDate='"+creationDate
+                +"' and g.baozhiqi='"+condition.getBaozhiqi()+"'";
+
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         List<Goods> goodslist = query.list();

@@ -61,7 +61,6 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
 
     public String listProducer() {
         List producer = producerBiz.getAllProducer();
-        Producer producer1 = (Producer) producer.get(0);
         session.put("producerlistall", producer);
         return "producer";
     }
@@ -102,18 +101,11 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         Producer condition = new Producer();
         if (producer.getProducerName() != null && !producer.getProducerName().equals(""))
             condition.setProducerName(producer.getProducerName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商户名称!");
-            return "input";
-        }
         List list = producerBiz.getProducerList(condition);
         if (list.size() > 0) {
-            System.out.println("yes");
-            ActionContext.getContext().put("noWords", "已有该商户，无法添加!");
+            session.put("nowords", "已有该商户，无法添加!");
             return "input";
         } else {
-            System.out.println("ok");
-            System.out.println(producer.getProducerName());
             if (producer.getProducerName() != null)        //商户名称
                 condition.setProducerName(producer.getProducerName());
             if (producer.getProducerAddress() != null)                      //商户地址
@@ -129,6 +121,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
             }
             condition.setState("no");
             producerBiz.add(condition);
+            session.put("producerlist",condition);
             return "success";
         }
     }
@@ -149,7 +142,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
     public String editProducer() {
         Producer p=new Producer();
         p.setProducerId(producer.getProducerId());
-        Producer condition = (Producer) producerBiz.getProducerList(p).get(0);
+        Producer condition = producerBiz.getProducerList(p).get(0);
         if (producer.getProducerId() != null && !producer.getProducerId().equals("")) {
             condition.setProducerId(producer.getProducerId());
             System.out.println(producer.getProducerId());

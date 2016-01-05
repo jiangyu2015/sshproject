@@ -1,0 +1,177 @@
+[{
+	"text": "库存",
+	"children": [{
+		"text": "库存基础信息",
+		"state": "closed",
+		"children": [{
+			"text": "商品信息",
+			"state": "closed",
+			"children": [{
+				"id": "sp/spAddtest.jsp",
+				"text": "增加"
+			},{
+				"id": "sp/spSelect.jsp",
+				"text": "查询"
+			},{
+				"id": "listGoods.action",
+				"text": "所有商品信息"
+			},{
+				"text": "过期提醒"
+			}]
+		},{
+			"text": "商户信息",
+			"state": "closed",
+			"children": [{
+				"id": "sh/shAdd.jsp",
+				"text": "增加"
+			},{
+				"id": "sh/shSelect.jsp",
+				"text": "查询"
+			},{
+				"id": "listSh.action",
+				"text": "所有商品信息"
+			}]
+		},{
+			"text": "仓库信息",
+			"state": "closed",
+			"children": [{
+				"id": "listPlace.action",
+				"text": "所有仓库信息"
+			}]
+		}]
+	},{
+		"text": "业务",
+		"state": "closed",
+		"children": [{
+			"text": "商品审核",
+			"state": "closed",
+			"children": [{
+				"id": "spCheck.action",
+				"text": "商品审核"
+			},{
+				"id": "sp/spCheckSelect.jsp",
+				"text": "查询未审核商品"
+			}]
+		},{
+			"text": "商户审核",
+			"state": "closed",
+			"children": [{
+				"id": "shCheck.action",
+				"text": "商户审核"
+			},{
+				"id": "sh/shCheckSelect.jsp",
+				"text": "查询未审核商户"
+			}]
+		},{
+			"text": "入库申请",
+			"state": "closed",
+			"children": [{
+				"id": "rksq/rksqAdd.jsp",
+				"text": "增加"
+			},{
+				"id": "listrksq.action",
+				"text": "查询所有入库申请信息"
+			}]
+		},{
+			"text": "调拨申请",
+			"state": "closed",
+			"children": [{
+				"id": "dbsq/dbsqSelect.jsp",
+				"text": "增加先查询要调拨的商品"
+			},{
+				"id": "listdbsq.action",
+				"text": "查询所有调拨申请信息"
+			}]
+		},{
+			"text": "转库申请",
+			"state": "closed",
+			"children": [{
+				"id": "zksq/zksqSelect.jsp",
+				"text": "增加先查询要转库的商品"
+			},{
+				"id": "listzksq.action",
+				"text": "查询所有转库申请信息"
+			}]
+		},{
+			"text": "入库申请单审核",
+			"state": "closed",
+			"children": [{
+				"id": "rksqcheck.action",
+				"text": "入库申请单审核"
+			},{
+				"text": "查询（还没加）"
+			}]
+		},{
+			"text": "调拨申请单审核",
+			"state": "closed",
+			"children": [{
+				"id": "dbsqcheck.action",
+				"text": "调拨申请单审核"
+			},{
+				"text": "查询（还没加）"
+			}]
+		},{
+			"text": "转库申请单审核",
+			"state": "closed",
+			"children": [{
+				"id": "zksqcheck.action",
+				"text": "转库申请单审核"
+			},{
+				"text": "查询（还没加）"
+			}]
+		},{
+			"text": "确认收货",
+			"state": "closed",
+			"children": [{
+				"id": "rkcheck.action",
+				"text": "确认收货"
+			},{
+				"id": "listrk.action",
+				"text": "查询入库明细"
+			},{
+				"id": "listokrk.action",
+				"text": "查询已入库商品明细"
+			}]
+		},{
+			"text": "预提申请",
+			"state": "closed",
+			"children": [{
+				"id": "yt/ytsqSelect.jsp",
+				"text": "增加先查询商品库存流动情况"
+			},{
+				"id": "listyt.action",
+				"text": "所有预提申请信息"
+			},{
+				"text": "查询（还没加）"
+			}]
+		},{
+			"text": "确认出库",
+			"state": "closed",
+			"children": [{
+				"id": "ckcheck.action",
+				"text": "确认调拨申请的出库请走这"
+			},{
+				"id": "ck/ytSelect.jsp",
+				"text": "预提出库消耗请走这查询"
+			},{
+				"id": "listck.action",
+				"text": "查询出库明细"
+			},{
+				"id": "listokck.action",
+				"text": "查询已出库商品明细"
+			}]
+		}]
+	},{
+		"text": "库存查询",
+		"children": [{
+			"text": "库存流动情况查询",
+			"children": [{
+				"id": "searchkcld.action",
+				"text": "查库存"
+			},{
+				"id": "searchall.action",
+				"text": "我是整个库存流动"
+			}]
+		}]
+	}]
+}]

@@ -8,11 +8,10 @@ import java.util.List;
 public interface GoodsBiz {
     public List <Goods>getGoodsList(Goods condition);
 
-    //public Serializable add(Goods condition);
     public void add(Goods condition);
 
       public boolean delGoods(Goods good);  //删除
-  //  public  Goods getGood(String name);
+
 
     public List getAllGoods();
 
@@ -21,4 +20,6 @@ public interface GoodsBiz {
     public List<Goods> getGoods(String name);
 
     public List<Goods> getGoodsCheck();
+
+    public List<Goods> isGoods(final Goods condition);
 }

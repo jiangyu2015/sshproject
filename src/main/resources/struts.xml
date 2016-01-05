@@ -18,15 +18,15 @@
             <result type="redirect" name="fail">/sp/fail.jsp</result>
         </action>
         <action name="addGoods" class="goodsAdd" method="addGoods">
-            <result type="redirect" name="success">/sp/test.jsp</result>
+            <result type="redirect" name="success">/sp/spList.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
         </action>
         <action name="listGoods" class="goodsList" method="listGoods">
             <result type="redirect" name="goods">/sp/spAllList.jsp</result>
         </action>
-        <action name="listGoodsTest" class="goodsListTest" method="listGoodsTest">
+      <!--  <action name="listGoodsTest" class="goodsListTest" method="listGoodsTest">
 
-        </action>
+        </action>-->
         <action name="spDel" class="goodsDel" method="delGoods">
             <result type="redirect" name="success">/sp/test.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
@@ -64,7 +64,7 @@
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
         <action name="shAdd" class="producerAdd" method="addProducer">
-            <result type="redirect" name="success">/sh/test.jsp</result>
+            <result type="redirect" name="success">/sh/shList.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
         <action name="shDel" class="producerDel" method="delProducer">

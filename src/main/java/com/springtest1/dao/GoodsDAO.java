@@ -23,5 +23,7 @@ public interface GoodsDAO {
 
     public List<Goods> getGoodsCheck();  //选出ok的商品
 
+    public List<Goods> isGoods(final Goods condition); //查是否已有
+
 
 }

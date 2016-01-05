@@ -50,4 +50,6 @@ public class GoodsBizImpl implements GoodsBiz {
     public List<Goods> getGoodsCheck(){
         return  goodsDAO.getGoodsCheck();
     }
+    @Transactional
+    public List<Goods> isGoods(final Goods condition){return  goodsDAO.isGoods(condition);}
 }

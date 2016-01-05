@@ -131,28 +131,29 @@
 
                     </div>
                     <div class="line">
-                        <div class="lable">商户名称：</div>
-                        <div class="input-div"><input placeholder="请输入商户名称" name="producer.producerName"/></div>
+                        <div class="lable"><span>* </span>商户名称：</div>
+                        <div class="input-div"><input id="producerName" name="producer.producerName"/>	<span id="div_producerName"></span></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">商户地址：</div>
-                        <div class="input-div"><input placeholder="请输入商户地址" name="producer.producerAddress"/></div>
+                        <div class="lable"><span>* </span>商户地址：</div>
+                        <div class="input-div"><input id="producerAddress"  name="producer.producerAddress"/>	<span id="div_producerAddress"></span></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">联系人：</div>
-                        <div class="input-div"><input placeholder="请输入联系人" name="producer.linkman"/></div>
+                        <div class="lable"><span>* </span>联系人：</div>
+                        <div class="input-div"><input id="linkman"  name="producer.linkman"/><span id="div_linkman"></span></div>
+
                     </div>
 
                     <div class="line">
                         <div class="lable">联系电话1：</div>
-                        <div class="input-div"><input placeholder="请输入联系电话" name="producer.telOne"/></div>
+                        <div class="input-div"><input id="telOne" placeholder="请输入联系电话" name="producer.telOne"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">联系电话2：</div>
-                        <div class="input-div"><input placeholder="请输入备用联系电话" name="producer.telTwo"/></div>
+                        <div class="input-div"><input id="telTwo"  placeholder="请输入备用联系电话" name="producer.telTwo"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">商户可用状态：</div>
@@ -182,7 +183,7 @@
                                                        style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
-
+                    <div class="tip-div"><span id="div_alert"></span></div>
                     <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>

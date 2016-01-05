@@ -48,7 +48,7 @@
             border: 1px solid #151515;
         }
 
-        .head-text {
+    /*    .head-text {
             padding-top: 30px;
             font-size: 26px;
         }
@@ -68,7 +68,7 @@
             margin: 10px;
             left: 22%;
             border: 1px solid #151515;
-        }
+        }*/
 
         .my-panel {
             padding: 5px;
@@ -89,7 +89,7 @@
                     <span>库存基础信息</span>
                     <ul>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="listGoods.action" target="t2">-->商品信息<!--</a>--></span>
+                            <span>商品信息</span>
                             <ul>
                                 <li id="sp/spAddtest.jsp"> 增加</li>
                                 <li id="sp/spSelect.jsp">查询</li>
@@ -98,31 +98,28 @@
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="listSh.action" target="t2">-->商户信息<!--</a>--></span>
+                            <span>商户信息</span>
                             <ul>
                                 <li id="sh/shAdd.jsp">增加</li>
-                                <li id="sh/shSelect.jsp">查询</li>  <!--查询之后要增加 修改 -->
+                                <li id="sh/shSelect.jsp">查询</li>
                                 <li id="listSh.action">所有商户信息</li>
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="listPlace.action" target="t2">-->仓库信息<!--</a>--></span>
+                            <span>仓库信息</span>
                             <ul>
                                 <li id="listPlace.action">所有仓库信息</li>
-                                <!--      <li>增加</li>
-                                      <li>删除</li>
-                                      <li>修改</li>
-                                      <li>查询</li>-->
+
                             </ul>
                         </li>
                     </ul>
                 </li>
-                <!-- <li>-->
+
                 <li data-options="state:'closed'">
                     <span>业务</span>
                     <ul>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="spCheck.action" target="t2">-->商品审核<!--</a>--></span>
+                            <span>商品审核</span>
                             <ul>
                                 <li id="spCheck.action">商品审核</li>
                                 <li id="sp/spCheckSelect.jsp">查询未审核商品</li>
@@ -130,7 +127,7 @@
                         </li>
 
                         <li data-options="state:'closed'">
-                            <span><!--<a href="shCheck.action" target="t2">-->商户审核<!--</a>--></span> <!--要check再列表里的-->
+                            <span>商户审核</span>
                             <ul>
                                 <li id="shCheck.action">商户审核</li>
                                 <li id="sh/shCheckSelect.jsp">查询未审核商户</li>
@@ -138,21 +135,21 @@
                         </li>
 
                         <li data-options="state:'closed'">
-                            <span><!--<a href="listrksq.action" target="t2">-->入库申请<!--</a>--></span>
+                            <span>入库申请</span>
                             <ul>
                                 <li id="rksq/rksqAdd.jsp">增加</li>
                                 <li id="listrksq.action">查询所有入库申请信息</li>
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="listdbsq.action" target="t2">-->调拨申请<!--</a>--></span>
+                            <span>调拨申请</span>
                             <ul>
                                 <li id="dbsq/dbsqSelect.jsp">增加先查询要调拨的商品</li>
                                 <li id="listdbsq.action">查询所有调拨申请信息</li>
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="listzksq.action" target="t2">-->转库申请<!--</a>--></span>
+                            <span>转库申请</span>
                             <ul>
                                 <li id="zksq/zksqSelect.jsp">增加先查询要转库的商品</li>
                                 <li id="listzksq.action">查询所有转库申请信息</li>
@@ -160,35 +157,29 @@
                         </li>
 
                         <li data-options="state:'closed'">
-                            <span><!--<a href="rksqcheck.action" target="t2">-->入库申请单审核<!--</a>--></span>
+                            <span>入库申请单审核</span>
                             <ul>
                                 <li id="rksqcheck.action">入库申请单审核</li>
                                 <li>查询（还没加）</li>
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="dbsqcheck.action" target="t2">-->调拨申请单审核<!--</a>--></span>
+                            <span>调拨申请单审核</span>
                             <ul>
                                 <li id="dbsqcheck.action">调拨申请单审核</li>
                                 <li>查询（还没加）</li>
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="zksqcheck.action" target="t2">-->转库申请单审核<!--</a>--></span>
+                            <span>转库申请单审核</span>
                             <ul>
                                 <li id="zksqcheck.action">转库申请单审核</li>
                                 <li>查询（还没加）</li>
                             </ul>
                         </li>
 
-                        <!-- <li>
-                             <span><a href="listrk.action" target="t2">入库明细</a></span>
-                             <ul>
-                                 <li>查询</li>   入库rk/Add rkAddTest没用了
-                             </ul>
-                         </li>-->
                         <li data-options="state:'closed'">
-                            <span><!--<a href="rkcheck.action" target="t2">-->确认收货<!--</a>--></span>
+                            <span>确认收货</span>
                             <ul>
                                 <li id="rkcheck.action">确认收货</li>
 
@@ -197,16 +188,15 @@
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="listyt.action" target="t2"> -->预提申请<!--</a>--></span>  <!--要加修改 弹药想想-->
+                            <span>预提申请</span>  <!--要加修改 弹药想想-->
                             <ul>
-                                <!--    <li id="yt/eventsAdd.jsp">预提申请原由事件填写</li>-->
                                 <li id="yt/ytsqSelect.jsp">增加先查询商品库存流动情况</li>
                                 <li id="listyt.action">所有预提申请信息</li>
                                 <li>查询（还没加）</li>
                             </ul>
                         </li>
                         <li data-options="state:'closed'">
-                            <span><!--<a href="ckcheck.action" target="t2">-->确认出库<!--</a>--></span>
+                            <span>确认出库</span>
                             <ul>
                                 <li id="ckcheck.action">确认调拨申请的出库请走这</li>
                                 <li id="ck/ytSelect.jsp">预提出库消耗请走这查询</li>
@@ -215,15 +205,7 @@
                             </ul>
                         </li>
 
-                        <!-- <li data-options="state:'closed'">
-                             <span><a href="listck.action" target="t2">出库明细</a></span>
-                             <ul>
-                               &lt;!&ndash;  <li id="ck/ytSelect.jsp">查询你的预提单</li>&ndash;&gt; &lt;!&ndash;要改更多条件的&ndash;&gt;
-                                 &lt;!&ndash;  <li id="ck/ckAdd.jsp">增加</li>&ndash;&gt;
-                                 &lt;!&ndash; <li>修改</li>&ndash;&gt;
 
-                             </ul>
-                         </li>-->
                     </ul>
                 </li>
                 <li>

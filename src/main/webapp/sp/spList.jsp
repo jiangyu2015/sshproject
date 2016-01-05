@@ -74,44 +74,51 @@
 
         function check(form) {
             var val = $("#state").val();
-            var goodsName = $('#goodsName').val();
+            var goodsName = $('#goodsName').val().replace(/\s/g, "");
+            $('#goodsName').val(goodsName);
             var price = $('#price').val();
             var unit = $('#unit').val();
             var creationDate = $('#creationDate').val();
             var baozhiqi = $('#baozhiqi').val();
             var expirationDate = $('#expirationDate').val();
             var val = $("#state").val();
+            $(".input-div span").html("");
+            $("#div_alert").html("");
             if (val == "yesok" || val == "yesno") {
                 alert("该商品已审核不能修改");
                 return false;
             }
             else {
-                if (goodsName == "") {
+                if (goodsName == null || goodsName.length == 0 || isNull(goodsName)) {
                     $("#div_goodsName").html("请输入商品名称!");
-                    $('#dialog_edit').show();
                     return false;
                 }
                 if (price == "") {
                     $("#div_price").html("请输入商品单价!");
-                    $('#dialog_edit').show();
                     return false;
                 }
                 if (unit == "") {
                     $("#div_unit").html("请输入商品单位!");
-                    $('#dialog_edit').show();
                     return false;
                 }
                 if ((creationDate == "" && baozhiqi == "") || (creationDate == "" && expirationDate == "") || (baozhiqi == "" && expirationDate == "")) {
                     $("#div_alert").html("请输入至少两个（生产日期、保质期、保质期截止日期）");
-                    $('#dialog_edit').show();
                     return false;
                 }
                 if (baozhiqi < 0) {
                     $("#div_alert").html("生产日期必须小于保质期截止日期!");
-                    $('#dialog_edit').show();
                     return false;
                 }
             }
+
+            $('#dialog_edit').hide();
+            return true;
+        }
+        function isNull(str) {
+            if (str == "") return true;
+            var regu = "^[ ]+$";
+            var re = new RegExp(regu);
+            return re.test(str);
         }
 
         function calculate() {
@@ -223,7 +230,7 @@
         <div class="title">修改商品</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="spEdit" onsubmit="return check(this)">
+                <form method="post" action="spEdit">
                     <div class="line">
                         <div class="lable">商品id：</div>
                         <div class="input-div"><input name="goods.goodsId" readonly="readonly"
@@ -231,9 +238,11 @@
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input id="goodsName" placeholder="请输入商品名称" name="goods.goodsName"/>
+                        <div class="input-div">
+                            <input id="goodsName" placeholder="请输入商品名称" name="goods.goodsName"/>
+                            <span id="div_goodsName"></span>
                         </div>
-                        <span id="div_goodsName"></span>
+
                     </div>
                     <div class="line">
                         <div class="lable">商品后台名称：</div>
@@ -241,28 +250,34 @@
                     </div>
                     <div class="line">
                         <div class="lable">参考价值：</div>
-                        <div class="input-div"><input placeholder="请输入参考价值" name="goods.value"/></div>
+                        <div class="input-div"><input placeholder="请输入参考价值" name="goods.value"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                                                      onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">单价：</div>
-                        <div class="input-div"><input id="price" placeholder="请输入单价" name="goods.price"/></div>
-                        <span id="div_price"></span>
+                        <div class="input-div"><input id="price" placeholder="请输入单价" name="goods.price"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                                                      onblur="value=value.replace(/[^\d\.]/g,'')"/><span id="div_price"></span></div>
+
                     </div>
                     <div class="line">
                         <div class="lable">长cm：</div>
-                        <div class="input-div"><input placeholder="请输入长cm" name="goods.length"/></div>
+                        <div class="input-div"><input placeholder="请输入长cm" name="goods.length"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                                                      onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">宽cm：</div>
-                        <div class="input-div"><input placeholder="请输入宽cm" name="goods.wide"/></div>
+                        <div class="input-div"><input placeholder="请输入宽cm" name="goods.wide"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                                                      onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">高cm：</div>
-                        <div class="input-div"><input placeholder="请输入高cm" name="goods.tall"/></div>
+                        <div class="input-div"><input placeholder="请输入高cm" name="goods.tall"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                                                      onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">毛重kg：</div>
-                        <div class="input-div"><input placeholder="请输入毛重kg" name="goods.mweight"/></div>
+                        <div class="input-div"><input placeholder="请输入毛重kg" name="goods.mweight"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                                                      onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">体积m*m*m：</div>
@@ -270,7 +285,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">体积重量kg：</div>
-                        <div class="input-div"><input placeholder="请输入体积重量kg" name="goods.vweight"/></div>
+                        <div class="input-div"><input placeholder="请输入体积重量kg" name="goods.vweight"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                                                      onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">装箱规格：</div>
@@ -278,8 +294,7 @@
                     </div>
                     <div class="line">
                         <div class="lable">单位：</div>
-                        <div class="input-div"><input id="unit" placeholder="请输入单位" name="goods.unit"/></div>
-                        <span id="div_unit"></span>
+                        <div class="input-div"><input id="unit" placeholder="请输入单位" name="goods.unit"/><span id="div_unit"></span></div>
                     </div>
                     <div class="line">
                         <div class="input-div">
@@ -297,17 +312,17 @@
                     <div class="line">
                         <div class="lable">生产日期：</div>
                         <div class="input-div"><input id="creationDate" placeholder="请输入生产日期" name="goods.creationDate"
-                                                      type="date"/>
+                                                      type="date" onblur="calculate()" />
                         </div>
                     </div>
                     <div class="line">
                         <div class="lable">保质期：</div>
-                        <div class="input-div"><input id="baozhiqi" placeholder="请输入保质期" name="goods.baozhiqi"/></div>
+                        <div class="input-div"><input id="baozhiqi" placeholder="请输入保质期" name="goods.baozhiqi"  onblur="calculate()"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">保质期截止日期：</div>
                         <div class="input-div"><input id="expirationDate" placeholder="请输入保质期截止日期"
-                                                      name="goods.expirationDate" type="date"/>
+                                                      name="goods.expirationDate" type="date" onblur="calculate()"/>
                         </div>
                     </div>
                     <div class="line">
@@ -338,7 +353,7 @@
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <span id="div_alert"></span><br>
-                    <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
+                    <input type="submit" value="确定" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>
             </div>

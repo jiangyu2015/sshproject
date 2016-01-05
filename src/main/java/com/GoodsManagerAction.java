@@ -79,21 +79,17 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
 
     public String addGoods() throws Exception {                  //增加商品
         Goods condition = new Goods();
-        System.out.println(goods.getGoodsName() + "我传过来了");
+
         if (goods.getGoodsName() != null && !goods.getGoodsName().equals(""))
             condition.setGoodsName(goods.getGoodsName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商品名称!");
-            return "input";
-        }
-        List list = goodsBiz.getGoodsList(condition);
+        List list = goodsBiz.isGoods(goods);
         if (list.size() > 0) {
-            System.out.println("yes");
-            ActionContext.getContext().put("noWords", "已有该商品，无法添加!");
+          /*  session.put("nowords", "已有该商品，无法添加!");*/
+            request.put("nowords", "已有该商品，无法添加!");
             return "input";
-        } else {
-            System.out.println("ok");
-            System.out.println(goods.getGoodsBackName());
+        } else
+
+        {
             if (goods.getGoodsBackName() != null)        //后台名字
                 condition.setGoodsBackName(goods.getGoodsBackName());
             if (goods.getBaozhiqi() != null)                      //保质期
@@ -130,6 +126,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
                 condition.setAdduser(session.get("name").toString()); //得到增加人
             }
             condition.setState("no");
+            session.put("goodslist", condition);
             goodsBiz.add(condition);
             return "success";
         }
@@ -152,21 +149,15 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
 
     public String listGoods() {
         List goods = goodsBiz.getAllGoods();
-        Goods g = (Goods) goods.get(0);
-        System.out.print(g.getState() + "state");
         session.put("goodslistall", goods);
-        //     Goods g = new Goods();
-        //     g = (Goods) goods.get(0);
         return "goods";
     }
 
-    public String listGoodsTest() {
+ /*   public String listGoodsTest() {
         List goods = goodsBiz.getAllGoods();
         session.put("goodslistall", goods);
-        //     Goods g = new Goods();
-        //     g = (Goods) goods.get(0);
         return NONE;
-    }
+    }*/
 
     public String modifyShow() {   //有问题
         Goods condition = new Goods();
@@ -174,8 +165,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         List list = goodsBiz.getGoodsList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
-            Goods goods = new Goods();
-            goods = (Goods) list.get(0);
+            Goods goods = (Goods) list.get(0);
             session.put("goods", goods);
             return "success";
         } else return "input";
@@ -183,9 +173,6 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
 
     public String modify() {
         Goods condition = (Goods) session.get("goods");
-        System.out.println("session里面得来的" + condition.getGoodsName());
-        System.out.println("session里面得来的" + condition.getService());
-
         if (goods.getGoodsBackName() != null && !goods.getGoodsBackName().equals(""))        //后台名字
             condition.setGoodsBackName(goods.getGoodsBackName());
         if (goods.getBaozhiqi() != null && !goods.getBaozhiqi().equals(""))                      //保质期
@@ -234,7 +221,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
     }
 
     public String editGoods() {
-        Goods g=new Goods();
+        Goods g = new Goods();
         g.setGoodsId(goods.getGoodsId());
         Goods condition = (Goods) goodsBiz.getGoodsList(g).get(0);
         System.out.println("修改的商品id" + goods.getGoodsId());
