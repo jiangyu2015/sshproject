@@ -26,10 +26,12 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-                    $line.find('input').val($tds.eq(i).text());
-
+                    if(i == 8) {
+                        $('#typeIn option[value="'+$tds.eq(i).text()+'"]').prop('selected', true);
+                    }else {
+                        $line.find('input').val($tds.eq(i).text());
+                    }
                 }
-
                 $("#dialog_edit").show();
             }
         }
@@ -127,7 +129,7 @@
             <td><s:property value="#storageapp.storageType"/></td>
             <td><s:date format="yyyy-MM-dd" name="#storageapp.applicationDate"/></td>
             <td><s:property value="#storageapp.state"/></td>
-            <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#storageapp.auditTime"/></td>
+            <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#storageapp.auditTime"/></td>
             <td><s:property value="#storageapp.adduser"/></td>
             <td><s:property value="#storageapp.edituser"/></td>
             <td><s:property value="#storageapp.checkuser"/></td>
@@ -183,7 +185,15 @@
                     </div>
                     <div class="line">
                         <div class="lable">入库类型：</div>
-                        <div class="input-div"><input placeholder="请输入入库类型" name="storageApp.storageType"/></div>
+                        <div class="input-div">
+                            <select id="typeIn" name="storageApp.storageType">
+                                <option value="任意配置">任意配置</option>
+                                <option value="一元购">一元购</option>
+                                <option value="社区特卖">社区特卖</option>
+                                <option value="物业礼包">物业礼包</option>
+                                <option value="福利">福利</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="line">
                         <div class="lable">申请时间：</div>

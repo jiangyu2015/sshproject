@@ -72,10 +72,10 @@
                     var str = "";
                     var d = eval("(" + data + ")");
                     var witholdingNumber = $("#witholdingNumber").val();
-                    alert("预提数" + witholdingNumber);
+                /*    alert("预提数" + witholdingNumber);*/
                     var unit = $("#unit").val();
                     var goodsUnit = str + d.goodsUnit;  //商品入库单位
-                    alert("后台单位" + goodsUnit);
+                /*    alert("后台单位" + goodsUnit);*/
                     var availableInventory = d.availableInventory;
                     var deteline = $('#deteline').val();
                     var arr = deteline.split("-");                    //比较时间
@@ -84,17 +84,34 @@
                     var arrs = getToDay().split("-");
                     var today = new Date(arrs[0], arrs[1], arrs[2]);
                     var todays = today.getTime();
-
-                    if (witholdingNumber > availableInventory) {
+                    $(".input-div span").html("");
+                    $("#div_alert").html("");
+                    if(unit == null || unit.length == 0){
+                        $("#div_unit").html("请输入预提单位");
+                        result = false;
+                    }
+                    else if(witholdingNumber == null || witholdingNumber.length == 0){
+                        $("#div_witholdingNumber").html("请输入预提数");
+                        witholdingNumber=0;
+                        result = false;
+                    }
+                    else if(deteline == null || deteline.length == 0){
+                        $("#div_deteline").html("请输入截止日期");
+                        result = false;
+                    }
+                    else if (witholdingNumber > availableInventory) {
                         alert("预提不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
+                        $("#div_witholdingNumber").html("当前预提后可用库存为" + availableInventory + "或许有人比你提前预提了，请确认！");
                         result = false;
                     }
                     else if (goodsUnit != unit) {
                         alert("预提不成功，商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
+                        $("#div_unit").html("商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
                         result = false;
                     }
                     else if(overdays<todays){
-                        alert("活动截止时间不能小于今天")
+                        alert("活动截止时间不能小于今天");
+                        $("#div_deteline").html("活动截止时间不能小于今天");
                         result = false;
                     }
                     else {
@@ -177,17 +194,18 @@
             <div class="input-div"><input name="withholding.activityId" placeholder="如该活动有id请输入"/></div>
         </div>
         <div class="line">
-            <div class="lable">单位：</div>
-            <div class="input-div"><input id="unit" name="withholding.unit" placeholder="请确认预提商品单位，如不一致会失败"/></div>
+            <div class="lable"><span>* </span>单位：</div>
+            <div class="input-div"><input id="unit" name="withholding.unit" placeholder="请确认预提商品单位，如不一致会失败"/>
+                <span id="div_unit"></span></div>
         </div>
         <div class="line">
-            <div class="lable">预提数：</div>
+            <div class="lable"><span>* </span>预提数：</div>
             <div class="input-div"><input id="witholdingNumber" input name="withholding.witholdingNumber"
-                                          placeholder="请输入预提数"/></div>
+                                          placeholder="请输入预提数"/><span id="div_witholdingNumber"></span></div>
         </div>
         <div class="line">
-            <div class="lable">截止日期：</div>
-            <div class="input-div"><input id="deteline" name="withholding.deteline" placeholder="请输入截止日期" type="date"/>
+            <div class="lable"><span>* </span>截止日期：</div>
+            <div class="input-div"><input id="deteline" name="withholding.deteline" placeholder="请输入截止日期" type="date"/><span id="div_deteline"></span>
             </div>
         </div>
         <div class="line">
@@ -195,6 +213,7 @@
             <div class="input-div"><input id="type" name="withholding.useType" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
+        <span id="div_alert"></span><br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>

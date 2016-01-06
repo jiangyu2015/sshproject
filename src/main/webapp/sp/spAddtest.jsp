@@ -12,7 +12,8 @@
             var goodsName = $('#goodsName').val().replace(/\s/g, "");
             $('#goodsName').val(goodsName);
             var price = $('#price').val();
-            var unit = $('#unit').val();
+            var unit = $('#unit').val().replace(/\s/g, "");
+            $('#unit').val(unit);
             var creationDate = $('#creationDate').val();
             var baozhiqi = $('#baozhiqi').val();
             var expirationDate = $('#expirationDate').val();
@@ -168,7 +169,7 @@
         <div class="line">
             <div class="lable"><span>* </span>单位：</div>
             <div class="input-div">
-                <input id="unit" placeholder="请输入单位，需与入库单位一致" name="goods.unit"/>
+                <input id="unit" placeholder="请输入单位，需与入库单位一致（不要有空格）" name="goods.unit"/>
                 <span id="div_unit"></span>
             </div>
         </div>

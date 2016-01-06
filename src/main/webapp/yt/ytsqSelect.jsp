@@ -48,6 +48,7 @@
 
             if (selectId == undefined) {
                 alert("该商品不存在");
+                document.getElementById("div_item").innerHTML = "该商品未建或未审核通过!输入名称后请选择选项框内出现的内容";
                 return false;
             }
             else  return true;
@@ -65,6 +66,7 @@
                 <datalist id="select"></datalist>
             </div>
         </div>
+        <span id="div_item"></span><br>
         <input type="submit" value="查找" class="btn-submit"/>
 
 

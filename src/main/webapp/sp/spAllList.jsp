@@ -23,7 +23,6 @@
                         $line.find('input').val($tds.eq(i).text());
                     }
                 }
-
                 $(".input-div span").html("");
                 $("#div_alert").html("");
                 $("#dialog_edit").show();
@@ -75,7 +74,8 @@
             var goodsName = $('#goodsName').val().replace(/\s/g, "");
             $('#goodsName').val(goodsName);
             var price = $('#price').val();
-            var unit = $('#unit').val();
+            var unit = $('#unit').val().replace(/\s/g, "");
+            $('#unit').val(unit);
             var creationDate = $('#creationDate').val();
             var baozhiqi = $('#baozhiqi').val();
             var expirationDate = $('#expirationDate').val();
@@ -209,7 +209,7 @@
                 <td><s:property value="#goods.service"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#goods.creationDate"/></td>
                 <td><s:property value="#goods.baozhiqi"/></td>
-                <td><s:date format="yyyy-MM-dd " name="#goods.expirationDate"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
                 <td><s:property value="#goods.state"/></td>
                 <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#goods.auditTime"/></td>
                 <td><s:property value="#goods.adduser"/></td>
@@ -329,6 +329,8 @@
                             <input id="expirationDate" name="goods.expirationDate" type="date" onblur="calculate()"/>
                         </div>
                     </div>
+
+
                     <div class="line">
                         <div class="lable">商品可用：</div>
                         <div class="input-div"><input id="state" name="goods.state" readonly="readonly"

@@ -27,7 +27,8 @@
                         $line.find('input').val($tds.eq(i).text());
                     }
                 }
-
+                $(".input-div span").html("");
+                $("#div_alert").html("");
                 $("#dialog_edit").show();
             }
         }
@@ -77,7 +78,8 @@
             var goodsName = $('#goodsName').val().replace(/\s/g, "");
             $('#goodsName').val(goodsName);
             var price = $('#price').val();
-            var unit = $('#unit').val();
+            var unit = $('#unit').val().replace(/\s/g, "");
+            $('#unit').val(unit);
             var creationDate = $('#creationDate').val();
             var baozhiqi = $('#baozhiqi').val();
             var expirationDate = $('#expirationDate').val();

@@ -17,6 +17,8 @@
                     var $line = $lines.eq(i);
                     $line.find('input').val($tds.eq(i).text());
                 }
+                $(".input-div span").html("");
+                $("#div_alert").html("");
                 $("#dialog_edit").show();
             }
         }

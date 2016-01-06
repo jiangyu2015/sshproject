@@ -26,7 +26,8 @@
                     $line.find('input').val($tds.eq(i).text());
 
                 }
-
+                $(".input-div span").html("");
+                $("#div_alert").html("");
                 $("#dialog_edit").show();
             }
         }
@@ -71,7 +72,7 @@
             });
         });
 
-        function check(form) {
+        function check() {
             var storageDate = $("#storageDate").val();  //实际入库时间
             var expectedNumber = $("#expectedNumber").val(); //预期入库数
             var storageNumber = $("#storageNumber").val(); //实收数量    实收数量和预期入库数到时候再说
@@ -81,13 +82,26 @@
             var arrs = storageDate.split("-");
             var storageday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
             var storagedays = storageday.getTime();
+            $(".input-div span").html("");
+            $("#div_alert").html("");
+
+            if (storageDate == null || storageDate.length == 0) {
+                $("#div_storageDate").html("请输入实际入库数！");
+                return false;
+            }
+            if (storageNumber == null || storageNumber.length == 0) {
+                $("#div_storageNumber").html("请输入实际入库数！");
+                return false;
+            }
             if (storagedays > todays) {
                 alert("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
-               return  false;
+                $("#div_storageDate").html("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
+                return false;
             }
             else {
+                $('#dialog_edit').hide();
                 alert("确认收货成功");
-               return true;
+                return true;
             }
         }
 
@@ -110,15 +124,15 @@
             return month;
         }
 
-		function selectCategory(){
-            var type=$("#type").val();
-            if(type=="入库类型"){
-                window.location.href="rkcheck.action";
-            }else if(type=="正常调拨"){
-                window.location.href="zcdbstorage.action";
+        function selectCategory() {
+            var type = $("#type").val();
+            if (type == "入库类型") {
+                window.location.href = "rkcheck.action";
+            } else if (type == "正常调拨") {
+                window.location.href = "zcdbstorage.action";
             }
-            else if(type=="正常入库"){
-                window.location.href="zcrkstorage.action";
+            else if (type == "正常入库") {
+                window.location.href = "zcrkstorage.action";
             }
         }
     </script>
@@ -148,13 +162,13 @@
             <th>申请人</th>
             <th>确认收货人</th>
             <th>
-				<select id="type" style="background: none; border: none; -webkit-box-shadow: none; width: auto; 
-            			font-size: 14px; color: #4d4d4d; font-weight: bold;" onchange="selectCategory();" >
+                <select id="type" style="background: none; border: none; -webkit-box-shadow: none; width: auto;
+            			font-size: 14px; color: #4d4d4d; font-weight: bold;" onchange="selectCategory();">
                     <option>入库类型</option>
-	            	<option>正常入库</option>
-	            	<option>正常调拨</option>
-            	</select>
-			</th>
+                    <option>正常入库</option>
+                    <option>正常调拨</option>
+                </select>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -186,7 +200,7 @@
         <div class="title">确认收货</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="rkOk" onsubmit="return check(this)">
+                <form method="post" action="rkOk">
                     <div class="line">
                         <div class="lable">入库明细id：</div>
                         <div class="input-div"><input name="storage.storageId" readonly="readonly"
@@ -219,9 +233,10 @@
                     </div>
 
                     <div class="line">
-                        <div class="lable">实际入库时间：</div>
+                        <div class="lable"><span>* </span>实际入库时间：</div>
                         <div class="input-div"><input id="storageDate" placeholder="请输入实际入库时间"
-                                                      name="storage.storageDate" type="date"/>
+                                                      name="storage.storageDate" type="date"/> <span
+                                id="div_storageDate"></span>
                         </div>
                     </div>
 
@@ -233,9 +248,10 @@
                     </div>
 
                     <div class="line">
-                        <div class="lable">实收数量：</div>
+                        <div class="lable"><span>* </span>实收数量：</div>
                         <div class="input-div"><input id="storageNumber" placeholder="请输入实收数量"
-                                                      name="storage.storageNumber"/></div>
+                                                      name="storage.storageNumber"/> <span
+                                id="div_storageNumber"></span></div>
                     </div>
 
                     <div class="line">
@@ -266,12 +282,12 @@
                     </div>
                     <div class="line">
                         <div class="lable">入库类别：</div>
-                        <div class="input-div"><input  readonly="readonly"
-                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
+                    <span id="div_alert"></span><br>
                     <div style="position: relative; bottom: 0px;">
-                        <input type="submit" value="确认" class="btn-submit" onclick="btn()"/>
+                        <input type="submit" value="确认" class="btn-submit" onclick="return check();"/>
                         <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                     </div>
                 </form>
