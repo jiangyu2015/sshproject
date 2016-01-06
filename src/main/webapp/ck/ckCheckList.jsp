@@ -203,7 +203,7 @@
                     </div>
                     <div class="line">
                         <div class="lable">实际出库数量：</div>
-                        <div class="input-div"><input id="deliverNumber" placeholder="请输入实收数量"
+                        <div class="input-div"><input id="deliverNumber" placeholder="请输入出库数量"
                                                      name="deliver.deliverNumber"/></div>
                     </div>
 
