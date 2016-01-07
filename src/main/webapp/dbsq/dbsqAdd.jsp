@@ -88,24 +88,33 @@
                     var todays = today.getTime();
                     $(".input-div span").html("");
                     $("#div_alert").html("");
-                    if (allotNumber > availableInventory) {
+                    if (selectId3 == undefined) {
+                        alert("调拨申请不成功,仓库未建，请选择选项框内的仓库");
+                        $("#div_item3").html("仓库未建，请选择选项框内的仓库");
+                        result = false;
+                    }
+                    else if(expectedDate==null ||expectedDate==""){
+                        $("#div_expectDate").html("期望时间不能为空");
+                        result = false;
+
+                    }
+                    else if(allotNumber==null ||allotNumber==""){
+                        $("#div_allotNumber").html("调拨数量不能为空");
+                        result = false;
+                    }
+                    else if (allotNumber > availableInventory) {
                         alert("调拨申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
-                        $("#div_alert").html("调拨申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
+                        $("#div_alert").html("当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
                         result = false;
                     }
                     else if (placeName == placeName2) {
                         alert("调拨申请不成功，目标仓库地址与原仓库地址相同！");
-                        $("#div_alert").html("调拨申请不成功，目标仓库地址与原仓库地址相同！");
+                        $("#div_alert").html("目标仓库地址与原仓库地址相同！");
                         result = false;
                     }
                     else if (storagedays <todays) {
                         alert("期望调拨时间不能比今天小");
                         $("#div_expectDate").html("期望调拨时间不能比今天小");
-                        result = false;
-                    }
-                    else if (selectId3 == undefined) {
-                        alert("调拨申请不成功,仓库未建，请选择选项框内的仓库");
-                        $("#div_item3").html("调拨申请不成功,仓库未建，请选择选项框内的仓库");
                         result = false;
                     }
                     else {
@@ -169,19 +178,19 @@
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">目标仓库地址：</div>
+            <div class="lable"><span>* </span>目标仓库地址：</div>
             <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址" name="placeName2"/>  <span id="div_item3"></span></div>
             <datalist id="select3"></datalist>
 
         </div>
         <div class="line">
-            <div class="lable">期望时间：</div>
+            <div class="lable"><span>* </span>期望时间：</div>
             <div class="input-div"><input id="expectDate" placeholder="请输入期望调拨时间" name="allotApp.expectDate"
                                           type="date"/>  <span id="div_expectDate"></span></div>
         </div>
         <div class="line">
-            <div class="lable">调拨数量：</div>
-            <div class="input-div"><input id="allotNumber" placeholder="请输入调拨数量" name="allotApp.allotNumber"/></div>
+            <div class="lable"><span>* </span>调拨数量：</div>
+            <div class="input-div"><input id="allotNumber" placeholder="请输入调拨数量" name="allotApp.allotNumber"/><span id="div_allotNumber"></span></div>
         </div>
         <div class="line">
             <div class="lable">使用类型：</div>

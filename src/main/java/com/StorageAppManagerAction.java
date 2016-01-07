@@ -275,8 +275,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setEdituser(session.get("name").toString()); //得到修改人
         }
         if (storageAppBiz.editStorageApp(condition)) {
-            System.out.println("condition" + condition.getProducerName());
-            System.out.println(condition.getGoodsName());
             session.put("storageapplist", condition);
             return "success";
         } else return "input";

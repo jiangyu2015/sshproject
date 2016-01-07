@@ -143,6 +143,10 @@
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
             }
+            else{
+                alert("入库申请成功！");
+                return true;
+            }
         }
 
         function isNull(str) {
@@ -220,7 +224,6 @@
         </div>
         <div class="line">
             <div class="lable"><span>* </span>入库类型：</div>
-
             <div class="input-div">
                 <select name="storageApp.storageType">
                     <option value="任意配置">任意配置</option>

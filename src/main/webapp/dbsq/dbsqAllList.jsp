@@ -106,7 +106,7 @@
                 alert("调拨申请修改不成功，目标仓库地址与原仓库地址相同！");
                 return false;
             }
-            else if (val3 != null & val3 != "") {
+            else if (val3 != null && val3 != "") {
                 if (selectId3 == undefined) {
                     alert("调拨申请修改不成功,仓库未建，请选择选项框内的仓库");
                     return false;
@@ -202,19 +202,20 @@
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
-                        <div class="lable">目标仓库地址：</div>
+                        <div class="lable"><span>* </span>目标仓库地址：</div>
                         <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址"
                                                       name="placeName2"/></div>
                         <datalist id="select3"></datalist>
                     </div>
                     <div class="line">
-                        <div class="lable">期望时间：</div>
-                        <div class="input-div"><input placeholder="请输入期望调拨时间" name="allotApp.expectDate" type="date"/></div>
+                        <div class="lable"><span>* </span>期望时间：</div>
+                        <div class="input-div"><input id=""placeholder="请输入期望调拨时间" name="allotApp.expectDate" type="date"/><span id="div_expectDate">
+                        </div>
                     </div>
                     <div class="line">
                         <div class="lable">调拨数量：</div>
-                        <div class="input-div"><input id="allotNumber" placeholder="请输入调拨数量"
-                                                      name="allotApp.allotNumber"/></div>
+                        <div class="input-div"><input id="allotNumber" name="allotApp.allotNumber" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">使用类型：</div>

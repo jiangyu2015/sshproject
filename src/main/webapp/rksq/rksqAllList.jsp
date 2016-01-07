@@ -23,13 +23,13 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-                    if(i == 8) {
-                        $('#typeIn option[value="'+$tds.eq(i).text()+'"]').prop('selected', true);
-                    }else {
+                    if (i == 8) {
+                        $('#typeIn option[value="' + $tds.eq(i).text() + '"]').prop('selected', true);
+                    } else {
                         $line.find('input').val($tds.eq(i).text());
                     }
                 }
-
+                $(".input-div span").html("");
                 $("#dialog_edit").show();
             }
         }
@@ -72,17 +72,179 @@
             }).mouseup(function () {
                 _move = false;
             });
+          /*  $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
+                        //   str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
+                    }
+                    $("#select").html(str);
+
+                    $('#item').bind('input propertychange', function () {
+                        $("#select").html(str);
+                    });
+                },
+                dataType: 'json'
+            });*/
+
+            $.ajax({
+                type: "post",
+                url: "selectProducerJsonAction",
+                dataType: 'json',
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var producer = d.producerList;
+                    console.log(producer);
+                    for (var i = 0; i < producer.length; i++) {
+                        //  str = str + "<option>" + producer[i].producerName + "</option>";
+                        str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
+                    }
+                    $("#select2").html(str);
+
+                    $('#item2').bind('input propertychange', function () {
+                        $("#select2").html(str);
+                    });
+                },
+                error: function () {
+                    alert("未查到商户");
+                    $("#div_item2").html("未查到商户");
+                }//这里不要加","
+
+            });
+            $.ajax({
+                type: "post",
+                url: "excutePlaceAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var place = d.placeList;
+                    console.log(place);
+                    for (var i = 0; i < place.length; i++) {
+                        // str = str + "<option>" + place[i].placeName + "</option>";
+                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
+                    }
+                    $("#select3").html(str);
+
+                    $('#item3').bind('input propertychange', function () {
+                        $("#select3").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
         });
 
-        function check(form) {
-            var val = $("#state").val();
+        function check() {
+          /*  var val = $("#state").val();
+            var val3 = $("#item3").val();
+            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+            $(".input-div span").html("");
+            $("#div_alert").html("");
             if (val == "yesok" || val == "yesno") {
                 alert("该入库申请已审核不能修改");
                 return false;
             }
-            else {
-                return true;
+            else if (val3 != null & val3 != "") {
+                if (selectId3 == undefined) {
+                    alert("仓库未建，请选择选项框内的仓库");
+                    return false;
+                }
             }
+            $('#dialog_edit').hide();
+            return true;*/
+            var val = $("#state").val();
+          /*  var val1 = $("#item").val();*/
+            var val2 = $("#item2").val();
+            var val3 = $("#item3").val();
+
+         /*   var selectId1 = $("[value='" + val1 + "']").eq(0).attr('value');*/
+            var selectId2 = $("[value='" + val2 + "']").eq(0).attr('value');
+            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('value');
+            var expectedNumber = $('#expectedNumber').val();
+
+            var expectedDate = $("#expectedDate").val();  //期望入库时间  比较时间
+            var arrs = expectedDate.split("-");
+            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
+            var storagedays = storageday.getTime();
+
+            var arr = getToDay().split("-");
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
+
+            $(".input-div span").html("");  //清空
+
+            if (val == "yesok" || val == "yesno") {
+                alert("该入库申请已审核不能修改");
+                return false;
+            }
+            else if (selectId2 == undefined) {
+                alert("商户未录入或未被审核通过，请与管理员联系");
+                $("#div_item2").html("商户未录入或未被审核通过，请与管理员联系");
+                return false;
+            }
+         /*   else if (selectId1 == undefined || val1.indexOf("|") == -1) {
+                alert("商品未录入或未被审核通过，请与管理员联系，并且请选择带|商品id的选项");
+                $("#div_item").html("商品未录入或未被审核通过，请与管理员联系，并且请选择带|商品id的选项，请先确认商品id");
+                return false;
+            }*/
+            else if (selectId3 == undefined) {
+                alert("仓库未录入");
+                $("#div_item3").html("仓库未录入");
+                return false;
+            }
+            else if (expectedDate == null || expectedDate.length == 0) {
+                alert("预期入库时间不能为空");
+                $("#div_expectedDate").html("预期入库时间不能为空");
+                return false;
+            }
+            else if (expectedNumber == null || expectedNumber.length == 0 || isNull(expectedNumber)) {
+                alert("预期入库数量不能为空");
+                $("#div_expectedNumber").html("预期入库数量不能为空");
+                return false;
+            }
+            else if (expectedNumber <= 0) {
+                alert("预期入库数量需大于0");
+                $("#div_expectedNumber").html("预期入库数量需大于0");
+                return false;
+            }
+           /* else if (storagedays < todays) {
+                alert("期望入库时间不能比今天小");
+                $("#div_expectedDate").html("期望入库时间不能比今天小");
+                return false;
+            }*/
+        }
+
+        function isNull(str) {
+            if (str == "") return true;
+            var regu = "^[ ]+$";
+            var re = new RegExp(regu);
+            return re.test(str);
+        }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
         }
     </script>
 </head>
@@ -92,7 +254,7 @@
     <div class="title">入库申请信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-     <%--   <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <%--   <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -144,25 +306,29 @@
         <div class="title">修改入库申请</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editrksq" onsubmit="return check(this)">
+                <form method="post" action="editrksq">
                     <div class="line">
                         <div class="lable">入库申请id：</div>
                         <div class="input-div"><input name="storageApp.storageAppId" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
-                        <div class="lable">商户名称：</div>
-                        <div class="input-div"><input placeholder="请输入商户名称" name="storageApp.producerName"/></div>
-                    </div>
+                        <div class="lable"><span>* </span>商户名称：</div>
+                        <div class="input-div"><input id="item2" list="select2" placeholder="请输入商户名称"
+                                                      name="storageApp.producerName"/> <span id="div_item2"></span></div>
+                        <datalist id="select2"></datalist>
 
+                    </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
                         <div class="input-div"><input placeholder="请输入商品名称" name="storageApp.goodsName"/></div>
                     </div>
 
                     <div class="line">
-                        <div class="lable">入库地点：</div>
-                        <div class="input-div"><input placeholder="请输入入库地点" name="storageApp.storagePlace"/></div>
+                        <div class="lable"><span>* </span>入库地点：</div>
+                        <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址"
+                                                      name="storageApp.storagePlace"/><span id="div_item3"></span></div>
+                        <datalist id="select3"></datalist>
                     </div>
 
                     <div class="line">
@@ -171,19 +337,21 @@
                     </div>
 
                     <div class="line">
-                        <div class="lable">预期入库时间：</div>
-                        <div class="input-div"><input placeholder="请输入预期入库时间" name="storageApp.expectedDate" type="date"/></div>
+                        <div class="lable"><span>* </span>预期入库时间：</div>
+                        <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间" name="storageApp.expectedDate"
+                                                      type="date"/> <span id="div_expectedDate"></span></div>
                     </div>
                     <div class="line">
-                        <div class="lable">预期入库数量：</div>
-                        <div class="input-div"><input placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/></div>
+                        <div class="lable"><span>* </span>预期入库数量：</div>
+                        <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/><span
+                                id="div_expectedNumber"></span></div>
                     </div>
                     <div class="line">
                         <div class="lable">三联单编号：</div>
                         <div class="input-div"><input placeholder="请输入三联单编号" name="storageApp.sldId"/></div>
                     </div>
                     <div class="line">
-                        <div class="lable">入库类型：</div>
+                        <div class="lable"><span>* </span>入库类型：</div>
                         <div class="input-div">
                             <select id="typeIn" name="storageApp.storageType">
                                 <option value="任意配置">任意配置</option>
@@ -196,8 +364,9 @@
                     </div>
                     <div class="line">
                         <div class="lable">申请时间：</div>
-                        <div class="input-div"><input  name="storageApp.applicationDate"  readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;"//></div>
+                        <div class="input-div"><input name="storageApp.applicationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/>
+                        </div>
                     </div>
                     <div class="line">
                         <div class="lable">处理状态：</div>
@@ -206,29 +375,28 @@
                     </div>
                     <div class="line">
                         <div class="lable">审核时间：</div>
-                        <div class="input-div"><input  name="storageApp.auditTime" readonly="readonly"
-                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input name="storageApp.auditTime" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">新增人：</div>
-                        <div class="input-div"><input  name="storageApp.adduser" readonly="readonly"
-                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input name="storageApp.adduser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">修改人：</div>
-                        <div class="input-div"><input  name="storageApp.edituser" readonly="readonly"
-                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input name="storageApp.edituser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">审核人：</div>
-                        <div class="input-div"><input  name="storageApp.checkuser" readonly="readonly"
-                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="input-div"><input name="storageApp.checkuser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
-
-                    <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
+                    <input type="submit" value="确定" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>
             </div>

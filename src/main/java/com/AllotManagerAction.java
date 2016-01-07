@@ -175,8 +175,8 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
         AllotApp condition = new AllotApp();
         condition = (AllotApp) allotAppBiz.getAllotAppList(s).get(0);
 
-        if (allotApp.getAllotNumber() != null && !allotApp.getAllotNumber().equals(""))               //调拨数量
-            condition.setAllotNumber(allotApp.getAllotNumber());
+        /*if (allotApp.getAllotNumber() != null && !allotApp.getAllotNumber().equals(""))               //调拨数量
+            condition.setAllotNumber(allotApp.getAllotNumber());*/
         if (placeName2 != null && !placeName2.equals("")) {            //目标仓库
             Place place = placeBiz.getPlace(placeName2).get(0);
             condition.setPlaceIn(place);
