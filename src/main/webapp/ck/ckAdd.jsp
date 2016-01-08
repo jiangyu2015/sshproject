@@ -68,7 +68,6 @@
                 success: function (data, xhrTxt) {
                     var withholdingNumber = GetQueryString("withholdingNumber");   //预提数
                     /*   var sumwithholdingdeliver=GetQueryString("sumwithholdingdeliver");*/
-                    alert(getToDay());
                     var deteline = GetQueryString("deteline");
                     var deliverNumber = $('#deliverNumber').val();
                     var d = eval("(" + data + ")");
