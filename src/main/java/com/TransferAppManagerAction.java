@@ -121,7 +121,6 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
     }
 
     public String addTransferApp() throws Exception {                  //增加转库申请
-        System.out.println("addTransferApp");
         TransferApp condition = new TransferApp();
         if (transferApp.getTransferNumber() != null)               //转库数量
             condition.setTransferNumber(transferApp.getTransferNumber());

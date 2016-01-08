@@ -73,28 +73,45 @@
                 success: function (data, xhrTxt) {
                     var d = eval("(" + data + ")");
                     var availableInventory = d.availableInventory;
-                    var allotNumber = $("#allotNumber").val();
+                    var transferNumber = $("#transferNumber").val();
+                    alert(transferNumber);
                     var typeOut = $("#typeOut").val();
                     var typeIn = $("#typeIn").val();
 
-                    var expectedDate = $("#expectDate").val();  //期望入库时间  比较时间
-                    var arrs = expectedDate.split("-");
+                    var expectDate = $("#expectDate").val();  //期望入库时间  比较时间
+                    var arrs = expectDate.split("-");
                     var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
                     var storagedays = storageday.getTime();
 
                     var arr = getToDay().split("-");
                     var today = new Date(arr[0], arr[1], arr[2]);  //今天
                     var todays = today.getTime();
-                    if (allotNumber > availableInventory) {
+                    $(".input-div span").html("");
+                    $("#div_alert").html("");
+                    if (transferNumber == null || transferNumber == "") {
+                        alert("转库数量不能为空");
+                        $("#div_transferNumber").html("转库数量不能为空");
+                        result = false;
+                    }
+                    else if (expectDate == null || expectDate == "") {
+                        alert("期望时间不能为空");
+                        $("#div_expectDate").html("期望时间不能为空");
+                        result = false;
+
+                    }
+                    else if (transferNumber > availableInventory) {
                         alert("转库申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
+                        $("#div_alert").html("转库申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
                         result = false;
                     }
                     else if (typeIn == typeOut) {
                         alert("转库申请不成功，目标使用类型与原先一样！");
+                        $("#div_alert").html("目标使用类型与原先一样！");
                         result = false;
                     }
-                    else if (storagedays <todays) {
+                    else if (storagedays < todays) {
                         alert("期望转库时间不能比今天小");
+                        $("#div_alert").html("期望转库时间不能比今天小");
                         result = false;
                     }
                     else {
@@ -160,8 +177,12 @@
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
-            <div class="lable">转库数量：</div>
-            <div class="input-div"><input id="allotNumber" placeholder="请输入转库数量" name="transferApp.transferNumber"/>
+            <div class="lable"><span>* </span>转库数量：</div>
+            <div class="input-div">
+                <input id="transferNumber" placeholder="请输入转库数量"
+                       name="transferApp.transferNumber" onkeyup="value=value.replace(/[^\d]/g,'')"
+                       onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                <span id="div_transferNumber"></span>
             </div>
         </div>
         <div class="line">
@@ -182,10 +203,11 @@
             </div>
         </div>
         <div class="line">
-            <div class="lable">期望时间：</div>
-            <div class="input-div"><input id="expectDate" placeholder="请输入期望转库时间" name="transferApp.expectDate" type="date"/></div>
+            <div class="lable"><span>* </span>期望时间：</div>
+            <div class="input-div"><input id="expectDate" placeholder="请输入期望转库时间" name="transferApp.expectDate"
+                                          type="date"/><span id="div_expectDate"></span></div>
         </div>
-
+        <span id="div_alert"></span><br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>

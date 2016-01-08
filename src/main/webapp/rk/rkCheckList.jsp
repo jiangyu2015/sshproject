@@ -95,7 +95,7 @@
             }
             if (storagedays > todays) {
                 alert("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
-                $("#div_storageDate").html("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
+                $("#div_alert").html("确认收货不成功，实际入库时间不能比今天大");
                 return false;
             }
             else {
@@ -142,7 +142,7 @@
 <div class="table-div">
     <div class="title">确认收货</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();">
+        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();" style="position: relative; width: 90px;">
         <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
@@ -249,9 +249,11 @@
 
                     <div class="line">
                         <div class="lable"><span>* </span>实收数量：</div>
-                        <div class="input-div"><input id="storageNumber" placeholder="请输入实收数量"
-                                                      name="storage.storageNumber"/> <span
-                                id="div_storageNumber"></span></div>
+                        <div class="input-div">
+                            <input id="storageNumber" placeholder="请输入实收数量"
+                                   name="storage.storageNumber" onkeyup="value=value.replace(/[^\d]/g,'')"
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                            <span id="div_storageNumber"></span></div>
                     </div>
 
                     <div class="line">

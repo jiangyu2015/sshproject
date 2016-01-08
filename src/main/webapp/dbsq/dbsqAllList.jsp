@@ -26,7 +26,7 @@
                     $line.find('input').val($tds.eq(i).text());
 
                 }
-
+                $(".input-div span").html("");  //清空
                 $("#dialog_edit").show();
             }
         }
@@ -92,30 +92,76 @@
             });
         });
 
-        function check(form) {
+        function check() {
             var val = $("#state").val();
-            var val3 = $("#item3").val();
-            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
-            var placeName = $("#placeName").val();
             var placeName2 = $("#item3").val();
+            var selectId3 = $("[value='" + placeName2 + "']").eq(0).attr('id');
+            var placeName = $("#placeName").val();
+            var expectDate = $("#expectDate").val();
+            var arrs = expectDate.split("-");
+            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
+            var storagedays = storageday.getTime();
+
+            var arr = getToDay().split("-");
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
+
+            $(".input-div span").html("");  //清空
             if (val == "yesok" || val == "yesno") {
                 alert("该调拨申请已审核不能修改");
                 return false;
             }
-            else if (placeName == placeName2) {
-                alert("调拨申请修改不成功，目标仓库地址与原仓库地址相同！");
+            else if (placeName2 == null || placeName2 == "") {
+                alert("目标仓库不能为空");
+                $("#div_item3").html("目标仓库不能为空");
                 return false;
             }
-            else if (val3 != null && val3 != "") {
-                if (selectId3 == undefined) {
-                    alert("调拨申请修改不成功,仓库未建，请选择选项框内的仓库");
-                    return false;
-                }
+            else if (placeName == placeName2) {
+                alert("调拨申请修改不成功，目标仓库地址与原仓库地址相同！");
+                $("#div_item3").html("目标仓库地址与原仓库地址不能相同");
+                return false;
+            }
+            else if (selectId3 == undefined) {
+                alert("调拨申请修改不成功,仓库未建，请选择选项框内的仓库");
+                $("#div_item3").html("仓库未建，请选择选项框内的仓库");
+                return false;
+            }
+            else if (expectDate == null || expectDate == "") {
+                alert("期望时间不能为空");
+                $("#div_expectDate").html("期望时间不能为空");
+                return false;
+
+            }
+            else if (storagedays <todays) {
+                alert("期望调拨时间不能比今天小");
+                $("#div_expectDate").html("期望调拨时间不能比今天小");
+                return false;
             }
             else {
+                alert("调拨申请成功！");
                 return true;
             }
         }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
+        }
+
     </script>
 </head>
 
@@ -175,7 +221,7 @@
         <div class="title">修改调拨申请</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editdbsq" onsubmit="return check(this)">
+                <form method="post" action="editdbsq">
                     <div class="line">
                         <div class="lable">调拨申请id：</div>
                         <div class="input-div"><input name="allotApp.allotAppId" readonly="readonly"
@@ -204,12 +250,13 @@
                     <div class="line">
                         <div class="lable"><span>* </span>目标仓库地址：</div>
                         <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址"
-                                                      name="placeName2"/></div>
+                                                      name="placeName2"/><span id="div_item3"></span></div>
                         <datalist id="select3"></datalist>
                     </div>
                     <div class="line">
                         <div class="lable"><span>* </span>期望时间：</div>
-                        <div class="input-div"><input id=""placeholder="请输入期望调拨时间" name="allotApp.expectDate" type="date"/><span id="div_expectDate">
+                        <div class="input-div"><input id="expectDate" placeholder="请输入期望调拨时间" name="allotApp.expectDate"
+                                                      type="date"/><span id="div_expectDate"></span>
                         </div>
                     </div>
                     <div class="line">
@@ -253,7 +300,7 @@
                         <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-                    <input type="submit" value="提交" class="btn-submit"/>
+                    <input type="submit" value="提交" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>
             </div>

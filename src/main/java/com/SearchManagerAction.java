@@ -71,11 +71,11 @@ public class SearchManagerAction extends ActionSupport implements RequestAware, 
     public String searchInventoryFlowGoods() {   //查带商品的总库存流动
         List<CommodityDto> list = searchBiz.searchAllGoods(goodsName);
         System.out.println(list.size());
-        if (list.size() > 0) {
+       /* if (list.size() > 0) {*/
             session.put("inventoryflowgoods", list);
             return "success";
-        } else
-            return "fail";   //应该提示该商品未入库
+     /*   } else
+            return "fail";   //应该提示该商品未入库*/
     }
 
     public String searchAll() {

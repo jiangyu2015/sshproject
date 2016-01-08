@@ -158,7 +158,8 @@
 
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input placeholder="请输入商品名称" name="storageApp.goodsName"/></div>
+                        <div class="input-div"><input  name="storageApp.goodsName"  readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">

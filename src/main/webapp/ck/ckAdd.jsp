@@ -5,15 +5,15 @@
         Time: 14:43
         To change this template use File | Settings | File Templates.
         --%>
-        <%@ page language="java" contentType="text/html; charset=utf-8"
-                 pageEncoding="utf-8" %>
-        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-        <html>
-        <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-                <title>添加出库信息</title>
-                <link type="text/css" rel="stylesheet" href="../common.css"/>
-                <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>添加出库信息</title>
+    <link type="text/css" rel="stylesheet" href="../common.css"/>
+    <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $.ajax({
@@ -79,20 +79,35 @@
                     var arrs = getToDay().split("-");
                     var today = new Date(arrs[0], arrs[1], arrs[2]);
                     var todays = today.getTime();
-                    var arrss = $('#deliverDate').val().split("-"); //出库时间
-                    alert($('#deliverDate').val());
+                    var deliverTime=$('#deliverDate').val()
+                    var arrss =deliverTime.split("-"); //出库时间
+
                     var deliverDate = new Date(arrss[0], arrss[1], arrss[2]);
                     var deliverDates = deliverDate.getTime();
-                    if (deliverDates > todays) {
+                    $(".input-div span").html("");
+                    if (deliverNumber == "" || deliverNumber == null) {
+                        alert("出库数量不能为空");
+                        $("#div_deliverNumber").html("出库数量不能为空");
+                        result = false;
+                    }
+                   else if (deliverTime == "" || deliverTime == null) {
+                        alert("出库时间不能为空");
+                        $("#div_deliverDate").html("出库时间不能为空");
+                        result = false;
+                    }
+                    else if (deliverDates > todays) {
                         alert("出库时间大于今天？！请回去检查！拜拜！");
+                        $("#div_deliverDate").html("出库时间不能大于今天");
                         result = false;
                     }
                     else if (deliverDates > overdays) {   //要试试
                         alert("出库时间大于了活动截止时间？");
+                        $("#div_deliverDate").html("出库时间不能大于截止时间");
                         result = false;
                     }
                     else if (difference < deliverNumber) {
                         alert("出库不成功!,您还可以消耗" + difference + "本次消耗为" + deliverNumber + "超出预提请确认！");
+                        $("#div_deliverNumber").html("出库不成功!,您还可以消耗" + difference + "本次消耗为" + deliverNumber + "超出预提请确认！");
                         result = false;
                     }
                     else {
@@ -174,15 +189,18 @@
                                           placeholder="请输入应发数量"/></div>
         </div>
         <div class="line">
-            <div class="lable">实发数量：</div>
-            <div class="input-div"><input id="deliverNumber" input name="deliver.deliverNumber"
-                                          placeholder="请输入实发数量"/></div>
+            <div class="lable"><span>* </span>实发数量：</div>
+            <div class="input-div">
+                <input id="deliverNumber" input name="deliver.deliverNumber"
+                       placeholder="请输入实发数量" onkeyup="value=value.replace(/[^\d]/g,'')"
+                       onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                <span id="div_deliverNumber"></span></div>
         </div>
 
         <div class="line">
-            <div class="lable">出库时间：</div>
+            <div class="lable"><span>* </span>出库时间：</div>
             <div class="input-div"><input id="deliverDate" name="deliver.deliverDate" placeholder="请输入出库时间"
-                                          type="date"/></div>
+                                          type="date"/> <span id="div_deliverDate"></span></div>
         </div>
 
         <div class="line">

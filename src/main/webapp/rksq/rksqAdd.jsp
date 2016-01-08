@@ -215,7 +215,8 @@
         </div>
         <div class="line">
             <div class="lable"><span>* </span>预期入库数量：</div>
-            <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/><span
+            <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber" onkeyup="value=value.replace(/[^\d]/g,'')"
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/><span
                     id="div_expectedNumber"></span></div>
         </div>
         <div class="line">

@@ -63,19 +63,19 @@
                     goodsId: $("#goodsId").val(),
                     placeId: $("#placeId").val(),
                     producerId: $("#producerId").val()
-                  /*  witholdingNumber: $("#witholdingNumber").val(),*/
+                    /*  witholdingNumber: $("#witholdingNumber").val(),*/
                     /*     type: $("#type").val(),*/
-                 /*   unit: $("#unit").val()  这个恢复上面的加逗号*/
+                    /*   unit: $("#unit").val()  这个恢复上面的加逗号*/
                 },
                 dataType: "json",//设置需要返回的数据类型
                 success: function (data, xhrTxt) {
                     var str = "";
                     var d = eval("(" + data + ")");
                     var witholdingNumber = $("#witholdingNumber").val();
-                /*    alert("预提数" + witholdingNumber);*/
+                    /*    alert("预提数" + witholdingNumber);*/
                     var unit = $("#unit").val();
                     var goodsUnit = str + d.goodsUnit;  //商品入库单位
-                /*    alert("后台单位" + goodsUnit);*/
+                    /*    alert("后台单位" + goodsUnit);*/
                     var availableInventory = d.availableInventory;
                     var deteline = $('#deteline').val();
                     var arr = deteline.split("-");                    //比较时间
@@ -86,16 +86,16 @@
                     var todays = today.getTime();
                     $(".input-div span").html("");
                     $("#div_alert").html("");
-                    if(unit == null || unit.length == 0){
+                    if (unit == null || unit.length == 0) {
                         $("#div_unit").html("请输入预提单位");
                         result = false;
                     }
-                    else if(witholdingNumber == null || witholdingNumber.length == 0){
+                    else if (witholdingNumber == null || witholdingNumber.length == 0) {
                         $("#div_witholdingNumber").html("请输入预提数");
-                        witholdingNumber=0;
+                        witholdingNumber = 0;
                         result = false;
                     }
-                    else if(deteline == null || deteline.length == 0){
+                    else if (deteline == null || deteline.length == 0) {
                         $("#div_deteline").html("请输入截止日期");
                         result = false;
                     }
@@ -109,7 +109,7 @@
                         $("#div_unit").html("商品入库单位为" + goodsUnit + "，您预提的商品单位为" + unit + "，请确认！");
                         result = false;
                     }
-                    else if(overdays<todays){
+                    else if (overdays < todays) {
                         alert("活动截止时间不能小于今天");
                         $("#div_deteline").html("活动截止时间不能小于今天");
                         result = false;
@@ -201,11 +201,14 @@
         <div class="line">
             <div class="lable"><span>* </span>预提数：</div>
             <div class="input-div"><input id="witholdingNumber" input name="withholding.witholdingNumber"
-                                          placeholder="请输入预提数"/><span id="div_witholdingNumber"></span></div>
+                                          placeholder="请输入预提数" onkeyup="value=value.replace(/[^\d]/g,'')"
+                                          onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/><span
+                    id="div_witholdingNumber"></span></div>
         </div>
         <div class="line">
             <div class="lable"><span>* </span>截止日期：</div>
-            <div class="input-div"><input id="deteline" name="withholding.deteline" placeholder="请输入截止日期" type="date"/><span id="div_deteline"></span>
+            <div class="input-div"><input id="deteline" name="withholding.deteline" placeholder="请输入截止日期"
+                                          type="date"/><span id="div_deteline"></span>
             </div>
         </div>
         <div class="line">

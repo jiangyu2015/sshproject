@@ -26,7 +26,7 @@
                     $line.find('input').val($tds.eq(i).text());
 
                 }
-
+                $(".input-div span").html("");
                 $("#dialog_edit").show();
             }
         }
@@ -71,9 +71,9 @@
             });
         });
 
-        function check(form) {
+        function check() {
             var deliverDate = $("#deliverDate").val();  //实际出库时间
-            var expecteNumber = $("#expecteNumber").val(); //预期出库数
+            /*     var expecteNumber = $("#expecteNumber").val(); //预期出库数*/
             var deliverNumber = $("#deliverNumber").val(); //实收数量    实收数量和预期入库数到时候再说
             var arr = getToDay().split("-");    //比较时间
             var today = new Date(arr[0], arr[1], arr[2]);  //今天
@@ -81,8 +81,19 @@
             var arrs = deliverDate.split("-");
             var deliverday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
             var deliverdays = deliverday.getTime();
-            if (deliverdays > todays) {
+            $(".input-div span").html("");
+
+            if (deliverNumber == "" || deliverNumber == null) {
+                $("#div_deliverNumber").html("请输入实际出库数！");
+                return false;
+            }
+            else if (deliverDate == "" || deliverDate == null) {
+                $("#div_deliverDate").html("请输入实际出库数量！");
+                return false;
+            }
+            else if (deliverdays > todays) {
                 alert("确认出库不成功，实际出库时间比今天大？真的出库了再来填，拜拜！");
+                $("#div_deliverDate").html("实际出库时间不能比今天大");
                 return false;
             }
             else {
@@ -117,7 +128,7 @@
 <div class="table-div">
     <div class="title">确认出库</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="确认出库" onclick="edit();">
+        <input type="button" class="btn-eidt" value="确认出库" onclick="edit();" style="position: relative; width: 90px;">
         <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
@@ -134,7 +145,7 @@
             <th>备注</th>
             <th>出库填写人</th>
             <th>出库确认人</th>
-          <%--  <th>预提单号</th>  //这是调拨申请的出库 没有预提单号--%>
+            <%--  <th>预提单号</th>  //这是调拨申请的出库 没有预提单号--%>
             <th>出库类别</th>
             <th>出库状态</th>
         </tr>
@@ -153,7 +164,7 @@
                 <td><s:property value="#deliver.remark"/></td>
                 <td><s:property value="#deliver.adduser"/></td>
                 <td><s:property value="#deliver.checkuser"/></td>
-          <%--      <td><s:property value="#deliver.withholding.withholdingId"/></td>--%>
+                    <%--      <td><s:property value="#deliver.withholding.withholdingId"/></td>--%>
                 <td><s:property value="#deliver.category"/></td>
                 <td><s:property value="#deliver.state"/></td>
             </tr>
@@ -168,7 +179,7 @@
         <div class="title">确认出货</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="ckOk" onsubmit="return check(this)">
+                <form method="post" action="ckOk">
                     <div class="line">
                         <div class="lable">出库明细id：</div>
                         <div class="input-div"><input name="deliver.deliverId" readonly="readonly"
@@ -192,19 +203,24 @@
                     </div>
 
                     <div class="line">
-                        <div class="lable">实际出库时间：</div>
-                        <div class="input-div"><input id="deliverDate" name="deliver.deliverDate" type="date"/></div>
+                        <div class="lable"><span>* </span>实际出库时间：</div>
+                        <div class="input-div"><input id="deliverDate" name="deliver.deliverDate" type="date"/><span
+                                id="div_deliverDate"></span></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">预期出库数量：</div>
-                        <div class="input-div"><input id="expecteNumber" name="deliver.expecteNumber" readonly="readonly"
+                        <div class="input-div"><input id="expecteNumber" name="deliver.expecteNumber"
+                                                      readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
-                        <div class="lable">实际出库数量：</div>
-                        <div class="input-div"><input id="deliverNumber" placeholder="请输入出库数量"
-                                                     name="deliver.deliverNumber"/></div>
+                        <div class="lable"><span>* </span>实际出库数量：</div>
+                        <div class="input-div">
+                            <input id="deliverNumber" placeholder="请输入出库数量"
+                                   name="deliver.deliverNumber" onkeyup="value=value.replace(/[^\d]/g,'')"
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                            <span id="div_deliverNumber"></span></div>
                     </div>
 
 
@@ -219,20 +235,20 @@
                     </div>
                     <div class="line">
                         <div class="lable">出库填写人：</div>
-                        <div class="input-div"><input  readonly="readonly"
+                        <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">确认出库人：</div>
-                        <div class="input-div"><input  readonly="readonly"
+                        <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-                  <%--  <div class="line">
-                        <div class="lable">预提单号：</div>
-                        <div class="input-div"><input  readonly="readonly"
-                                                       style="border: none;-webkit-box-shadow: none;"/></div>
-                    </div>--%>
+                    <%--  <div class="line">
+                          <div class="lable">预提单号：</div>
+                          <div class="input-div"><input  readonly="readonly"
+                                                         style="border: none;-webkit-box-shadow: none;"/></div>
+                      </div>--%>
                     <div class="line">
                         <div class="lable">出库类别：</div>
                         <div class="input-div"><input readonly="readonly"
@@ -245,7 +261,7 @@
                     </div>
 
 
-                    <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
+                    <input type="submit" value="确定" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>
             </div>

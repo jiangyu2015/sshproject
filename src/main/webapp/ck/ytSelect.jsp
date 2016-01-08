@@ -43,6 +43,18 @@
                 dataType: 'json'
             });
         });
+
+        function check(form) {
+            var val = $("#item").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            if (val != null & val != "") {
+                if (selectId == undefined) {
+                    alert("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
+                    $("#div_alert").html("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
+                    return false;
+                }
+            }
+        }
     </script>
 </head>
 
@@ -69,7 +81,7 @@
              <datalist id="select3"></datalist>
          </div>
      </div>--%>
-    <form method="post" action="ytSelectDeliver.action">
+    <form method="post" action="ytSelectDeliver.action" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">预提单号：</div>
             <div class="input-div"><input placeholder="请输入预提单号"
@@ -89,6 +101,7 @@
                 <datalist id="select"></datalist>
             </div>
         </div>
+        <span id="div_alert"></span><br>
         <input type="submit" value="查找" class="btn-submit" <%--onclick="find();"--%>/>
     </form>
 </div>

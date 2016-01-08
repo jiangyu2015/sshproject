@@ -72,27 +72,6 @@
             }).mouseup(function () {
                 _move = false;
             });
-          /*  $.ajax({
-                type: "post",
-                url: "excuteAjaxJsonAction",
-                success: function (data, xhrTxt) {
-                    var str = "";
-                    var d = eval("(" + data + ")");
-                    var goods = d.goodsList;
-                    console.log(goods);
-                    for (var i = 0; i < goods.length; i++) {
-                        //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
-                        //   str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
-                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
-                    }
-                    $("#select").html(str);
-
-                    $('#item').bind('input propertychange', function () {
-                        $("#select").html(str);
-                    });
-                },
-                dataType: 'json'
-            });*/
 
             $.ajax({
                 type: "post",
@@ -160,11 +139,11 @@
             $('#dialog_edit').hide();
             return true;*/
             var val = $("#state").val();
-          /*  var val1 = $("#item").val();*/
+
             var val2 = $("#item2").val();
             var val3 = $("#item3").val();
 
-         /*   var selectId1 = $("[value='" + val1 + "']").eq(0).attr('value');*/
+
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('value');
             var selectId3 = $("[value='" + val3 + "']").eq(0).attr('value');
             var expectedNumber = $('#expectedNumber').val();
@@ -189,11 +168,6 @@
                 $("#div_item2").html("商户未录入或未被审核通过，请与管理员联系");
                 return false;
             }
-         /*   else if (selectId1 == undefined || val1.indexOf("|") == -1) {
-                alert("商品未录入或未被审核通过，请与管理员联系，并且请选择带|商品id的选项");
-                $("#div_item").html("商品未录入或未被审核通过，请与管理员联系，并且请选择带|商品id的选项，请先确认商品id");
-                return false;
-            }*/
             else if (selectId3 == undefined) {
                 alert("仓库未录入");
                 $("#div_item3").html("仓库未录入");
@@ -214,11 +188,11 @@
                 $("#div_expectedNumber").html("预期入库数量需大于0");
                 return false;
             }
-           /* else if (storagedays < todays) {
+            else if (storagedays < todays) {
                 alert("期望入库时间不能比今天小");
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
-            }*/
+            }
         }
 
         function isNull(str) {
@@ -321,7 +295,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input placeholder="请输入商品名称" name="storageApp.goodsName"/></div>
+                        <div class="input-div"><input  name="storageApp.goodsName" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">

@@ -93,12 +93,12 @@
                         $("#div_item3").html("仓库未建，请选择选项框内的仓库");
                         result = false;
                     }
-                    else if(expectedDate==null ||expectedDate==""){
+                    else if (expectedDate == null || expectedDate == "") {
                         $("#div_expectDate").html("期望时间不能为空");
                         result = false;
 
                     }
-                    else if(allotNumber==null ||allotNumber==""){
+                    else if (allotNumber == null || allotNumber == "") {
                         $("#div_allotNumber").html("调拨数量不能为空");
                         result = false;
                     }
@@ -112,7 +112,7 @@
                         $("#div_alert").html("目标仓库地址与原仓库地址相同！");
                         result = false;
                     }
-                    else if (storagedays <todays) {
+                    else if (storagedays < todays) {
                         alert("期望调拨时间不能比今天小");
                         $("#div_expectDate").html("期望调拨时间不能比今天小");
                         result = false;
@@ -179,18 +179,23 @@
         </div>
         <div class="line">
             <div class="lable"><span>* </span>目标仓库地址：</div>
-            <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址" name="placeName2"/>  <span id="div_item3"></span></div>
+            <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址" name="placeName2"/> <span
+                    id="div_item3"></span></div>
             <datalist id="select3"></datalist>
 
         </div>
         <div class="line">
             <div class="lable"><span>* </span>期望时间：</div>
             <div class="input-div"><input id="expectDate" placeholder="请输入期望调拨时间" name="allotApp.expectDate"
-                                          type="date"/>  <span id="div_expectDate"></span></div>
+                                          type="date"/> <span id="div_expectDate"></span></div>
         </div>
         <div class="line">
             <div class="lable"><span>* </span>调拨数量：</div>
-            <div class="input-div"><input id="allotNumber" placeholder="请输入调拨数量" name="allotApp.allotNumber"/><span id="div_allotNumber"></span></div>
+            <div class="input-div">
+                <input id="allotNumber" placeholder="请输入调拨数量" name="allotApp.allotNumber"
+                       onkeyup="value=value.replace(/[^\d]/g,'')"
+                       onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                <span id="div_allotNumber"></span></div>
         </div>
         <div class="line">
             <div class="lable">使用类型：</div>

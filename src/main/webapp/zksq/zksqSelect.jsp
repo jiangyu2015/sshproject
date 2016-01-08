@@ -44,7 +44,7 @@
 
             if (selectId == undefined) {
                 alert("该商品不存在，没有通过审核或没有入库，请确认");
-                document.getElementById("div_item").innerHTML = "该商品不存在，没有通过审核或没有入库，请确认";
+                document.getElementById("div_item").innerHTML = "该商品不存在，没有通过审核或没有建立，请确认!输入商品名称选择选项框内选项，无需添加|商品id!";
                 return false;
             }
             else  return true;
