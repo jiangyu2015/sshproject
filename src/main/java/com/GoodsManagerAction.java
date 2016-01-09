@@ -261,37 +261,39 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         }
         if (goodsBiz.modifyGood(condition)) {
             session.put("goodslist", condition);
-            request.put("message", "修改成功");  //先放着
+          /*  request.put("message", "修改成功");  //先放着*/
             return "success";
         } else
             return "input";
     }
 
     public String checkGoods() {               //得到所需审核的单子
-        System.out.println("审核checkGoods");
         Goods g = new Goods();
         g.setState("no");
         List<Goods> goods = goodsBiz.getGoodsList(g);
         if (goods.size() > 0) {
             Goods goods1 = (Goods) goods.get(0);
-            System.out.println(goods1.getGoodsName());
             session.put("goodslistcheck", goods);
         }
         return "goodsCheck";
     }
 
     public String checkGoodsSelect() { //得到查询的信息来审核 与search一样
-        System.out.println(goodsName);
         Goods condition = new Goods();
         condition.setGoodsName(goodsName);
         List list = goodsBiz.getGoodsList(condition);
         System.out.println(list.size());
         if (list.size() > 0) {
             Goods goods = (Goods) list.get(0);
-            //  session.put("goodslist", list);
             session.put("goodslistcheck", list);
             return "success";
         } else
             return "input";
+    }
+
+    public String getOverdueGoods(){
+        List goods = goodsBiz.getOverdueGoods();
+        session.put("goodslist", goods);
+        return "success";
     }
 }

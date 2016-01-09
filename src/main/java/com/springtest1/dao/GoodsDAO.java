@@ -25,5 +25,5 @@ public interface GoodsDAO {
 
     public List<Goods> isGoods(final Goods condition); //查是否已有
 
-
+    public List<Goods> getOverdueGoods();  //看是否过期
 }

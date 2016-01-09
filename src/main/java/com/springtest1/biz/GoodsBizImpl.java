@@ -20,9 +20,6 @@ public class GoodsBizImpl implements GoodsBiz {
         return list;
     }
 
-    /*	public Serializable add(Goods condition){
-            return goodsDAO.add(condition);
-        }  */
     public void add(Goods condition) {
         goodsDAO.add(condition);
     }
@@ -36,20 +33,28 @@ public class GoodsBizImpl implements GoodsBiz {
         return goodsDAO.getAllGoods();
     }
 
-    public boolean modifyGood(Goods good){
-        System.out.println(good.getPrice()+"biz里面的");
-        System.out.println(good.getService()+"biz里面的");
+    public boolean modifyGood(Goods good) {
         goodsDAO.modifyGood(good);
         return true;
     }
+
     @Transactional
-    public List<Goods> getGoods(String name){
+    public List<Goods> getGoods(String name) {
         return goodsDAO.getGoods(name);
     }
+
     @Transactional
-    public List<Goods> getGoodsCheck(){
-        return  goodsDAO.getGoodsCheck();
+    public List<Goods> getGoodsCheck() {
+        return goodsDAO.getGoodsCheck();
     }
+
     @Transactional
-    public List<Goods> isGoods(final Goods condition){return  goodsDAO.isGoods(condition);}
+    public List<Goods> isGoods(final Goods condition) {
+        return goodsDAO.isGoods(condition);
+    }
+
+    @Transactional
+    public List<Goods> getOverdueGoods() {
+        return goodsDAO.getOverdueGoods();
+    }
 }

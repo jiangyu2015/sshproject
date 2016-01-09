@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import java.io.Serializable;
@@ -27,11 +28,9 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
                 if (condition != null) {
                     if (condition.getGoodsId() != null && !condition.getGoodsId().equals("")) {
                         c.add(Restrictions.eq("goodsId", condition.getGoodsId()));
-                    }
-                    else if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
+                    } else if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
                         c.add(Restrictions.eq("goodsName", condition.getGoodsName()));
-                    }
-                    else if (condition.getState() != null && !condition.getState().equals("")) {
+                    } else if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }
@@ -109,14 +108,34 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
     }
 
     public List<Goods> isGoods(final Goods condition) {
-        Date date=condition.getCreationDate();
+        Date date = condition.getCreationDate();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String creationDate=df.format(date);
+        String creationDate = df.format(date);
 
-        String hql = "from Goods g where g.goodsName='"+condition.getGoodsName()+"' and g.price='"+condition.getPrice()
-                +"' and g.unit='"+condition.getUnit()+"'and g.service='"+condition.getService()+"' and g.creationDate='"+creationDate
-                +"' and g.baozhiqi='"+condition.getBaozhiqi()+"'";
+        String hql = "from Goods g where g.goodsName='" + condition.getGoodsName() + "' and g.price='" + condition.getPrice()
+                + "' and g.unit='" + condition.getUnit() + "'and g.service='" + condition.getService() + "' and g.creationDate='" + creationDate
+                + "' and g.baozhiqi='" + condition.getBaozhiqi() + "'";
 
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+        List<Goods> goodslist = query.list();
+        if (goodslist.size() <= 0) return new ArrayList<Goods>();
+        else {
+            Goods g = (Goods) query.list().get(0);
+            System.out.println(g.getGoodsName());
+            return goodslist;
+        }
+    }
+
+    public List<Goods> getOverdueGoods() {
+        Date date = new Date();
+        Calendar ca = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String start = sdf.format(date);
+        ca.add(Calendar.DATE, 90);
+        date = ca.getTime();
+        String end = sdf.format(date);
+        String hql = "from Goods g where g.expirationDate>= '" + start + "'and  g.expirationDate<='" + end + "'";
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         List<Goods> goodslist = query.list();

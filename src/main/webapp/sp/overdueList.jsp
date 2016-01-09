@@ -10,17 +10,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>商品信息</title>
+    <title>即将过期商品信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 </head>
 
 <body>
 <div class="table-div">
-    <div class="title">商品信息</div>
-    <div class="btn-div">
-        <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-    </div>
+    <div class="title">以下为90天内即将过期商品</div>
     <table id="advSearch" class="table">
         <thead>
         <tr>
@@ -49,7 +46,7 @@
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.goodslistall}" var="goods">
+        <s:iterator value="%{#session.goodslist}" var="goods">
             <tr>
                 <td><s:property value="#goods.goodsId"/></td>
                 <td><s:property value="#goods.goodsName"/></td>

@@ -24,9 +24,10 @@
         <action name="listGoods" class="goodsList" method="listGoods">
             <result type="redirect" name="goods">/sp/spAllList.jsp</result>
         </action>
-      <!--  <action name="listGoodsTest" class="goodsListTest" method="listGoodsTest">
+        <action name="overdueGoods" class="overdueGoods" method="getOverdueGoods">
+            <result type="redirect" name="success">/sp/overdueList.jsp</result>
+        </action>
 
-        </action>-->
         <action name="spDel" class="goodsDel" method="delGoods">
             <result type="redirect" name="success">/sp/test.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>

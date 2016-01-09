@@ -22,4 +22,6 @@ public interface GoodsBiz {
     public List<Goods> getGoodsCheck();
 
     public List<Goods> isGoods(final Goods condition);
+
+    public List<Goods> getOverdueGoods();
 }
