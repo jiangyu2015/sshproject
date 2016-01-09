@@ -99,7 +99,7 @@
                 <td><s:property value="#inventoryflow.withholdingConsume"/></td>
                 <td><s:property value="#inventoryflow.surplusWithholdingNumber"/></td>
                 <td><s:property value="#inventoryflow.availableInventory"/></td>
-                <td><s:property value="#inventoryflow.type"/></td>
+                <td><s:property value="#inventoryflow.type"/></td>、
 
             </tr>
         </s:iterator>

@@ -16,7 +16,7 @@
                 /*   alert($tds.eq(0).text())*/
                 if ($tds.eq(13).text() == 0) {
                     alert("可用库存为0，不可预提");
-                    return ;
+                    return;
                 }
                 else {
 
@@ -46,7 +46,8 @@
 <div class="table-div">
     <div class="title">库存仓库信息</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="预提申请" onclick="doWithholding();" style="position: relative; width: 90px;"/>
+        <input type="button" class="btn-eidt" value="预提申请" onclick="doWithholding();"
+               style="position: relative; width: 90px;"/>
 
     </div>
     <table id="advSearch" class="table">
@@ -68,7 +69,7 @@
             <th>剩余预提</th>
             <th>预提后可用库存</th>
 
-            <%--   <th>入库类型</th>--%>
+            <th>入库类型</th>
         </tr>
         </thead>
         <tbody>
@@ -89,7 +90,7 @@
                 <td><s:property value="#inventoryflow.withholdingConsume"/></td>
                 <td><s:property value="#inventoryflow.surplusWithholdingNumber"/></td>
                 <td><s:property value="#inventoryflow.availableInventory"/></td>
-                    <%--    <td><s:property value="#inventoryflow.type"/></td>--%>
+                <td><s:property value="#inventoryflow.type"/></td>
 
             </tr>
         </s:iterator>
