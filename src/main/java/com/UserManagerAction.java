@@ -66,7 +66,9 @@ public class UserManagerAction extends ActionSupport implements RequestAware,Ses
 		if(list.size()>0){
 			Users users=(Users)list.get(0);
 			String name=users.getName();
+            Integer roleId=users.getRoleId();
 			session.put("name", name);
+			session.put("role",roleId);
 			return "success"; 
 		}else{		
 			return "error";   

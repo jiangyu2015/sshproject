@@ -16,6 +16,7 @@
 				"id": "listGoods.action",
 				"text": "所有商品信息"
 			},{
+				"id": "overdueGoods.action",
 				"text": "过期提醒"
 			}]
 		},{

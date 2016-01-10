@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -15,24 +14,25 @@
     </style>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.easyui.min.js"></script>
 
-    <script>        
-		$(function(){
-			var role = 1; //根据后台获得的当前用户角色
-			var url = "";
-			
-			if(role == 1){
-				url = "tree_data1.json";
-			}else if(role == 2){
-				url = "tree_data2.json";
-			}else {
-				alert("您没有任何角色，不能查看");
-			}
-			
-			$('#mytree').tree({
-				url: url
-			});
-		});
-		
+    <script>
+        $(function () {
+
+           /*  alert(document.getElementById("sess").value);*/
+            var url = "";
+
+            if (document.getElementById("sess").value == 1) {
+                url = "tree_data1.json";
+            } else if (document.getElementById("sess").value  == 2) {
+                url = "tree_data2.json";
+            } else {
+                alert("您没有任何角色，不能查看");
+            }
+
+            $('#mytree').tree({
+                url: url
+            });
+        });
+
         function nodeClick(node) {
             if (node.id != undefined) {
                 //if	(node.id != undefined){
@@ -57,36 +57,6 @@
             background-color: #0a5c8e;
         }
 
-        .head-div {
-            position: relative;
-            top: 0px;
-            width: 100%;
-            height: 100px;
-            border: 1px solid #151515;
-        }
-
-    /*    .head-text {
-            padding-top: 30px;
-            font-size: 26px;
-        }
-
-        .left-div {
-            position: absolute;
-            width: 20%;
-            height: 80%;
-            margin: 10px;
-            border: 1px solid #151515;
-        }
-
-        .right-div {
-            position: absolute;
-            width: 75%;
-            height: 80%;
-            margin: 10px;
-            left: 22%;
-            border: 1px solid #151515;
-        }*/
-
         .my-panel {
             padding: 5px;
             background-color: #E6F4FD;
@@ -96,8 +66,9 @@
 </head>
 
 <body>
-	<div class="easyui-panel my-panel" style="width: 100%; height: 100%;">
-		<ul id="mytree" class="easyui-tree" data-options="onClick: nodeClick"></ul>
-	</div>
+<input type="hidden" id="sess" name="hiddenField" value=<%=session.getAttribute("role")%>>
+<div class="easyui-panel my-panel" style="width: 100%; height: 100%;">
+    <ul id="mytree" class="easyui-tree" data-options="onClick: nodeClick"></ul>
+</div>
 </body>
 </html>

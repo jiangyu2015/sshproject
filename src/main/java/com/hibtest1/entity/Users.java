@@ -7,6 +7,15 @@ public class Users implements Serializable {
     private String loginName;
     private String loginPwd;
     private String name;
+    private Integer roleId;
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 
     public String getName() {
         return name;
