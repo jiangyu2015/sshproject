@@ -6,12 +6,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface GoodsBiz {
-    public List <Goods>getGoodsList(Goods condition);
+    public List<Goods> getGoodsList(Goods condition);
 
     public void add(Goods condition);
 
-      public boolean delGoods(Goods good);  //删除
-
+    public boolean delGoods(Goods good);  //删除
 
     public List getAllGoods();
 

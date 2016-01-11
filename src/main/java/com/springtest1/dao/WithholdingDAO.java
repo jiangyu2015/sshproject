@@ -12,4 +12,5 @@ public interface WithholdingDAO {
    public void add(Withholding withholding); //预提添加
     public List<Withholding> getAllWithholding();
     public List<Withholding> search(final Withholding condition);//按条件查询
+    public void modifyWithholding(Withholding withholding);
 }

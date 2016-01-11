@@ -1,6 +1,7 @@
 package com;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
     Map<String, Object> session;
     private String result;
     private Goods goods;
+   /* private Withholding withholding;*/
 
     public void setGoodsBiz(GoodsBiz goodsBiz) {
         this.goodsBiz = goodsBiz;
@@ -40,12 +42,19 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         this.goods = goods;
     }
 
-    GoodsBiz goodsBiz;
+   /* public Withholding getWithholding() {
+        return withholding;
+    }
+
+    public void setWithholding(Withholding withholding) {
+        this.withholding = withholding;
+    }*/
 
     public void setStorageBiz(StorageBiz storageBiz) {
         this.storageBiz = storageBiz;
     }
 
+    GoodsBiz goodsBiz;
     ProducerBiz producerBiz;
     PlaceBiz placeBiz;
     StorageAppBiz storageAppBiz;
@@ -393,17 +402,38 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         return SUCCESS;
     }
 
+    public String doRelease() {
+      /*  Date as = new Date(new Date().getTime()-24*60*60*1000);
+        SimpleDateFormat matter1 = new SimpleDateFormat("yyyy-MM-dd");
+        String yesterday = matter1.format(as);*/
+        Date date = new Date();//取时间
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE, -1);//把日期往后增加一天.整数往后推,负数往前移动
+        date = calendar.getTime();
+        String yt = request.getParameter("id"); //预提id
+        int withholdingId = Integer.valueOf(yt);
+        Withholding condition = new Withholding();
+        condition.setWithholdingId(withholdingId);
+        Withholding withholding = withholdingBiz.search(condition).get(0);
+        withholding.setDeteline(date);
+        withholdingBiz.modifyWithholding(withholding);
+         /*   JSONObject json = new JSONObject();
+            json.put("difference", difference);
+            result = json.toString();*/
+        return SUCCESS;
+
+
+    }
+
     public String deliverSelect() {  //检测已出库多少，还可以预提多少
         String yt = request.getParameter("withholdingNumber"); //预提数
-        System.out.println("yt" + yt);
         int withholdingNumber = Integer.valueOf(yt);
         String xh = request.getParameter("sumwithholdingdeliver"); //预提消耗总数
-        System.out.println("xh" + xh);
         int sumwithholdingdeliver = Integer.valueOf(xh);
         /*String ck=request.getParameter("deliverNumber"); //本次出库数
         int deliverNumber=Integer.valueOf(ck);*/
         int difference = withholdingNumber - sumwithholdingdeliver;  //剩余消耗数
-        System.out.println("剩余消耗数为" + difference);
         JSONObject json = new JSONObject();
         json.put("difference", difference);
         result = json.toString();

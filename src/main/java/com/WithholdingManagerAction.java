@@ -101,7 +101,16 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     Integer goodsId;
     Integer placeId;
     Integer producerId;
+    Integer withholdingId;
     String goodsName;
+
+    public Integer getWithholdingId() {
+        return withholdingId;
+    }
+
+    public void setWithholdingId(Integer withholdingId) {
+        this.withholdingId = withholdingId;
+    }
 
     public Integer getId() {
         return id;
@@ -225,7 +234,6 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     Deliver deliver = delivers.get(0);
                     BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
                     int sumDeliver = a.intValue();
-                    System.out.println("出库总数" + sumDeliver);
                     session.put("sumwithholdingdeliver", sumDeliver);
                 } else {
                     int sumDeliver = 0;
@@ -249,7 +257,6 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     Deliver deliver = delivers.get(0);
                     BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
                     int sumDeliver = a.intValue();
-                    System.out.println("出库总数" + sumDeliver);
                     session.put("sumwithholdingdeliver", sumDeliver);
                 } else {
                     int sumDeliver = 0;

@@ -53,7 +53,7 @@
 <body>
 <div class="title">预提信息</div>
 <div class="btn-div">
-    <input type="button" class="btn-eidt" value="查看出库消耗" onclick="doDeliver();" style="position: relative; width:150px;"/>
+    <input type="button" class="btn-eidt" value="出库消耗" onclick="doDeliver();" style="position: relative; width:150px;"/>
 </div>
 
 <table id="advSearch" class="table">

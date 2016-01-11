@@ -12,4 +12,5 @@ public interface WithholdingBiz  {
   public void add(Withholding withholding);
   public List<Withholding> getAllWithholding();
   public List<Withholding> search( Withholding condition);
+  public boolean modifyWithholding(Withholding withholding);
 }

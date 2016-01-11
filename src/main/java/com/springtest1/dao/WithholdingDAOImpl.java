@@ -84,4 +84,8 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
         });
     }
 
+    public void modifyWithholding(Withholding withholding) {  //修改商品
+        super.getHibernateTemplate().update(withholding);
+    }
+
 }

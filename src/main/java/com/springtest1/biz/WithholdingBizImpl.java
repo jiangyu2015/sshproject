@@ -16,17 +16,22 @@ public class WithholdingBizImpl implements WithholdingBiz {
 
     private WithholdingDAO withholdingDAO;
 
-    public void add(Withholding withholding){
+    public void add(Withholding withholding) {
         withholdingDAO.add(withholding);
     }
 
     @Transactional
-    public List<Withholding> getAllWithholding(){
+    public List<Withholding> getAllWithholding() {
         return withholdingDAO.getAllWithholding();
     }
 
-    public List<Withholding> search(Withholding condition){
+    public List<Withholding> search(Withholding condition) {
         return withholdingDAO.search(condition);
+    }
+
+    public boolean modifyWithholding(Withholding withholding) {
+        withholdingDAO.modifyWithholding(withholding);
+        return true;
     }
 
 }

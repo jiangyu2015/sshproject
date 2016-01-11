@@ -27,8 +27,8 @@
                 $.ajax({
                     success: function () {
                         window.location.href = "ckAdd.jsp?id=" + $tds.eq(0).text() +
-                                "&withholdingNumber=" + $tds.eq(10).text() + "&sumwithholdingdeliver=" +  $('#sumwithholdingdeliver').html()+
-                        "&deteline="+$tds.eq(12).text();
+                                "&withholdingNumber=" + $tds.eq(10).text() + "&sumwithholdingdeliver=" + $('#sumwithholdingdeliver').html() +
+                                "&deteline=" + $tds.eq(12).text();
                     },
                     error: function () {
                         alert("系统异常，请稍后重试！");
@@ -36,6 +36,60 @@
                 });
             }
         }
+
+        function doRelease() {
+            if ($(".active").length == 0) {
+                alert('请选择要修改的行');
+            } else {
+                var deteline = $("tr.active").children().eq(12).text();
+                var arr = deteline.split("-");                    //比较时间
+                var overday = new Date(arr[0], arr[1], arr[2]);
+                var overdays = overday.getTime(); //截止时间
+                var arrs = getToDay().split("-");
+                var today = new Date(arrs[0], arrs[1], arrs[2]);
+                var todays = today.getTime();
+
+                if (overdays < todays)
+                    alert('预提已结束，无需释放');
+                else {
+                    $.ajax({
+                        url: "doReleaseJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                        data: {//设置数据源
+                            id: $("tr.active").children().eq(0).text()
+                        },
+                        dataType: "json",//设置需要返回的数据类型*/
+                        success: function (data, xhrTxt) {
+                            window.location.href = "ytSelectDeliver.action?withholdingId=" + $("tr.active").children().eq(0).text();
+                        },
+                        error: function () {
+                            alert("系统异常，请稍后重试！");
+                        }//这里不要加","
+                    });
+                }
+
+
+            }
+        }
+
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
+        }
+
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
+        }
+
         $(function () {
             $("#advSearch tbody tr").bind('click', function () {
                 $('table tr').removeClass('active');
@@ -57,6 +111,7 @@
 <div class="btn-div">
     <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();" style="position: relative; width: 90px;"/>
     当前预提消耗为： <span id="sumwithholdingdeliver"><%=session.getAttribute("sumwithholdingdeliver")%></span>
+    <input type="button" class="btn-eidt" value="预提释放" onclick="doRelease();" style="position: relative; width: 90px;"/>
 
 </div>
 
