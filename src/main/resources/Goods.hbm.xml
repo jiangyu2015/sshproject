@@ -78,5 +78,8 @@
         <property name="checkuser" type="java.lang.String">
             <column name="checkuser" length="30" not-null="false"/>
         </property>
+        <property name="commodityRating" type="java.lang.String">
+            <column name="commodity_rating" length="10" not-null="false"/>
+        </property>
     </class>
 </hibernate-mapping>

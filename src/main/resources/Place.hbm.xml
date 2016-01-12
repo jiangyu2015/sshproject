@@ -16,5 +16,14 @@
         <property name="state" type="java.lang.String">
             <column name="state" length="50" not-null="false"/>
         </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="50" not-null="false"/>
+        </property>
+        <property name="receiver" type="java.lang.String">
+            <column name="receiver" length="30" not-null="false"/>
+        </property>
+        <property name="tel" type="java.lang.String">
+            <column name="tel" length="15" not-null="false"/>
+        </property>
     </class>
 </hibernate-mapping>

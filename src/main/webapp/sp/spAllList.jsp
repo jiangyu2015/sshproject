@@ -15,9 +15,14 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-                    if (i == 13) {
-                        $('input:radio[name="goods.service"]').prop('checked', false);
-                        $('input:radio[name="goods.service"][value="' + $tds.eq(i).text() + '"]').prop('checked', true);
+                    if (i == 13 || i == 18) {
+                        if (i == 13) {
+                            $('input:radio[name="goods.service"]').prop('checked', false);
+                            $('input:radio[name="goods.service"][value="' + $tds.eq(i).text() + '"]').prop('checked', true);
+                        }
+                        if (i == 18) {
+                            $('#typeIn option[value="' + $tds.eq(i).text() + '"]').prop('selected', true);
+                        }
                     }
                     else {
                         $line.find('input').val($tds.eq(i).text());
@@ -184,6 +189,7 @@
             <th>保质期</th>
             <th>保质期截止日期</th>
             <th>商品可用</th>
+            <th>商品评级</th>
             <th>审核时间</th>
             <th>新建人</th>
             <th>修改人</th>
@@ -211,6 +217,7 @@
                 <td><s:property value="#goods.baozhiqi"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
                 <td><s:property value="#goods.state"/></td>
+                <td><s:property value="#goods.commodityRating"/></td>
                 <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#goods.auditTime"/></td>
                 <td><s:property value="#goods.adduser"/></td>
                 <td><s:property value="#goods.edituser"/></td>
@@ -246,13 +253,15 @@
                     </div>
                     <div class="line">
                         <div class="lable">参考价值：</div>
-                        <div class="input-div"><input placeholder="请输入参考价值" name="goods.value"   onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                        <div class="input-div"><input placeholder="请输入参考价值" name="goods.value"
+                                                      onkeyup="value=value.replace(/[^\d\.]/g,'')"
                                                       onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable"><span>* </span>单价：</div>
                         <div class="input-div">
-                            <input id="price" placeholder="请输入单价" name="goods.price"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                            <input id="price" placeholder="请输入单价" name="goods.price"
+                                   onkeyup="value=value.replace(/[^\d\.]/g,'')"
                                    onblur="value=value.replace(/[^\d\.]/g,'')"/>
                             <span id="div_price"></span>
                         </div>
@@ -260,22 +269,26 @@
                     </div>
                     <div class="line">
                         <div class="lable">长cm：</div>
-                        <div class="input-div"><input placeholder="请输入长cm" name="goods.length"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                        <div class="input-div"><input placeholder="请输入长cm" name="goods.length"
+                                                      onkeyup="value=value.replace(/[^\d\.]/g,'')"
                                                       onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">宽cm：</div>
-                        <div class="input-div"><input placeholder="请输入宽cm" name="goods.wide"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                        <div class="input-div"><input placeholder="请输入宽cm" name="goods.wide"
+                                                      onkeyup="value=value.replace(/[^\d\.]/g,'')"
                                                       onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">高cm：</div>
-                        <div class="input-div"><input placeholder="请输入高cm" name="goods.tall"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                        <div class="input-div"><input placeholder="请输入高cm" name="goods.tall"
+                                                      onkeyup="value=value.replace(/[^\d\.]/g,'')"
                                                       onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">毛重kg：</div>
-                        <div class="input-div"><input placeholder="请输入毛重kg" name="goods.mweight"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                        <div class="input-div"><input placeholder="请输入毛重kg" name="goods.mweight"
+                                                      onkeyup="value=value.replace(/[^\d\.]/g,'')"
                                                       onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
@@ -284,7 +297,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">体积重量kg：</div>
-                        <div class="input-div"><input placeholder="请输入体积重量kg" name="goods.vweight"    onkeyup="value=value.replace(/[^\d\.]/g,'')"
+                        <div class="input-div"><input placeholder="请输入体积重量kg" name="goods.vweight"
+                                                      onkeyup="value=value.replace(/[^\d\.]/g,'')"
                                                       onblur="value=value.replace(/[^\d\.]/g,'')"/></div>
                     </div>
                     <div class="line">
@@ -335,6 +349,18 @@
                         <div class="lable">商品可用：</div>
                         <div class="input-div"><input id="state" name="goods.state" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable"><span>* </span>商品评级：</div>
+                        <div class="input-div">
+                            <select id="typeIn" name="goods.commodityRating">
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="line">
                         <div class="lable">审核时间：</div>

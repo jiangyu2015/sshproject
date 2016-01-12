@@ -56,6 +56,9 @@
         <tr>
             <th>仓库id</th>
             <th>仓库名称</th>
+            <th>仓库地址</th>
+            <th>仓库收货人</th>
+            <th>仓库联系电话</th>
             <th>仓库状态</th>
 
         </tr>
@@ -65,6 +68,9 @@
             <tr>
                 <td><s:property value="#place.placeId"/></td>
                 <td><s:property value="#place.placeName"/></td>
+                <td><s:property value="#place.address"/></td>
+                <td><s:property value="#place.receiver"/></td>
+                <td><s:property value="#place.tel"/></td>
                 <td><s:property value="#place.state"/></td>
             </tr>
         </s:iterator>
@@ -72,6 +78,7 @@
     </table>
 </div>
 
+<%--
 <div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
@@ -102,3 +109,4 @@
 </div>
 </body>
 </html>
+--%>

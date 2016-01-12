@@ -25,6 +25,7 @@ public class Goods implements java.io.Serializable {
     private String adduser; //添加人
     private String edituser; //修改人
     private String checkuser; //审核人
+    private String commodityRating; //商品评级
 
     public Date getAuditTime() {
         return auditTime;
@@ -200,5 +201,13 @@ public class Goods implements java.io.Serializable {
 
     public void setCheckuser(String checkuser) {
         this.checkuser = checkuser;
+    }
+
+    public String getCommodityRating() {
+        return commodityRating;
+    }
+
+    public void setCommodityRating(String commodityRating) {
+        this.commodityRating = commodityRating;
     }
 }

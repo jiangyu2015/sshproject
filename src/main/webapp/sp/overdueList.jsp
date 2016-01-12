@@ -39,6 +39,7 @@
             <th>保质期</th>
             <th>保质期截止日期</th>
             <th>商品可用</th>
+            <th>商品评级</th>
             <th>审核时间</th>
             <th>新建人</th>
             <th>修改人</th>
@@ -66,6 +67,7 @@
                 <td><s:property value="#goods.baozhiqi"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
                 <td><s:property value="#goods.state"/></td>
+                <td><s:property value="#goods.commodityRating"/></td>
                 <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#goods.auditTime"/></td>
                 <td><s:property value="#goods.adduser"/></td>
                 <td><s:property value="#goods.edituser"/></td>

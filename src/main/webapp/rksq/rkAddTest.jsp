@@ -80,7 +80,7 @@
 
         });
     </script>
-    <!--   <% if(session.getAttribute("goodslistall")==null){response.sendRedirect("listrk");} %>  -->
+    <%--   <% if(session.getAttribute("goodslistall")==null){response.sendRedirect("listrk");} %>   --%>
 </head>
 
 <body>

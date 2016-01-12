@@ -119,6 +119,8 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
                 condition.setVweight(goods.getVweight()); //体积重量
             if (goods.getStandard() != null)
                 condition.setStandard(goods.getStandard());  //装箱规格
+            if (goods.getCommodityRating()!= null)
+                condition.setCommodityRating(goods.getCommodityRating());  //商品评级
             if (session.get("name") != null) {
                 condition.setAdduser(session.get("name").toString()); //得到增加人
             }
@@ -205,6 +207,8 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setStandard(goods.getStandard());  //装箱规格
         if (goods.getState() != null && !goods.getState().equals(""))
             condition.setState(goods.getState());  //开放状态
+        if (goods.getCommodityRating()!= null && !goods.getCommodityRating().equals(""))
+            condition.setCommodityRating(goods.getCommodityRating());  //商品评级
         if (session.get("name") != null) {
             condition.setEdituser(session.get("name").toString()); //得到修改人
         }
@@ -220,7 +224,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
     public String editGoods() {
         Goods g = new Goods();
         g.setGoodsId(goods.getGoodsId());
-        Goods condition = (Goods) goodsBiz.getGoodsList(g).get(0);
+        Goods condition = goodsBiz.getGoodsList(g).get(0);
         System.out.println("修改的商品id" + goods.getGoodsId());
         if (goods.getGoodsBackName() != null && !goods.getGoodsBackName().equals(""))        //后台名字
             condition.setGoodsBackName(goods.getGoodsBackName());
@@ -256,6 +260,8 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setStandard(goods.getStandard());  //装箱规格
         if (goods.getState() != null && !goods.getState().equals(""))
             condition.setState(goods.getState());  //开放状态
+        if (goods.getCommodityRating()!= null && !goods.getCommodityRating().equals(""))
+            condition.setCommodityRating(goods.getCommodityRating());  //商品评级
         if (session.get("name") != null) {
             condition.setEdituser(session.get("name").toString()); //得到修改人
         }

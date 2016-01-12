@@ -209,6 +209,18 @@
                        onblur="calculate()"/>
             </div>
         </div>
+        <div class="line">
+            <div class="lable"><span>* </span>商品评级：</div>
+            <div class="input-div">
+                <select name="goods.commodityRating">
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>
+                    <option value="B+">B+</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+        </div>
         <span id="div_alert"></span><br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>

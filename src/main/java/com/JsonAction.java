@@ -431,8 +431,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         int withholdingNumber = Integer.valueOf(yt);
         String xh = request.getParameter("sumwithholdingdeliver"); //预提消耗总数
         int sumwithholdingdeliver = Integer.valueOf(xh);
-        /*String ck=request.getParameter("deliverNumber"); //本次出库数
-        int deliverNumber=Integer.valueOf(ck);*/
         int difference = withholdingNumber - sumwithholdingdeliver;  //剩余消耗数
         JSONObject json = new JSONObject();
         json.put("difference", difference);

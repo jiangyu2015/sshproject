@@ -59,7 +59,9 @@
                         },
                         dataType: "json",//设置需要返回的数据类型*/
                         success: function (data, xhrTxt) {
-                            window.location.href = "ytSelectDeliver.action?withholdingId=" + $("tr.active").children().eq(0).text();
+                            alert('预提已释放');
+                            window.location.href = "ytSelectDeliver.action?id=" + $("tr.active").children().eq(0).text();
+
                         },
                         error: function () {
                             alert("系统异常，请稍后重试！");
@@ -111,7 +113,7 @@
 <div class="btn-div">
     <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();" style="position: relative; width: 90px;"/>
     当前预提消耗为： <span id="sumwithholdingdeliver"><%=session.getAttribute("sumwithholdingdeliver")%></span>
-    <input type="button" class="btn-eidt" value="预提释放" onclick="doRelease();" style="position: relative; width: 90px;"/>
+    <input type="button" class="btn-eidt" value="预提释放" onclick="doRelease();" style="position: absolute; width: 90px; right: 10px;"/>
 
 </div>
 
