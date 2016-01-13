@@ -111,7 +111,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         StorageApp storageApp1 = (StorageApp) storageApp.get(0);
         System.out.println(storageApp1.getGoodsName());
         session.put("storageapplistall", storageApp);
-
         return "storageApp";
     }
 
@@ -191,8 +190,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         if (storageApp.getStoragePlace() != null) {                     //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
         }
-        if (storageApp.getCommodityRating() != null)               //商品评级
-            condition.setCommodityRating(storageApp.getCommodityRating());
+    /*    if (storageApp.getCommodityRating() != null)               //商品评级
+            condition.setCommodityRating(storageApp.getCommodityRating());*/
         if (storageApp.getExpectedDate() != null)          //预期入库时间
             condition.setExpectedDate(storageApp.getExpectedDate());
         if (storageApp.getExpectedNumber() != null)          //预期入库数量
@@ -259,8 +258,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setStoragePlace(storageApp.getStoragePlace());
         if (storageApp.getGoodsName() != null && !storageApp.getGoodsName().equals(""))                 //商品名称
             condition.setGoodsName(storageApp.getGoodsName());
-        if (storageApp.getCommodityRating() != null && !storageApp.getCommodityRating().equals(""))               //商品评级
-            condition.setCommodityRating(storageApp.getCommodityRating());
+      /*  if (storageApp.getCommodityRating() != null && !storageApp.getCommodityRating().equals(""))               //商品评级
+            condition.setCommodityRating(storageApp.getCommodityRating());*/
         if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))          //预期入库时间
             condition.setExpectedDate(storageApp.getExpectedDate());
         if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))          //预期入库数量

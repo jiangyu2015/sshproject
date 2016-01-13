@@ -1,6 +1,7 @@
 package com;
 
 import java.math.BigDecimal;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -247,17 +248,51 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         return SUCCESS;
     }
 
+    public String getInfo() {
+        try {
+            if (request.getParameter("placeName") != null) {
+                String placeName = request.getParameter("placeName");
+                placeName = URLDecoder.decode(placeName, "UTF-8");
+                placeName = URLDecoder.decode(placeName, "UTF-8");
+                Place p = new Place();
+                p.setPlaceName(placeName);
+                List<Place> placeList = placeBiz.getPlaceList(p);
+                Place place = placeList.get(0);
+                JSONObject json = new JSONObject();
+                json.put("place", place);
+                result = json.toString();
+            }
+            if (request.getParameter("goodsName") != null) {
+                String goodsName = request.getParameter("goodsName");
+
+                goodsName = URLDecoder.decode(goodsName, "UTF-8");
+                goodsName = URLDecoder.decode(goodsName, "UTF-8");
+                Goods g = new Goods();
+                if (goodsName.indexOf("|") != -1) {
+                    String[] strs = goodsName.split("\\|");
+                    Integer id = Integer.parseInt(strs[1]);
+                    g.setGoodsId(id);
+                }
+                List<Goods> goodsList = goodsBiz.getGoodsList(g);
+                Goods goods = goodsList.get(0);
+                JSONObject json = new JSONObject();
+                json.put("goods", goods);
+                result = json.toString();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+
     public String excuteCheck() {   //入库申请审核未通过
         String id = request.getParameter("id");
         int storageAppId = Integer.valueOf(id);
-        System.out.println("JsonActionCheck传值" + storageAppId);
         StorageApp condition = new StorageApp();
         condition.setStorageAppId(storageAppId);
-        System.out.println(condition.getStorageAppId() + "condition.setStorageAppId");
         List list = storageAppBiz.getStorageAppList(condition);
-        System.out.println(list.size());
         StorageApp storageApp = (StorageApp) list.get(0);
-        System.out.print(storageApp.getProducerName() + storageApp.getStoragePlace() + storageApp.getGoodsName());
         storageApp.setState("yesno");                               //改申请state
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();

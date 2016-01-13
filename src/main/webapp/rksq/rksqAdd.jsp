@@ -86,6 +86,52 @@
                 dataType: 'json'
             });
         });
+        function getInfo() {
+            var goodsName=$("#item").val();
+            var  placeName=$("#item3").val();
+            if(goodsName!=null || goodsName!="") {
+                $.ajax({
+                    url: "getInfoJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                    data: {//设置数据源
+                        goodsName: encodeURI(encodeURI(goodsName))
+                    },
+                    dataType: "json",//设置需要返回的数据类型*/
+                    success: function (data, xhrTxt) {
+                        var str = "";
+                        var d = eval("(" + data + ")");
+                        var goods = d.goods;
+                        var commodityRating = str + goods.commodityRating;
+                        $('#commodityRating').val(commodityRating);
+                    },
+                    error: function () {
+                        alert("系统异常，请稍后重试！");
+                    }//这里不要加","
+                });
+            }
+            if(placeName!=null || placeName!="") {
+                $.ajax({
+                    url: "getInfoJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                    data: {//设置数据源
+                        placeName: encodeURI(encodeURI(placeName))
+                    },
+                    dataType: "json",//设置需要返回的数据类型*/
+                    success: function (data, xhrTxt) {
+                        var str = "";
+                        var d = eval("(" + data + ")");
+                        var place = d.place;
+                        var address = str + place.address;
+                        var receiver = str + place.receiver;
+                        var tel = str + place.tel;
+                        $('#address').val(address);
+                        $('#receiver').val(receiver);
+                        $('#tel').val(tel);
+                    },
+                    error: function () {
+                        alert("系统异常，请稍后重试！");
+                    }//这里不要加","
+                });
+            }
+        }
 
         function check(form) {
             var val = $("#item").val();
@@ -143,7 +189,7 @@
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
             }
-            else{
+            else {
                 alert("入库申请成功！");
                 return true;
             }
@@ -191,7 +237,7 @@
         <div class="line">
             <div class="lable"><span>* </span>商品名称：</div>
             <div class="input-div"><input id="item" list="select" placeholder="请输入商品名称"
-                                          name="storageApp.goodsName"/> <span
+                                          name="storageApp.goodsName" onchange="getInfo()"/> <span
                     id="div_item"></span></div>
             <datalist id="select"></datalist>
 
@@ -200,13 +246,31 @@
         <div class="line">
             <div class="lable"><span>* </span>入库地点：</div>
             <div class="input-div"><input id="item3" list="select3" placeholder="请输入入库地点"
-                                          name="storageApp.storagePlace"/><span id="div_item3"></span></div>
+                                          name="storageApp.storagePlace" onchange="getInfo()"/><span
+                    id="div_item3"></span></div>
             <datalist id="select3"></datalist>
 
         </div>
         <div class="line">
+            <div class="lable">仓库地址：</div>
+            <div class="input-div"><input id="address" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">仓库负责人：</div>
+            <div class="input-div"><input id="receiver" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">仓库联系电话：</div>
+            <div class="input-div"><input id="tel" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+
+        <div class="line">
             <div class="lable">商品评级：</div>
-            <div class="input-div"><input placeholder="请输入商品评级" name="storageApp.commodityRating"/></div>
+            <div class="input-div"><input id="commodityRating" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
             <div class="lable"><span>* </span>预期入库时间：</div>
@@ -215,7 +279,8 @@
         </div>
         <div class="line">
             <div class="lable"><span>* </span>预期入库数量：</div>
-            <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber" onkeyup="value=value.replace(/[^\d]/g,'')"
+            <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber"
+                                          onkeyup="value=value.replace(/[^\d]/g,'')"
                                           onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/><span
                     id="div_expectedNumber"></span></div>
         </div>
