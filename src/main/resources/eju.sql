@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-01-14 16:22:46
+Date: 2016-01-14 18:04:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -315,7 +315,7 @@ CREATE TABLE `rk_application` (
   CONSTRAINT `rk_place_add` FOREIGN KEY (`rk_place_add`) REFERENCES `kc_place` (`place`),
   CONSTRAINT `sh_name` FOREIGN KEY (`sh_name`) REFERENCES `sh_info` (`sh_name`),
   CONSTRAINT `sp_name` FOREIGN KEY (`sp_name`) REFERENCES `sp_info` (`sp_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rk_application
@@ -336,7 +336,7 @@ INSERT INTO `rk_application` VALUES ('15', '27', '商户A', '1252', '测试商�
 INSERT INTO `rk_application` VALUES ('16', '17', '一果人生', '7', '南瓜庄园天然南瓜籽', '2015-12-12', '100', '', '1', '1', '昆山仓库', '一元购', 'yesno', '2015-12-11', null, '笔', null, null);
 INSERT INTO `rk_application` VALUES ('17', '1', '首道养生', '1', '松江原生态大米（2斤装）', '2015-12-14', '200', 'AAA', '12', '2', '一楼仓库', '一元购', 'yesok', '2015-12-14', '2015-12-31 11:00:56', '笔', null, '王瑜佳');
 INSERT INTO `rk_application` VALUES ('18', '1', '首道养生', '1253', '商品AA', '2015-12-15', '200', 'AAA', '123', '2', '一楼仓库', '一元购', 'yesno', '2015-12-15', '2015-12-18 16:31:26', '笔', null, null);
-INSERT INTO `rk_application` VALUES ('19', '1', '首道养生', '1', '松江原生态大米（2斤装）', '2015-12-16', '999', 'A', '12', '1', '昆山仓库', '一元购', 'no', '2015-12-16', null, '笔', '王瑜佳', null);
+INSERT INTO `rk_application` VALUES ('19', '1', '首道养生', '1', '松江原生态大米（2斤装）', '2016-01-14', '888', 'A', '12', '1', '昆山仓库', '一元购', 'yesok', '2015-12-16', '2016-01-14 18:03:01', '笔', '王瑜佳', '王瑜佳');
 INSERT INTO `rk_application` VALUES ('20', '26', '小地方', '4', '实惠早餐蛋糕', '2015-12-31', '1000', 'AAA', '123', '1', '昆山仓库', '社区特卖', 'yesok', '2015-12-16', null, '笔', '诶', null);
 INSERT INTO `rk_application` VALUES ('21', '26', '小地方', '3', '下午茶饼干', '2015-12-16', '1000', 'A', '12', '1', '昆山仓库', '一元购', 'yesok', '2015-12-16', null, '笔', null, null);
 INSERT INTO `rk_application` VALUES ('22', '9', '波奇宠物', '7', '松江原生态大米（2斤装）', '2015-12-26', '1000', 'AAA', '1213', '6', '一楼仓库', '社区特卖', 'yesok', '2015-12-16', null, '笔', null, null);
@@ -352,7 +352,7 @@ INSERT INTO `rk_application` VALUES ('31', '1', '首道养生', '6', '卡依之�
 INSERT INTO `rk_application` VALUES ('32', '28', '大陆大葱培育有限公司', '1254', '我是一根葱', '2015-12-18', '10000000', 'A++', '0058888', '1', '昆山仓库', '福利', 'yesok', '2015-12-18', '2015-12-18 16:30:53', '笔', null, null);
 INSERT INTO `rk_application` VALUES ('33', '30', '悲伤的商户2', '1254', '我是一根葱', '2015-12-31', '100', 'BBB', '1234', '1', '昆山仓库', '一元购', 'yesok', '2015-12-21', '2015-12-21 17:17:55', '王瑜佳', '王瑜佳', '王瑜佳');
 INSERT INTO `rk_application` VALUES ('34', '26', '小地方', '10', '荷高全脂牛奶', '2015-12-31', '100', 'A+', '123', '2', '一楼仓库', '任意配置', 'yesok', '2015-12-24', '2015-12-24 16:39:02', '笔', null, null);
-INSERT INTO `rk_application` VALUES ('35', '2', '斯锐凯博（上海）健身服务有限公司', '13', '非非水', '2016-01-21', '100', 'AAA', '1213', '3', '宝山仓库', '社区特卖', 'no', '2015-12-31', null, '王瑜佳', null, null);
+INSERT INTO `rk_application` VALUES ('35', '2', '波奇宠物', '13', '非非水', '2016-01-21', '100', 'AAA', '1213', '3', '一楼仓库/虚拟入库', '社区特卖', 'no', '2015-12-31', null, '王瑜佳', '王瑜佳', null);
 INSERT INTO `rk_application` VALUES ('36', '2', '斯锐凯博（上海）健身服务有限公司', '2', '松江原生态大米（2斤装）', '2016-01-07', '1000', 'A', '12', '3', '宝山仓库', '社区特卖', 'no', '2016-01-06', null, '王瑜佳', '诶', null);
 INSERT INTO `rk_application` VALUES ('37', '32', '黄土高坡', '1269', '一抔土', '2016-01-07', '100', 'AAAA', '', '1', '昆山仓库', '社区特卖', 'yesok', '2016-01-06', '2016-01-06 13:29:11', '王瑜佳', '王瑜佳', '王瑜佳');
 INSERT INTO `rk_application` VALUES ('38', '7', '实惠上海', '9', '妇菌洁女士内裤消毒泡腾片.33g*10片', '2016-01-31', '1000', 'A+', '', '4', '四楼财务室进门抽屉', '社区特卖', 'no', '2016-01-07', null, '诶', '王瑜佳', null);
@@ -362,6 +362,8 @@ INSERT INTO `rk_application` VALUES ('41', '34', '大金', '13', '非非水', '2
 INSERT INTO `rk_application` VALUES ('42', '8', '鞋博士皮具修护中心', '5', '查理氏果汁饮料', '2016-01-31', '100', '', '', '5', '一楼仓库/虚拟入库', '一元购', 'no', '2016-01-07', null, '王瑜佳', null, null);
 INSERT INTO `rk_application` VALUES ('43', '8', '鞋博士皮具修护中心', '4', '实惠早餐蛋糕', '2016-01-31', '100', '', '', '5', '一楼仓库/虚拟入库', '一元购', 'no', '2016-01-07', null, '王瑜佳', null, null);
 INSERT INTO `rk_application` VALUES ('44', '35', '山上', '13', '非非水', '2016-01-12', '400', null, '', '4', '四楼财务室进门抽屉', '社区特卖', 'no', '2016-01-14', null, '王瑜佳', '王瑜佳', null);
+INSERT INTO `rk_application` VALUES ('45', '8', '鞋博士皮具修护中心', '6', '卡依之黑莓葡萄汁', '2016-01-14', '100', null, '', '3', '宝山仓库', '社区特卖', 'no', '2016-01-14', null, '王瑜佳', null, null);
+INSERT INTO `rk_application` VALUES ('46', '7', '实惠上海', '5', '查理氏果汁饮料', '2016-01-31', '1000', null, '', '5', '一楼仓库/虚拟入库', '社区特卖', 'no', '2016-01-14', null, '王瑜佳', null, null);
 
 -- ----------------------------
 -- Table structure for rk_detail
@@ -382,13 +384,13 @@ CREATE TABLE `rk_detail` (
   `state` enum('no','ok') DEFAULT 'no',
   `checkuser` varchar(30) DEFAULT NULL,
   `adduser` varchar(30) DEFAULT NULL,
-  `rkapplicationId` int(11) DEFAULT NULL,
+  `rkapplicationId` int(4) DEFAULT NULL,
   PRIMARY KEY (`rk_id`),
   KEY `rksp_id` (`sp_id`) USING BTREE,
   KEY `rk_plcae_id` (`rk_place_id`),
   CONSTRAINT `rksp_id` FOREIGN KEY (`sp_id`) REFERENCES `sp_info` (`sp_id`),
   CONSTRAINT `rk_plcae_id` FOREIGN KEY (`rk_place_id`) REFERENCES `kc_place` (`kc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rk_detail
@@ -450,6 +452,7 @@ INSERT INTO `rk_detail` VALUES ('54', '1269', '32', '2016-01-07', '2016-01-07', 
 INSERT INTO `rk_detail` VALUES ('55', '1269', '32', '2016-01-08', '2016-01-06', '2', '10', '10', null, '社区特卖', '正常调拨', 'ok', '王瑜佳', '王瑜佳', null);
 INSERT INTO `rk_detail` VALUES ('56', '1271', '35', '2016-01-09', '2016-01-06', '2', '100', '100', null, '一元购', '正常入库', 'ok', '王瑜佳', '王瑜佳', null);
 INSERT INTO `rk_detail` VALUES ('57', '10', '26', '2015-12-28', null, '5', '20', null, null, '任意配置', '正常调拨', 'no', null, '诶', null);
+INSERT INTO `rk_detail` VALUES ('58', '1', '1', '2016-01-14', null, '1', '888', null, null, '一元购', '正常入库', 'no', null, '笔', '19');
 
 -- ----------------------------
 -- Table structure for sh_info

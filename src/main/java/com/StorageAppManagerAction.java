@@ -125,6 +125,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String storageAppOk() {               //通过          需要增加不能为空的提示
         StorageApp condition = new StorageApp();
         condition.setStorageAppId(storageApp.getStorageAppId());
+        int i=storageApp.getStorageAppId();
         List list = storageAppBiz.getStorageAppList(condition);
         StorageApp storageApp = (StorageApp) list.get(0);
         storageApp.setState("yesok");     //更改状态yesok
@@ -137,7 +138,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         storageAppBiz.editStorageApp(storageApp);
         Storage storage = new Storage();           //新建入库明细表
 
-        Goods goods = (Goods) goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
+        storage.setStorageAppId(i); //入库明细id增加入库申请id
+        Goods goods = goodsBiz.getGoodsList(storageApp.getGoods()).get(0);
         storage.setGoods(goods);
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);
         storage.setProducer(producer);

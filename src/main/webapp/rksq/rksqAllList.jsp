@@ -193,6 +193,10 @@
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
             }
+            else {
+                alert("修改成功！");
+                return true;
+            }
         }
 
         function isNull(str) {
@@ -306,20 +310,17 @@
                         <div class="input-div"><input name="storageApp.goodsName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable"><span>* </span>入库地点：</div>
                         <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址"
                                                       name="storageApp.storagePlace"/><span id="div_item3"></span></div>
                         <datalist id="select3"></datalist>
                     </div>
-
                     <div class="line">
                         <div class="lable">商品评级：</div>
                         <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
                     <div class="line">
                         <div class="lable"><span>* </span>预期入库时间：</div>
                         <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间"

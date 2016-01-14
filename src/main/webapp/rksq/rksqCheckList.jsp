@@ -105,6 +105,7 @@
         <tr>
             <th>入库申请id</th>
             <th>商户名称</th>
+            <th>商品id</th>
             <th>商品名称</th>
             <th>入库地点</th>
             <th>商品评级</th>
@@ -123,10 +124,11 @@
         <s:iterator value="%{#session.storageapplistcheck}" var="storageapp">
             <tr>
                 <td><s:property value="#storageapp.storageAppId"/></td>
-                <td><s:property value="#storageapp.producerName"/></td>
-                <td><s:property value="#storageapp.goodsName"/></td>
-                <td><s:property value="#storageapp.storagePlace"/></td>
-                <td><s:property value="#storageapp.commodityRating"/></td>
+                <td><s:property value="#storageapp.producer.producerName"/></td>
+                <td><s:property value="#storageapp.goods.goodsId"/></td>
+                <td><s:property value="#storageapp.goods.goodsName"/></td>
+                <td><s:property value="#storageapp.place.placeName"/></td>
+                <td><s:property value="#storageapp.goods.commodityRating"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storageapp.expectedDate"/></td>
                 <td><s:property value="#storageapp.expectedNumber"/></td>
                 <td><s:property value="#storageapp.sldId"/></td>
@@ -156,74 +158,78 @@
                     </div>
                     <div class="line">
                         <div class="lable">商户名称：</div>
-                        <div class="input-div"><input name="storageApp.producerName" readonly="readonly"
+                        <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
+                    <div class="line">
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input name="storageApp.goodsName" readonly="readonly"
+                        <div class="input-div"><input  readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">入库地点：</div>
-                        <div class="input-div"><input name="storageApp.storagePlace" readonly="readonly"
+                        <div class="input-div"><input  readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">商品评级：</div>
-                        <div class="input-div"><input name="storageApp.commodityRating" readonly="readonly"
+                        <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">预期入库时间：</div>
-                        <div class="input-div"><input name="storageApp.expectedDate"  type="date" readonly="readonly"
+                        <div class="input-div"><input  type="date" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
 
                     </div>
                     <div class="line">
                         <div class="lable">预期入库数量：</div>
-                        <div class="input-div"><input name="storageApp.expectedNumber" readonly="readonly"
+                        <div class="input-div"><input  readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">三联单编号：</div>
-                        <div class="input-div"><input name="storageApp.sldId" readonly="readonly"
+                        <div class="input-div"><input  readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">入库类型：</div>
-                        <div class="input-div"><input name="storageApp.storageType" readonly="readonly"
+                        <div class="input-div"><input  readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">申请时间：</div>
-                        <div class="input-div"><input  name="storageApp.applicationDate"  readonly="readonly"
+                        <div class="input-div"><input   readonly="readonly"
                                                        style="border: none;-webkit-box-shadow: none;"//></div>
                     </div>
                     <div class="line">
                         <div class="lable">处理状态：</div>
-                        <div class="input-div"><input name="storageApp.state" readonly="readonly"
+                        <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">新增人：</div>
-                        <div class="input-div"><input  name="storageApp.adduser" readonly="readonly"
+                        <div class="input-div"><input   readonly="readonly"
                                                        style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">修改人：</div>
-                        <div class="input-div"><input  name="storageApp.edituser" readonly="readonly"
+                        <div class="input-div"><input  readonly="readonly"
                                                        style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable">审核人：</div>
-                        <div class="input-div"><input  name="storageApp.checkuser" readonly="readonly"
+                        <div class="input-div"><input  readonly="readonly"
                                                        style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 

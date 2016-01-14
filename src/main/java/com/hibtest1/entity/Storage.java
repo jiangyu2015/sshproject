@@ -21,6 +21,15 @@ public class Storage implements Serializable {
     private String remark; //备注
     private String adduser; //添加人
     private String checkuser; //确认收货人
+    private Integer storageAppId; //入库申请id
+
+    public Integer getStorageAppId() {
+        return storageAppId;
+    }
+
+    public void setStorageAppId(Integer storageAppId) {
+        this.storageAppId = storageAppId;
+    }
 
     public Goods getGoods() {
         return goods;

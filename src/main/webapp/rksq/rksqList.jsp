@@ -74,6 +74,50 @@
             }).mouseup(function () {
                 _move = false;
             });
+
+            $.ajax({
+                type: "post",
+                url: "selectProducerJsonAction",
+                dataType: 'json',
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var producer = d.producerList;
+                    console.log(producer);
+                    for (var i = 0; i < producer.length; i++) {
+                        str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
+                    }
+                    $("#select2").html(str);
+
+                    $('#item2').bind('input propertychange', function () {
+                        $("#select2").html(str);
+                    });
+                },
+                error: function () {
+                    alert("未查到商户");
+                    $("#div_item2").html("未查到商户");
+                }//这里不要加","
+
+            });
+            $.ajax({
+                type: "post",
+                url: "excutePlaceAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var place = d.placeList;
+                    console.log(place);
+                    for (var i = 0; i < place.length; i++) {
+                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
+                    }
+                    $("#select3").html(str);
+
+                    $('#item3').bind('input propertychange', function () {
+                        $("#select3").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
         });
 
         function check() {
@@ -126,6 +170,10 @@
                 alert("期望入库时间不能比今天小");
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
+            }
+            else {
+                alert("修改成功！");
+                return true;
             }
         }
 
