@@ -23,7 +23,7 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-                    if (i == 8) {
+                    if (i == 9) {
                         $('#typeIn option[value="' + $tds.eq(i).text() + '"]').prop('selected', true);
                     } else {
                         $line.find('input').val($tds.eq(i).text());
@@ -121,23 +121,23 @@
         });
 
         function check() {
-          /*  var val = $("#state").val();
-            var val3 = $("#item3").val();
-            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
-            $(".input-div span").html("");
-            $("#div_alert").html("");
-            if (val == "yesok" || val == "yesno") {
-                alert("该入库申请已审核不能修改");
-                return false;
-            }
-            else if (val3 != null & val3 != "") {
-                if (selectId3 == undefined) {
-                    alert("仓库未建，请选择选项框内的仓库");
-                    return false;
-                }
-            }
-            $('#dialog_edit').hide();
-            return true;*/
+            /*  var val = $("#state").val();
+             var val3 = $("#item3").val();
+             var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+             $(".input-div span").html("");
+             $("#div_alert").html("");
+             if (val == "yesok" || val == "yesno") {
+             alert("该入库申请已审核不能修改");
+             return false;
+             }
+             else if (val3 != null & val3 != "") {
+             if (selectId3 == undefined) {
+             alert("仓库未建，请选择选项框内的仓库");
+             return false;
+             }
+             }
+             $('#dialog_edit').hide();
+             return true;*/
             var val = $("#state").val();
 
             var val2 = $("#item2").val();
@@ -235,6 +235,7 @@
         <tr>
             <th>入库申请id</th>
             <th>商户名称</th>
+            <th>商品id</th>
             <th>商品名称</th>
             <th>入库地点</th>
             <th>商品评级</th>
@@ -253,11 +254,13 @@
         <tbody>
         <s:iterator value="%{#session.storageapplistall}" var="storageapp">
             <tr>
+
                 <td><s:property value="#storageapp.storageAppId"/></td>
-                <td><s:property value="#storageapp.producerName"/></td>
-                <td><s:property value="#storageapp.goodsName"/></td>
-                <td><s:property value="#storageapp.storagePlace"/></td>
-                <td><s:property value="#storageapp.commodityRating"/></td>
+                <td><s:property value="#storageapp.producer.producerName"/></td>
+                <td><s:property value="#storageapp.goods.goodsId"/></td>
+                <td><s:property value="#storageapp.goods.goodsName"/></td>
+                <td><s:property value="#storageapp.place.placeName"/></td>
+                <td><s:property value="#storageapp.goods.commodityRating"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storageapp.expectedDate"/></td>
                 <td><s:property value="#storageapp.expectedNumber"/></td>
                 <td><s:property value="#storageapp.sldId"/></td>
@@ -289,13 +292,18 @@
                     <div class="line">
                         <div class="lable"><span>* </span>商户名称：</div>
                         <div class="input-div"><input id="item2" list="select2" placeholder="请输入商户名称"
-                                                      name="storageApp.producerName"/> <span id="div_item2"></span></div>
+                                                      name="storageApp.producerName"/> <span id="div_item2"></span>
+                        </div>
                         <datalist id="select2"></datalist>
-
+                    </div>
+                    <div class="line">
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
-                        <div class="input-div"><input  name="storageApp.goodsName" readonly="readonly"
+                        <div class="input-div"><input name="storageApp.goodsName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
@@ -308,17 +316,20 @@
 
                     <div class="line">
                         <div class="lable">商品评级：</div>
-                        <div class="input-div"><input placeholder="请输入商品评级" name="storageApp.commodityRating"/></div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">
                         <div class="lable"><span>* </span>预期入库时间：</div>
-                        <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间" name="storageApp.expectedDate"
+                        <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间"
+                                                      name="storageApp.expectedDate"
                                                       type="date"/> <span id="div_expectedDate"></span></div>
                     </div>
                     <div class="line">
                         <div class="lable"><span>* </span>预期入库数量：</div>
-                        <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量" name="storageApp.expectedNumber"/><span
+                        <div class="input-div"><input id="expectedNumber" placeholder="请输入预期入库数量"
+                                                      name="storageApp.expectedNumber"/><span
                                 id="div_expectedNumber"></span></div>
                     </div>
                     <div class="line">

@@ -274,8 +274,21 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
                 }
                 List<Goods> goodsList = goodsBiz.getGoodsList(g);
                 Goods goods = goodsList.get(0);
+                Date c=goods.getCreationDate();
+                Date e=goods.getExpirationDate();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 JSONObject json2 = new JSONObject();
-                json2.put("goods", goods);
+                String creationDate="";
+                String expirationDate="";
+                if(c!=null){
+                    creationDate = df.format(c);
+                }
+                if(e!=null){
+                    expirationDate = df.format(e);
+                }
+                json2.put("goods",goods);
+                json2.put("creationDate",creationDate);
+                json2.put("expirationDate",expirationDate);
                 result = json2.toString();
             }
 

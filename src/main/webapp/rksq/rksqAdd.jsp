@@ -95,9 +95,10 @@
             $('#commodityRating').val("");
             $('#price').val("");
             $('#unit').val("");
-            $('#creationDate').val("2010-01-01");
+            $('#creationDate').val("");
             $('#baozhiqi').val("");
             $('#expirationDate').val("");
+            $('#adduser').val("");
             if(goodsName!=null && goodsName!="") {
                 $.ajax({
                     url: "getInfoJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
@@ -112,15 +113,17 @@
                         var commodityRating = str + goods.commodityRating;
                         var price= str +goods.price;
                         var unit=str + goods.unit;
-                        var creationDate= goods.creationDate;
+                        var creationDate=str + d.creationDate;
                         var baozhiqi= str +goods.baozhiqi;
-                        var expirationDate=goods.expirationDate;
+                        var expirationDate=str +d.expirationDate;
+                        var adduser=str+ goods.adduser;
                         $('#commodityRating').val(commodityRating);
                         $('#price').val(price);
                         $('#unit').val(unit);
                         $('#creationDate').val(creationDate);
                         $('#baozhiqi').val(baozhiqi);
                         $('#expirationDate').val(expirationDate);
+                        $('#adduser').val(adduser);
                     },
                     error: function () {
                         alert("系统异常，请稍后重试！");
@@ -302,8 +305,13 @@
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
+            <div class="lable">商品增加人：</div>
+            <div class="input-div"><input id="adduser" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
             <div class="lable">生产日期：</div>
-            <div class="input-div"><input id="creationDate"  type="date" readonly="readonly"
+            <div class="input-div"><input id="creationDate" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
         <div class="line">
@@ -313,7 +321,7 @@
         </div>
         <div class="line">
             <div class="lable">保质期截止日期：</div>
-            <div class="input-div"><input id="expirationDate"  type="date" readonly="readonly"
+            <div class="input-div"><input id="expirationDate" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
 
