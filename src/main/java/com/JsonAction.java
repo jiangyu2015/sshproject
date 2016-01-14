@@ -250,7 +250,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
 
     public String getInfo() {
         try {
-            if (request.getParameter("placeName") != null) {
+            if (request.getParameter("placeName") != null && request.getParameter("placeName") != "") {
                 String placeName = request.getParameter("placeName");
                 placeName = URLDecoder.decode(placeName, "UTF-8");
                 placeName = URLDecoder.decode(placeName, "UTF-8");
@@ -258,13 +258,12 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
                 p.setPlaceName(placeName);
                 List<Place> placeList = placeBiz.getPlaceList(p);
                 Place place = placeList.get(0);
-                JSONObject json = new JSONObject();
-                json.put("place", place);
-                result = json.toString();
+                JSONObject json1 = new JSONObject();
+                json1.put("place", place);
+                result = json1.toString();
             }
-            if (request.getParameter("goodsName") != null) {
+            if (request.getParameter("goodsName") != null && request.getParameter("goodsName") != "") {
                 String goodsName = request.getParameter("goodsName");
-
                 goodsName = URLDecoder.decode(goodsName, "UTF-8");
                 goodsName = URLDecoder.decode(goodsName, "UTF-8");
                 Goods g = new Goods();
@@ -275,9 +274,9 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
                 }
                 List<Goods> goodsList = goodsBiz.getGoodsList(g);
                 Goods goods = goodsList.get(0);
-                JSONObject json = new JSONObject();
-                json.put("goods", goods);
-                result = json.toString();
+                JSONObject json2 = new JSONObject();
+                json2.put("goods", goods);
+                result = json2.toString();
             }
 
         } catch (Exception e) {

@@ -89,7 +89,16 @@
         function getInfo() {
             var goodsName=$("#item").val();
             var  placeName=$("#item3").val();
-            if(goodsName!=null || goodsName!="") {
+            $('#address').val("");
+            $('#receiver').val("");
+            $('#tel').val("");
+            $('#commodityRating').val("");
+            $('#price').val("");
+            $('#unit').val("");
+            $('#creationDate').val("2010-01-01");
+            $('#baozhiqi').val("");
+            $('#expirationDate').val("");
+            if(goodsName!=null && goodsName!="") {
                 $.ajax({
                     url: "getInfoJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                     data: {//设置数据源
@@ -101,14 +110,24 @@
                         var d = eval("(" + data + ")");
                         var goods = d.goods;
                         var commodityRating = str + goods.commodityRating;
+                        var price= str +goods.price;
+                        var unit=str + goods.unit;
+                        var creationDate= goods.creationDate;
+                        var baozhiqi= str +goods.baozhiqi;
+                        var expirationDate=goods.expirationDate;
                         $('#commodityRating').val(commodityRating);
+                        $('#price').val(price);
+                        $('#unit').val(unit);
+                        $('#creationDate').val(creationDate);
+                        $('#baozhiqi').val(baozhiqi);
+                        $('#expirationDate').val(expirationDate);
                     },
                     error: function () {
                         alert("系统异常，请稍后重试！");
                     }//这里不要加","
                 });
             }
-            if(placeName!=null || placeName!="") {
+            if(placeName!=null && placeName!="") {
                 $.ajax({
                     url: "getInfoJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                     data: {//设置数据源
@@ -268,10 +287,37 @@
         </div>
 
         <div class="line">
+            <div class="lable">单位：</div>
+            <div class="input-div"><input id="unit" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">单价：</div>
+            <div class="input-div"><input id="price" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
             <div class="lable">商品评级：</div>
             <div class="input-div"><input id="commodityRating" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
+        <div class="line">
+            <div class="lable">生产日期：</div>
+            <div class="input-div"><input id="creationDate"  type="date" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">保质期：</div>
+            <div class="input-div"><input id="baozhiqi" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+        <div class="line">
+            <div class="lable">保质期截止日期：</div>
+            <div class="input-div"><input id="expirationDate"  type="date" readonly="readonly"
+                                          style="border: none;-webkit-box-shadow: none;"/></div>
+        </div>
+
+
         <div class="line">
             <div class="lable"><span>* </span>预期入库时间：</div>
             <div class="input-div"><input id="expectedDate" placeholder="请输入预期入库时间" name="storageApp.expectedDate"
