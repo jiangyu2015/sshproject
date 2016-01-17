@@ -22,7 +22,6 @@ public class PlaceDAOImpl extends HibernateDaoSupport implements PlaceDAO {
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         Place test = (Place) query.list().get(0);
-        System.out.println("123" + test.getPlaceName());
         return query.list();
     }
 

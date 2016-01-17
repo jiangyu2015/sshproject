@@ -39,7 +39,7 @@ public class SearchBizImpl extends HibernateDaoSupport implements SearchBiz {
     }
 
     @Transactional
-    public List<CommodityDto> searchWithholding(Integer goodsId,Integer producerId,Integer placeId){
-        return  searchDAO.searchWithholding(goodsId, producerId,placeId);
+    public List<CommodityDto> searchWithholding(Integer goodsId,Integer producerId,Integer placeId,String type){
+        return  searchDAO.searchWithholding(goodsId, producerId,placeId,type);
     }
 }

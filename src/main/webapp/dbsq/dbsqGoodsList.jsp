@@ -19,7 +19,7 @@
 
         function doWithholding() {
             if ($(".active").length == 0) {
-                alert('请选择要修改的行');
+                alert('请选择要调拨的行');
                 return;
             } else {
                 var $tds = $("tr.active").children();
@@ -58,7 +58,6 @@
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="调拨申请" onclick="doWithholding();"
                style="position: relative; width: 90px;"/>
-
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -99,7 +98,7 @@
                 <td><s:property value="#inventoryflow.withholdingConsume"/></td>
                 <td><s:property value="#inventoryflow.surplusWithholdingNumber"/></td>
                 <td><s:property value="#inventoryflow.availableInventory"/></td>
-                <td><s:property value="#inventoryflow.type"/></td>、
+                <td><s:property value="#inventoryflow.type"/></td>
 
             </tr>
         </s:iterator>

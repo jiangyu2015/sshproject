@@ -37,10 +37,8 @@
                 url: "excutePlaceAjaxJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
-//                    alert("ck");
                     var d = eval("(" + data + ")");
                     var place = d.placeList;
-                    console.log(place);
                     for (var i = 0; i < place.length; i++) {
                         // str = str + "<option>" + place[i].placeName + "</option>";
                         str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
@@ -64,8 +62,8 @@
                     goodsId: $("#goodsId").val(),
                     placeId: GetQueryString("placeId"),
                     producerId: GetQueryString("producerId"),
-                    witholdingNumber: $("#witholdingNumber").val()
-                    /*     type: $("#type").val(),*/
+                    witholdingNumber: $("#witholdingNumber").val(),
+                    type: $("#type").val()
                     /*  unit: $("#unit").val()*/
                 },
                 dataType: "json",//设置需要返回的数据类型

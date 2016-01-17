@@ -27,6 +27,7 @@
 
                 }
                 $(".input-div span").html("");  //清空
+                $("#div_alert").html("");
                 $("#dialog_edit").show();
             }
         }
@@ -93,54 +94,86 @@
         });
 
         function check() {
-            var val = $("#state").val();
-            var placeName2 = $("#item3").val();
-            var selectId3 = $("[value='" + placeName2 + "']").eq(0).attr('id');
-            var placeName = $("#placeName").val();
-            var expectDate = $("#expectDate").val();
-            var arrs = expectDate.split("-");
-            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
-            var storagedays = storageday.getTime();
+            var result;
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "doWithholdingCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                data: {//设置数据源
+                    goodsId: $("#goodsId").val(),
+                    placeName: $("#placeName").val(),
+                    producerName: $("#producerName").val(),
+                    witholdingNumber: $("#witholdingNumber").val(),
+                    type: $("#type").val()
+                },
+                dataType: "json",//设置需要返回的数据类型
+                success: function (data, xhrTxt) {
+                    var d = eval("(" + data + ")");
+                    var availableInventory = d.availableInventory;
+                    var allotNumber = $("#allotNumber").val();
+                    var val = $("#state").val();
+                    var placeName2 = $("#item3").val();
+                    var selectId3 = $("[value='" + placeName2 + "']").eq(0).attr('id');
+                    var placeName = $("#placeName").val();
+                    var expectDate = $("#expectDate").val();
+                    var arrs = expectDate.split("-");
+                    var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
+                    var storagedays = storageday.getTime();
 
-            var arr = getToDay().split("-");
-            var today = new Date(arr[0], arr[1], arr[2]);  //今天
-            var todays = today.getTime();
+                    var arr = getToDay().split("-");
+                    var today = new Date(arr[0], arr[1], arr[2]);  //今天
+                    var todays = today.getTime();
 
-            $(".input-div span").html("");  //清空
-            if (val == "yesok" || val == "yesno") {
-                alert("该调拨申请已审核不能修改");
-                return false;
-            }
-            else if (placeName2 == null || placeName2 == "") {
-                alert("目标仓库不能为空");
-                $("#div_item3").html("目标仓库不能为空");
-                return false;
-            }
-            else if (placeName == placeName2) {
-                alert("调拨申请修改不成功，目标仓库地址与原仓库地址相同！");
-                $("#div_item3").html("目标仓库地址与原仓库地址不能相同");
-                return false;
-            }
-            else if (selectId3 == undefined) {
-                alert("调拨申请修改不成功,仓库未建，请选择选项框内的仓库");
-                $("#div_item3").html("仓库未建，请选择选项框内的仓库");
-                return false;
-            }
-            else if (expectDate == null || expectDate == "") {
-                alert("期望时间不能为空");
-                $("#div_expectDate").html("期望时间不能为空");
-                return false;
+                    $(".input-div span").html("");  //清空
+                    $("#div_alert").html("");
+                    if (val == "yesok" || val == "yesno") {
+                        alert("该调拨申请已审核不能修改");
+                        result = false;
+                    }
+                    else if (placeName2 == null || placeName2 == "") {
+                        alert("目标仓库不能为空");
+                        $("#div_item3").html("目标仓库不能为空");
+                        result = false;
+                    }
 
-            }
-            else if (storagedays <todays) {
-                alert("期望调拨时间不能比今天小");
-                $("#div_expectDate").html("期望调拨时间不能比今天小");
-                return false;
-            }
-            else {
-                alert("调拨申请成功！");
-                return true;
-            }
+                    else if (placeName == placeName2) {
+                        alert("调拨申请修改不成功，目标仓库地址与原仓库地址相同！");
+                        $("#div_item3").html("目标仓库地址与原仓库地址不能相同");
+                        result = false;
+                    }
+                    else if (selectId3 == undefined) {
+                        alert("调拨申请修改不成功,仓库未建，请选择选项框内的仓库");
+                        $("#div_item3").html("仓库未建，请选择选项框内的仓库");
+                        result = false;
+                    }
+                    else if (allotNumber == null || allotNumber == "") {
+                        alert("调拨数量不能为空");
+                        $("#div_allotNumber").html("调拨数量不能为空");
+                        result = false;
+                    }
+                    else if (allotNumber > availableInventory) {
+                        alert("调拨申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
+                        $("#div_alert").html("当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
+                        result = false;
+                    }
+                    else if (expectDate == null || expectDate == "") {
+                        alert("期望时间不能为空");
+                        $("#div_expectDate").html("期望时间不能为空");
+                        result = false;
+
+                    }
+                    else if (storagedays < todays) {
+                        alert("期望调拨时间不能比今天小");
+                        $("#div_expectDate").html("期望调拨时间不能比今天小");
+                        result = false;
+                    }
+                    else {
+                        alert("调拨修改成功！");
+                        result = true;
+                    }
+                }
+            });
+            return result;
         }
 
         var newdate = null;
@@ -260,9 +293,12 @@
                         </div>
                     </div>
                     <div class="line">
-                        <div class="lable">调拨数量：</div>
-                        <div class="input-div"><input id="allotNumber" name="allotApp.allotNumber" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                        <div class="lable"><span>* </span>调拨数量：</div>
+                        <div class="input-div">
+                            <input id="allotNumber" placeholder="请输入调拨数量" name="allotApp.allotNumber"
+                                   onkeyup="value=value.replace(/[^\d]/g,'')"
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                            <span id="div_allotNumber"></span></div>
                     </div>
                     <div class="line">
                         <div class="lable">使用类型：</div>
@@ -300,6 +336,7 @@
                         <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
+                    <span id="div_alert"></span><br>
                     <input type="submit" value="提交" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>

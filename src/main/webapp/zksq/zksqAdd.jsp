@@ -65,8 +65,8 @@
                     goodsId: $("#goodsId").val(),
                     placeId: GetQueryString("placeId"),
                     producerId: GetQueryString("producerId"),
-                    witholdingNumber: $("#witholdingNumber").val()
-                    /*     type: $("#type").val(),*/
+                    witholdingNumber: $("#witholdingNumber").val(),
+                    type: $("#typeOut").val()
                     /*  unit: $("#unit").val()*/
                 },
                 dataType: "json",//设置需要返回的数据类型
@@ -74,7 +74,7 @@
                     var d = eval("(" + data + ")");
                     var availableInventory = d.availableInventory;
                     var transferNumber = $("#transferNumber").val();
-                    alert(transferNumber);
+
                     var typeOut = $("#typeOut").val();
                     var typeIn = $("#typeIn").val();
 
@@ -204,7 +204,7 @@
         </div>
         <div class="line">
             <div class="lable"><span>* </span>期望时间：</div>
-            <div class="input-div"><input id="expectDate" placeholder="请输入期望转库时间" name="transferApp.expectDate"
+            <div class="input-div"><input id="expectDate"  name="transferApp.expectDate"
                                           type="date"/><span id="div_expectDate"></span></div>
         </div>
         <span id="div_alert"></span><br>

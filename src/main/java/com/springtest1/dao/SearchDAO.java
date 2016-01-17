@@ -14,5 +14,5 @@ public interface SearchDAO  {
 
     public List<CommodityDto> searchAll(); //查所有
     public List<CommodityDto> searchAllGoods(String goodsName);
-    public List<CommodityDto> searchWithholding(Integer goodsId,Integer producerId,Integer placeId);
+    public List<CommodityDto> searchWithholding(Integer goodsId,Integer producerId,Integer placeId,String type);
 }

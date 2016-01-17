@@ -274,21 +274,21 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
                 }
                 List<Goods> goodsList = goodsBiz.getGoodsList(g);
                 Goods goods = goodsList.get(0);
-                Date c=goods.getCreationDate();
-                Date e=goods.getExpirationDate();
+                Date c = goods.getCreationDate();
+                Date e = goods.getExpirationDate();
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 JSONObject json2 = new JSONObject();
-                String creationDate="";
-                String expirationDate="";
-                if(c!=null){
+                String creationDate = "";
+                String expirationDate = "";
+                if (c != null) {
                     creationDate = df.format(c);
                 }
-                if(e!=null){
+                if (e != null) {
                     expirationDate = df.format(e);
                 }
-                json2.put("goods",goods);
-                json2.put("creationDate",creationDate);
-                json2.put("expirationDate",expirationDate);
+                json2.put("goods", goods);
+                json2.put("creationDate", creationDate);
+                json2.put("expirationDate", expirationDate);
                 result = json2.toString();
             }
 
@@ -384,20 +384,35 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
 
     public String doWithholdingCheck() {      //检查是否可以预提，预提数小于等于预提后可用库存
         String gid = request.getParameter("goodsId");
-        System.out.println("商品id" + gid);
+        int placeId=0;
+        int producerId=0;
         int goodsId = Integer.valueOf(gid);
-        String kid = request.getParameter("placeId");
-        System.out.println("placeId" + kid);
-        int placeId = Integer.valueOf(kid);
-        String pid = request.getParameter("producerId");
-        System.out.println("producerId" + pid);
-        int producerId = Integer.valueOf(pid);
-     /*   String w = request.getParameter("witholdingNumber");
+        if (request.getParameter("placeId") != null && request.getParameter("placeId") != "") {
+            String kid = request.getParameter("placeId");
+             placeId = Integer.valueOf(kid);
+        }
+        if (request.getParameter("placeName") != null && request.getParameter("placeName") != "") {
+            String placeName = request.getParameter("placeName");
+            Place pl=new Place();
+            pl.setPlaceName(placeName);
+            Place place=placeBiz.getPlaceList(pl).get(0);
+            placeId = place.getPlaceId();
+        }
 
-        System.out.println("预提数" + w);
-        int witholdingNumber = Integer.valueOf(w);  //预提数  需要检测是不是字符 要不然会报错
-        String unit = request.getParameter("unit");       //单位  与库存商品单位不一样不预提*/
-        List<CommodityDto> commodityDtoList = searchBiz.searchWithholding(goodsId, producerId, placeId);
+        if (request.getParameter("producerId") != null && request.getParameter("producerId") != "") {
+            String pid = request.getParameter("producerId");
+             producerId = Integer.valueOf(pid);
+        }
+        if (request.getParameter("producerName") != null && request.getParameter("producerName") != "") {
+            String producerName=request.getParameter("producerName");
+            Producer p=new Producer();
+            p.setProducerName(producerName);
+            Producer producer=producerBiz.getProducerList(p).get(0);
+            producerId = producer.getProducerId();
+        }
+
+        String type = request.getParameter("type");
+        List<CommodityDto> commodityDtoList = searchBiz.searchWithholding(goodsId, producerId, placeId, type);
         System.out.println("搜查成功" + commodityDtoList.size());
         JSONObject json = new JSONObject();
         if (commodityDtoList.size() > 0) {

@@ -23,13 +23,14 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-					if(i == 7) {
-    					$('#typeIn option[value="'+$tds.eq(i).text()+'"]').prop('selected', true);
-    				}else {
-    					 $line.find('input').val($tds.eq(i).text());
-    				}
+                    if (i == 7) {
+                        $('#typeIn option[value="' + $tds.eq(i).text() + '"]').prop('selected', true);
+                    } else {
+                        $line.find('input').val($tds.eq(i).text());
+                    }
                 }
-
+                $(".input-div span").html("");  //清空
+                $("#div_alert").html("");
                 $("#dialog_edit").show();
             }
         }
@@ -74,24 +75,93 @@
             });
         });
 
-        function check(form) {
-            var val = $("#state").val();
-            var typeOut = $("#typeOut").val();
-            var typeIn = $("#typeIn").val();
-            if (val == "yesok" || val == "yesno") {
-                alert("该转库申请已审核不能修改");
-                return false;
-            }
-            else if (typeIn == typeOut) {
-                alert("转库申请修改不成功，目标使用类型与原先一样！");
-                return false;
-            }
-            else {
-                alert("转库申请修改成功！");
-                return true;
-            }
+        function check() {
+            var result;
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "doWithholdingCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                data: {//设置数据源
+                    goodsId: $("#goodsId").val(),
+                    placeName: $("#placeName").val(),
+                    producerName: $("#producerName").val(),
+                    witholdingNumber: $("#witholdingNumber").val(),
+                    type: $("#typeOut").val()
+                },
+                dataType: "json",//设置需要返回的数据类型
+                success: function (data, xhrTxt) {
+                    var d = eval("(" + data + ")");
+                    var availableInventory = d.availableInventory;
+                    var val = $("#state").val();
+                    var typeOut = $("#typeOut").val();
+                    var typeIn = $("#typeIn").val();
+                    var transferNumber = $("#transferNumber").val();
+                    var expectDate = $("#expectDate").val();  //期望入库时间  比较时间
+                    var arrs = expectDate.split("-");
+                    var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
+                    var storagedays = storageday.getTime();
+
+                    var arr = getToDay().split("-");
+                    var today = new Date(arr[0], arr[1], arr[2]);  //今天
+                    var todays = today.getTime();
+                    $(".input-div span").html("");
+                    $("#div_alert").html("");
+
+                    if (val == "yesok" || val == "yesno") {
+                        alert("该转库申请已审核不能修改");
+                        result = false;
+                    }
+                    else if (transferNumber == null || transferNumber == "") {
+                        alert("转库数量不能为空");
+                        $("#div_transferNumber").html("转库数量不能为空");
+                        result = false;
+                    }
+                    else if (expectDate == null || expectDate == "") {
+                        alert("期望时间不能为空");
+                        $("#div_expectDate").html("期望时间不能为空");
+                        result = false;
+                    }
+                    else if (typeIn == typeOut) {
+                        alert("转库申请修改不成功，目标使用类型与原先一样！");
+                        $("#div_alert").html("目标使用类型与原先一样！");
+                        result = false;
+                    }
+                    else if (transferNumber > availableInventory) {
+                        alert("转库申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
+                        $("#div_alert").html("转库申请不成功，当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
+                        result = false;
+                    }
+                    else if (storagedays < todays) {
+                        alert("期望转库时间不能比今天小");
+                        $("#div_alert").html("期望转库时间不能比今天小");
+                        result = false;
+                    }
+                    else {
+                        alert("转库申请修改成功！");
+                        result = true;
+                    }
+                }
+            });
+            return result;
+        }
+        var newdate = null;
+        function getToDay() {   //获取今天的日子
+            var now = new Date();
+            var nowYear = now.getFullYear();
+            var nowMonth = now.getMonth();
+            var nowDate = now.getDate();
+            newdate = new Date(nowYear, nowMonth, nowDate);
+            nowMonth = doHandleMonth(nowMonth + 1);
+            nowDate = doHandleMonth(nowDate);
+            return nowYear + "-" + nowMonth + "-" + nowDate;
         }
 
+        function doHandleMonth(month) {
+            if (month.toString().length == 1) {
+                month = "0" + month;
+            }
+            return month;
+        }
     </script>
 </head>
 
@@ -151,7 +221,7 @@
         <div class="title">修改转库申请</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editzksq" onsubmit="return check(this)">
+                <form method="post" action="editzksq">
                     <div class="line">
                         <div class="lable">转库申请id：</div>
                         <div class="input-div"><input readonly="readonly" name="transferApp.transferAppId"
@@ -178,9 +248,12 @@
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
-                        <div class="lable">转库数量：</div>
-                        <div class="input-div"><input id="allotNumber" placeholder="请输入转库数量"
-                                                      name="transferApp.transferNumber"/>
+                        <div class="lable"><span>* </span>转库数量：</div>
+                        <div class="input-div">
+                            <input id="transferNumber" placeholder="请输入转库数量"
+                                   name="transferApp.transferNumber" onkeyup="value=value.replace(/[^\d]/g,'')"
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                            <span id="div_transferNumber"></span>
                         </div>
                     </div>
                     <div class="line">
@@ -201,9 +274,9 @@
                         </div>
                     </div>
                     <div class="line">
-                        <div class="lable">期望时间：</div>
-                        <div class="input-div"><input  name="transferApp.expectDate"
-                                                      type="date"/></div>
+                        <div class="lable"><span>* </span>期望时间：</div>
+                        <div class="input-div"><input id="expectDate" name="transferApp.expectDate"
+                                                      type="date"/><span id="div_expectDate"></span></div>
                     </div>
                     <div class="line">
                         <div class="lable">申请时间：</div>
@@ -236,8 +309,8 @@
                         <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
-                    <input type="submit" value="提交" class="btn-submit"/>
+                    <span id="div_alert"></span><br>
+                    <input type="submit" value="提交" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>
             </div>

@@ -62,9 +62,10 @@
                 data: {//设置数据源
                     goodsId: $("#goodsId").val(),
                     placeId: $("#placeId").val(),
-                    producerId: $("#producerId").val()
+                    producerId: $("#producerId").val(),
+                    type: $("#type").val()
                     /*  witholdingNumber: $("#witholdingNumber").val(),*/
-                    /*     type: $("#type").val(),*/
+
                     /*   unit: $("#unit").val()  这个恢复上面的加逗号*/
                 },
                 dataType: "json",//设置需要返回的数据类型
