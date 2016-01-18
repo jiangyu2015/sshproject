@@ -70,7 +70,6 @@
         });
 
         function btn() {
-            alert("no");
             $.ajax({
                 type: "post",
                 url: "goodsCheckJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
@@ -81,7 +80,6 @@
                 success: function () {
                     alert("已确认未通过");
                     $('#dialog_edit').hide();
-                    //  window.location.reload();
                     window.location.href = "spCheck.action";
                 },
                 error: function () {
@@ -91,7 +89,6 @@
         }
 
         function btnOk() {
-            alert("yes");
             $.ajax({
                 type: "post",
                 url: "goodsCheckOkJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
@@ -102,7 +99,6 @@
                 success: function () {
                     alert("已确认通过");
                     $('#dialog_edit').hide();
-                    //  window.location.reload();
                     window.location.href = "spCheck.action";
                 },
                 error: function () {

@@ -196,7 +196,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         condition.setWitholdingDate(date);
-        System.out.println("当前时间" + date);
+    /*    session.put("goodslist", condition);*/
         withholdingBiz.add(condition);
         return "success";
     }

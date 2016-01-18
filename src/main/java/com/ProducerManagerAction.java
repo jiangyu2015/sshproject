@@ -184,9 +184,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         Producer p = new Producer();
         p.setState("no");
         List<Producer> producer = producerBiz.getProducerList(p);
-        if (producer.size() > 0) {
-            session.put("producerlistcheck", producer);
-        }
+        session.put("producerlistcheck", producer);
         return "producerCheck";
     }
 

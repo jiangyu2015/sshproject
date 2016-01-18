@@ -86,15 +86,17 @@
             $("#div_alert").html("");
 
             if (storageDate == null || storageDate.length == 0) {
-                $("#div_storageDate").html("请输入实际入库数！");
+                alert("请输入实际入库日期！");
+                $("#div_storageDate").html("请输入实际入库日期！");
                 return false;
             }
             if (storageNumber == null || storageNumber.length == 0) {
+                alert("请输入实际入库数！");
                 $("#div_storageNumber").html("请输入实际入库数！");
                 return false;
             }
             if (storagedays > todays) {
-                alert("确认收货不成功，实际入库时间比今天大？真的入库了再来填，拜拜！");
+                alert("确认收货不成功，实际入库时间不能比今天大");
                 $("#div_alert").html("确认收货不成功，实际入库时间不能比今天大");
                 return false;
             }

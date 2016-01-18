@@ -86,22 +86,30 @@
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
             var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+            if (!val && !val2 && !val3) {
+                alert("请输入一个查询选项");
+                $("#div_alert").html("请输入一个查询选项");
+                return false;
+            }
 
-            if (val != null & val != "") {
+            else if (val != null && val != "") {
                 if (selectId == undefined) {
                     alert("商品未建或未通过审核，请选择选项框内带“|数字”的商品");
+                    $("#div_alert").html("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
                     return false;
                 }
             }
-            else if (val2 != null & val2 != "") {
+            else if (val2 != null && val2 != "") {
                 if (selectId2 == undefined) {
                     alert("商户未建或未通过审核，请选择选项框内的商户");
+                    $("#div_alert").html("商户未建或未通过审核，请选择选项框内的商户");
                     return false;
                 }
             }
-            else if (val3 != null & val3 != "") {
+            else if (val3 != null && val3 != "") {
                 if (selectId3 == undefined) {
                     alert("仓库未建，请选择选项框内的仓库");
+                    $("#div_alert").html("仓库未建，请选择选项框内的仓库");
                     return false;
                 }
             }
@@ -133,7 +141,7 @@
             </div>
         </div>
 
-
+        <span id="div_alert"></span><br>
         <input type="submit" value="查找" class="btn-submit"/>
     </form>
 </div>
