@@ -159,7 +159,7 @@
 <div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
-        <div class="title">修改商户</div>
+        <div class="title">审核商户</div>
         <div class="overflow-div">
             <div class="content">
                 <form method="post" <%--action="editSh"--%>>
