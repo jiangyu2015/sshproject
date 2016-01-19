@@ -193,6 +193,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         if (session.get("name") != null) {
             condition.setAdduser(session.get("name").toString()); //得到增加人
         }
+
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         condition.setWitholdingDate(date);

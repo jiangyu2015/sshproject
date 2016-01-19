@@ -218,7 +218,7 @@
                 <td><s:date format="yyyy-MM-dd" name="#goods.expirationDate"/></td>
                 <td><s:property value="#goods.state"/></td>
                 <td><s:property value="#goods.commodityRating"/></td>
-                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#goods.auditTime"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#goods.auditTime"/></td>
                 <td><s:property value="#goods.adduser"/></td>
                 <td><s:property value="#goods.edituser"/></td>
                 <td><s:property value="#goods.checkuser"/></td>

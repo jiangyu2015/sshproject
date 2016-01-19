@@ -178,7 +178,6 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
             return "success";
         } else return "input";
     }
-
  
     public String  checkProducer() {               //得到所需审核的单子
         Producer p = new Producer();

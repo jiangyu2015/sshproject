@@ -140,7 +140,7 @@
                 <td><s:property value="#producer.telOne"/></td>
                 <td><s:property value="#producer.telTwo"/></td>
                 <td><s:property value="#producer.state"/></td>
-                <td><s:date format="yyyy-MM-dd hh:mm:ss" name="#producer.auditTime"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#producer.auditTime"/></td>
                 <td><s:property value="#producer.adduser"/></td>
                 <td><s:property value="#producer.edituser"/></td>
                 <td><s:property value="#producer.checkuser"/></td>

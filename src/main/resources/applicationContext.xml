@@ -76,7 +76,7 @@
     <bean id="userBiz" class="com.springtest1.biz.UserBizImpl">
         <property name="userDAO" ref="userDAO"/>
     </bean>
-    <bean id="umAction" class="com.UserManagerAction">
+    <bean id="umAction" class="com.UserManagerAction" scope="prototype">
         <property name="userBiz" ref="userBiz"/>
     </bean>
     <bean id="userAdd" class="com.UserManagerAction" scope="prototype">
