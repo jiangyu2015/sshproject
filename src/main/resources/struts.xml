@@ -103,6 +103,10 @@
             <result type="redirect" name="success">/zksq/zksqList.jsp</result>
         </action>
 
+        <action name="rksqSelect" class="searchStorageAppList" method="searchStorageAppList">
+            <result type="redirect" name="success">/rksq/rksqList.jsp</result>
+        </action>
+
         <action name="rksqcheck" class="storageAppCheck" method="checkStorageApp">
             <result type="redirect" name="storageAppCheck">/rksq/rksqCheckList.jsp</result>
         </action>

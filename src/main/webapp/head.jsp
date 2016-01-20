@@ -25,6 +25,7 @@
 <div id="top">
     <div id="top_txt">
         您好，<%=session.getAttribute("name")%>
+        <a href="index.html" target="_parent">   |  退出系统</a>
     </div>
     <h5>
         <em>

@@ -14,7 +14,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>入库申请信息</title>
-    <link type="text/css" rel="stylesheet" href="../common.css" />
+    <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
     <script>
@@ -26,9 +26,9 @@
                 var $lines = $("#dialog_edit").find('form').children();
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
-                    if(i == 9) {
-                        $('#typeIn option[value="'+$tds.eq(i).text()+'"]').prop('selected', true);
-                    }else {
+                    if (i == 9) {
+                        $('#typeIn option[value="' + $tds.eq(i).text() + '"]').prop('selected', true);
+                    } else {
                         $line.find('input').val($tds.eq(i).text());
                     }
                 }
@@ -74,7 +74,25 @@
             }).mouseup(function () {
                 _move = false;
             });
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
+                    }
+                    $("#selectgoods").html(str);
 
+                    $('#goods').bind('input propertychange', function () {
+                        $("#selectgoods").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
             $.ajax({
                 type: "post",
                 url: "selectProducerJsonAction",
@@ -88,9 +106,12 @@
                         str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
                     }
                     $("#select2").html(str);
-
+                    $("#selectproducer").html(str);
                     $('#item2').bind('input propertychange', function () {
                         $("#select2").html(str);
+                    });
+                    $('#producer').bind('input propertychange', function () {
+                        $("#selectproducer").html(str);
                     });
                 },
                 error: function () {
@@ -111,9 +132,12 @@
                         str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
                     }
                     $("#select3").html(str);
-
+                    $("#selectplace").html(str);
                     $('#item3').bind('input propertychange', function () {
                         $("#select3").html(str);
+                    });
+                    $('#place').bind('input propertychange', function () {
+                        $("#selectplace").html(str);
                     });
                 },
                 dataType: 'json'
@@ -202,6 +226,16 @@
             }
             return month;
         }
+
+        function checkSelect() {
+            var val = $("#goods").val();
+            var val2 = $("#producer").val();
+            var val3 = $("#place").val();
+            if (!val && !val2 && !val3) {
+                alert("请输入至少一个查询选项");
+                return false;
+            }
+        }
     </script>
 </head>
 
@@ -210,51 +244,63 @@
     <div class="title">入库申请信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
+        <form method="post" action="rksqSelect.action" onsubmit="return checkSelect()" class="head-form">
+            <div class="head-lable">商品名称：</div>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <datalist id="selectgoods"></datalist>
+            <div class="head-lable"> 商户名称：</div>
+            <input id="producer" class="head-input" list="selectproducer" name="producerName"/>
+            <datalist id="selectproducer"></datalist>
+            <div class="head-lable">入库地点：</div>
+            <input id="place" class="head-input" list="selectplace" name="storagePlace"/>
+            <datalist id="selectplace"></datalist>
+            <input type="submit" class="btn-remove head-btn-right" value="查询">
+        </form>
     </div>
-<table id="advSearch" class="table">
-    <thead>
-    <tr>
-        <th>入库申请id</th>
-        <th>商户名称</th>
-        <th>商品id</th>
-        <th>商品名称</th>
-        <th>入库地点</th>
-        <th>商品评级</th>
-        <th>预期入库时间</th>
-        <th>预期入库数量</th>
-        <th>三联单编号</th>
-        <th>入库类型</th>
-        <th>申请时间</th>
-        <th>处理状态</th>
-        <th>审核时间</th>
-        <th>新建人</th>
-        <th>修改人</th>
-        <th>审核人</th>
-    </tr>
-    </thead>
-    <tbody>
-    <s:iterator value="%{#session.storageapplist}" var="storageapp">
+    <table id="advSearch" class="table">
+        <thead>
         <tr>
-            <td><s:property value="#storageapp.storageAppId"/></td>
-            <td><s:property value="#storageapp.producer.producerName"/></td>
-            <td><s:property value="#storageapp.goods.goodsId"/></td>
-            <td><s:property value="#storageapp.goods.goodsName"/></td>
-            <td><s:property value="#storageapp.place.placeName"/></td>
-            <td><s:property value="#storageapp.goods.commodityRating"/></td>
-            <td><s:date format="yyyy-MM-dd" name="#storageapp.expectedDate"/></td>
-            <td><s:property value="#storageapp.expectedNumber"/></td>
-            <td><s:property value="#storageapp.sldId"/></td>
-            <td><s:property value="#storageapp.storageType"/></td>
-            <td><s:date format="yyyy-MM-dd" name="#storageapp.applicationDate"/></td>
-            <td><s:property value="#storageapp.state"/></td>
-            <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#storageapp.auditTime"/></td>
-            <td><s:property value="#storageapp.adduser"/></td>
-            <td><s:property value="#storageapp.edituser"/></td>
-            <td><s:property value="#storageapp.checkuser"/></td>
+            <th>入库申请id</th>
+            <th>商户名称</th>
+            <th>商品id</th>
+            <th>商品名称</th>
+            <th>入库地点</th>
+            <th>商品评级</th>
+            <th>预期入库时间</th>
+            <th>预期入库数量</th>
+            <th>三联单编号</th>
+            <th>入库类型</th>
+            <th>申请时间</th>
+            <th>处理状态</th>
+            <th>审核时间</th>
+            <th>新建人</th>
+            <th>修改人</th>
+            <th>审核人</th>
         </tr>
-    </s:iterator>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <s:iterator value="%{#session.storageapplist}" var="storageapp">
+            <tr>
+                <td><s:property value="#storageapp.storageAppId"/></td>
+                <td><s:property value="#storageapp.producer.producerName"/></td>
+                <td><s:property value="#storageapp.goods.goodsId"/></td>
+                <td><s:property value="#storageapp.goods.goodsName"/></td>
+                <td><s:property value="#storageapp.place.placeName"/></td>
+                <td><s:property value="#storageapp.goods.commodityRating"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storageapp.expectedDate"/></td>
+                <td><s:property value="#storageapp.expectedNumber"/></td>
+                <td><s:property value="#storageapp.sldId"/></td>
+                <td><s:property value="#storageapp.storageType"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storageapp.applicationDate"/></td>
+                <td><s:property value="#storageapp.state"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#storageapp.auditTime"/></td>
+                <td><s:property value="#storageapp.adduser"/></td>
+                <td><s:property value="#storageapp.edituser"/></td>
+                <td><s:property value="#storageapp.checkuser"/></td>
+            </tr>
+        </s:iterator>
+        </tbody>
+    </table>
 </div>
 
 <div id="dialog_edit" class="dialog-div">

@@ -154,8 +154,9 @@ input[type="radio"] {
 	background-color: #F5F17E !important;
 }
 .btn-div {
-	height: 45px;
-	padding-left: 20px;
+	height: 30px;
+    padding-left: 20px;
+    padding-bottom: 20px;
 }
 .btn-eidt, .btn-remove {
 	position: absolute;
@@ -226,5 +227,24 @@ input[type="radio"] {
 .dialog-content .overflow-div .content {
 	left: 45%;
 }
-
+.head-form {
+	padding-left: 90px;
+}
+.head-lable {
+	width: 8%;
+	min-width: 100px;
+ 	text-align: right;
+ 	font-size: 18px;
+ 	color: #3E3C3C;
+ 	display: inline-block;
+}
+.head-input {
+	width: 15%;
+	border: 1px solid #223CB7;
+	-webkit-box-shadow: 0px 1.5px 1.5px #080D44;
+}
+.head-btn-right {
+    position: relative;
+    left: 20px;
+}
 

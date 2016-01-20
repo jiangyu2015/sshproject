@@ -2,6 +2,7 @@ package com;
 
 import com.dto.EnteringWarehouseDto;
 import com.hibtest1.entity.*;
+import com.core.util.*;
 import com.hibtest1.entity.StorageApp;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -125,7 +126,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String storageAppOk() {               //通过          需要增加不能为空的提示
         StorageApp condition = new StorageApp();
         condition.setStorageAppId(storageApp.getStorageAppId());
-        int i=storageApp.getStorageAppId();
+        int i = storageApp.getStorageAppId();
         List list = storageAppBiz.getStorageAppList(condition);
         StorageApp storageApp = (StorageApp) list.get(0);
         storageApp.setState("yesok");     //更改状态yesok
@@ -162,13 +163,31 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
     public String searchStorageAppList() {  //改了
         StorageApp condition = new StorageApp();
-        condition.setProducerName(producerName);
+        if (StringUtils.isEmpty(goodsName) && StringUtils.isEmpty(producerName) && StringUtils.isEmpty(storagePlace)) {          //商品名称不为空
+            if (goodsName.indexOf("|") != -1) {
+                String[] strs = goodsName.split("\\|");      //增加goods
+                Integer id = Integer.parseInt(strs[1]);  //id
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsBiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
+            } else {
+                Goods g = new Goods();
+                g.setGoodsName(goodsName);
+                condition.setGoods(g);
+            }
+
+            Producer producer = producerBiz.getProducer(producerName).get(0);
+            condition.setProducer(producer);
+            Place place = placeBiz.getPlace(storagePlace).get(0);
+            condition.setPlace(place);
+        }
+
+
         List list = storageAppBiz.getStorageAppList(condition);
-        if (list.size() > 0) {
-            session.put("storageapplist", list);
-            return "success";
-        } else
-            return "input";
+        session.put("storageapplist", list);
+        return "success";
+
     }
 
 
@@ -185,15 +204,18 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         if (storageApp.getGoodsName() != null) {          //商品名称
             if (storageApp.getGoodsName().indexOf("|") != -1) {
                 String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
-                String name = strs[0];
+                String name = strs[0];  //名称
                 condition.setGoodsName(name);
+                Integer id = Integer.parseInt(strs[1]);  //id
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsBiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
             } else return "input";
         }
         if (storageApp.getStoragePlace() != null) {                     //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
         }
-    /*    if (storageApp.getCommodityRating() != null)               //商品评级
-            condition.setCommodityRating(storageApp.getCommodityRating());*/
         if (storageApp.getExpectedDate() != null)          //预期入库时间
             condition.setExpectedDate(storageApp.getExpectedDate());
         if (storageApp.getExpectedNumber() != null)          //预期入库数量
@@ -206,8 +228,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         condition.setApplicationDate(date);
-        System.out.println("当前时间" + date);
-        if (storageApp.getGoodsName().indexOf("|") != -1) {
+
+  /*      if (storageApp.getGoodsName().indexOf("|") != -1) {
             String[] strs = storageApp.getGoodsName().split("\\|");      //增加goods
             Integer id = Integer.parseInt(strs[1]);
             Goods g = new Goods();
@@ -217,12 +239,11 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setGoods(goods);
         } else {
             return "input";
-        }
+        }*/
 
         Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);       //增加商户
         condition.setProducer(producer);
-        Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0);
-        System.out.println("输出仓库id" + place.getPlaceId());
+        Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0); //增加仓库
         condition.setPlace(place);
         if (session.get("name") != null) {                   //得到增加人
             condition.setAdduser(session.get("name").toString());
@@ -233,35 +254,23 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
     }
 
-  /*  public String modifyShow() {                        //更新显示
-        StorageApp condition = new StorageApp();
-        condition.setStorageAppName(storageAppName);
-        List list = storageAppBiz.getStorageAppList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            StorageApp storageApp = new StorageApp();
-            storageApp = (StorageApp) list.get(0);
-            session.put("storageApp", storageApp);
-            return "success";
-        } else return "input";
-    } */
 
     public String editStorageApp() {
         StorageApp s = new StorageApp();
         s.setStorageAppId(storageApp.getStorageAppId());
-        StorageApp condition = new StorageApp();
-        condition = (StorageApp) storageAppBiz.getStorageAppList(s).get(0);
-     /*   if (storageApp.getStorageAppId() != null && !storageApp.getStorageAppId().equals("")) {
-            condition.setStorageAppId(storageApp.getStorageAppId());
-        }*/
-        if (storageApp.getProducerName() != null && !storageApp.getProducerName().equals(""))        //商户名称
+        StorageApp condition = (StorageApp) storageAppBiz.getStorageAppList(s).get(0);
+        if (storageApp.getProducerName() != null && !storageApp.getProducerName().equals("")) {      //商户名称
             condition.setProducerName(storageApp.getProducerName());
-        if (storageApp.getStoragePlace() != null && !storageApp.getStoragePlace().equals(""))                      //仓库地址
+            Producer producer = producerBiz.getProducer(storageApp.getProducerName()).get(0);       //增加商户
+            condition.setProducer(producer);
+        }
+        if (storageApp.getStoragePlace() != null && !storageApp.getStoragePlace().equals("")) {                 //仓库地址
             condition.setStoragePlace(storageApp.getStoragePlace());
+            Place place = placeBiz.getPlace(storageApp.getStoragePlace()).get(0); //增加仓库
+            condition.setPlace(place);
+        }
         if (storageApp.getGoodsName() != null && !storageApp.getGoodsName().equals(""))                 //商品名称
             condition.setGoodsName(storageApp.getGoodsName());
-      /*  if (storageApp.getCommodityRating() != null && !storageApp.getCommodityRating().equals(""))               //商品评级
-            condition.setCommodityRating(storageApp.getCommodityRating());*/
         if (storageApp.getExpectedDate() != null && !storageApp.getExpectedDate().equals(""))          //预期入库时间
             condition.setExpectedDate(storageApp.getExpectedDate());
         if (storageApp.getExpectedNumber() != null && !storageApp.getExpectedNumber().equals(""))          //预期入库数量

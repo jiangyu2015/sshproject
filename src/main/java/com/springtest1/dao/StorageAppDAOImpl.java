@@ -43,7 +43,22 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
             public List<StorageApp> doInHibernate(Session session) throws HibernateException, SQLException {
                 Criteria c = session.createCriteria(StorageApp.class);
                 if (condition != null) {
-                    System.out.println(condition.getProducerName() + "商户名称 DAOImpl");
+                    if (condition.getGoods() != null && condition.getProducer() != null && condition.getPlace() != null) {
+                        if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")
+                                && condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")
+                                && condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
+                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                            c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                            c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                        }
+                        if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals("")
+                                && condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")
+                                && condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
+                            c.add(Restrictions.eq("goodsName", condition.getGoods().getGoodsName()));
+                            c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                            c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                        }
+                    }
                     if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
                         c.add(Restrictions.eq("storageAppName", condition.getProducerName()));
                     }
@@ -53,24 +68,21 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
                         c.add(Restrictions.eq("storageAppId", condition.getStorageAppId()));
                     }
                 }
-                return c.list();
+                if (c.list().size() <= 0) {
+                    return new ArrayList<StorageApp>();
+                } else {
+                    return c.list();
+                }
             }
         });
     }
 
     public void add(StorageApp storageApp) {
-
-        System.out.println("商品" + storageApp.getGoodsName() + "商户" + storageApp.getProducerName() + "库存地点" + storageApp.getStoragePlace());
         super.getHibernateTemplate().save(storageApp);
     }
 
-  /*  public boolean delGoods(StorageApp condition) {
-        super.getHibernateTemplate().delete(condition);
-        return true;
-    }  */
 
     public void editStorageApp(StorageApp storageApp) {
-        System.out.println("DAO里面的入库申请" + storageApp.getProducerName());
         super.getHibernateTemplate().update(storageApp);   //修改
     }
 

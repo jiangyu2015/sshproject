@@ -24,7 +24,6 @@
                 for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
                     $line.find('input').val($tds.eq(i).text());
-
                 }
                 $(".input-div span").html("");
                 $("#div_alert").html("");
