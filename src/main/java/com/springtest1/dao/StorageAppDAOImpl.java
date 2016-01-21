@@ -90,7 +90,7 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
                     } else if (condition.getGoods() != null || condition.getProducer() != null || condition.getPlace() != null) {
                         if (condition.getGoods() != null) {
                             if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
-                                if (condition.getState() != null) {
+                                if (condition.getState() != null&& !condition.getState().equals("")) {
                                     c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                                     c.add(Restrictions.eq("state", condition.getState()));
                                 } else {

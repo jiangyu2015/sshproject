@@ -130,13 +130,29 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
         return "allotApp";
     }
 
+
     public String checkAllotApp() {               //得到所需审核的单子
         AllotApp condition = new AllotApp();
         condition.setState("no");
         List<AllotApp> allotApp = allotAppBiz.getAllotAppList(condition);
         session.put("allotapplischeck", allotApp);
         return "allotAppCheck";
+    }
 
+    public String checkAllotAppSelect() { //得到查询的信息来审核 与search一样
+        AllotApp condition = new AllotApp();
+        if (StringUtils.isEmpty(goodsName)) {
+            String[] strs = goodsName.split("\\|");      //增加goods
+            Integer id = Integer.parseInt(strs[1]);  //id
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        condition.setState("no");
+        List list = allotAppBiz.getAllotAppList(condition);
+        session.put("allotapplischeck", list);
+        return "success";
     }
 
     public String addAllotApp() throws Exception {                  //增加调拨申请

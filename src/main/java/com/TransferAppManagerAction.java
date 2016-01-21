@@ -127,7 +127,21 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
         List<TransferApp> transferApp = transferAppBiz.getTransferAppList(condition);
         session.put("transferapplischeck", transferApp);
         return "transferAppCheck";
-
+    }
+    public String checkTransferAppSelect() { //得到查询的信息来审核 与search一样
+        TransferApp condition = new TransferApp();
+        if (StringUtils.isEmpty(goodsName)) {
+            String[] strs = goodsName.split("\\|");      //增加goods
+            Integer id = Integer.parseInt(strs[1]);  //id
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        condition.setState("no");
+        List list = transferAppBiz.getTransferAppList(condition);
+        session.put("transferapplischeck", list);
+        return "success";
     }
 
     public String addTransferApp() throws Exception {                  //增加转库申请

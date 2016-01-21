@@ -125,8 +125,14 @@
         <action name="dbsqcheck" class="allotAppCheck" method="checkAllotApp">                     <!--调拨申请审核-->
             <result type="redirect" name="allotAppCheck">/dbsq/dbsqCheckList.jsp</result>
         </action>
+        <action name="dbsqSelectCheck" class="allotAppCheckSelect" method="checkAllotAppSelect">
+            <result type="redirect" name="success">/dbsq/dbsqCheckList.jsp</result>
+        </action>
         <action name="zksqcheck" class="transferAppCheck" method="checkTransferApp">               <!--转库申请审核-->
             <result type="redirect" name="transferAppCheck">/zksq/zksqCheckList.jsp</result>
+        </action>
+        <action name="zksqSelectCheck" class="transferAppCheckSelect" method="checkTransferAppSelect">
+            <result type="redirect" name="success">/zksq/zksqCheckList.jsp</result>
         </action>
         <action name="rksqOk" class="storageAppOk" method="storageAppOk">
             <result type="redirect" name="success">rksqcheck.action</result>

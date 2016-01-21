@@ -43,13 +43,16 @@ public class TransferAppDAOImpl extends HibernateDaoSupport implements TransferA
                 Criteria c = session.createCriteria(TransferApp.class);
                 if (condition != null) {
                     if (condition.getTransferAppId() != null && !condition.getTransferAppId().equals("")) {
-                        System.out.println("DAO" + condition.getTransferAppId());
                         c.add(Restrictions.eq("transferAppId", condition.getTransferAppId()));
+                    } else if (condition.getGoods() != null) {
+                        if (condition.getState() != null && !condition.getState().equals("")) {
+                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                            c.add(Restrictions.eq("state", condition.getState()));
+                        } else {
+                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                        }
                     } else if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
-                    }else if(condition.getGoods() != null){
-                        if(condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals(""))
-                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                     }
                 }
                 if (c.list().size() <= 0) {

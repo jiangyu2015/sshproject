@@ -226,8 +226,16 @@
     <bean id="allotAppCheck" class="com.AllotManagerAction" scope="prototype">
         <property name="allotAppBiz" ref="allotAppBiz"/>
     </bean>
+    <bean id="allotAppCheckSelect" class="com.AllotManagerAction" scope="prototype">
+        <property name="allotAppBiz" ref="allotAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
     <bean id="transferAppCheck" class="com.TransferAppManagerAction" scope="prototype">
         <property name="transferAppBiz" ref="transferAppBiz"/>
+    </bean>
+    <bean id="transferAppCheckSelect" class="com.TransferAppManagerAction" scope="prototype">
+        <property name="transferAppBiz" ref="transferAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
     <bean id="storageAppOk" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>

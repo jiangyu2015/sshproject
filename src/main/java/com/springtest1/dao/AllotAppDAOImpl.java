@@ -1,4 +1,5 @@
 package com.springtest1.dao;
+
 import com.hibtest1.entity.AllotApp;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by user on 2015/12/25.
  */
-public class AllotAppDAOImpl extends HibernateDaoSupport implements AllotAppDAO{
+public class AllotAppDAOImpl extends HibernateDaoSupport implements AllotAppDAO {
     public List getAllAllotApp() {
         String hql = "from AllotApp";
         Session session = this.getSessionFactory().getCurrentSession();
@@ -44,11 +45,15 @@ public class AllotAppDAOImpl extends HibernateDaoSupport implements AllotAppDAO{
                     if (condition.getAllotAppId() != null && !condition.getAllotAppId().equals("")) {
                         System.out.println("DAO" + condition.getAllotAppId());
                         c.add(Restrictions.eq("allotAppId", condition.getAllotAppId()));
-                    }else if (condition.getState() != null && !condition.getState().equals("")) {
-                        c.add(Restrictions.eq("state", condition.getState()));
-                    }else if(condition.getGoods() != null){
-                        if(condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals(""))
+                    } else if (condition.getGoods() != null) {
+                        if (condition.getState() != null && !condition.getState().equals("")) {
                             c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                            c.add(Restrictions.eq("state", condition.getState()));
+                        } else {
+                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                        }
+                    } else if (condition.getState() != null && !condition.getState().equals("")) {
+                        c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }
                 if (c.list().size() <= 0) {

@@ -122,7 +122,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
     public String checkStorageAppSelect() { //得到查询的信息来审核 与search一样
         StorageApp condition = new StorageApp();
         if (StringUtils.isEmpty(goodsName)) {
-          /*  if (goodsName.indexOf("|") != -1) {*/
             String[] strs = goodsName.split("\\|");      //增加goods
             Integer id = Integer.parseInt(strs[1]);  //id
             Goods g = new Goods();
@@ -134,7 +133,6 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
         List list = storageAppBiz.getStorageAppList(condition);
         session.put("storageapplistcheck", list);
         return "success";
-
     }
 
     public String storageAppOk() {               //通过          需要增加不能为空的提示
