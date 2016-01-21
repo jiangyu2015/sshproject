@@ -109,17 +109,31 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
 
     public String listStorageApp() {               //得到所有入库申请单
         List storageApp = storageAppBiz.getAllStorageApp();
-        StorageApp storageApp1 = (StorageApp) storageApp.get(0);
-        System.out.println(storageApp1.getGoodsName());
         session.put("storageapplistall", storageApp);
         return "storageApp";
     }
 
     public String checkStorageApp() {               //得到所需审核的单子
-        System.out.println("审核checkStorageApp");
         List<StorageApp> storageApp = storageAppBiz.getCheckStorageApp();
         session.put("storageapplistcheck", storageApp);
         return "storageAppCheck";
+    }
+
+    public String checkStorageAppSelect() { //得到查询的信息来审核 与search一样
+        StorageApp condition = new StorageApp();
+        if (StringUtils.isEmpty(goodsName)) {
+          /*  if (goodsName.indexOf("|") != -1) {*/
+            String[] strs = goodsName.split("\\|");      //增加goods
+            Integer id = Integer.parseInt(strs[1]);  //id
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        condition.setState("no");
+        List list = storageAppBiz.getStorageAppList(condition);
+        session.put("storageapplistcheck", list);
+        return "success";
 
     }
 
@@ -228,8 +242,11 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
                     id = Integer.parseInt(strs[1]);
                     Goods g = new Goods();
                     g.setGoodsId(id);
-                    Goods goods = goodsBiz.getGoodsList(g).get(0);
-                    condition.setGoods(goods);
+                    List<Goods> goodslist = goodsBiz.getGoodsList(g);
+                    if (goodslist.size() > 0) {
+                        Goods goods = goodslist.get(0);
+                        condition.setGoods(goods);
+                    } else return "input";
                 } else {
                     Goods g = new Goods();
                     g.setGoodsName(goodsName);

@@ -225,7 +225,6 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         Goods g = new Goods();
         g.setGoodsId(goods.getGoodsId());
         Goods condition = goodsBiz.getGoodsList(g).get(0);
-        System.out.println("修改的商品id" + goods.getGoodsId());
         if (goods.getGoodsBackName() != null && !goods.getGoodsBackName().equals(""))        //后台名字
             condition.setGoodsBackName(goods.getGoodsBackName());
         if (goods.getBaozhiqi() != null && !goods.getBaozhiqi().equals(""))                      //保质期
@@ -267,7 +266,6 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         }
         if (goodsBiz.modifyGood(condition)) {
             session.put("goodslist", condition);
-          /*  request.put("message", "修改成功");  //先放着*/
             return "success";
         } else
             return "input";
@@ -278,7 +276,6 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         g.setState("no");
         List<Goods> goods = goodsBiz.getGoodsList(g);
         if (goods.size() > 0) {
-            Goods goods1 = (Goods) goods.get(0);
             session.put("goodslistcheck", goods);
         }
         return "goodsCheck";
@@ -288,9 +285,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         Goods condition = new Goods();
         condition.setGoodsName(goodsName);
         List list = goodsBiz.getGoodsList(condition);
-        System.out.println(list.size());
         if (list.size() > 0) {
-            Goods goods = (Goods) list.get(0);
             session.put("goodslistcheck", list);
             return "success";
         } else

@@ -99,8 +99,6 @@
 			"children": [{
 				"id": "rksqcheck.action",
 				"text": "入库申请单审核"
-			},{
-				"text": "查询（还没加）"
 			}]
 		},{
 			"text": "调拨申请单审核",
@@ -108,8 +106,6 @@
 			"children": [{
 				"id": "dbsqcheck.action",
 				"text": "调拨申请单审核"
-			},{
-				"text": "查询（还没加）"
 			}]
 		},{
 			"text": "转库申请单审核",
@@ -117,8 +113,6 @@
 			"children": [{
 				"id": "zksqcheck.action",
 				"text": "转库申请单审核"
-			},{
-				"text": "查询（还没加）"
 			}]
 		},{
 			"text": "确认收货",

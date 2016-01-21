@@ -67,6 +67,25 @@
             }).mouseup(function () {
                 _move = false;
             });
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
+                    }
+                    $("#selectgoods").html(str);
+
+                    $('#goods').bind('input propertychange', function () {
+                        $("#selectgoods").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
         });
 
         function btn() {
@@ -89,6 +108,21 @@
 
         }
 
+        function checkSelect() {
+            var val = $("#goods").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            if (val == null || val == "") {
+                alert("请输入查询选项");
+                return false;
+            }
+            else if (val != null && val != "") {
+                if (selectId == undefined) {
+                    alert("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
+                    return false;
+                }
+            }
+        }
+
     </script>
 
 </head>
@@ -98,7 +132,12 @@
     <div class="title">未审核入库申请信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="审核" onclick="check();">
-       <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <form method="post" action="rksqSelectCheck.action" onsubmit="return checkSelect()" class="head-form">
+            <div class="head-lable">商品名称：</div>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <datalist id="selectgoods"></datalist>
+            <input type="submit" class="btn-remove head-btn-right" value="查询">
+        </form>
     </div>
     <table id="advSearch" class="table">
         <thead>

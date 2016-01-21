@@ -105,21 +105,27 @@
 
         <action name="rksqSelect" class="searchStorageAppList" method="searchStorageAppList">
             <result type="redirect" name="success">/rksq/rksqList.jsp</result>
+            <result type="redirect" name="input">/rksq/fail.jsp</result>
         </action>
         <action name="dbsqSelect" class="searchAllotAppList" method="searchAllotAppList">
             <result type="redirect" name="success">/dbsq/dbsqList.jsp</result>
+            <result type="redirect" name="input">/dbsq/fail.jsp</result>
         </action>
         <action name="zksqSelect" class="searchTransferAppList" method="searchTransferAppList">
             <result type="redirect" name="success">/zksq/zksqList.jsp</result>
+            <result type="redirect" name="input">/zksq/fail.jsp</result>
         </action>
 
-        <action name="rksqcheck" class="storageAppCheck" method="checkStorageApp">
+        <action name="rksqcheck" class="storageAppCheck" method="checkStorageApp">                 <!--入库申请审核-->
             <result type="redirect" name="storageAppCheck">/rksq/rksqCheckList.jsp</result>
         </action>
-        <action name="dbsqcheck" class="allotAppCheck" method="checkAllotApp">
+        <action name="rksqSelectCheck" class="storageAppCheckSelect" method="checkStorageAppSelect">
+            <result type="redirect" name="success">/rksq/rksqCheckList.jsp</result>
+        </action>
+        <action name="dbsqcheck" class="allotAppCheck" method="checkAllotApp">                     <!--调拨申请审核-->
             <result type="redirect" name="allotAppCheck">/dbsq/dbsqCheckList.jsp</result>
         </action>
-        <action name="zksqcheck" class="transferAppCheck" method="checkTransferApp">
+        <action name="zksqcheck" class="transferAppCheck" method="checkTransferApp">               <!--转库申请审核-->
             <result type="redirect" name="transferAppCheck">/zksq/zksqCheckList.jsp</result>
         </action>
         <action name="rksqOk" class="storageAppOk" method="storageAppOk">
@@ -136,7 +142,7 @@
             <result type="redirect" name="input">/rksq/fail.jsp</result>
         </action>
 
-        <action name="dbSelect" class="withholdingSelect" method="searchInventoryFlowGoods">
+        <action name="dbSelect" class="withholdingSelect" method="searchInventoryFlowGoods"> <!-- 调拨申请前先查询库存流动-->
             <result type="redirect" name="success">/dbsq/dbsqGoodsList.jsp</result>
             <result type="redirect" name="fail">/dbsq/fail.jsp</result>
         </action>

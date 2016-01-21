@@ -219,6 +219,10 @@
     <bean id="storageAppCheck" class="com.StorageAppManagerAction" scope="prototype">
         <property name="storageAppBiz" ref="storageAppBiz"/>
     </bean>
+    <bean id="storageAppCheckSelect" class="com.StorageAppManagerAction" scope="prototype">
+        <property name="storageAppBiz" ref="storageAppBiz"/>
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
     <bean id="allotAppCheck" class="com.AllotManagerAction" scope="prototype">
         <property name="allotAppBiz" ref="allotAppBiz"/>
     </bean>

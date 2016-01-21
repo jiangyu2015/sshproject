@@ -89,9 +89,14 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
                         }
                     } else if (condition.getGoods() != null || condition.getProducer() != null || condition.getPlace() != null) {
                         if (condition.getGoods() != null) {
-                            if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals(""))
-                                c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
-                            else if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals(""))
+                            if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
+                                if (condition.getState() != null) {
+                                    c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                                    c.add(Restrictions.eq("state", condition.getState()));
+                                } else {
+                                    c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                                }
+                            } else if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals(""))
                                 c.add(Restrictions.eq("goodsName", condition.getGoods().getGoodsName()));
                         } else if (condition.getProducer() != null) {
                             if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals(""))
@@ -101,11 +106,8 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
                                 c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
                     }
-                  /*  if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
-                        c.add(Restrictions.eq("storageAppName", condition.getProducerName()));
-                    }*/
 
-                    else  if (condition.getStorageAppId() != null && !condition.getStorageAppId().equals("")) {
+                    else if (condition.getStorageAppId() != null && !condition.getStorageAppId().equals("")) {
                         c.add(Restrictions.eq("storageAppId", condition.getStorageAppId()));
                     }
                 }
