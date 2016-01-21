@@ -106,6 +106,12 @@
         <action name="rksqSelect" class="searchStorageAppList" method="searchStorageAppList">
             <result type="redirect" name="success">/rksq/rksqList.jsp</result>
         </action>
+        <action name="dbsqSelect" class="searchAllotAppList" method="searchAllotAppList">
+            <result type="redirect" name="success">/dbsq/dbsqList.jsp</result>
+        </action>
+        <action name="zksqSelect" class="searchTransferAppList" method="searchTransferAppList">
+            <result type="redirect" name="success">/zksq/zksqList.jsp</result>
+        </action>
 
         <action name="rksqcheck" class="storageAppCheck" method="checkStorageApp">
             <result type="redirect" name="storageAppCheck">/rksq/rksqCheckList.jsp</result>

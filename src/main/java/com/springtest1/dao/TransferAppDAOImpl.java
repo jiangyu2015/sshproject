@@ -47,6 +47,9 @@ public class TransferAppDAOImpl extends HibernateDaoSupport implements TransferA
                         c.add(Restrictions.eq("transferAppId", condition.getTransferAppId()));
                     } else if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
+                    }else if(condition.getGoods() != null){
+                        if(condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals(""))
+                            c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                     }
                 }
                 if (c.list().size() <= 0) {

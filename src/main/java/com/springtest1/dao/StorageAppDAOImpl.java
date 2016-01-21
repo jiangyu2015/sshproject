@@ -50,21 +50,62 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
                             c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                             c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
-                        }
-                        if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals("")
+                        } else if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals("")
                                 && condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")
                                 && condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
                             c.add(Restrictions.eq("goodsName", condition.getGoods().getGoodsName()));
                             c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
+                    } else if (condition.getGoods() != null && condition.getProducer() != null
+                            || condition.getGoods() != null && condition.getPlace() != null
+                            || condition.getProducer() != null && condition.getPlace() != null) {
+                        if (condition.getGoods() != null && condition.getProducer() != null) {
+                            if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")
+                                    && condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
+                                c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                                c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                            } else if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals("")
+                                    && condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
+                                c.add(Restrictions.eq("goodsName", condition.getGoods().getGoodsName()));
+                                c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                            }
+                        } else if (condition.getGoods() != null && condition.getPlace() != null) {
+                            if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")
+                                    && condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
+                                c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                                c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                            } else if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals("")
+                                    && condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
+                                c.add(Restrictions.eq("goodsName", condition.getGoods().getGoodsName()));
+                                c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                            }
+                        } else if (condition.getProducer() != null && condition.getPlace() != null) {
+                            if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")
+                                    && condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
+                                c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                                c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                            }
+                        }
+                    } else if (condition.getGoods() != null || condition.getProducer() != null || condition.getPlace() != null) {
+                        if (condition.getGoods() != null) {
+                            if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals(""))
+                                c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
+                            else if (condition.getGoods().getGoodsName() != null && !condition.getGoods().getGoodsName().equals(""))
+                                c.add(Restrictions.eq("goodsName", condition.getGoods().getGoodsName()));
+                        } else if (condition.getProducer() != null) {
+                            if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals(""))
+                                c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                        } else if (condition.getPlace() != null) {
+                            if (condition.getPlace().getPlaceId() != null)
+                                c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
+                        }
                     }
-                    if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
+                  /*  if (condition.getProducerName() != null && !condition.getProducerName().equals("")) {
                         c.add(Restrictions.eq("storageAppName", condition.getProducerName()));
-                    }
+                    }*/
 
-                    if (condition.getStorageAppId() != null && !condition.getStorageAppId().equals("")) {
-                        System.out.println("DAO" + condition.getStorageAppId());
+                    else  if (condition.getStorageAppId() != null && !condition.getStorageAppId().equals("")) {
                         c.add(Restrictions.eq("storageAppId", condition.getStorageAppId()));
                     }
                 }

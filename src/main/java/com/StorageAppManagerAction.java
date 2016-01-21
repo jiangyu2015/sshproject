@@ -181,9 +181,68 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             condition.setProducer(producer);
             Place place = placeBiz.getPlace(storagePlace).get(0);
             condition.setPlace(place);
+        } else if (StringUtils.isEmpty(goodsName) && StringUtils.isEmpty(producerName)
+                || StringUtils.isEmpty(goodsName) && StringUtils.isEmpty(storagePlace)
+                || StringUtils.isEmpty(producerName) && StringUtils.isEmpty(storagePlace)) {
+            if (StringUtils.isEmpty(goodsName) && StringUtils.isEmpty(producerName)) {
+                if (goodsName.indexOf("|") != -1) {
+                    String[] strs = goodsName.split("\\|");      //增加goods
+                    Integer id = Integer.parseInt(strs[1]);  //id
+                    Goods g = new Goods();
+                    g.setGoodsId(id);
+                    Goods goods = goodsBiz.getGoodsList(g).get(0);
+                    condition.setGoods(goods);
+                } else {
+                    Goods g = new Goods();
+                    g.setGoodsName(goodsName);
+                    condition.setGoods(g);
+                }
+                Producer producer = producerBiz.getProducer(producerName).get(0);
+                condition.setProducer(producer);
+            } else if (StringUtils.isEmpty(goodsName) && StringUtils.isEmpty(storagePlace)) {
+                if (goodsName.indexOf("|") != -1) {
+                    String[] strs = goodsName.split("\\|");      //增加goods
+                    Integer id = Integer.parseInt(strs[1]);  //id
+                    Goods g = new Goods();
+                    g.setGoodsId(id);
+                    Goods goods = goodsBiz.getGoodsList(g).get(0);
+                    condition.setGoods(goods);
+                } else {
+                    Goods g = new Goods();
+                    g.setGoodsName(goodsName);
+                    condition.setGoods(g);
+                }
+                Place place = placeBiz.getPlace(storagePlace).get(0);
+                condition.setPlace(place);
+            } else if (StringUtils.isEmpty(producerName) && StringUtils.isEmpty(storagePlace)) {
+                Producer producer = producerBiz.getProducer(producerName).get(0);
+                condition.setProducer(producer);
+                Place place = placeBiz.getPlace(storagePlace).get(0);
+                condition.setPlace(place);
+            }
+        } else if (StringUtils.isEmpty(goodsName) || StringUtils.isEmpty(producerName) || StringUtils.isEmpty(storagePlace)) {
+            if (StringUtils.isEmpty(goodsName)) {
+                if (goodsName.indexOf("|") != -1) {
+                    String[] strs = goodsName.split("\\|");      //增加goods
+                    Integer id;  //id
+                    id = Integer.parseInt(strs[1]);
+                    Goods g = new Goods();
+                    g.setGoodsId(id);
+                    Goods goods = goodsBiz.getGoodsList(g).get(0);
+                    condition.setGoods(goods);
+                } else {
+                    Goods g = new Goods();
+                    g.setGoodsName(goodsName);
+                    condition.setGoods(g);
+                }
+            } else if (StringUtils.isEmpty(producerName)) {
+                Producer producer = producerBiz.getProducer(producerName).get(0);
+                condition.setProducer(producer);
+            } else if (StringUtils.isEmpty(storagePlace)) {
+                Place place = placeBiz.getPlace(storagePlace).get(0);
+                condition.setPlace(place);
+            }
         }
-
-
         List list = storageAppBiz.getStorageAppList(condition);
         session.put("storageapplist", list);
         return "success";

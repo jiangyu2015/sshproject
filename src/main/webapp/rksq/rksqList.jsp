@@ -235,6 +235,15 @@
                 alert("请输入至少一个查询选项");
                 return false;
             }
+            if (val != null && val != "") {
+                if (val.indexOf("|") != -1) {
+                    var strs = val.split("|");
+                    if (strs[1] == "") {
+                        alert("输入有误，输入商品后请选择选项框内带“|数字”的商品");
+                        return false;
+                    }
+                }
+            }
         }
     </script>
 </head>

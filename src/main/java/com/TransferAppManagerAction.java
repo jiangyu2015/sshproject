@@ -1,5 +1,6 @@
 package com;
 
+import com.core.util.StringUtils;
 import com.hibtest1.entity.*;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.*;
@@ -79,6 +80,7 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
     String producerName;
     Integer goodsId;
     String placeName;
+    String goodsName;
 
     public String getPlaceName() {
         return placeName;
@@ -102,6 +104,14 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
 
     public void setProducerName(String producerName) {
         this.producerName = producerName;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
     public String listTransferApp() {               //得到所有转库申请单
@@ -175,6 +185,22 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
             session.put("transferapplist", condition);
             return "success";
         } else return "input";
+    }
+
+    public String searchTransferAppList() {         //查询
+        TransferApp condition = new TransferApp();
+        if (StringUtils.isEmpty(goodsName)) {
+            String[] strs = goodsName.split("\\|");      //前台已排除非法输入 这里不用加id 增加goods
+            Integer id = Integer.parseInt(strs[1]);  //id
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        List list = transferAppBiz.getTransferAppList(condition);
+        session.put("transferapplist", list);
+        return "success";
+
     }
 
     public String transferAppOk() {

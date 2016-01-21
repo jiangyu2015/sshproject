@@ -1,5 +1,6 @@
 package com;
 
+import com.core.util.StringUtils;
 import com.hibtest1.entity.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -81,6 +82,7 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
     Integer goodsId;
     String placeName;
     String placeName2;
+    String goodsName;
 
     public String getPlaceName2() {
         return placeName2;
@@ -112,6 +114,14 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
 
     public void setProducerName(String producerName) {
         this.producerName = producerName;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
     public String listAllotApp() {               //得到所有调拨申请单
@@ -193,6 +203,22 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
         } else return "input";
     }
 
+    public String searchAllotAppList() {         //查询
+        AllotApp condition = new AllotApp();
+        if (StringUtils.isEmpty(goodsName)) {
+            String[] strs = goodsName.split("\\|");      //前台已排除非法输入 这里不用加id 增加goods
+            Integer id = Integer.parseInt(strs[1]);  //id
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        List list = allotAppBiz.getAllotAppList(condition);
+        session.put("allotapplist", list);
+        return "success";
+
+    }
+
     public String allotAppOk() {
         AllotApp condition = new AllotApp();
         condition.setAllotAppId(allotApp.getAllotAppId());
@@ -229,7 +255,7 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
             storage.setAdduser(allotApp.getAdduser());  //申请人
             deliver.setAdduser(allotApp.getAdduser());
         }
-        if(allotApp.getAllotNumber() != null && !allotApp.getAllotNumber().equals("")){
+        if (allotApp.getAllotNumber() != null && !allotApp.getAllotNumber().equals("")) {
             storage.setExpectedNumber(allotApp.getAllotNumber());  //调拨数
             deliver.setExpecteNumber(allotApp.getAllotNumber());
         }

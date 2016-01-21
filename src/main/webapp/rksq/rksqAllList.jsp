@@ -241,6 +241,16 @@
                 alert("请输入至少一个查询选项");
                 return false;
             }
+            if (val != null && val != "") {
+                if (val.indexOf("|") != -1) {
+                    var strs = val.split("|");
+                    if (strs[1] == "") {
+                        alert("输入有误，输入商品后请选择选项框内带“|数字”的商品");
+                        /*   $("#div_alert").html("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");*/
+                        return false;
+                    }
+                }
+            }
         }
     </script>
 </head>
@@ -251,61 +261,61 @@
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
         <form method="post" action="rksqSelect.action" onsubmit="return checkSelect()" class="head-form">
-			<div class="head-lable">商品名称： </div>
-			<input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <div class="head-lable">商品名称：</div>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
             <datalist id="selectgoods"></datalist>
-           	<div class="head-lable"> 商户名称：</div> 
-           	<input id="producer" class="head-input" list="selectproducer" name="producerName"/>
+            <div class="head-lable"> 商户名称：</div>
+            <input id="producer" class="head-input" list="selectproducer" name="producerName"/>
             <datalist id="selectproducer"></datalist>
-			<div class="head-lable">入库地点：</div>
-			<input id="place" class="head-input" list="selectplace" name="storagePlace"/>
+            <div class="head-lable">入库地点：</div>
+            <input id="place" class="head-input" list="selectplace" name="storagePlace"/>
             <datalist id="selectplace"></datalist>
-            <input  type="submit"  class="btn-remove head-btn-right" value="查询">
+            <input type="submit" class="btn-remove head-btn-right" value="查询">
         </form>
     </div>
-    
+
     <table id="advSearch" class="table">
         <thead>
-	        <tr>
-	            <th>入库申请id</th>
-	            <th>商户名称</th>
-	            <th>商品id</th>
-	            <th>商品名称</th>
-	            <th>入库地点</th>
-	            <th>商品评级</th>
-	            <th>预期入库时间</th>
-	            <th>预期入库数量</th>
-	            <th>三联单编号</th>
-	            <th>入库类型</th>
-	            <th>申请时间</th>
-	            <th>处理状态</th>
-	            <th>审核时间</th>
-	            <th>申请人</th>
-	            <th>修改人</th>
-	            <th>审核人</th>
-	        </tr>
+        <tr>
+            <th>入库申请id</th>
+            <th>商户名称</th>
+            <th>商品id</th>
+            <th>商品名称</th>
+            <th>入库地点</th>
+            <th>商品评级</th>
+            <th>预期入库时间</th>
+            <th>预期入库数量</th>
+            <th>三联单编号</th>
+            <th>入库类型</th>
+            <th>申请时间</th>
+            <th>处理状态</th>
+            <th>审核时间</th>
+            <th>申请人</th>
+            <th>修改人</th>
+            <th>审核人</th>
+        </tr>
         </thead>
         <tbody>
-	        <s:iterator value="%{#session.storageapplistall}" var="storageapp">
-	            <tr>
-	                <td><s:property value="#storageapp.storageAppId"/></td>
-	                <td><s:property value="#storageapp.producer.producerName"/></td>
-	                <td><s:property value="#storageapp.goods.goodsId"/></td>
-	                <td><s:property value="#storageapp.goods.goodsName"/></td>
-	                <td><s:property value="#storageapp.place.placeName"/></td>
-	                <td><s:property value="#storageapp.goods.commodityRating"/></td>
-	                <td><s:date format="yyyy-MM-dd" name="#storageapp.expectedDate"/></td>
-	                <td><s:property value="#storageapp.expectedNumber"/></td>
-	                <td><s:property value="#storageapp.sldId"/></td>
-	                <td><s:property value="#storageapp.storageType"/></td>
-	                <td><s:date format="yyyy-MM-dd" name="#storageapp.applicationDate"/></td>
-	                <td><s:property value="#storageapp.state"/></td>
-	                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#storageapp.auditTime"/></td>
-	                <td><s:property value="#storageapp.adduser"/></td>
-	                <td><s:property value="#storageapp.edituser"/></td>
-	                <td><s:property value="#storageapp.checkuser"/></td>
-	            </tr>
-	        </s:iterator>
+        <s:iterator value="%{#session.storageapplistall}" var="storageapp">
+            <tr>
+                <td><s:property value="#storageapp.storageAppId"/></td>
+                <td><s:property value="#storageapp.producer.producerName"/></td>
+                <td><s:property value="#storageapp.goods.goodsId"/></td>
+                <td><s:property value="#storageapp.goods.goodsName"/></td>
+                <td><s:property value="#storageapp.place.placeName"/></td>
+                <td><s:property value="#storageapp.goods.commodityRating"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storageapp.expectedDate"/></td>
+                <td><s:property value="#storageapp.expectedNumber"/></td>
+                <td><s:property value="#storageapp.sldId"/></td>
+                <td><s:property value="#storageapp.storageType"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storageapp.applicationDate"/></td>
+                <td><s:property value="#storageapp.state"/></td>
+                <td><s:date format="yyyy-MM-dd HH:mm:ss" name="#storageapp.auditTime"/></td>
+                <td><s:property value="#storageapp.adduser"/></td>
+                <td><s:property value="#storageapp.edituser"/></td>
+                <td><s:property value="#storageapp.checkuser"/></td>
+            </tr>
+        </s:iterator>
         </tbody>
     </table>
 </div>
