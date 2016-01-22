@@ -69,6 +69,66 @@
             }).mouseup(function () {
                 _move = false;
             });
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
+                    }
+                    $("#selectgoods").html(str);
+                    $('#goods').bind('input propertychange', function () {
+                        $("#selectgoods").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+            $.ajax({
+                type: "post",
+                url: "selectProducerJsonAction",
+                dataType: 'json',
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var producer = d.producerList;
+                    console.log(producer);
+                    for (var i = 0; i < producer.length; i++) {
+                        str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
+                    }
+
+                    $("#selectproducer").html(str);
+                    $('#producer').bind('input propertychange', function () {
+                        $("#selectproducer").html(str);
+                    });
+                },
+                error: function () {
+                    alert("未查到商户");
+                    $("#div_item2").html("未查到商户");
+                }//这里不要加","
+
+            });
+            $.ajax({
+                type: "post",
+                url: "excutePlaceAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var place = d.placeList;
+                    console.log(place);
+                    for (var i = 0; i < place.length; i++) {
+                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
+                    }
+                    $("#selectplace").html(str);
+                    $('#place').bind('input propertychange', function () {
+                        $("#selectplace").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
         });
 
         function check() {
@@ -136,6 +196,36 @@
                 window.location.href = "zcrkstorage.action";
             }
         }
+        function checkSelect() {
+            var val = $("#goods").val();
+            var val2 = $("#producer").val();
+            var val3 = $("#place").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
+            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+            if (!val && !val2 && !val3) {
+                alert("请输入至少一个查询选项");
+                return false;
+            }
+            if (val != null && val != "") {
+                if (selectId == undefined) {
+                    alert("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
+                    return false;
+                }
+            }
+            if (val2 != null && val2 != "") {
+                if (selectId2 == undefined) {
+                    alert("商户未建或未通过审核，请选择选项框内的商户");
+                    return false;
+                }
+            }
+            if (val3 != null && val3 != "") {
+                if (selectId3 == undefined) {
+                    alert("仓库未建，请选择选项框内的仓库");
+                    return false;
+                }
+            }
+        }
     </script>
 </head>
 
@@ -144,15 +234,32 @@
     <div class="title">确认收货</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="确认收货" onclick="edit();" style="position: relative; width: 90px;">
-        <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <form method="post" action="rkCheckSelect.action" onsubmit="return checkSelect()" class="head-form">
+            <div class="head-lable">商品名称：</div>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <datalist id="selectgoods"></datalist>
+            <div class="head-lable"> 商户名称：</div>
+            <input id="producer" class="head-input" list="selectproducer" name="producerName"/>
+            <datalist id="selectproducer"></datalist>
+            <div class="head-lable">入库地点：</div>
+            <input id="place" class="head-input" list="selectplace" name="storagePlace"/>
+            <datalist id="selectplace"></datalist>
+        <%--    <div class="head-lable">入库类别：</div>
+            <input id="category" class="head-input" name="category"/>--%>
+            <input type="submit" class="btn-remove head-btn-right" value="查询">
+        </form>
     </div>
     <table id="advSearch" class="table">
         <thead>
         <tr>
             <th>入库明细id</th>
             <th>商户名称</th>
+            <th>商品id</th>
             <th>商品名称</th>
             <th>仓库名称</th>
+            <th>商品生产日期</th>
+            <th>商品保质期</th>
+            <th>商品截止日期</th>
             <th>预期入库时间</th>
             <th>实际入库时间</th>
             <th>预期数量</th>
@@ -177,8 +284,12 @@
             <tr>
                 <td><s:property value="#storage.storageId"/></td>
                 <td><s:property value="#storage.producer.producerName"/></td>
+                <td><s:property value="#storage.goods.goodsId"/></td>
                 <td><s:property value="#storage.goods.goodsName"/></td>
                 <td><s:property value="#storage.place.placeName"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storage.goods.creationDate"/></td>
+                <td><s:property value="#storage.goods.baozhiqi"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storage.goods.expirationDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storage.expectedDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storage.storageDate"/></td>
                 <td><s:property value="#storage.expectedNumber"/></td>
@@ -214,7 +325,11 @@
                             <input name="storage.producer.producerName" readonly="readonly"
                                    style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
+                    <div class="line">
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input name="storage.goods.goodsId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
                         <div class="input-div"><input name="storage.goods.goodsName" readonly="readonly"
@@ -226,7 +341,23 @@
                         <div class="input-div"><input name="storage.place.placeName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
+                    <div class="line">
+                        <div class="lable">商品生产日期：</div>
+                        <div class="input-div"><input name="storage.goods.creationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
 
+                    <div class="line">
+                        <div class="lable">商品保质期：</div>
+                        <div class="input-div"><input name="storage.goods.baozhiqi" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">商品截止日期：</div>
+                        <div class="input-div"><input name="storage.goods.expirationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
                     <div class="line">
                         <div class="lable">预期入库时间：</div>
                         <div class="input-div"><input id="expectedDate" name="storage.expectedDate" readonly="readonly"

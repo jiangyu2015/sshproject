@@ -169,7 +169,7 @@
         <action name="listrk" class="storageList" method="listStorage">
             <result type="redirect" name="storage">/rk/rkAllList.jsp</result>
         </action>
-        <action name="listokrk" class="storageOkList" method="listOkStorage">
+        <action name="listokrk" class="storageOkList" method="listOkStorage">   <!--入库明细已确认收货查询app那与上面的一样-->
             <result type="redirect" name="success">/rk/rkOkList.jsp</result>
         </action>
         <action name="listokck" class="deliverOkList" method="listOkDeliver">
@@ -178,8 +178,16 @@
         <action name="editrk" class="storageEdit" method="editStorage">
             <result type="redirect" name="success">/rk/rkList.jsp</result>
         </action>
-        <action name="rkSelect" class="storageSelect" method="searchStorageList">
+        <action name="rkSelect" class="storageSelect" method="searchStorageList">   <!--入库明细查询-->
             <result type="redirect" name="success">/rk/rkList.jsp</result>
+            <result type="redirect" name="input">/rk/fail.jsp</result>
+        </action>
+        <action name="rkCheckSelect" class="storageSelect" method="searchStorageNoList">   <!--入库明细未确认收货查询app那与上面的一样-->
+            <result type="redirect" name="success">/rk/rkCheckSelectList.jsp</result>
+            <result type="redirect" name="input">/rk/fail.jsp</result>
+        </action>
+        <action name="rkOkSelect" class="storageSelect" method="searchStorageOkList">   <!--入库明细已确认收货查询app那与上面的一样-->
+            <result type="redirect" name="success">/rk/rkOkList.jsp</result>
             <result type="redirect" name="input">/rk/fail.jsp</result>
         </action>
         <action name="ckSelect" class="deliverSelect" method="searchDeliverList">

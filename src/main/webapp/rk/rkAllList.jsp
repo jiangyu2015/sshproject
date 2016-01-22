@@ -133,8 +133,35 @@
 
         });
 
-        function search() {
-            window.location.href = "rkSelect.jsp";
+        function checkSelect() {
+            var val = $("#goods").val();
+            var val2 = $("#producer").val();
+            var val3 = $("#place").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
+            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+            if (!val && !val2 && !val3) {
+                alert("请输入至少一个查询选项");
+                return false;
+            }
+            if (val != null && val != "") {
+                if (selectId == undefined) {
+                    alert("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
+                    return false;
+                }
+            }
+            if (val2 != null && val2 != "") {
+                if (selectId2 == undefined) {
+                    alert("商户未建或未通过审核，请选择选项框内的商户");
+                    return false;
+                }
+            }
+            if (val3 != null && val3 != "") {
+                if (selectId3 == undefined) {
+                    alert("仓库未建，请选择选项框内的仓库");
+                    return false;
+                }
+            }
         }
     </script>
 </head>
@@ -154,6 +181,8 @@
                <div class="head-lable">入库地点：</div>
                <input id="place" class="head-input" list="selectplace" name="storagePlace"/>
                <datalist id="selectplace"></datalist>
+            <%--   <div class="head-lable">入库类别：</div>
+               <input id="category" class="head-input" name="category"/>--%>
                <input type="submit" class="btn-remove head-btn-right" value="查询">
            </form>
     </div>

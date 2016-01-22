@@ -137,7 +137,11 @@
 				"id": "listyt.action",
 				"text": "所有预提申请信息"
 			},{
-				"text": "查询（还没加）"
+				"id": "ytOverAllList.action",
+				"text": "查询已截止预提信息"
+			},{
+				"id": "ytNowAllList.action",
+				"text": "查询未截止预提信息"
 			}]
 		},{
 			"text": "确认出库",

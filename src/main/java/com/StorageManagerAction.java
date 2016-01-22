@@ -43,6 +43,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     Storage storage;
     String goodsName;   //商品名称
     String producerName;//商户
+    String category;//查询用到类别
 
     public String getProducerName() {
         return producerName;
@@ -100,6 +101,14 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         this.storage = storage;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String listStorage() {
         List storage = storageBiz.getAllStorage();
         session.put("storagelistall", storage);
@@ -117,7 +126,6 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
                 Goods goods = goodsBiz.getGoodsList(g).get(0);
                 System.out.println(goods.getGoodsName());
                 condition.setGoods(goods);
-
         }
         if (producerName != null && !producerName.equals("")) {
             Producer producer = producerBiz.getProducer(producerName).get(0);
@@ -133,6 +141,59 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         return "success";
     }
 
+    public String searchStorageNoList() {      //查询未确认收货的 比上面的加了state=no
+        Storage condition = new Storage();
+        if (goodsName != null && !goodsName.equals("")) {
+            String[] strs = goodsName.split("\\|");
+            Integer id = Integer.parseInt(strs[1]);
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        if (producerName != null && !producerName.equals("")) {
+            Producer producer = producerBiz.getProducer(producerName).get(0);
+            condition.setProducer(producer);
+        }
+        if (storagePlace != null && !storagePlace.equals("")) {
+            Place place = placeBiz.getPlace(storagePlace).get(0);
+            condition.setPlace(place);
+        }
+        if (category != null && !category.equals("")) {   //加不下 先没有
+            condition.setCategory(category);
+        }
+        condition.setState("no");
+        List list = storageBiz.getStorageList(condition);
+        session.put("storagelistcheck", list);
+        return "success";
+    }
+
+    public String searchStorageOkList() {      //查询未确认收货的 比上面的加了state=ok
+        Storage condition = new Storage();
+        if (goodsName != null && !goodsName.equals("")) {
+            String[] strs = goodsName.split("\\|");
+            Integer id = Integer.parseInt(strs[1]);
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        if (producerName != null && !producerName.equals("")) {
+            Producer producer = producerBiz.getProducer(producerName).get(0);
+            condition.setProducer(producer);
+        }
+        if (storagePlace != null && !storagePlace.equals("")) {
+            Place place = placeBiz.getPlace(storagePlace).get(0);
+            condition.setPlace(place);
+        }
+        if (category != null && !category.equals("")) {   //加不下 先没有
+            condition.setCategory(category);
+        }
+        condition.setState("ok");
+        List list = storageBiz.getStorageList(condition);
+        session.put("storagelistok", list);
+        return "success";
+    }
     public String checkStorage() {               //得到所需入库的单子
         List<Storage> storage = storageBiz.getCheckStorage();
         session.put("storagelistcheck", storage);
