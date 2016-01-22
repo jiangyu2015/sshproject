@@ -82,8 +82,6 @@
                     var goods = d.goodsList;
                     console.log(goods);
                     for (var i = 0; i < goods.length; i++) {
-                        //         str = str + "<option id='" + goods[i].goodsId + "' value='" + goods[i].goodsName + "'>";
-                        //   str = str + "<option value='" + goods[i].goodsName + "'>"+ goods[i].goodsId+"</option>";
                         str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
                     }
                     $("#selectgoods").html(str);
@@ -104,7 +102,6 @@
                     var producer = d.producerList;
                     console.log(producer);
                     for (var i = 0; i < producer.length; i++) {
-                        //  str = str + "<option>" + producer[i].producerName + "</option>";
                         str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
                     }
                     $("#select2").html(str);
@@ -131,7 +128,6 @@
                     var place = d.placeList;
                     console.log(place);
                     for (var i = 0; i < place.length; i++) {
-                        // str = str + "<option>" + place[i].placeName + "</option>";
                         str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
                     }
                     $("#select3").html(str);

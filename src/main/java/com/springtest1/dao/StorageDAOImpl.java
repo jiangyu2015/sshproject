@@ -49,24 +49,32 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
                         if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
                             c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                         }
-                    } else if (condition.getProducer() != null) {
+                    }
+                    if (condition.getProducer() != null) {
                         if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
                             c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
                         }
-                    } else if (condition.getPlace() != null) {
+                    }
+                    if (condition.getPlace() != null) {
                         if (condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
-                    } else if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
+                    }
+                    if (condition.getStorageId() != null && !condition.getStorageId().equals("")) {
                         c.add(Restrictions.eq("storageId", condition.getStorageId()));
-                    } else if (condition.getState() != null && !condition.getState().equals("") && condition.getCategory() != null && !condition.getCategory().equals("")) {
+                    } /* if (condition.getState() != null && !condition.getState().equals("") && condition.getCategory() != null && !condition.getCategory().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
                         c.add(Restrictions.eq("category", condition.getCategory()));
-                    } else if (condition.getState() != null && !condition.getState().equals("")) {
-                        c.add(Restrictions.eq("state", condition.getState()));
-                    } else if (condition.getCategory() != null && !condition.getCategory().equals("")) {
+
+                    }*/
+                    if (condition.getCategory() != null && !condition.getCategory().equals("")) {
                         c.add(Restrictions.eq("category", condition.getCategory()));
                     }
+                    if (condition.getState() != null && !condition.getState().equals("")) {
+                        c.add(Restrictions.eq("state", condition.getState()));
+                    } /*else if (condition.getCategory() != null && !condition.getCategory().equals("")) {
+                        c.add(Restrictions.eq("category", condition.getCategory()));
+                    }*/
                 }
                 if (c.list().size() <= 0) {
                     return new ArrayList<Storage>();

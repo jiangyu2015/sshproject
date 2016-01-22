@@ -69,6 +69,68 @@
             }).mouseup(function () {
                 _move = false;
             });
+
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
+                    }
+                    $("#selectgoods").html(str);
+                    $('#goods').bind('input propertychange', function () {
+                        $("#selectgoods").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+            $.ajax({
+                type: "post",
+                url: "selectProducerJsonAction",
+                dataType: 'json',
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var producer = d.producerList;
+                    console.log(producer);
+                    for (var i = 0; i < producer.length; i++) {
+                        str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
+                    }
+
+                    $("#selectproducer").html(str);
+                    $('#producer').bind('input propertychange', function () {
+                        $("#selectproducer").html(str);
+                    });
+                },
+                error: function () {
+                    alert("未查到商户");
+                    $("#div_item2").html("未查到商户");
+                }//这里不要加","
+
+            });
+            $.ajax({
+                type: "post",
+                url: "excutePlaceAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var place = d.placeList;
+                    console.log(place);
+                    for (var i = 0; i < place.length; i++) {
+                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
+                    }
+                    $("#selectplace").html(str);
+                    $('#place').bind('input propertychange', function () {
+                        $("#selectplace").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+
         });
 
         function search() {
@@ -81,14 +143,26 @@
 <div class="table-div">
     <div class="title">入库明细信息</div>
     <div class="btn-div">
-        <%--  <input type="button" class="btn-eidt" value="修改" onclick="edit();">--%>
-        <input type="button" class="btn-remove" value="查询" onclick="search();">
+       <%-- <input type="button" class="btn-remove" value="查询" onclick="search();">--%>
+           <form method="post" action="rkSelect.action" onsubmit="return checkSelect()" class="head-form">
+               <div class="head-lable">商品名称：</div>
+               <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+               <datalist id="selectgoods"></datalist>
+               <div class="head-lable"> 商户名称：</div>
+               <input id="producer" class="head-input" list="selectproducer" name="producerName"/>
+               <datalist id="selectproducer"></datalist>
+               <div class="head-lable">入库地点：</div>
+               <input id="place" class="head-input" list="selectplace" name="storagePlace"/>
+               <datalist id="selectplace"></datalist>
+               <input type="submit" class="btn-remove head-btn-right" value="查询">
+           </form>
     </div>
     <table id="advSearch" class="table">
         <thead>
         <tr>
             <th>入库明细id</th>
             <th>商户名称</th>
+            <th>商品id</th>
             <th>商品名称</th>
             <th>仓库名称</th>
 
@@ -115,9 +189,9 @@
             <tr>
                 <td><s:property value="#storage.storageId"/></td>
                 <td><s:property value="#storage.producer.producerName"/></td>
+                <td><s:property value="#storage.goods.goodsId"/></td>
                 <td><s:property value="#storage.goods.goodsName"/></td>
                 <td><s:property value="#storage.place.placeName"/></td>
-
 
                 <td><s:date format="yyyy-MM-dd" name="#storage.goods.creationDate"/></td>
                 <td><s:property value="#storage.goods.baozhiqi"/></td>
@@ -140,6 +214,7 @@
     </table>
 </div>
 
+<%--
 <div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
@@ -159,7 +234,11 @@
                             <input name="storage.producer.producerName" readonly="readonly"
                                    style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
+ <div class="line">
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input name="storage.goods.goodsId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
 
                     <div class="line">
                         <div class="lable">商品名称：</div>
@@ -263,3 +342,4 @@
 </body>
 </html>
 
+--%>

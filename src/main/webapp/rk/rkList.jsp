@@ -134,8 +134,14 @@
         <tr>
             <th>入库明细id</th>
             <th>商户名称</th>
+            <th>商品id</th>
             <th>商品名称</th>
             <th>仓库名称</th>
+
+            <th>商品生产日期</th>
+            <th>商品保质期</th>
+            <th>商品截止日期</th>
+
             <th>预期入库时间</th>
             <th>实际入库时间</th>
             <th>预期数量</th>
@@ -153,8 +159,14 @@
             <tr>
                 <td><s:property value="#storage.storageId"/></td>
                 <td><s:property value="#storage.producer.producerName"/></td>
+                <td><s:property value="#storage.goods.goodsId"/></td>
                 <td><s:property value="#storage.goods.goodsName"/></td>
                 <td><s:property value="#storage.place.placeName"/></td>
+
+                <td><s:date format="yyyy-MM-dd" name="#storage.goods.creationDate"/></td>
+                <td><s:property value="#storage.goods.baozhiqi"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#storage.goods.expirationDate"/></td>
+
                 <td><s:date format="yyyy-MM-dd" name="#storage.expectedDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#storage.storageDate"/></td>
                 <td><s:property value="#storage.expectedNumber"/></td>
@@ -190,7 +202,11 @@
                             <input name="storage.producer.producerName" readonly="readonly"
                                    style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
-
+                    <div class="line">
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input name="storage.goods.goodsId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
                     <div class="line">
                         <div class="lable">商品名称：</div>
                         <div class="input-div"><input name="storage.goods.goodsName" readonly="readonly"
