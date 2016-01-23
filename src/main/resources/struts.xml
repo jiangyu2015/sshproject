@@ -229,9 +229,17 @@
             <result type="redirect" name="success">/yt/test.jsp</result>
             <result type="redirect" name="input">/yt/fail.jsp</result>
         </action>
-        <action name="listyt" class="withholdingList" method="listWithholding">
+        <action name="listyt" class="withholdingList" method="listWithholding">    <!--查询预提信息-->
             <result type="redirect" name="withholding">/yt/ytAllList.jsp</result>
             <result type="redirect" name="input">/yt/fail.jsp</result>
+        </action>
+        <action name="ytNowAllList" class="withholdingList" method="searchNowWithholdingList">    <!--查询预提截止日期大于等于今天-->
+            <result type="redirect" name="success">/yt/ytNowAllList.jsp</result>
+
+        </action>
+        <action name="ytOverAllList" class="withholdingList" method="searchOverWithholdingList">    <!--查询预提截止日期小于于今天-->
+            <result type="redirect" name="success">/yt/ytOverAllList.jsp</result>
+
         </action>
         <action name="ytSelectDeliver" class="withholdingDeliverSelect" method="searchWithholdingList">
             <result type="redirect" name="success">/ck/ytList.jsp</result>

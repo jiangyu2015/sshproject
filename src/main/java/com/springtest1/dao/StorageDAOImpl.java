@@ -28,7 +28,6 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
         String hql = "from Storage s where s.state='no'";
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
-
         List<Storage> storagelist = query.list();
         if (storagelist.size() <= 0) {
             return new ArrayList<Storage>();

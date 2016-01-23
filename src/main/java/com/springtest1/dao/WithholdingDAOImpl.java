@@ -10,9 +10,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.sql.Date;
 
 /**
  * Created by dell on 2015/11/29.
@@ -61,15 +64,30 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
                         if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
                             c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                         }
-                    } else if (condition.getPlace() != null) {
+                    }
+                    if (condition.getProducer() != null) {
+                        if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
+                            c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
+                        }
+                    }
+                    if (condition.getPlace() != null) {
                         if (condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
-                            System.out.println("3");
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
-                    } else if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
-                        System.out.println("DAO" + condition.getWithholdingId());
+                    }
+                    if (condition.getTimeId() != null) //查询截止日期比今天，即已过期
+                    {
+                      /*  Calendar calendar = Calendar.getInstance();   //更改审核时间
+                        java.sql.Date date = calendar.getTime();*/
+                        if (condition.getTimeId() == 1)  //过期
+                            c.add(Restrictions.le("deteline", Date.valueOf("2016-01-01")));
+                        if (condition.getTimeId() == 2)
+                            c.add(Restrictions.ge("deteline", Date.valueOf("2016-01-01")));
+                    }
+                    if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
                         c.add(Restrictions.eq("withholdingId", condition.getWithholdingId()));
-                    } else if (condition.getActivityId() != null && !condition.getActivityId().equals("")) {
+                    }
+                    if (condition.getActivityId() != null && !condition.getActivityId().equals("")) {
                         c.add(Restrictions.eq("activityId", condition.getActivityId()));
                     }
 

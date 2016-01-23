@@ -382,6 +382,9 @@
     </bean>
     <bean id="withholdingList" class="com.WithholdingManagerAction">
         <property name="withholdingBiz" ref="withholdingBiz"/>
+        <property name="goodsbiz" ref="goodsBiz"/>
+        <property name="placebiz" ref="placeBiz"/>
+        <property name="producerBiz" ref="producerBiz"/>
     </bean>
     <bean id="withholdingDeliverSelect" class="com.WithholdingManagerAction">
         <property name="withholdingBiz" ref="withholdingBiz"/>

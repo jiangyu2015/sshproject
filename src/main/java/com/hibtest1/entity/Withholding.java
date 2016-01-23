@@ -23,6 +23,16 @@ public class Withholding implements Serializable {
     private String activityId;//活动id
     private String unit;//单位
     private String adduser; //添加人
+    private Integer timeId;//判断今天的标记查询用
+
+    public Integer getTimeId() {
+        return timeId;
+    }
+
+    public void setTimeId(Integer timeId) {
+        this.timeId = timeId;
+    }
+
     public Producer getProducer() {
         return producer;
     }

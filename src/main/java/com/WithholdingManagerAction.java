@@ -103,6 +103,24 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     Integer producerId;
     Integer withholdingId;
     String goodsName;
+    String producerName;//商户
+    String storagePlace;  //入库地点
+
+    public String getStoragePlace() {
+        return storagePlace;
+    }
+
+    public void setStoragePlace(String storagePlace) {
+        this.storagePlace = storagePlace;
+    }
+
+    public String getProducerName() {
+        return producerName;
+    }
+
+    public void setProducerName(String producerName) {
+        this.producerName = producerName;
+    }
 
     public Integer getWithholdingId() {
         return withholdingId;
@@ -218,7 +236,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         Withholding condition = new Withholding();
         if (id != null && !id.equals("")) {
             withholding.setWithholdingId(id);
-            id=null;
+            id = null;
         }
         if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
             condition.setWithholdingId(withholding.getWithholdingId());
@@ -286,5 +304,52 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         return "success";
     }
 
+    public String searchNowWithholdingList() {
+       Withholding condition = new Withholding();
+        if (goodsName != null && !goodsName.equals("")) {
+            String[] strs = goodsName.split("\\|");
+            Integer id = Integer.parseInt(strs[1]);
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsbiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        if (producerName != null && !producerName.equals("")) {
+            Producer producer = producerBiz.getProducer(producerName).get(0);
+            condition.setProducer(producer);
+        }
+        if (storagePlace != null && !storagePlace.equals("")) {
+            Place place = placebiz.getPlace(storagePlace).get(0);
+            condition.setPlace(place);
+        }
+        condition.setTimeId(2);
+        List list =withholdingBiz.search(condition);
+        session.put("withholdingdatelist", list);
+        return "success";
 
+    }
+
+    public String searchOverWithholdingList() {
+        Withholding condition = new Withholding();
+        if (goodsName != null && !goodsName.equals("")) {
+            String[] strs = goodsName.split("\\|");
+            Integer id = Integer.parseInt(strs[1]);
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsbiz.getGoodsList(g).get(0);
+            condition.setGoods(goods);
+        }
+        if (producerName != null && !producerName.equals("")) {
+            Producer producer = producerBiz.getProducer(producerName).get(0);
+            condition.setProducer(producer);
+        }
+        if (storagePlace != null && !storagePlace.equals("")) {
+            Place place = placebiz.getPlace(storagePlace).get(0);
+            condition.setPlace(place);
+        }
+        condition.setTimeId(1);
+        List list =withholdingBiz.search(condition);
+        session.put("withholdingdatelist", list);
+        return "success";
+    }
 }
