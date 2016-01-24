@@ -1,5 +1,6 @@
 package com;
 
+import com.core.util.StringUtils;
 import com.hibtest1.entity.*;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -221,12 +222,35 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     }
 
     public String listWithholding() {               //得到所有预提单
-        List<Withholding> withholdinglist = withholdingBiz.getAllWithholding();
-        if (withholdinglist.size() > 0) {
-            session.put("withholdinglistall", withholdinglist);
-            return "withholding";
-        } else
-            return "input";
+       /* session.put("withholdinglistall", null);*/
+        if (StringUtils.isEmpty(goodsName) || StringUtils.isEmpty(producerName) || StringUtils.isEmpty(storagePlace)) {
+            Withholding condition = new Withholding();
+            if (goodsName != null && !goodsName.equals("")) {
+                String[] strs = goodsName.split("\\|");
+                Integer id = Integer.parseInt(strs[1]);
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsbiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
+                goodsName="";
+            }
+            if (producerName != null && !producerName.equals("")) {
+                Producer producer = producerBiz.getProducer(producerName).get(0);
+                condition.setProducer(producer);
+                producerName="";
+            }
+            if (storagePlace != null && !storagePlace.equals("")) {
+                Place place = placebiz.getPlace(storagePlace).get(0);
+                condition.setPlace(place);
+                storagePlace="";
+            }
+            List list = withholdingBiz.search(condition);
+            session.put("withholdinglistall", list);
+        } else {
+            List<Withholding> list = withholdingBiz.getAllWithholding();
+            session.put("withholdinglistall", list);
+        }
+        return "withholding";
     }
 
     public String searchWithholdingList() {      //增加这个方法需要注入 biz别忘了
@@ -234,6 +258,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         session.put("withholdinglist", null);
         session.put("sumwithholdingdeliver", null);
         Withholding condition = new Withholding();
+        condition.setTimeId(2);  //超时间问题 待定
         if (id != null && !id.equals("")) {
             withholding.setWithholdingId(id);
             id = null;
@@ -305,7 +330,8 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     }
 
     public String searchNowWithholdingList() {
-       Withholding condition = new Withholding();
+
+        Withholding condition = new Withholding();
         if (goodsName != null && !goodsName.equals("")) {
             String[] strs = goodsName.split("\\|");
             Integer id = Integer.parseInt(strs[1]);
@@ -313,17 +339,20 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             g.setGoodsId(id);
             Goods goods = goodsbiz.getGoodsList(g).get(0);
             condition.setGoods(goods);
+            goodsName="";
         }
         if (producerName != null && !producerName.equals("")) {
             Producer producer = producerBiz.getProducer(producerName).get(0);
             condition.setProducer(producer);
+            producerName="";
         }
         if (storagePlace != null && !storagePlace.equals("")) {
             Place place = placebiz.getPlace(storagePlace).get(0);
             condition.setPlace(place);
+            storagePlace="";
         }
         condition.setTimeId(2);
-        List list =withholdingBiz.search(condition);
+        List list = withholdingBiz.search(condition);
         session.put("withholdingdatelist", list);
         return "success";
 
@@ -338,17 +367,20 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             g.setGoodsId(id);
             Goods goods = goodsbiz.getGoodsList(g).get(0);
             condition.setGoods(goods);
+            goodsName="";
         }
         if (producerName != null && !producerName.equals("")) {
             Producer producer = producerBiz.getProducer(producerName).get(0);
             condition.setProducer(producer);
+            producerName="";
         }
         if (storagePlace != null && !storagePlace.equals("")) {
             Place place = placebiz.getPlace(storagePlace).get(0);
             condition.setPlace(place);
+            storagePlace="";
         }
         condition.setTimeId(1);
-        List list =withholdingBiz.search(condition);
+        List list = withholdingBiz.search(condition);
         session.put("withholdingdatelist", list);
         return "success";
     }

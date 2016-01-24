@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -77,12 +78,14 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
                     }
                     if (condition.getTimeId() != null) //查询截止日期比今天，即已过期
                     {
-                      /*  Calendar calendar = Calendar.getInstance();   //更改审核时间
-                        java.sql.Date date = calendar.getTime();*/
-                        if (condition.getTimeId() == 1)  //过期
-                            c.add(Restrictions.le("deteline", Date.valueOf("2016-01-01")));
-                        if (condition.getTimeId() == 2)
-                            c.add(Restrictions.ge("deteline", Date.valueOf("2016-01-01")));
+                        java.util.Date date = new java.util.Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        String today = sdf.format(date);
+                        System.out.println("ytDAOImpl获取今天的日子"+date);
+                        if (condition.getTimeId() == 1)  //过期<今天
+                            c.add(Restrictions.lt("deteline", Date.valueOf(today)));
+                        if (condition.getTimeId() == 2) //未过期>=今天
+                            c.add(Restrictions.ge("deteline", Date.valueOf(today)));
                     }
                     if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
                         c.add(Restrictions.eq("withholdingId", condition.getWithholdingId()));
