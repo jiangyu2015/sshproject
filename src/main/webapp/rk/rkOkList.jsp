@@ -15,22 +15,6 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
     <script>
-       /* function edit() {
-            if ($(".active").length == 0) {
-                alert('请选择要修改的行');
-            } else {
-                var $tds = $("tr.active").children();
-                var $lines = $("#dialog_edit").find('form').children();
-                for (var i = 0, len = $tds.length; i < len; i++) {
-                    var $line = $lines.eq(i);
-                    $line.find('input').val($tds.eq(i).text());
-
-                }
-
-                $("#dialog_edit").show();
-            }
-        }*/
-
         var _move = false;//移动标记
         var _x, _y;//鼠标离控件左上角的相对位置
 
@@ -172,7 +156,7 @@
     <div class="btn-div">
         <form method="post" action="rkOkSelect.action" onsubmit="return checkSelect()" class="head-form">
             <div class="head-lable">商品名称：</div>
-            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName"/>
             <datalist id="selectgoods"></datalist>
             <div class="head-lable"> 商户名称：</div>
             <input id="producer" class="head-input" list="selectproducer" name="producerName"/>

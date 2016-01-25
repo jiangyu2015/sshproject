@@ -118,7 +118,7 @@
     <div class="btn-div">
         <form method="post" action="ytNowAllList.action" onsubmit="return checkSelect()" class="head-form">
             <div class="head-lable">商品名称：</div>
-            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName"/>
             <datalist id="selectgoods"></datalist>
             <div class="head-lable"> 商户名称：</div>
             <input id="producer" class="head-input" list="selectproducer" name="producerName"/>

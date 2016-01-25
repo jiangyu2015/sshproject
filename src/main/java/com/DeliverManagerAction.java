@@ -1,5 +1,6 @@
 package com;
 
+import com.core.util.StringUtils;
 import com.hibtest1.entity.*;
 import com.springtest1.biz.*;
 import org.apache.struts2.interceptor.RequestAware;
@@ -68,6 +69,13 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     Integer withholdingId;
     Integer producerId;
 
+    public String getProducerName() {
+        return producerName;
+    }
+
+    public void setProducerName(String producerName) {
+        this.producerName = producerName;
+    }
 
     public Integer getWithholdingId() {
         return withholdingId;
@@ -135,6 +143,27 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
 
     public String checkDeliver() {               //得到所需出库的单子
         Deliver condition = new Deliver();
+        if (StringUtils.isEmpty(goodsName) || StringUtils.isEmpty(producerName) || StringUtils.isEmpty(placeName)) {
+            if (goodsName != null && !goodsName.equals("")) {
+                String[] strs = goodsName.split("\\|");
+                Integer id = Integer.parseInt(strs[1]);
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsBiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
+                goodsName = "";
+            }
+            if (producerName != null && !producerName.equals("")) {
+                Producer producer = producerBiz.getProducer(producerName).get(0);
+                condition.setProducer(producer);
+                producerName = "";
+            }
+            if (placeName != null && !placeName.equals("")) {
+                Place place = placeBiz.getPlace(placeName).get(0);
+                condition.setPlace(place);
+                placeName = "";
+            }
+        }
         condition.setState("no");
         List<Deliver> deliver = deliverBiz.getDeliverList(condition);
         session.put("deliverlistcheck", deliver);
@@ -267,9 +296,30 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String listOkDeliver() {
-        Deliver s = new Deliver();
-        s.setState("ok");
-        List deliver = deliverBiz.getDeliverList(s);
+        Deliver condition = new Deliver();
+        if (StringUtils.isEmpty(goodsName) || StringUtils.isEmpty(producerName) || StringUtils.isEmpty(placeName)) {
+            if (goodsName != null && !goodsName.equals("")) {
+                String[] strs = goodsName.split("\\|");
+                Integer id = Integer.parseInt(strs[1]);
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsBiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
+                goodsName = "";
+            }
+            if (producerName != null && !producerName.equals("")) {
+                Producer producer = producerBiz.getProducer(producerName).get(0);
+                condition.setProducer(producer);
+                producerName = "";
+            }
+            if (placeName != null && !placeName.equals("")) {
+                Place place = placeBiz.getPlace(placeName).get(0);
+                condition.setPlace(place);
+                placeName = "";
+            }
+        }
+        condition.setState("ok");
+        List deliver = deliverBiz.getDeliverList(condition);
         session.put("deliverlistok", deliver);
         return "success";
     }

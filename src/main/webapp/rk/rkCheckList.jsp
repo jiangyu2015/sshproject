@@ -16,7 +16,7 @@
     <script>
         function edit() {
             if ($(".active").length == 0) {
-                alert('请选择要修改的行');
+                alert('请选择要确认的行');
             } else {
                 var $tds = $("tr.active").children();
                 var $lines = $("#dialog_edit").find('form').children();
@@ -199,10 +199,11 @@
             var val = $("#goods").val();
             var val2 = $("#producer").val();
             var val3 = $("#place").val();
+            var val4 = $("#category").val();
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
             var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
-            if (!val && !val2 && !val3) {
+            if (!val && !val2 && !val3  && !val4) {
                 alert("请输入至少一个查询选项");
                 return false;
             }
@@ -237,7 +238,7 @@
     <div class="btn-div">
         <form method="post" action="rkCheckSelect.action" onsubmit="return checkSelect()" class="head-form">
             <div class="head-lable">商品名称：</div>
-            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName"/>
             <datalist id="selectgoods"></datalist>
             <div class="head-lable"> 商户名称：</div>
             <input id="producer" class="head-input" list="selectproducer" name="producerName" style="width: 10%;"/>
@@ -246,7 +247,11 @@
             <input id="place" class="head-input" list="selectplace" name="storagePlace"  style="width: 10%;"/>
             <datalist id="selectplace"></datalist>
             <div class="head-lable">入库类别：</div>
-            <input id="category" class="head-input" name="category"  style="width: 10%;"/>
+            <select id="category"class="head-input" name="category" style="width: 10%;"/>
+                <option></option>
+                <option value="正常入库">正常入库</option>
+                <option value="正常调拨">正常调拨</option>
+            </select>
             <input type="submit" class="btn-remove" value="查询" style="left: 20px;;">
         </form>
     </div>

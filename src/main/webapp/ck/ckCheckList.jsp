@@ -16,20 +16,20 @@
 
     <script>
         function edit() {
-            if ($(".active").length == 0) {
-                alert('请选择要修改的行');
-            } else {
-                var $tds = $("tr.active").children();
-                var $lines = $("#dialog_edit").find('form').children();
-                for (var i = 0, len = $tds.length; i < len; i++) {
-                    var $line = $lines.eq(i);
-                    $line.find('input').val($tds.eq(i).text());
+         if ($(".active").length == 0) {
+         alert('请选择要确认的行');
+         } else {
+         var $tds = $("tr.active").children();
+         var $lines = $("#dialog_edit").find('form').children();
+         for (var i = 0, len = $tds.length; i < len; i++) {
+         var $line = $lines.eq(i);
+         $line.find('input').val($tds.eq(i).text());
 
-                }
-                $(".input-div span").html("");
-                $("#dialog_edit").show();
-            }
-        }
+         }
+         $(".input-div span").html("");
+         $("#dialog_edit").show();
+         }
+         }
 
         var _move = false;//移动标记
         var _x, _y;//鼠标离控件左上角的相对位置
@@ -69,6 +69,67 @@
             }).mouseup(function () {
                 _move = false;
             });
+
+            $.ajax({
+                type: "post",
+                url: "excuteAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var goods = d.goodsList;
+                    console.log(goods);
+                    for (var i = 0; i < goods.length; i++) {
+                        str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
+                    }
+                    $("#selectgoods").html(str);
+                    $('#goods').bind('input propertychange', function () {
+                        $("#selectgoods").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
+            $.ajax({
+                type: "post",
+                url: "selectProducerJsonAction",
+                dataType: 'json',
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var producer = d.producerList;
+                    console.log(producer);
+                    for (var i = 0; i < producer.length; i++) {
+                        str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
+                    }
+
+                    $("#selectproducer").html(str);
+                    $('#producer').bind('input propertychange', function () {
+                        $("#selectproducer").html(str);
+                    });
+                },
+                error: function () {
+                    alert("未查到商户");
+                    $("#div_item2").html("未查到商户");
+                }//这里不要加","
+
+            });
+            $.ajax({
+                type: "post",
+                url: "excutePlaceAjaxJsonAction",
+                success: function (data, xhrTxt) {
+                    var str = "";
+                    var d = eval("(" + data + ")");
+                    var place = d.placeList;
+                    console.log(place);
+                    for (var i = 0; i < place.length; i++) {
+                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
+                    }
+                    $("#selectplace").html(str);
+                    $('#place').bind('input propertychange', function () {
+                        $("#selectplace").html(str);
+                    });
+                },
+                dataType: 'json'
+            });
         });
 
         function check() {
@@ -84,10 +145,12 @@
             $(".input-div span").html("");
 
             if (deliverNumber == "" || deliverNumber == null) {
+                alert("请输入实际出库数！");
                 $("#div_deliverNumber").html("请输入实际出库数！");
                 return false;
             }
             else if (deliverDate == "" || deliverDate == null) {
+                alert("请输入实际出库数量！");
                 $("#div_deliverDate").html("请输入实际出库数量！");
                 return false;
             }
@@ -120,7 +183,36 @@
             }
             return month;
         }
-
+        function checkSelect() {
+            var val = $("#goods").val();
+            var val2 = $("#producer").val();
+            var val3 = $("#place").val();
+            var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
+            var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
+            if (!val && !val2 && !val3) {
+                alert("请输入至少一个查询选项");
+                return false;
+            }
+            if (val != null && val != "") {
+                if (selectId == undefined) {
+                    alert("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
+                    return false;
+                }
+            }
+            if (val2 != null && val2 != "") {
+                if (selectId2 == undefined) {
+                    alert("商户未建或未通过审核，请选择选项框内的商户");
+                    return false;
+                }
+            }
+            if (val3 != null && val3 != "") {
+                if (selectId3 == undefined) {
+                    alert("仓库未建，请选择选项框内的仓库");
+                    return false;
+                }
+            }
+        }
     </script>
 </head>
 
@@ -128,8 +220,21 @@
 <div class="table-div">
     <div class="title">确认出库</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="确认出库" onclick="edit();" style="position: relative; width: 90px;">
-        <%-- <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <input type="button" class="btn-eidt" value="确认出库" onclick="edit();" style="width: 90px;">
+    </div>
+    <div class="btn-div">
+        <form method="post" action="ckcheck.action" onsubmit="return checkSelect()" class="head-form">
+            <div class="head-lable">商品名称：</div>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName"/>
+            <datalist id="selectgoods"></datalist>
+            <div class="head-lable"> 商户名称：</div>
+            <input id="producer" class="head-input" list="selectproducer" name="producerName" style="width: 10%;"/>
+            <datalist id="selectproducer"></datalist>
+            <div class="head-lable">入库地点：</div>
+            <input id="place" class="head-input" list="selectplace" name="placeName" style="width: 10%;"/>
+            <datalist id="selectplace"></datalist>
+            <input type="submit" class="btn-remove" value="查询" style="left: 20px;;">
+        </form>
     </div>
     <table id="advSearch" class="table">
         <thead>

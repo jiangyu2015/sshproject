@@ -15,19 +15,6 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
     <script>
-       /* function edit() {
-            if ($(".active").length == 0) {
-                alert('请选择要修改的行');
-            } else {
-                var $tds = $("tr.active").children();
-                var $lines = $("#dialog_edit").find('form').children();
-                for (var i = 0, len = $tds.length; i < len; i++) {
-                    var $line = $lines.eq(i);
-                    $line.find('input').val($tds.eq(i).text());
-                }
-                $("#dialog_edit").show();
-            }
-        }*/
         $(function () {
             $.ajax({
                 type: "post",

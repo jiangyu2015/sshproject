@@ -258,7 +258,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         session.put("withholdinglist", null);
         session.put("sumwithholdingdeliver", null);
         Withholding condition = new Withholding();
-        condition.setTimeId(2);  //超时间问题 待定
+    /*    condition.setTimeId(2);  //超时间问题 待定*/
         if (id != null && !id.equals("")) {
             withholding.setWithholdingId(id);
             id = null;
