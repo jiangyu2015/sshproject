@@ -137,6 +137,9 @@
             <th>商品名称</th>
             <th>仓库id</th>
             <th>入库地点</th>
+            <th>商品生产日期</th>
+            <th>商品保质期</th>
+            <th>商品截止日期</th>
             <th>使用原由</th>
             <th>活动id</th>
             <th>单位</th>
@@ -156,6 +159,9 @@
                 <td><s:property value="#withholding.goods.goodsName"/></td>
                 <td><s:property value="#withholding.place.placeId"/></td>
                 <td><s:property value="#withholding.place.placeName"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#withholding.goods.creationDate"/></td>
+                <td><s:property value="#withholding.goods.baozhiqi"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#withholding.goods.expirationDate"/></td>
                 <td><s:property value="#withholding.events"/></td>
                 <td><s:property value="#withholding.activityId"/></td>
                 <td><s:property value="#withholding.unit"/></td>

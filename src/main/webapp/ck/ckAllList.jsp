@@ -139,8 +139,14 @@
         <tr>
             <th>出库明细id</th>
             <th>商户名称</th>
+            <th>商品id</th>
             <th>商品名称</th>
             <th>仓库地点</th>
+
+            <th>商品生产日期</th>
+            <th>商品保质期</th>
+            <th>商品截止日期</th>
+
             <th>实际出库时间</th>
             <th>预期出库数量</th>
             <th>实际出库数量</th>
@@ -158,8 +164,12 @@
             <tr>
                 <td><s:property value="#deliver.deliverId"/></td>
                 <td><s:property value="#deliver.producer.producerName"/></td>
+                <td><s:property value="#deliver.goods.goodsId"/></td>
                 <td><s:property value="#deliver.goods.goodsName"/></td>
                 <td><s:property value="#deliver.place.placeName"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#deliver.goods.creationDate"/></td>
+                <td><s:property value="#deliver.goods.baozhiqi"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#deliver.goods.expirationDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#deliver.deliverDate"/></td>
                 <td><s:property value="#deliver.expecteNumber"/></td>
                 <td><s:property value="#deliver.deliverNumber"/></td>

@@ -359,7 +359,7 @@
                     <div class="line">
                         <div class="lable">商品保质期：</div>
                         <div class="input-div"><input name="storage.goods.baozhiqi" readonly="readonly"
-                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
                     <div class="line">

@@ -150,8 +150,8 @@
                 return false;
             }
             else if (deliverDate == "" || deliverDate == null) {
-                alert("请输入实际出库数量！");
-                $("#div_deliverDate").html("请输入实际出库数量！");
+                alert("请输入实际出库日期！");
+                $("#div_deliverDate").html("请输入实际出库日期！");
                 return false;
             }
             else if (deliverdays > todays) {
@@ -241,8 +241,12 @@
         <tr>
             <th>出库明细id</th>
             <th>商户名称</th>
+            <th>商品id</th>
             <th>商品名称</th>
             <th>仓库地点</th>
+            <th>商品生产日期</th>
+            <th>商品保质期</th>
+            <th>商品截止日期</th>
             <th>实际出库时间</th>
             <th>预期出库数量</th>
             <th>实际出库数量</th>
@@ -260,8 +264,12 @@
             <tr>
                 <td><s:property value="#deliver.deliverId"/></td>
                 <td><s:property value="#deliver.producer.producerName"/></td>
+                <td><s:property value="#deliver.goods.goodsId"/></td>
                 <td><s:property value="#deliver.goods.goodsName"/></td>
                 <td><s:property value="#deliver.place.placeName"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#deliver.goods.creationDate"/></td>
+                <td><s:property value="#deliver.goods.baozhiqi"/></td>
+                <td><s:date format="yyyy-MM-dd" name="#deliver.goods.expirationDate"/></td>
                 <td><s:date format="yyyy-MM-dd" name="#deliver.deliverDate"/></td>
                 <td><s:property value="#deliver.expecteNumber"/></td>
                 <td><s:property value="#deliver.deliverNumber"/></td>
@@ -296,6 +304,11 @@
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input   readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
                         <div class="lable">商品名称：</div>
                         <div class="input-div"><input name="deliver.goods.goodsName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
@@ -306,7 +319,23 @@
                         <div class="input-div"><input name="deliver.place.placeName" readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
+                    <div class="line">
+                        <div class="lable">商品生产日期：</div>
+                        <div class="input-div"><input name="storage.goods.creationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
 
+                    <div class="line">
+                        <div class="lable">商品保质期：</div>
+                        <div class="input-div"><input name="storage.goods.baozhiqi" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" /></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">商品截止日期：</div>
+                        <div class="input-div"><input name="storage.goods.expirationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
                     <div class="line">
                         <div class="lable"><span>* </span>实际出库时间：</div>
                         <div class="input-div"><input id="deliverDate" name="deliver.deliverDate" type="date"/><span
