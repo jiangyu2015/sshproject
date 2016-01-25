@@ -13,7 +13,6 @@
     <title>入库明细信息</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
-
     <script>
         function edit() {
             if ($(".active").length == 0) {
@@ -233,20 +232,22 @@
 <div class="table-div">
     <div class="title">确认收货</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();" style="position: relative; width: 90px;">
+        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();" style="width: 90px;">
+    </div>
+    <div class="btn-div">
         <form method="post" action="rkCheckSelect.action" onsubmit="return checkSelect()" class="head-form">
             <div class="head-lable">商品名称：</div>
             <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
             <datalist id="selectgoods"></datalist>
             <div class="head-lable"> 商户名称：</div>
-            <input id="producer" class="head-input" list="selectproducer" name="producerName"/>
+            <input id="producer" class="head-input" list="selectproducer" name="producerName" style="width: 10%;"/>
             <datalist id="selectproducer"></datalist>
             <div class="head-lable">入库地点：</div>
-            <input id="place" class="head-input" list="selectplace" name="storagePlace"/>
+            <input id="place" class="head-input" list="selectplace" name="storagePlace"  style="width: 10%;"/>
             <datalist id="selectplace"></datalist>
-        <%--    <div class="head-lable">入库类别：</div>
-            <input id="category" class="head-input" name="category"/>--%>
-            <input type="submit" class="btn-remove head-btn-right" value="查询">
+            <div class="head-lable">入库类别：</div>
+            <input id="category" class="head-input" name="category"  style="width: 10%;"/>
+            <input type="submit" class="btn-remove" value="查询" style="left: 20px;;">
         </form>
     </div>
     <table id="advSearch" class="table">

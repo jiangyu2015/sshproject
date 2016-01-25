@@ -132,7 +132,7 @@
         <input type="button" class="btn-eidt" value="审核" onclick="check();">
         <form method="post" action="zksqSelectCheck.action" onsubmit="return checkSelect()" class="head-form">
             <div class="head-lable">商品名称：</div>
-            <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+            <input id="goods" class="head-input" list="selectgoods" name="goodsName"/>
             <datalist id="selectgoods"></datalist>
             <input type="submit" class="btn-remove head-btn-right" value="查询">
         </form>

@@ -134,7 +134,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     }
 
     public String checkDeliver() {               //得到所需出库的单子
-       Deliver condition=new Deliver();
+        Deliver condition = new Deliver();
         condition.setState("no");
         List<Deliver> deliver = deliverBiz.getDeliverList(condition);
         session.put("deliverlistcheck", deliver);
@@ -164,88 +164,31 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     public String searchDeliverList() {      //增加这个方法需要注入 biz别忘了
         Deliver condition = new Deliver();
         if (goodsName != null && !goodsName.equals("")) {
-        /*    if (deliverApp.getGoodsName().indexOf("|") != -1) {
-                String[] strs = deliverApp.getGoodsName().split("\\|");      //增加goods
-                String name = strs[0];
-                condition.setGoodsName(name);
-            } else return "input";*/
             if (goodsName.indexOf("|") != -1) {
                 String[] strs = goodsName.split("\\|");
-                String name = strs[0];
                 Integer id = Integer.parseInt(strs[1]);
-
                 Goods g = new Goods();
                 g.setGoodsId(id);
                 Goods goods = goodsBiz.getGoodsList(g).get(0);
                 condition.setGoods(goods);
-                List list = deliverBiz.getDeliverList(condition);
-                if (list.size() > 0) {
-                    session.put("deliverlist", list);
-                    return "success";
-                } else {
-                    return "input";
-                }
-            } else {
-                return "input";
-            } //输错提示
-        } else if (producerName != null && !producerName.equals("")) {
+            }
+        }
+        if (producerName != null && !producerName.equals("")) {
             Producer producer = producerBiz.getProducer(producerName).get(0);
             condition.setProducer(producer);
-            List list = deliverBiz.getDeliverList(condition);
-            System.out.println(list.size());
-            if (list.size() > 0) {
-                session.put("deliverlist", list);
-                return "success";
-            } else
-                return "input";
-        } else if (placeName != null && !placeName.equals("")) {
+        }
+        if (placeName != null && !placeName.equals("")) {
             Place place = placeBiz.getPlace(placeName).get(0);
             condition.setPlace(place);
-            List list = deliverBiz.getDeliverList(condition);
-            if (list.size() > 0) {
-                session.put("deliverlist", list);
-                return "success";
-            } else
-                return "input";
         }
+        List list = deliverBiz.getDeliverList(condition);
+        session.put("deliverlist", list);
         return "success";
     }
-    
-   /* public String searchDeliverList() {  //没用
-        Deliver condition = new Deliver();
-        // condition.setGoodsName(goodsName);
-        List list = deliverBiz.getDeliverList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            //  session.put("goodslist", list);
-            session.put("deliverlist", list);
-            return "success";
-        } else
-            return "input";
-    }*/
 
     public String addDeliver() throws Exception {                  //增加出库申请
         System.out.println("addDeliver");
         Deliver condition = new Deliver();
-        //   System.out.println(deliver.getGoodsId() + "出库明细添加商品id我传过来了");
- /*       if (deliver.getProducerName() != null && !deliver.getProducerName().equals(""))
-            condition.setProducerName(deliver.getProducerName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商户名称!");
-            return "input";
-        }
-        if (deliver.getGoodsName() != null && !deliver.getGoodsName().equals(""))
-            condition.setGoodsName(deliver.getGoodsName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商品名称!");
-            return "input";
-        }
-        if (deliver.getDeliverPlace() != null && !deliver.getDeliverPlace().equals(""))
-            condition.setDeliverPlace(deliver.getDeliverPlace());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入仓库名称!");
-            return "input";
-        }*/
         if (goodsId != null && !goodsId.equals("")) {          //商品id
             Goods g = new Goods();
             g.setGoodsId(goodsId);
@@ -255,7 +198,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (placeId != null && !placeId.equals("")) {                     //仓库id
             Place p = new Place();
             p.setPlaceId(placeId);
-            Place place =(Place) placeBiz.getPlaceList(p).get(0);
+            Place place = (Place) placeBiz.getPlaceList(p).get(0);
             condition.setPlace(place);
         }
 
@@ -265,12 +208,12 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             Producer producer = producerBiz.getProducerList(p).get(0);
             condition.setProducer(producer);
         }
-      if( withholdingId!= null && ! withholdingId.equals("")){
-          Withholding w=new Withholding();
-          w.setWithholdingId(withholdingId);
-          Withholding withholding= withholdingBiz.search(w).get(0);
-          condition.setWithholding(withholding);
-      }
+        if (withholdingId != null && !withholdingId.equals("")) {
+            Withholding w = new Withholding();
+            w.setWithholdingId(withholdingId);
+            Withholding withholding = withholdingBiz.search(w).get(0);
+            condition.setWithholding(withholding);
+        }
         if (deliver.getDeliverDate() != null)                      //实际出库时间
             condition.setDeliverDate(deliver.getDeliverDate());
         if (deliver.getExpecteNumber() != null)               //预期出库数量
@@ -323,8 +266,8 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         } else return "input";
     }
 
-    public String listOkDeliver(){
-        Deliver s=new Deliver();
+    public String listOkDeliver() {
+        Deliver s = new Deliver();
         s.setState("ok");
         List deliver = deliverBiz.getDeliverList(s);
         session.put("deliverlistok", deliver);

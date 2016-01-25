@@ -173,12 +173,12 @@
        <%-- <input type="button" class="btn-remove" value="查询" onclick="search();">--%>
            <form method="post" action="rkSelect.action" onsubmit="return checkSelect()" class="head-form">
                <div class="head-lable">商品名称：</div>
-               <input id="goods" class="head-input" list="selectgoods" name="goodsName" onchange="getInfo()"/>
+               <input id="goods" class="head-input" list="selectgoods" name="goodsName"/>
                <datalist id="selectgoods"></datalist>
                <div class="head-lable"> 商户名称：</div>
                <input id="producer" class="head-input" list="selectproducer" name="producerName"/>
                <datalist id="selectproducer"></datalist>
-               <div class="head-lable">入库地点：</div>
+               <div class="head-lable">出库地点：</div>
                <input id="place" class="head-input" list="selectplace" name="storagePlace"/>
                <datalist id="selectplace"></datalist>
             <%--   <div class="head-lable">入库类别：</div>

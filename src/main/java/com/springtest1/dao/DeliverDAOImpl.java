@@ -32,27 +32,30 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
                     if (condition.getDeliverId() != null && !condition.getDeliverId().equals("")) {
                         c.add(Restrictions.eq("deliverId", condition.getDeliverId()));
                     }
-                    else if (condition.getWithholding() != null) {   //通过预提id查询所有的出库明细
+                    if (condition.getWithholding() != null) {   //通过预提id查询所有的出库明细
                         if (condition.getWithholding().getWithholdingId() != null && !condition.getWithholding().getWithholdingId().equals("")) {
                             c.add(Restrictions.eq("withholding.withholdingId", condition.getWithholding().getWithholdingId()));
                         }
                     }
-                    else if (condition.getState() != null && !condition.getState().equals("")) {
+                    if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
                     }
-                    else if (condition.getGoods() != null) {
+                    if (condition.getGoods() != null) {
                         if (condition.getGoods().getGoodsId() != null && !condition.getGoods().getGoodsId().equals("")) {
                             c.add(Restrictions.eq("goods.goodsId", condition.getGoods().getGoodsId()));
                         }
-                    } else if (condition.getProducer() != null) {
+                    }
+                    if (condition.getProducer() != null) {
                         if (condition.getProducer().getProducerId() != null && !condition.getProducer().getProducerId().equals("")) {
                             c.add(Restrictions.eq("producer.producerId", condition.getProducer().getProducerId()));
                         }
-                    } else if (condition.getPlace() != null) {
+                    }
+                    if (condition.getPlace() != null) {
                         if (condition.getPlace().getPlaceId() != null && !condition.getPlace().getPlaceId().equals("")) {
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
                     }
+
                 }
                 if (c.list().size() <= 0) {
                     return new ArrayList<Deliver>();
@@ -71,8 +74,8 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
         super.getHibernateTemplate().update(deliver);   //修改
     }
 
-    public List<Deliver> searchWithholdingDeliver(Integer withholdingId){   //查询预提id对应的所有消耗
-        String sql = "select IFNULL(sum(ck_number), 0) FROM ck_detail GROUP BY yt_id HAVING yt_id=" +withholdingId;
+    public List<Deliver> searchWithholdingDeliver(Integer withholdingId) {   //查询预提id对应的所有消耗
+        String sql = "select IFNULL(sum(ck_number), 0) FROM ck_detail GROUP BY yt_id HAVING yt_id=" + withholdingId;
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<BigDecimal> list = sqlQuery.list();
