@@ -232,17 +232,17 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 g.setGoodsId(id);
                 Goods goods = goodsbiz.getGoodsList(g).get(0);
                 condition.setGoods(goods);
-                goodsName="";
+                goodsName = "";
             }
             if (producerName != null && !producerName.equals("")) {
                 Producer producer = producerBiz.getProducer(producerName).get(0);
                 condition.setProducer(producer);
-                producerName="";
+                producerName = "";
             }
             if (storagePlace != null && !storagePlace.equals("")) {
                 Place place = placebiz.getPlace(storagePlace).get(0);
                 condition.setPlace(place);
-                storagePlace="";
+                storagePlace = "";
             }
             List list = withholdingBiz.search(condition);
             session.put("withholdinglistall", list);
@@ -258,13 +258,14 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         session.put("withholdinglist", null);
         session.put("sumwithholdingdeliver", null);
         Withholding condition = new Withholding();
-    /*    condition.setTimeId(2);  //超时间问题 待定*/
+        condition.setTimeId(3);  //超时间问题 待定
         if (id != null && !id.equals("")) {
             withholding.setWithholdingId(id);
             id = null;
         }
         if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
             condition.setWithholdingId(withholding.getWithholdingId());
+
             List<Withholding> list = withholdingBiz.search(condition);
             if (list.size() > 0) {
                 session.put("withholdinglist", list);   //有了预提表
@@ -283,11 +284,26 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     int sumDeliver = 0;
                     session.put("sumwithholdingdeliver", sumDeliver);
                 }
+                withholding.setWithholdingId(null);
                 return "success";
-            } else
+            } else {
+                session.put("nowithholding", "没有找到相关信息!");
                 return "input";
-        } else if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
+            }
+        }
+
+        if (StringUtils.isEmpty(withholding.getActivityId()) && StringUtils.isEmpty(goodsName)) {    //针对出库预提查询
             condition.setActivityId(withholding.getActivityId());
+            withholding.setActivityId("");
+            if (goodsName.indexOf("|") != -1) {
+                String[] strs = goodsName.split("\\|");
+                Integer id = Integer.parseInt(strs[1]);
+                Goods g = new Goods();
+                g.setGoodsId(id);
+                Goods goods = goodsbiz.getGoodsList(g).get(0);
+                condition.setGoods(goods);
+                goodsName="";
+            }
             List<Withholding> list = withholdingBiz.search(condition);
             if (list.size() > 0) {
                 session.put("withholdinglist", list);   //有了预提表
@@ -307,24 +323,63 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     session.put("sumwithholdingdeliver", sumDeliver);
                 }
                 return "success";
-            } else
+            } else {
+                session.put("nowithholding", "没有找到相关信息!");
                 return "input";
-        } else if (goodsName != null && !goodsName.equals("")) {
-            if (goodsName.indexOf("|") != -1) {
-                String[] strs = goodsName.split("\\|");
-                String name = strs[0];
-                Integer id = Integer.parseInt(strs[1]);
-                Goods g = new Goods();
-                g.setGoodsId(id);
-                Goods goods = goodsbiz.getGoodsList(g).get(0);
-                condition.setGoods(goods);
-                List list = withholdingBiz.search(condition);
+            }
+        }
+        else {
+            if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
+                condition.setActivityId(withholding.getActivityId());
+                withholding.setActivityId("");
+                List<Withholding> list = withholdingBiz.search(condition);
                 if (list.size() > 0) {
-                    session.put("withholdinglist", list);
+                    session.put("withholdinglist", list);   //有了预提表
                     return "s";
-                } else
+                } else {
+                    session.put("nowithholding", "没有找到相关信息!");
                     return "input";
-            } else return "input";
+                }
+
+                  /*  Withholding w = list.get(0);
+                    Deliver d = new Deliver();
+                    d.setWithholding(w);
+                    List<Deliver> deliverList = deliverBiz.getDeliverList(d);
+                    session.put("deliverytlist", deliverList);
+                    List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(w.getWithholdingId());
+                    if (delivers.size() > 0) {
+                        Deliver deliver = delivers.get(0);
+                        BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
+                        int sumDeliver = a.intValue();
+                        session.put("sumwithholdingdeliver", sumDeliver);
+                    } else {
+                        int sumDeliver = 0;
+                        session.put("sumwithholdingdeliver", sumDeliver);
+                    }
+                    return "success";
+                } else {
+                    session.put("nowithholding", "没有找到相关信息!");
+                    return "input";*/
+
+            } else if (goodsName != null && !goodsName.equals("")) {
+                if (goodsName.indexOf("|") != -1) {
+                    String[] strs = goodsName.split("\\|");
+                    Integer id = Integer.parseInt(strs[1]);
+                    Goods g = new Goods();
+                    g.setGoodsId(id);
+                    Goods goods = goodsbiz.getGoodsList(g).get(0);
+                    condition.setGoods(goods);
+                    goodsName="";
+                    List list = withholdingBiz.search(condition);
+                    if (list.size() > 0) {
+                        session.put("withholdinglist", list);
+                        return "s";
+                    } else {
+                        session.put("nowithholding", "没有找到相关信息!");
+                        return "input";
+                    }
+                }
+            }
         }
         return "success";
     }
@@ -339,17 +394,17 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             g.setGoodsId(id);
             Goods goods = goodsbiz.getGoodsList(g).get(0);
             condition.setGoods(goods);
-            goodsName="";
+            goodsName = "";
         }
         if (producerName != null && !producerName.equals("")) {
             Producer producer = producerBiz.getProducer(producerName).get(0);
             condition.setProducer(producer);
-            producerName="";
+            producerName = "";
         }
         if (storagePlace != null && !storagePlace.equals("")) {
             Place place = placebiz.getPlace(storagePlace).get(0);
             condition.setPlace(place);
-            storagePlace="";
+            storagePlace = "";
         }
         condition.setTimeId(2);
         List list = withholdingBiz.search(condition);
@@ -367,17 +422,17 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
             g.setGoodsId(id);
             Goods goods = goodsbiz.getGoodsList(g).get(0);
             condition.setGoods(goods);
-            goodsName="";
+            goodsName = "";
         }
         if (producerName != null && !producerName.equals("")) {
             Producer producer = producerBiz.getProducer(producerName).get(0);
             condition.setProducer(producer);
-            producerName="";
+            producerName = "";
         }
         if (storagePlace != null && !storagePlace.equals("")) {
             Place place = placebiz.getPlace(storagePlace).get(0);
             condition.setPlace(place);
-            storagePlace="";
+            storagePlace = "";
         }
         condition.setTimeId(1);
         List list = withholdingBiz.search(condition);

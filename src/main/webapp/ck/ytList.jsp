@@ -19,10 +19,9 @@
     <script type="text/javascript">
         function doDeliver() {
             if ($(".active").length == 0) {
-                alert('请选择要修改的行');
+                alert('请选择要出库的行');
             } else {
                 var $tds = $("tr.active").children();
-                /*   alert($tds.eq(0).text())*/
                 alert("预提" + $tds.eq(10).text() + "出库数" + $('#sumwithholdingdeliver').html());
                 $.ajax({
                     success: function () {
@@ -39,37 +38,41 @@
 
         function doRelease() {
             if ($(".active").length == 0) {
-                alert('请选择要修改的行');
+                alert('请选择要释放的行');
             } else {
-                var deteline = $("tr.active").children().eq(12).text();
-                var arr = deteline.split("-");                    //比较时间
-                var overday = new Date(arr[0], arr[1], arr[2]);
-                var overdays = overday.getTime(); //截止时间
-                var arrs = getToDay().split("-");
-                var today = new Date(arrs[0], arrs[1], arrs[2]);
-                var todays = today.getTime();
-
-                if (overdays < todays)
-                    alert('预提已结束，无需释放');
-                else {
-                    $.ajax({
-                        url: "doReleaseJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
-                        data: {//设置数据源
-                            id: $("tr.active").children().eq(0).text()
-                        },
-                        dataType: "json",//设置需要返回的数据类型*/
-                        success: function (data, xhrTxt) {
-                            alert('预提已释放');
-                            window.location.href = "ytSelectDeliver.action?id=" + $("tr.active").children().eq(0).text();
-
-                        },
-                        error: function () {
-                            alert("系统异常，请稍后重试！");
-                        }//这里不要加","
-                    });
+                if (document.getElementById("sess").value != "梁吉") {
+                    alert('只有梁吉鸽鸽可以释放！');
                 }
+                else {
+                    var deteline = $("tr.active").children().eq(12).text();
+                    var arr = deteline.split("-");                    //比较时间
+                    var overday = new Date(arr[0], arr[1], arr[2]);
+                    var overdays = overday.getTime(); //截止时间
+                    var arrs = getToDay().split("-");
+                    var today = new Date(arrs[0], arrs[1], arrs[2]);
+                    var todays = today.getTime();
 
+                    if (overdays < todays)
+                        alert('预提已结束，无需释放');
+                    else {
+                        $.ajax({
+                            url: "doReleaseJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                            data: {//设置数据源
+                                id: $("tr.active").children().eq(0).text()
+                            },
+                            dataType: "json",//设置需要返回的数据类型*/
+                            success: function (data, xhrTxt) {
+                                alert('预提已释放');
+                                window.location.href = "ytSelectDeliver.action?id=" + $("tr.active").children().eq(0).text();
 
+                            },
+                            error: function () {
+                                alert("系统异常，请稍后重试！");
+                            }//这里不要加","
+                        });
+                    }
+
+                }
             }
         }
 
@@ -113,7 +116,9 @@
 <div class="btn-div">
     <input type="button" class="btn-eidt" value="预提消耗" onclick="doDeliver();" style="position: relative; width: 90px;"/>
     当前预提消耗为： <span id="sumwithholdingdeliver"><%=session.getAttribute("sumwithholdingdeliver")%></span>
-    <input type="button" class="btn-eidt" value="预提释放" onclick="doRelease();" style="position: absolute; width: 90px; right: 10px;"/>
+    <input type="button" class="btn-eidt" value="预提释放" onclick="doRelease();"
+           style="position: absolute; width: 90px; right: 10px;"/>
+    <input type="hidden" id="sess" name="hiddenField" value=<%=session.getAttribute("name")%>>
 
 </div>
 

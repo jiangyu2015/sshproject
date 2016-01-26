@@ -81,11 +81,17 @@ public class WithholdingDAOImpl extends HibernateDaoSupport implements Withholdi
                         java.util.Date date = new java.util.Date();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         String today = sdf.format(date);
-                        System.out.println("ytDAOImpl获取今天的日子"+date);
                         if (condition.getTimeId() == 1)  //过期<今天
                             c.add(Restrictions.lt("deteline", Date.valueOf(today)));
                         if (condition.getTimeId() == 2) //未过期>=今天
                             c.add(Restrictions.ge("deteline", Date.valueOf(today)));
+                        if (condition.getTimeId() == 3) {//未过期>=今天七天之前
+                            Calendar ca = Calendar.getInstance();
+                            ca.add(Calendar.DATE, -8);
+                            date = ca.getTime();
+                            String end = sdf.format(date);
+                            c.add(Restrictions.ge("deteline", Date.valueOf(end)));
+                        }
                     }
                     if (condition.getWithholdingId() != null && !condition.getWithholdingId().equals("")) {
                         c.add(Restrictions.eq("withholdingId", condition.getWithholdingId()));

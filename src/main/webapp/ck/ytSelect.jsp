@@ -82,12 +82,12 @@
          </div>
      </div>--%>
     <form method="post" action="ytSelectDeliver.action" onsubmit="return check(this)">
-        <div class="line">
+       <%-- <div class="line">
             <div class="lable">预提单号：</div>
             <div class="input-div"><input placeholder="请输入预提单号"
                                           name="withholding.withholdingId"/>
             </div>
-        </div>
+        </div>--%>
         <div class="line">
             <div class="lable">活动号：</div>
             <div class="input-div"><input placeholder="请输入预提时填写的活动号"
