@@ -63,7 +63,7 @@
                             dataType: "json",//设置需要返回的数据类型*/
                             success: function (data, xhrTxt) {
                                 alert('预提已释放');
-                                window.location.href = "ytSelectDeliver.action?id=" + $("tr.active").children().eq(0).text();
+                                window.location.href = "ytSelectDeliver.action?id=" + $("tr.active").children().eq(0).text()+"&timeId=4";
 
                             },
                             error: function () {

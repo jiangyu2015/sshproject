@@ -106,6 +106,15 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     String goodsName;
     String producerName;//商户
     String storagePlace;  //入库地点
+    Integer timeId; //用来预提释放
+
+    public Integer getTimeId() {
+        return timeId;
+    }
+
+    public void setTimeId(Integer timeId) {
+        this.timeId = timeId;
+    }
 
     public String getStoragePlace() {
         return storagePlace;
@@ -258,10 +267,17 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         session.put("withholdinglist", null);
         session.put("sumwithholdingdeliver", null);
         Withholding condition = new Withholding();
-        condition.setTimeId(3);  //超时间问题 待定
+       /* condition.setTimeId(3);  //超时间问题 待定*/
         if (id != null && !id.equals("")) {
             withholding.setWithholdingId(id);
             id = null;
+        }
+        if (timeId != null && !timeId.equals("")) {
+            withholding.setTimeId(timeId);
+            timeId= null;
+        }
+        if (withholding.getTimeId() != null && !withholding.getTimeId().equals("")) {
+            condition.setTimeId(withholding.getTimeId());
         }
         if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
             condition.setWithholdingId(withholding.getWithholdingId());
@@ -302,7 +318,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 g.setGoodsId(id);
                 Goods goods = goodsbiz.getGoodsList(g).get(0);
                 condition.setGoods(goods);
-                goodsName="";
+                goodsName = "";
             }
             List<Withholding> list = withholdingBiz.search(condition);
             if (list.size() > 0) {
@@ -327,8 +343,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 session.put("nowithholding", "没有找到相关信息!");
                 return "input";
             }
-        }
-        else {
+        } else {
             if (withholding.getActivityId() != null && !withholding.getActivityId().equals("")) {
                 condition.setActivityId(withholding.getActivityId());
                 withholding.setActivityId("");
@@ -369,7 +384,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     g.setGoodsId(id);
                     Goods goods = goodsbiz.getGoodsList(g).get(0);
                     condition.setGoods(goods);
-                    goodsName="";
+                    goodsName = "";
                     List list = withholdingBiz.search(condition);
                     if (list.size() > 0) {
                         session.put("withholdinglist", list);

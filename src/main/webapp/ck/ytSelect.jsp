@@ -44,9 +44,14 @@
             });
         });
 
-        function check(form) {
+        function check() {
             var val = $("#item").val();
+            var val2 = $("#activityId").val();
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
+            if (!val && !val2 ) {
+                alert("活动id与商品请输入至少一个查询选项");
+                return false;
+            }
             if (val != null & val != "") {
                 if (selectId == undefined) {
                     alert("商品未建或未通过审核，输入商品后请选择选项框内带“|数字”的商品");
@@ -61,36 +66,16 @@
 <body>
 <div class="title">查询预提明细</div>
 <div class="content">
-
-    <%-- <div class="line">
-         <div class="lable">商品名称：</div>
-         <div class="input-div"><input id="item" list="select" placeholder="请输入要查询的入库商品名称" name="goodsName"/>
-             <datalist id="select"></datalist>
-         </div>
-     </div>
-     <div class="line">
-         <div class="lable">商户名称：</div>
-         <div class="input-div"><input id="item2" list="select2" placeholder="请输入要查询的入库商户名称" name="producerName"/>
-             <datalist id="select2"></datalist>
-         </div>
-     </div>
-
-     <div class="line">
-         <div class="lable">仓库地址：</div>
-         <div class="input-div"><input id="item3" list="select3" placeholder="请输入要查询的入库商户名称" name="storagePlace"/>
-             <datalist id="select3"></datalist>
-         </div>
-     </div>--%>
-    <form method="post" action="ytSelectDeliver.action" onsubmit="return check(this)">
-       <%-- <div class="line">
-            <div class="lable">预提单号：</div>
-            <div class="input-div"><input placeholder="请输入预提单号"
-                                          name="withholding.withholdingId"/>
-            </div>
-        </div>--%>
+    <form method="post" action="ytSelectDeliver.action" onsubmit="return check()">
+        <%-- <div class="line">
+             <div class="lable">预提单号：</div>
+             <div class="input-div"><input placeholder="请输入预提单号"
+                                           name="withholding.withholdingId"/>
+             </div>
+         </div>--%>
         <div class="line">
             <div class="lable">活动号：</div>
-            <div class="input-div"><input placeholder="请输入预提时填写的活动号"
+            <div class="input-div"><input id="activityId" placeholder="请输入预提时填写的活动号"
                                           name="withholding.activityId"/>
 
             </div>
@@ -101,6 +86,18 @@
                 <datalist id="select"></datalist>
             </div>
         </div>
+        <div class="line">
+            <div class="lable">选择时间：</div>
+            <div class="input-div">
+                <select  name="withholding.TimeId">
+                    <option value="2">未截止</option>
+                    <option value="4">三天之前截止</option>
+                    <option value="3">八天之前截止</option>
+                </select>
+            </div>
+        </div>
+
+
         <span id="div_alert"></span><br>
         <input type="submit" value="查找" class="btn-submit" <%--onclick="find();"--%>/>
     </form>
