@@ -148,10 +148,10 @@
 			"state": "closed",
 			"children": [{
 				"id": "ckcheck.action",
-				"text": "确认调拨申请的出库请走这"
+				"text": "调拨出库"
 			},{
 				"id": "ck/ytSelect.jsp",
-				"text": "预提出库消耗请走这查询"
+				"text": "预提消耗出库"
 			},{
 				"id": "listck.action",
 				"text": "查询出库明细"

@@ -184,7 +184,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (deliver.getRemark() != null && !deliver.getRemark().equals(""))          //备注
             deliver2.setRemark(deliver.getRemark());
         if (session.get("name") != null) {
-            deliver2.setCheckuser(session.get("name").toString()); //得到入库确认人
+            deliver2.setCheckuser(session.get("name").toString()); //得到出库确认人
         }
         deliverBiz.editDeliver(deliver2);                //更改状态ok1
         return "success";

@@ -128,6 +128,7 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
         session.put("transferapplischeck", transferApp);
         return "transferAppCheck";
     }
+
     public String checkTransferAppSelect() { //得到查询的信息来审核 与search一样
         TransferApp condition = new TransferApp();
         if (StringUtils.isEmpty(goodsName)) {
@@ -243,6 +244,9 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
         deliver.setPlace(place);
         if (transferApp.getExpectDate() != null && !transferApp.getExpectDate().equals("")) {                   //期望转库时间
             storage.setExpectedDate(transferApp.getExpectDate());
+            deliver.setExpecteDate(transferApp.getExpectDate());
+            storage.setStorageDate(transferApp.getExpectDate());
+            deliver.setDeliverDate(transferApp.getExpectDate());
         }
         if (transferApp.getTypeIn() != null && !transferApp.getTypeIn().equals("")) {  //入库类型
             storage.setStorageType(transferApp.getTypeIn());

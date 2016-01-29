@@ -23,6 +23,15 @@ public class Deliver implements Serializable {
     private String adduser; //添加人
     private String checkuser; //确认出货人
     private String state ;  //处理状态 no就是未出货
+    private Date expecteDate;//期望出库时间
+
+    public Date getExpecteDate() {
+        return expecteDate;
+    }
+
+    public void setExpecteDate(Date expecteDate) {
+        this.expecteDate = expecteDate;
+    }
 
     public String getCheckuser() {
         return checkuser;
