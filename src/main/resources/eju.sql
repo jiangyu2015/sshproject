@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-01-26 16:49:12
+Date: 2016-01-27 13:06:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -793,43 +793,30 @@ INSERT INTO `yt_application` VALUES ('5', '1', '4', null, '2', '一楼仓库', '
 INSERT INTO `yt_application` VALUES ('6', '3', '5', null, '7', '373号领奖处', '包', '2016-01-01', '3', null, '3', '30', '2015-11-09', '2016-01-22', '一元购', '', null);
 INSERT INTO `yt_application` VALUES ('7', '3', '6', null, '7', '373号领奖处', '包', '2016-01-15', '4', null, null, '50', '2015-11-10', '2015-12-26', '一元购', '', null);
 INSERT INTO `yt_application` VALUES ('8', '3', '1', null, '7', null, '包', null, null, '社区特卖', '1', '100', '2015-12-10', '2016-01-25', '社区特卖', null, null);
-INSERT INTO `yt_application` VALUES ('9', '7', '1', null, '1', null, '包', null, null, '我在测试1', '1', '50', '2015-12-11', '2016-01-31', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('10', '1', '1', null, '2', null, '个', null, null, '我在测试2', '4', '100', '2015-12-14', '2016-01-20', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('11', '1', '1', null, '2', null, '只', null, null, null, null, '10', '2015-12-16', '2016-01-25', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('12', '1', '1', null, '1', null, '只', null, null, null, null, '10', '2015-12-16', '2016-01-18', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('13', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2015-12-31', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('14', '1', '1', null, '1', null, '只', null, null, null, null, '10', '2015-12-16', '2015-12-31', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('9', '7', '1', null, '1', null, '包', null, null, '我在测试1', '1', '50', '2015-12-11', '2016-01-26', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('10', '1', '1', null, '2', null, '个', null, null, '我在测试2', '4', '100', '2015-12-14', '2016-01-28', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('11', '1', '1', null, '2', null, '只', null, null, null, null, '10', '2015-12-16', '2016-01-27', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('12', '1', '1', null, '1', null, '只', null, null, null, null, '10', '2015-12-16', '2016-01-29', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('13', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2015-12-26', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('14', '1', '1', null, '1', null, '只', null, null, null, null, '10', '2015-12-16', '2015-12-25', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('15', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-08-23', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('16', '3', '2', null, '7', null, '包', null, null, '社区特卖', '121', '20', '2015-12-16', '2016-02-26', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('17', '1', '1', null, '2', null, '只', null, null, '啦啦', '1', '100', '2015-12-16', '2015-12-31', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('17', '1', '1', null, '2', null, '只', null, null, '啦啦', '1', '100', '2015-12-16', '2015-12-17', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('18', '1', '6', null, '7', null, '只', null, null, '我在测试1', '1', '30', '2015-12-16', '2015-12-31', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('23', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('24', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('25', '1', '1', null, '1', null, '只', null, null, null, null, '20', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('26', '1', '1', null, '1', null, '只', null, null, null, '121', '20', '2015-12-16', '2016-01-15', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('27', '1', '1', null, '1', null, '只', null, null, null, '121', '2', '2015-12-16', '2016-02-05', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('28', '1', '1', null, '1', null, '只', null, null, '一元购', '1', '100', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('29', '1', '1', null, '1', null, '只', null, null, '一元购', '1', '100', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('30', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('31', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('32', '1', '1', null, '1', null, '只', null, null, null, null, '100', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('33', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('34', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('35', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('36', '1', '1', null, '1', null, '只', null, null, null, null, '100', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('37', '1', '1', null, '1', null, '只', null, null, null, null, '100', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('38', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-02-28', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('23', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-01-26', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('24', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-01-25', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('25', '1', '1', null, '1', null, '只', null, null, null, null, '20', '2015-12-16', '2016-01-24', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('26', '1', '1', null, '1', null, '只', null, null, null, '121', '20', '2015-12-16', '2016-01-23', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('27', '1', '1', null, '1', null, '只', null, null, null, '121', '2', '2015-12-16', '2016-01-22', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('28', '1', '1', null, '1', null, '只', null, null, '一元购', '1', '100', '2015-12-16', '2016-01-21', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('29', '1', '1', null, '1', null, '只', null, null, '一元购', '1', '100', '2015-12-16', '2016-01-18', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('38', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-01-19', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('39', '1', '1', null, '1', null, '只', null, null, null, null, '2', '2015-12-16', '2016-01-16', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('40', '1', '1', null, '1', null, '只', null, null, null, null, '100', '2015-12-16', '2016-01-18', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('41', '1', '1', null, '1', null, '只', null, null, null, '1', '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('42', '1', '1', null, '1', null, '只', null, null, null, '1', '2', '2015-12-16', '2016-02-28', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('43', '1', '1', null, '1', null, '只', null, null, null, '121', '2', '2015-12-16', '2016-01-25', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('44', '1', '1', null, '1', null, '包', null, null, null, '121', '2', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('45', '1', '1', null, '1', null, '包', null, null, null, '333', '2', '2015-12-16', '2016-02-28', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('44', '1', '1', null, '1', null, '包', null, null, null, '121', '2', '2015-12-16', '2016-01-26', '一元购', null, null);
+INSERT INTO `yt_application` VALUES ('45', '1', '1', null, '1', null, '包', null, null, null, '333', '2', '2015-12-16', '2016-01-26', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('46', '1', '1', null, '1', null, '包', null, null, null, null, '30', '2015-12-16', '2015-12-31', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('47', '1', '1', null, '1', null, '包', null, null, null, '333', '500', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('48', '1', '1', null, '2', null, '包', null, null, null, '2', '3', '2015-12-16', '2016-02-28', '一元购', null, null);
-INSERT INTO `yt_application` VALUES ('49', '1', '1', null, '2', null, '包', null, null, null, '2', '3', '2015-12-16', '2016-02-28', '一元购', null, null);
 INSERT INTO `yt_application` VALUES ('50', '3', '5', null, '7', null, '包', null, null, null, null, '70', '2015-12-16', '2016-02-28', '社区特卖', null, null);
 INSERT INTO `yt_application` VALUES ('51', '3', '5', null, '7', null, '包', null, null, null, null, '28', '2015-12-16', '2016-02-28', '社区特卖', null, null);
 INSERT INTO `yt_application` VALUES ('52', '1', '1', null, '1', null, '包', null, null, null, '3', '2', '2015-12-17', '2016-01-23', '一元购', null, null);

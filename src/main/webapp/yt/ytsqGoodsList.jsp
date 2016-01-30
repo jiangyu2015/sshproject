@@ -9,7 +9,7 @@
 
         function doWithholding() {
             if ($(".active").length == 0) {
-                alert('请选择要修改的行');
+                alert('请选择要申请的行');
             }
             else {
                 var $tds = $("tr.active").children();

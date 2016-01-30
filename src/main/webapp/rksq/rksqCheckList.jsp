@@ -246,7 +246,7 @@
                     <div class="line">
                         <div class="lable">申请时间：</div>
                         <div class="input-div"><input   readonly="readonly"
-                                                       style="border: none;-webkit-box-shadow: none;"//></div>
+                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
                     <div class="line">
                         <div class="lable">处理状态：</div>
@@ -271,7 +271,7 @@
                                                        style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
-                    <input type="submit" value="通过" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
+                    <input type="submit" value="通过" class="btn-submit" onclick="$('#dialog_edit').hide();alert('已通过')"/>
                     <input type="button"  value="不通过" class="btn" onclick="btn()"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>

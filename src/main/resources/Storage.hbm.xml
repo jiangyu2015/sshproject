@@ -38,7 +38,7 @@
             <column name="category" length="30" not-null="false"/>
         </property>
         <property name="remark" type="java.lang.String">
-            <column name="remark" length="30" not-null="false"/>
+            <column name="remark" length="200" not-null="false"/>
         </property>
         <property name="state" type="java.lang.String">
             <column name="state" length="30" not-null="false"/>

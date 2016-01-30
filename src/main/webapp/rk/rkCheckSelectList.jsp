@@ -404,7 +404,7 @@
                     </div>
                     <div class="line">
                         <div class="lable">备注：</div>
-                        <div class="input-div"><input placeholder="请输入备注" name="storage.remark"/></div>
+                        <div class="input-div"><input placeholder="请输入备注（可输入200个字符）" name="storage.remark" maxlength="200"/></div>
                     </div>
 
                     <div class="line">
