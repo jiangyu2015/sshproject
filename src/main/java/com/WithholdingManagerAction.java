@@ -281,7 +281,6 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         }
         if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
             condition.setWithholdingId(withholding.getWithholdingId());
-
             List<Withholding> list = withholdingBiz.search(condition);
             if (list.size() > 0) {
                 session.put("withholdinglist", list);   //有了预提表
@@ -405,12 +404,8 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         session.put("sumwithholdingdeliver", null);
         Withholding condition = new Withholding();
         if (id != null && !id.equals("")) {
-            withholding.setWithholdingId(id);
-            id = null;
-            System.out.println(withholding.getWithholdingId());
-        } else return "input";
-        if (withholding.getWithholdingId() != null && !withholding.getWithholdingId().equals("")) {
-            condition.setWithholdingId(withholding.getWithholdingId());
+            condition.setWithholdingId(id);
+
             List<Withholding> list = withholdingBiz.search(condition);
             if (list.size() > 0) {
                 session.put("withholdinglist", list);   //有了预提表
@@ -419,7 +414,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                 d.setWithholding(w);
                 List<Deliver> deliverList = deliverBiz.getDeliverList(d);
                 session.put("deliverytlist", deliverList);
-                List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(withholding.getWithholdingId());
+                List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(id);
                 if (delivers.size() > 0) {
                     Deliver deliver = delivers.get(0);
                     BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
@@ -429,14 +424,16 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
                     int sumDeliver = 0;
                     session.put("sumwithholdingdeliver", sumDeliver);
                 }
-                withholding.setWithholdingId(null);
+              /*  withholding.setWithholdingId(null);*/
+                /*id = null;*/
                 return "success";
             } else {
                 session.put("nowithholding", "没有找到相关信息!");
                 return "input";
             }
-        } else return "input";
 
+        }
+       else return "input";
     }
 
     public String searchNowWithholdingList() {
