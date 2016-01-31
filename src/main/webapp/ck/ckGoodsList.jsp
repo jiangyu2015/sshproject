@@ -1,58 +1,67 @@
 <%--
   Created by IntelliJ IDEA.
   User: dell
-  Date: 2015/12/13
-  Time: 21:03
+  Date: 2016/1/31
+  Time: 13:30
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <title>Title</title>
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $.ajax({
-                type: "post",
-                url: "excuteAjaxJsonAction",
-                success: function (data, xhrTxt) {
-                    var str = "";
-                    var d = eval("(" + data + ")");
-                    var goods = d.goodsList;
-                    console.log(goods);
-                    for (var i = 0; i < goods.length; i++) {
-                        str = str + "<option value='" + goods[i].goodsName + "'>";
-                    }
-                    $("#select").html(str);
-                    $('#item').bind('input propertychange', function () {
-                        $("#select").html(str);
+
+        function doDeliver() {
+            if ($(".active").length == 0) {
+                alert('请选择要出库的行');
+                return;
+            } else {
+                var $tds = $("tr.active").children();
+                if ($tds.eq(13).text() == 0) {
+                    alert("可用库存为0，不可出库");
+                    return;
+                }
+                else if($tds.eq(14).text() != "任意配置"){
+                    alert("其他出库只能出库任意配置类型");
+                    return;
+                }
+                else {
+                    $.ajax({
+                        success: function () {
+                            window.location.href =encodeURI(encodeURI( "ckOtherAdd.jsp?id=" + $tds.eq(0).text() + "&producerId="
+                                    + $tds.eq(1).text() + "&producerName=" + $tds.eq(2).text() + "&goodsId=" + $tds.eq(3).text() + "&goodsName=" + $tds.eq(4).text()
+                                    + "&placeId="+$tds.eq(5).text()+"&placeName=" + $tds.eq(6).text()+"&type="+$tds.eq(14).text()));
+                        },
+                        error: function () {
+                            alert("系统异常，请稍后重试！");
+                        }//这里不要加","
                     });
-                },
-                dataType: 'json'
+                }
+            }
+        }
+
+        $(function () {
+            $("tbody tr").bind('click', function () {
+                $('table tr').removeClass('active');
+                $(this).addClass('active');
             });
         });
-        function check() {
-            var val = $("#item").val();
-            var selectId = $("[value='" + val + "']").eq(0).attr('value');
-            if (selectId == undefined) {
-                alert("该商品不存在，没有通过审核或没有建立，请确认!输入商品名称选择选项框内选项，无需添加|商品id!");
-                return false;
-            }
-            else  return true;
-        }
+
     </script>
+
 </head>
 <body>
 <div class="table-div">
-    <div class="title">商品库存流动信息</div>
-    <form method="post" action="inventoryFlowSelect.action" onsubmit="return check()" class="head-form">
-        <div class="head-lable">商品名称：</div>
-        <input id="item" class="head-input" list="select" name="goodsName"/>
-        <datalist id="select"></datalist>
-        <input type="submit" class="btn-remove head-btn-right" value="查询">
-    </form>
+    <div class="title">库存仓库信息</div>
+    <div class="btn-div">
+        <input type="button" class="btn-eidt" value="出库" onclick="doDeliver();"
+               style="position: relative; width: 90px;"/>
+    </div>
     <table id="advSearch" class="table">
         <thead>
         <tr>
@@ -71,11 +80,11 @@
             <th>预提消耗</th>
             <th>剩余预提</th>
             <th>预提后可用库存</th>
-            <th>使用类型</th>
+            <th>入库类型</th>
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.inventoryflowall}" var="inventoryflow">
+        <s:iterator value="%{#session.inventoryflowgoods}" var="inventoryflow">
             <tr>
                 <td><s:property value="#inventoryflow.id"/></td>
                 <td><s:property value="#inventoryflow.producerId"/></td>

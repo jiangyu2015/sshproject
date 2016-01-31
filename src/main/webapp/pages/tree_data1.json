@@ -153,6 +153,9 @@
 				"id": "ck/ytSelect.jsp",
 				"text": "预提消耗出库"
 			},{
+				"id": "ck/ckSearch.jsp",
+				"text": "其他出库"
+			},{
 				"id": "listck.action",
 				"text": "查询出库明细"
 			},{

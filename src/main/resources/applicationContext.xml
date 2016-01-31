@@ -392,7 +392,11 @@
         <property name="placebiz" ref="placeBiz"/>
         <property name="producerBiz" ref="producerBiz"/>
     </bean>
-    <bean id="withholdingDeliverSelect" class="com.WithholdingManagerAction">
+    <bean id="withholdingDeliver" class="com.WithholdingManagerAction"><!--预提对应的出库 预提查询-->
+        <property name="withholdingBiz" ref="withholdingBiz"/>
+        <property name="deliverBiz" ref="deliverBiz"/>
+    </bean>
+    <bean id="withholdingDeliverSelect" class="com.WithholdingManagerAction">  <!--预提对应的出库 出库-->
         <property name="withholdingBiz" ref="withholdingBiz"/>
         <property name="deliverBiz" ref="deliverBiz"/>
         <property name="goodsbiz" ref="goodsBiz"/>

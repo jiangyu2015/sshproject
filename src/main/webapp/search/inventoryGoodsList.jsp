@@ -1,12 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: dell
-  Date: 2015/12/13
-  Time: 21:03
+  Date: 2016/1/31
+  Time: 20:00
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <title>Title</title>
@@ -36,6 +38,7 @@
         function check() {
             var val = $("#item").val();
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
+
             if (selectId == undefined) {
                 alert("该商品不存在，没有通过审核或没有建立，请确认!输入商品名称选择选项框内选项，无需添加|商品id!");
                 return false;
@@ -71,11 +74,11 @@
             <th>预提消耗</th>
             <th>剩余预提</th>
             <th>预提后可用库存</th>
-            <th>使用类型</th>
+            <th>入库类型</th>
         </tr>
         </thead>
         <tbody>
-        <s:iterator value="%{#session.inventoryflowall}" var="inventoryflow">
+        <s:iterator value="%{#session.inventoryflowgoods}" var="inventoryflow">
             <tr>
                 <td><s:property value="#inventoryflow.id"/></td>
                 <td><s:property value="#inventoryflow.producerId"/></td>
