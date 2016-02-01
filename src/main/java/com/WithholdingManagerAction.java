@@ -188,7 +188,6 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
     public String addWithholding() throws Exception {                  //增加预提申请
         Withholding condition = new Withholding();
         if (goodsId != null && !goodsId.equals("")) {          //商品id
-            System.out.println(goodsId + "预提申请我传过来了");
             Goods g = new Goods();
             g.setGoodsId(goodsId);
             Goods goods = goodsbiz.getGoodsList(g).get(0);
@@ -227,6 +226,7 @@ public class WithholdingManagerAction extends ActionSupport implements RequestAw
         condition.setWitholdingDate(date);
     /*    session.put("goodslist", condition);*/
         withholdingBiz.add(condition);
+        session.put("withholdinglistall", condition);
         return "success";
     }
 

@@ -32,25 +32,7 @@
                     $('#type').val(type);
                 }
             });
-         /*   $.ajax({
-                type: "post",
-                url: "excutePlaceAjaxJsonAction",
-                success: function (data, xhrTxt) {
-                    var str = "";
-                    var d = eval("(" + data + ")");
-                    var place = d.placeList;
-                    for (var i = 0; i < place.length; i++) {
-                        // str = str + "<option>" + place[i].placeName + "</option>";
-                        str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
-                    }
-                    $("#select3").html(str);
 
-                    $('#item3').bind('input propertychange', function () {
-                        $("#select3").html(str);
-                    });
-                },
-                dataType: 'json'
-            });*/
         });
         function check(form) {
             var result;
@@ -64,7 +46,6 @@
                     producerId: GetQueryString("producerId"),
                     witholdingNumber: $("#witholdingNumber").val(),
                     type: $("#type").val()
-                    /*  unit: $("#unit").val()*/
                 },
                 dataType: "json",//设置需要返回的数据类型
                 success: function (data, xhrTxt) {
@@ -72,10 +53,6 @@
                     var availableInventory = d.availableInventory;
                     var allotNumber = $("#allotNumber").val();
                     var placeName = $("#placeName").val();
-                    /*   var placeName2 = $("#item3").val();
-                    var val3 = $("#item3").val();
-                    var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');*/
-
                     var expectedDate = $("#expectDate").val();  //期望入库时间  比较时间
                     var arrs = expectedDate.split("-");
                     var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
@@ -86,11 +63,6 @@
                     var todays = today.getTime();
                     $(".input-div span").html("");
                     $("#div_alert").html("");
-                  /*  if (selectId3 == undefined) {
-                        alert("调拨申请不成功,仓库未建，请选择选项框内的仓库");
-                        $("#div_item3").html("仓库未建，请选择选项框内的仓库");
-                        result = false;
-                    }*/
                      if (expectedDate == null || expectedDate == "") {
                         $("#div_expectDate").html("期望时间不能为空");
                         result = false;
@@ -105,11 +77,6 @@
                         $("#div_alert").html("当前预提后可用库存为" + availableInventory + "或许有人比你提前操作预提了，请确认！");
                         result = false;
                     }
-                  /*  else if (placeName == placeName2) {
-                        alert("调拨申请不成功，目标仓库地址与原仓库地址相同！");
-                        $("#div_alert").html("目标仓库地址与原仓库地址相同！");
-                        result = false;
-                    }*/
                     else if (storagedays < todays) {
                         alert("期望调拨时间不能比今天小");
                         $("#div_expectDate").html("期望调拨时间不能比今天小");
@@ -175,13 +142,6 @@
             <div class="input-div"><input id="placeName" name="placeName" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
-      <%--  <div class="line">
-            <div class="lable"><span>* </span>目标仓库地址：</div>
-            <div class="input-div"><input id="item3" list="select3" placeholder="请输入目标仓库地址" name="placeName2"/> <span
-                    id="div_item3"></span></div>
-            <datalist id="select3"></datalist>
-
-        </div>--%>
         <div class="line">
             <div class="lable"><span>* </span>期望时间：</div>
             <div class="input-div"><input id="expectDate" placeholder="请输入期望调拨时间" name="deliver.expecteDate"

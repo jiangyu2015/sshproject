@@ -26,10 +26,6 @@
                     alert("可用库存为0，不可出库");
                     return;
                 }
-                else if($tds.eq(14).text() != "任意配置"){
-                    alert("其他出库只能出库任意配置类型");
-                    return;
-                }
                 else {
                     $.ajax({
                         success: function () {

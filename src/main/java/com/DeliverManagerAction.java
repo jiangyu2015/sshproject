@@ -221,13 +221,13 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (goodsId != null && !goodsId.equals("")) {          //商品id
             Goods g = new Goods();
             g.setGoodsId(goodsId);
-            Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
             condition.setGoods(goods);
         }
         if (placeId != null && !placeId.equals("")) {                     //仓库id
             Place p = new Place();
             p.setPlaceId(placeId);
-            Place place = (Place) placeBiz.getPlaceList(p).get(0);
+            Place place = placeBiz.getPlaceList(p).get(0);
             condition.setPlace(place);
         }
 
@@ -254,60 +254,48 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         if (deliver.getRemark() != null)          //备注
             condition.setRemark(deliver.getRemark());
         if (session.get("name") != null) {
-            condition.setAdduser(session.get("name").toString()); //得到出库人
+            condition.setCheckuser(session.get("name").toString()); //得到出库确认人
         }
         condition.setState("ok");
         condition.setCategory("正常出库");
         deliverBiz.add(condition);
+        session.put("deliverlistok", condition);
         return "success";
     }
 
     public String addOtherDeliver() throws Exception {                  //增加其他出库申请
-        System.out.println("addDeliver");
         Deliver condition = new Deliver();
         if (goodsId != null && !goodsId.equals("")) {          //商品id
             Goods g = new Goods();
             g.setGoodsId(goodsId);
-            Goods goods = (Goods) goodsBiz.getGoodsList(g).get(0);
+            Goods goods =  goodsBiz.getGoodsList(g).get(0);
             condition.setGoods(goods);
         }
-        if (placeId != null && !placeId.equals("")) {                     //仓库id
+        if (placeName!= null && !placeName.equals("")) {                     //仓库id
             Place p = new Place();
-            p.setPlaceId(placeId);
-            Place place = (Place) placeBiz.getPlaceList(p).get(0);
+            p.setPlaceName(placeName);
+            Place place =  placeBiz.getPlaceList(p).get(0);
             condition.setPlace(place);
         }
-
-        if (producerId != null && !producerId.equals("")) {          //商户id
+        if (producerName != null && !producerName.equals("")) {          //商户名称
             Producer p = new Producer();
-            p.setProducerId(producerId);
+            p.setProducerName(producerName);
             Producer producer = producerBiz.getProducerList(p).get(0);
             condition.setProducer(producer);
         }
-        if (withholdingId != null && !withholdingId.equals("")) {
-            Withholding w = new Withholding();
-            w.setWithholdingId(withholdingId);
-            Withholding withholding = withholdingBiz.search(w).get(0);
-            condition.setWithholding(withholding);
-        }
-    /*    if (deliver.getDeliverDate() != null)                      //实际出库时间
-            condition.setDeliverDate(deliver.getDeliverDate());*/
         if (deliver.getExpecteDate() != null)                      //预期出库时间
             condition.setExpecteDate(deliver.getExpecteDate());
         if (deliver.getExpecteNumber() != null)               //预期出库数量
             condition.setExpecteNumber(deliver.getExpecteNumber());
-    /*    if (deliver.getDeliverNumber() != null)               //实际出库数量 要问一下
-            condition.setDeliverNumber(deliver.getDeliverNumber());*/
         if (deliver.getDeliverType() != null)          //出库类型
             condition.setDeliverType(deliver.getDeliverType());
         if (deliver.getRemark() != null)          //备注
             condition.setRemark(deliver.getRemark());
         if (session.get("name") != null) {
-            condition.setAdduser(session.get("name").toString()); //得到出库人
+            condition.setAdduser(session.get("name").toString()); //得到申请出库人
         }
         condition.setState("no");
-        condition.setDeliverType("其他");
-        condition.setCategory("正常出库");//问问
+        condition.setCategory("其他出库");
         deliverBiz.add(condition);
         return "success";
     }

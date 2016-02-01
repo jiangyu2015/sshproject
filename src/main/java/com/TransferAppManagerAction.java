@@ -259,8 +259,8 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
             deliver.setAdduser(transferApp.getAdduser());
         }
         if (transferApp.getTransferNumber() != null && !transferApp.getTransferNumber().equals("")) {
-         /*   storage.setExpectedNumber(transferApp.getTransferNumber());  //转库数
-            deliver.setExpecteNumber(transferApp.getTransferNumber());*/
+            storage.setExpectedNumber(transferApp.getTransferNumber());  //预期转库数
+            deliver.setExpecteNumber(transferApp.getTransferNumber());
             storage.setStorageNumber(transferApp.getTransferNumber());
             deliver.setDeliverNumber(transferApp.getTransferNumber());  //直接实际出入库了
         }

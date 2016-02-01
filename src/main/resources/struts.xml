@@ -226,7 +226,7 @@
             <result type="redirect" name="fail">/yt/fail.jsp</result>
         </action>
         <action name="ytAdd" class="withholdingAdd" method="addWithholding">
-            <result type="redirect" name="success">/yt/test.jsp</result>
+            <result type="redirect" name="success">/yt/ytAllList.jsp</result>
             <result type="redirect" name="input">/yt/fail.jsp</result>
         </action>
         <action name="listyt" class="withholdingList" method="listWithholding">    <!--查询预提信息-->
@@ -257,7 +257,7 @@
             <result type="redirect" name="deliver">/ck/ckAllList.jsp</result>
         </action>
         <action name="ckAdd" class="deliverAdd" method="addDeliver">
-            <result type="redirect" name="success">/ck/test.jsp</result>
+            <result type="redirect" name="success">/ck/ckOkList.jsp</result>
         </action>
         <action name="ckOtherAdd" class="deliverAdd" method="addOtherDeliver">
             <result type="redirect" name="success">/ck/test.jsp</result>
