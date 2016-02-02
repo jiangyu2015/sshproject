@@ -28,9 +28,8 @@
             } else if (document.getElementById("sess").value  == 2) {
                 url = "tree_data2.json";
             } else {
-                alert("您没有任何角色，不能查看");
+                alert("操作失败，登录超时，请重新登录");
             }
-
             $('#mytree').tree({
                 url: url
             });

@@ -384,30 +384,30 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
 
     public String doWithholdingCheck() {      //检查是否可以预提，预提数小于等于预提后可用库存
         String gid = request.getParameter("goodsId");
-        int placeId=0;
-        int producerId=0;
+        int placeId = 0;
+        int producerId = 0;
         int goodsId = Integer.valueOf(gid);
         if (request.getParameter("placeId") != null && request.getParameter("placeId") != "") {
             String kid = request.getParameter("placeId");
-             placeId = Integer.valueOf(kid);
+            placeId = Integer.valueOf(kid);
         }
         if (request.getParameter("placeName") != null && request.getParameter("placeName") != "") {
             String placeName = request.getParameter("placeName");
-            Place pl=new Place();
+            Place pl = new Place();
             pl.setPlaceName(placeName);
-            Place place=placeBiz.getPlaceList(pl).get(0);
+            Place place = placeBiz.getPlaceList(pl).get(0);
             placeId = place.getPlaceId();
         }
 
         if (request.getParameter("producerId") != null && request.getParameter("producerId") != "") {
             String pid = request.getParameter("producerId");
-             producerId = Integer.valueOf(pid);
+            producerId = Integer.valueOf(pid);
         }
         if (request.getParameter("producerName") != null && request.getParameter("producerName") != "") {
-            String producerName=request.getParameter("producerName");
-            Producer p=new Producer();
+            String producerName = request.getParameter("producerName");
+            Producer p = new Producer();
             p.setProducerName(producerName);
-            Producer producer=producerBiz.getProducerList(p).get(0);
+            Producer producer = producerBiz.getProducerList(p).get(0);
             producerId = producer.getProducerId();
         }
 
@@ -488,16 +488,37 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
 
     }
 
-    public String deliverSelect() {  //检测已出库多少，还可以预提多少
+    public String deliverSelect() {  //检测已出库多少，还可以预提多少 改
         String yt = request.getParameter("withholdingNumber"); //预提数
         int withholdingNumber = Integer.valueOf(yt);
-        String xh = request.getParameter("sumwithholdingdeliver"); //预提消耗总数
+     /*   String xh = request.getParameter("sumwithholdingdeliver"); //预提消耗总数
         int sumwithholdingdeliver = Integer.valueOf(xh);
         int difference = withholdingNumber - sumwithholdingdeliver;  //剩余消耗数
         JSONObject json = new JSONObject();
         json.put("difference", difference);
-        result = json.toString();
-        return SUCCESS;
+        result = json.toString();*/
+        String id = request.getParameter("id");
+        int withholdingId = Integer.valueOf(id);
+        Withholding condition = new Withholding();
+        condition.setWithholdingId(withholdingId);
+        List<Withholding> list = withholdingBiz.search(condition);
+        if (list.size() > 0) {
+            List<Deliver> delivers = deliverBiz.searchWithholdingDeliver(withholdingId);
+            int sumDeliver;
+            if (delivers.size() > 0) {
+                Deliver deliver = delivers.get(0);
+                BigDecimal a = deliver.getSumDeliver(); //预提号对应的总的出库数
+                sumDeliver = a.intValue();
+            } else {
+                sumDeliver = 0;
+            }
+            int difference = withholdingNumber - sumDeliver;  //剩余消耗数
+            JSONObject json = new JSONObject();
+            json.put("difference", difference);
+            result = json.toString();
+            return SUCCESS;
+        } else return ERROR;
+
     }
 
     public String goodsCheck() {

@@ -48,7 +48,6 @@
                     var producer = d.producerList;
                     console.log(producer);
                     for (var i = 0; i < producer.length; i++) {
-                        //  str = str + "<option>" + producer[i].producerName + "</option>";
                         str = str + "<option id='" + producer[i].producerId + "' value='" + producer[i].producerName + "'>";
                     }
                     $("#select2").html(str);
@@ -69,12 +68,10 @@
                 url: "excutePlaceAjaxJsonAction",
                 success: function (data, xhrTxt) {
                     var str = "";
-//                    alert("ck");
                     var d = eval("(" + data + ")");
                     var place = d.placeList;
                     console.log(place);
                     for (var i = 0; i < place.length; i++) {
-                        // str = str + "<option>" + place[i].placeName + "</option>";
                         str = str + "<option id='" + place[i].placeId + "' value='" + place[i].placeName + "'>";
                     }
                     $("#select3").html(str);

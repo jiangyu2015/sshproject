@@ -62,25 +62,30 @@
                 url: "deliverSelectJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名*/
                 data: {//设置数据源
                     withholdingNumber: GetQueryString("withholdingNumber"),
-                    sumwithholdingdeliver: GetQueryString("sumwithholdingdeliver")
+                    id: GetQueryString("id")
                 },
                 dataType: "json",//设置需要返回的数据类型
                 success: function (data, xhrTxt) {
                     var withholdingNumber = GetQueryString("withholdingNumber");   //预提数
                     /*   var sumwithholdingdeliver=GetQueryString("sumwithholdingdeliver");*/
-                    var deteline = GetQueryString("deteline");
+                    var deteline = GetQueryString("deteline"); //截止时间
+                    var witholdingDate= GetQueryString("witholdingDate");  //预提时间
                     var deliverNumber = $('#deliverNumber').val();
                     var d = eval("(" + data + ")");
                     var difference = d.difference;   //预提消耗数
-                    var arr = deteline.split("-");                    //比较时间
-                    var overday = new Date(arr[0], arr[1], arr[2]);  //截止时间
+                    var arr = deteline.split("-");                    //比较时间截止时间
+                    var overday = new Date(arr[0], arr[1], arr[2]);
                     var overdays = overday.getTime();
+                    var yttime = witholdingDate.split("-");                    //预提时间
+                    var yttimes = new Date(yttime[0], yttime[1], yttime[2]);
+                    var witholdingDates = yttimes.getTime();
+
+
                     var arrs = getToDay().split("-");
                     var today = new Date(arrs[0], arrs[1], arrs[2]);
                     var todays = today.getTime();
-                    var deliverTime=$('#deliverDate').val()
-                    var arrss =deliverTime.split("-"); //出库时间
-
+                    var deliverTime=$('#deliverDate').val()//出库时间
+                    var arrss =deliverTime.split("-");
                     var deliverDate = new Date(arrss[0], arrss[1], arrss[2]);
                     var deliverDates = deliverDate.getTime();
                     $(".input-div span").html("");
@@ -99,9 +104,14 @@
                         $("#div_deliverDate").html("出库时间不能大于今天");
                         result = false;
                     }
-                    else if (deliverDates > overdays) {   //要试试
+                    else if (deliverDates > overdays) {
                         alert("出库时间大于了活动截止时间？");
                         $("#div_deliverDate").html("出库时间不能大于截止时间");
+                        result = false;
+                    }
+                    else if (deliverDates < witholdingDates) {
+                        alert("出库时间小于了预提时间？");
+                        $("#div_deliverDate").html("出库时间不能小于预提时间");
                         result = false;
                     }
                     else if (difference < deliverNumber) {
@@ -113,7 +123,10 @@
                         alert("出库成功");
                         result = true;
                     }
-                }
+                },
+                error: function () {
+                    alert("系统异常");
+                }//这里不要加","
             });
             return result;
         }
@@ -207,7 +220,7 @@
             <div class="input-div"><input id="type" name="deliver.deliverType" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
-
+        </br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
 </div>

@@ -22,17 +22,22 @@
                 alert('请选择要出库的行');
             } else {
                 var $tds = $("tr.active").children();
-                alert("预提" + $tds.eq(10).text() + "出库数" + $('#sumwithholdingdeliver').html());
-                $.ajax({
-                    success: function () {
-                        window.location.href = "ckAdd.jsp?id=" + $tds.eq(0).text() +
-                                "&withholdingNumber=" + $tds.eq(10).text() + "&sumwithholdingdeliver=" + $('#sumwithholdingdeliver').html() +
-                                "&deteline=" + $tds.eq(12).text();
-                    },
-                    error: function () {
-                        alert("系统异常，请稍后重试！");
-                    }//这里不要加","
-                });
+                if ($tds.eq(10).text() == $('#sumwithholdingdeliver').html()) {
+                    alert("预提消耗已等于预提数，不能出库");
+                }
+                else {
+                    alert("预提" + $tds.eq(10).text() + "出库数" + $('#sumwithholdingdeliver').html());
+                    $.ajax({
+                        success: function () {
+                            window.location.href = "ckAdd.jsp?id=" + $tds.eq(0).text() +
+                                    "&withholdingNumber=" + $tds.eq(10).text() + "&witholdingDate=" + $tds.eq(11).text() +
+                                    "&deteline=" + $tds.eq(12).text();
+                        },
+                        error: function () {
+                            alert("系统异常，请稍后重试！");
+                        }//这里不要加","
+                    });
+                }
             }
         }
 
@@ -63,7 +68,7 @@
                             dataType: "json",//设置需要返回的数据类型*/
                             success: function (data, xhrTxt) {
                                 alert('预提已释放');
-                                window.location.href = "ytSelectDeliver.action?id=" + $("tr.active").children().eq(0).text()+"&timeId=4";
+                                window.location.href = "ytSelectDeliver.action?id=" + $("tr.active").children().eq(0).text() + "&timeId=4";
 
                             },
                             error: function () {

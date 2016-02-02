@@ -171,6 +171,7 @@
         <thead>
         <tr>
             <th>预提单id</th>
+            <th>商户名称</th>
             <th>商品id</th>
             <th>商品名称</th>
             <th>仓库id</th>
@@ -195,6 +196,7 @@
         <s:iterator value="%{#session.withholdinglistall}" var="withholding">
             <tr>
                 <td><s:property value="#withholding.withholdingId"/></td>
+                <td><s:property value="#withholding.producer.producerName"/></td>
                 <td><s:property value="#withholding.goods.goodsId"/></td>
                 <td><s:property value="#withholding.goods.goodsName"/></td>
                 <td><s:property value="#withholding.place.placeId"/></td>

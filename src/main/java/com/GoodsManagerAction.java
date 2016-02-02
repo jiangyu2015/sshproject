@@ -124,6 +124,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             if (session.get("name") != null) {
                 condition.setAdduser(session.get("name").toString()); //得到增加人
             }
+            else return "login";
             condition.setState("no");
             session.put("goodslist", condition);
             goodsBiz.add(condition);

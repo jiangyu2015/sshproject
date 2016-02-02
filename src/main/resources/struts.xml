@@ -21,6 +21,7 @@
         <action name="addGoods" class="goodsAdd" method="addGoods">
             <result type="redirect" name="success">/sp/spList.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
+            <result type="redirect" name="login">/pages/menu1.jsp</result>
         </action>
         <action name="listGoods" class="goodsList" method="listGoods">
             <result type="redirect" name="goods">/sp/spAllList.jsp</result>
