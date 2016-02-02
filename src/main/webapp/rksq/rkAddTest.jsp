@@ -32,7 +32,6 @@
             clearTimeout(timer);
             $("#showCompanyname").empty();
             var companyname = $("#companyname").val();
-            //alert(companyname);
             if (goodsName) {
 
                 timer = setTimeout(function () {

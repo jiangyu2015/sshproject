@@ -167,28 +167,9 @@
             var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
             var storagedays = storageday.getTime();
 
-                var arr = getToDay().split("-");
-             var today = new Date(arr[0], arr[1], arr[2]);  //今天
-             var todays = today.getTime();
-
-
-            /*     var xhr = new XMLHttpRequest();
-             var  todays;
-             if (!xhr) {
-             xhr = new ActiveXObject("Microsoft.XMLHTTP");
-             }
-             xhr.open("HEAD", location.href, true);
-             xhr.onreadystatechange = function () {
-             if (xhr.readyState == 4 && xhr.status == 200) {
-             var str = xhr.getResponseHeader("Date"); //获取Response Header里面的Date
-             todays = new Date(str).getTime(); //把Date转换成时间对象
-             alert(todays); //输出时间戳
-             }
-             }
-             xhr.send(null);*/
-            /*  var date=new Date($.ajax({async:false}).getResponseHeader("Date"));
-             var bombay=date+(3600000*8);
-             var todays=new Date(bombay);*/
+            var arr = getToDay().split("-");
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
 
             $(".input-div span").html("");  //清空
 
@@ -223,8 +204,6 @@
                 return false;
             }
             else if (storagedays < todays) {
-                alert("预期时间" + storagedays);
-                alert("今天" + todays);
                 alert("期望入库时间不能比今天小");
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
@@ -253,6 +232,7 @@
          nowDate = doHandleMonth(nowDate);
          return nowYear + "-" + nowMonth + "-" + nowDate;
          }*/
+        var newdate = null;
         function getToDay() {
             var date = new Date($.ajax({async: false}).getResponseHeader("Date"));
             var bombay = date + (3600000 * 8);

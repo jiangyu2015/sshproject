@@ -82,8 +82,10 @@
         }
 
         var newdate = null;
-        function getToDay() {   //获取今天的日子
-            var now = new Date();
+        function getToDay() {
+            var date = new Date($.ajax({async: false}).getResponseHeader("Date"));
+            var bombay = date + (3600000 * 8);
+            var now = new Date(bombay);
             var nowYear = now.getFullYear();
             var nowMonth = now.getMonth();
             var nowDate = now.getDate();
