@@ -24,4 +24,17 @@
 		<filter-name>Struts2</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<filter>
+		<filter-name>filter</filter-name>
+		<filter-class>com.LoginFilter</filter-class>
+	</filter>
+	<!-- servlet规范，不能以/*.jsp这样的结尾，写全，或者写成/app/*，这样的才行 -->
+	<filter-mapping>
+		<filter-name>filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<session-config>
+		<session-timeout>2</session-timeout>
+	</session-config>
 </web-app>
