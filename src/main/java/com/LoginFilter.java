@@ -27,13 +27,18 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession();
         // 如果session不为空，则可以浏览其他页面
         String url = request.getServletPath();
-    /*    System.out.println(url);*/
+     /*   System.out.println(url);*/
         //这里判断目录，后缀名，当然也可以写在web.xml中，用url-pattern进行拦截映射
         if ((!request.getServletPath().equals("/doLogin.action"))
-               /* && (!request.getServletPath().equals("/index.html"))*/
+                && (!request.getServletPath().equals("/index.html"))
                 &&(!request.getServletPath().equals("/login.jsp"))
-                && (!request.getServletPath().equals("/resources/jquery-easyui/jquery.min.js"))) {
-            System.out.println(request.getServletPath());
+                && (!request.getServletPath().equals("/resources/jquery-easyui/jquery.min.js"))
+                && (!request.getServletPath().equals("/style.css"))
+                && (!request.getServletPath().equals("/main.js"))
+                && (!request.getServletPath().equals("/picture/logo.png"))
+                && (!request.getServletPath().equals("/picture/shihui.png"))
+                && (!request.getServletPath().equals("/css.css"))) {
+        /*    System.out.println(request.getServletPath());*/
             if (session.getAttribute("name") == null) {
                 session.invalidate();
                 response.setContentType("text/html;charset=utf-8");
