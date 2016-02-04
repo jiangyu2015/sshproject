@@ -84,8 +84,8 @@
             });
         });
         function getInfo() {
-            var goodsName=$("#item").val();
-            var  placeName=$("#item3").val();
+            var goodsName = $("#item").val();
+            var placeName = $("#item3").val();
             $('#address').val("");
             $('#receiver').val("");
             $('#tel').val("");
@@ -96,7 +96,7 @@
             $('#baozhiqi').val("");
             $('#expirationDate').val("");
             $('#adduser').val("");
-            if(goodsName!=null && goodsName!="") {
+            if (goodsName != null && goodsName != "") {
                 $.ajax({
                     url: "getInfoJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                     data: {//设置数据源
@@ -108,12 +108,12 @@
                         var d = eval("(" + data + ")");
                         var goods = d.goods;
                         var commodityRating = str + goods.commodityRating;
-                        var price= str +goods.price;
-                        var unit=str + goods.unit;
-                        var creationDate=str + d.creationDate;
-                        var baozhiqi= str +goods.baozhiqi;
-                        var expirationDate=str +d.expirationDate;
-                        var adduser=str+ goods.adduser;
+                        var price = str + goods.price;
+                        var unit = str + goods.unit;
+                        var creationDate = str + d.creationDate;
+                        var baozhiqi = str + goods.baozhiqi;
+                        var expirationDate = str + d.expirationDate;
+                        var adduser = str + goods.adduser;
                         $('#commodityRating').val(commodityRating);
                         $('#price').val(price);
                         $('#unit').val(unit);
@@ -127,7 +127,7 @@
                     }//这里不要加","
                 });
             }
-            if(placeName!=null && placeName!="") {
+            if (placeName != null && placeName != "") {
                 $.ajax({
                     url: "getInfoJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
                     data: {//设置数据源
@@ -167,9 +167,28 @@
             var storageday = new Date(arrs[0], arrs[1], arrs[2]); //
             var storagedays = storageday.getTime();
 
-            var arr = getToDay().split("-");
-            var today = new Date(arr[0], arr[1], arr[2]);  //今天
-            var todays = today.getTime();
+                var arr = getToDay().split("-");
+             var today = new Date(arr[0], arr[1], arr[2]);  //今天
+             var todays = today.getTime();
+
+
+            /*     var xhr = new XMLHttpRequest();
+             var  todays;
+             if (!xhr) {
+             xhr = new ActiveXObject("Microsoft.XMLHTTP");
+             }
+             xhr.open("HEAD", location.href, true);
+             xhr.onreadystatechange = function () {
+             if (xhr.readyState == 4 && xhr.status == 200) {
+             var str = xhr.getResponseHeader("Date"); //获取Response Header里面的Date
+             todays = new Date(str).getTime(); //把Date转换成时间对象
+             alert(todays); //输出时间戳
+             }
+             }
+             xhr.send(null);*/
+            /*  var date=new Date($.ajax({async:false}).getResponseHeader("Date"));
+             var bombay=date+(3600000*8);
+             var todays=new Date(bombay);*/
 
             $(".input-div span").html("");  //清空
 
@@ -204,6 +223,8 @@
                 return false;
             }
             else if (storagedays < todays) {
+                alert("预期时间" + storagedays);
+                alert("今天" + todays);
                 alert("期望入库时间不能比今天小");
                 $("#div_expectedDate").html("期望入库时间不能比今天小");
                 return false;
@@ -221,9 +242,21 @@
             return re.test(str);
         }
 
-        var newdate = null;
-        function getToDay() {   //获取今天的日子
-            var now = new Date();
+        /*   var newdate = null;
+         function getToDay() {   //获取今天的日子
+         var now = new Date();
+         var nowYear = now.getFullYear();
+         var nowMonth = now.getMonth();
+         var nowDate = now.getDate();
+         newdate = new Date(nowYear, nowMonth, nowDate);
+         nowMonth = doHandleMonth(nowMonth + 1);
+         nowDate = doHandleMonth(nowDate);
+         return nowYear + "-" + nowMonth + "-" + nowDate;
+         }*/
+        function getToDay() {
+            var date = new Date($.ajax({async: false}).getResponseHeader("Date"));
+            var bombay = date + (3600000 * 8);
+            var now = new Date(bombay);
             var nowYear = now.getFullYear();
             var nowMonth = now.getMonth();
             var nowDate = now.getDate();
@@ -232,7 +265,6 @@
             nowDate = doHandleMonth(nowDate);
             return nowYear + "-" + nowMonth + "-" + nowDate;
         }
-
         function doHandleMonth(month) {
             if (month.toString().length == 1) {
                 month = "0" + month;

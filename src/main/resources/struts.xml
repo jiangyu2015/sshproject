@@ -9,7 +9,6 @@
         <action name="doLogin" class="umAction">
             <result name="success" type="redirect">/menu.html</result>
             <result name="error">/error.jsp</result>
-
         </action>
         <action name="reg" class="userAdd" method="addUser">
             <result type="redirect" name="success">/index.jsp</result>
