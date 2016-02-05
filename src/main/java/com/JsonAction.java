@@ -122,7 +122,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
      * @return SUCCESS
      */
     public String excuteAjax() {            //状态为yesok的商品
-
      /*   try {
             //获取数据
             String name = request.getParameter("name");
@@ -143,7 +142,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         List<Goods> goodslist = goodsBiz.getGoodsCheck();
         if (goodslist.size() > 0) {
             try {
-                Goods g = goodslist.get(0);
                 JSONObject json = new JSONObject();
                 json.put("goodsList", goodslist);
                 result = json.toString();//给result赋值，传递给页面
@@ -155,7 +153,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
     }
 
     public String selectAllNoGoods() {            //所有未审核的查询商品
-
         try {
             Goods g = new Goods();
             g.setState("no");
@@ -186,7 +183,22 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         return SUCCESS;
 
     }
-
+    public String checkGoods() {            //检查商品相似
+        try {
+            String goodsName = request.getParameter("goodsName");  //解码两次
+            goodsName = URLDecoder.decode(goodsName, "UTF-8");
+            goodsName = URLDecoder.decode(goodsName, "UTF-8");
+            List<Goods> goods = goodsBiz.getGoods(goodsName);
+            if (goods.size() > 0) {
+                JSONObject json = new JSONObject();
+                json.put("goodsList", goods);
+                result = json.toString();
+            } else return ERROR;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
     public String selectProducer() {            //状态为yesok的商户
         List<Producer> producerlist = producerBiz.getProducerCheck();
         if (producerlist.size() > 0) {

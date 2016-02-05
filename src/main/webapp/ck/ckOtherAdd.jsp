@@ -162,6 +162,16 @@
             <div class="input-div"><input id="type" name="deliver.deliverType" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
+        <div class="line">
+            <div class="lable">备注：</div>
+            <div class="input-div">
+                <select name="deliver.remark">
+                    <option value=""></option>
+                    <option value="调账">调账</option>
+                    <option value="转残次">转残次</option>
+                </select>
+            </div>
+        </div>
         <span id="div_alert"></span><br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>

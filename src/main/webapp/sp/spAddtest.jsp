@@ -8,6 +8,33 @@
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
+        function checkGoods() {
+            var goodsName = $("#goodsName").val();
+            if (goodsName != null && goodsName != "") {
+                $.ajax({
+                    url: "checkGoodsJsonAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+                    data: {//设置数据源
+                        goodsName: encodeURI(encodeURI(goodsName))
+                    },
+                    dataType: "json",//设置需要返回的数据类型*/
+                    success: function (data, xhrTxt) {
+                        var str = "";
+                        var d = eval("(" + data + ")");
+                        var goods = d.goodsList;
+                        for (var i = 0; i < goods.length; i++) {
+                            str = str + goods[i].goodsId + "   " + goods[i].goodsName + "\n";
+                        }
+                        alert("类似的有" + "\n" + str);
+                    },
+                    error: function () {
+                        alert("未找到相似");
+                    }//这里不要加","
+                });
+            }
+            else {
+                alert("请输入商品名称");
+            }
+        }
         function check(form) {
             var goodsName = $('#goodsName').val().replace(/\s/g, "");
             $('#goodsName').val(goodsName);
@@ -41,6 +68,7 @@
                 return false;
             }
         }
+
         function isNull(str) {
             if (str == "") return true;
             var regu = "^[ ]+$";
@@ -84,6 +112,7 @@
             var dates = (endTime - startTime) / (1000 * 60 * 60 * 24);
             return dates;
         }
+
     </script>
 </head>
 
@@ -94,8 +123,9 @@
         <div class="line">
             <div class="lable"><span>* </span>商品名称：</div>
             <div class="input-div">
-                <input id="goodsName" placeholder="请输入商品名称（不要有空格）" name="goods.goodsName"/>
-                <span id="div_goodsName"></span>
+                <input id="goodsName" placeholder="请输入商品名称（不要有空格）" name="goods.goodsName"/> <span
+                    id="div_goodsName"></span>
+                <input type="button" value="检查商品名称是否有类似" onclick="checkGoods()"/>
             </div>
         </div>
 

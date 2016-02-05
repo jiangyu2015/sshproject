@@ -217,39 +217,17 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
             storage2.setCheckuser(session.get("name").toString()); //得到入库确认人
         }
         storageBiz.editStorage(storage2);                //更改状态ok1
-
         return "success";
     }
 
-    public String addStorage() throws Exception {                  //增加入库申请
+ /*   public String addStorage() throws Exception {                  //有错误 用不到不改了 增加入库申请
         Storage condition = new Storage();
-
- /*       if (storage.getProducerName() != null && !storage.getProducerName().equals(""))
-            condition.setProducerName(storage.getProducerName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商户名称!");
-            return "input";
-        }
-        if (storage.getGoodsName() != null && !storage.getGoodsName().equals(""))
-            condition.setGoodsName(storage.getGoodsName());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入商品名称!");
-            return "input";
-        }
-        if (storage.getStoragePlace() != null && !storage.getStoragePlace().equals(""))
-            condition.setStoragePlace(storage.getStoragePlace());
-        else {
-            ActionContext.getContext().put("yesWords", "请输入仓库名称!");
-            return "input";
-        }*/
-
-       /* if (storage.getGoodsId() != null)        //商品id
-            condition.setGoodsId(storage.getGoodsId());
-        if (storage.getPlaceId() != null)   {              //仓库id
-            condition.setPlaceId(storage.getPlaceId());}*/
-
-        Goods goods = goodsBiz.getGoods(goodsName).get(0);
+        Goods g=new Goods();
+        g.setGoodsName(goodsName);
+        Goods goods = goodsBiz.getGoodsList(g).get(0);
         condition.setGoods(goods);
+        Producer p=new Producer();
+        p.setProducerName();
         Producer producer = producerBiz.getProducer(storagePlace).get(0);
         condition.setProducer(producer);
         Place place = placeBiz.getPlace(storagePlace).get(0);
@@ -264,10 +242,8 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
             condition.setRemark(storage.getRemark());
         storageBiz.add(condition);
         return "success";
-
-
     }
-
+*/
     public String editStorage() {  //能改吗 不能
         Storage condition = new Storage();
         if (storage.getStorageId() != null && !storage.getStorageId().equals("")) {

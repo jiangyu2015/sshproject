@@ -69,7 +69,7 @@
                     var withholdingNumber = GetQueryString("withholdingNumber");   //预提数
                     /*   var sumwithholdingdeliver=GetQueryString("sumwithholdingdeliver");*/
                     var deteline = GetQueryString("deteline"); //截止时间
-                    var witholdingDate= GetQueryString("witholdingDate");  //预提时间
+                    var witholdingDate = GetQueryString("witholdingDate");  //预提时间
                     var deliverNumber = $('#deliverNumber').val();
                     var d = eval("(" + data + ")");
                     var difference = d.difference;   //预提消耗数
@@ -80,21 +80,24 @@
                     var yttimes = new Date(yttime[0], yttime[1], yttime[2]);
                     var witholdingDates = yttimes.getTime();
 
-
                     var arrs = getToDay().split("-");
                     var today = new Date(arrs[0], arrs[1], arrs[2]);
                     var todays = today.getTime();
-                    var deliverTime=$('#deliverDate').val()//出库时间
-                    var arrss =deliverTime.split("-");
+                    var deliverTime = $('#deliverDate').val()//出库时间
+                    var arrss = deliverTime.split("-");
                     var deliverDate = new Date(arrss[0], arrss[1], arrss[2]);
                     var deliverDates = deliverDate.getTime();
                     $(".input-div span").html("");
-                    if (deliverNumber == "" || deliverNumber == null) {
+                    if (document.getElementById("sess").value == null) {
+                        alert("session name丢失");
+                        result = false;
+                    }
+                    else if (deliverNumber == "" || deliverNumber == null) {
                         alert("出库数量不能为空");
                         $("#div_deliverNumber").html("出库数量不能为空");
                         result = false;
                     }
-                   else if (deliverTime == "" || deliverTime == null) {
+                    else if (deliverTime == "" || deliverTime == null) {
                         alert("出库时间不能为空");
                         $("#div_deliverDate").html("出库时间不能为空");
                         result = false;
@@ -222,6 +225,16 @@
             <div class="input-div"><input id="type" name="deliver.deliverType" readonly="readonly"
                                           style="border: none;-webkit-box-shadow: none;"/></div>
         </div>
+        <div class="line">
+            <div class="lable">备注：</div>
+            <div class="input-div">
+                <select name="deliver.remark">
+                    <option value=""></option>
+                    <option value="借领">借领</option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" id="sess" name="hiddenField" value=<%=session.getAttribute("name")%>>
         </br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>

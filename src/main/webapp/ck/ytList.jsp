@@ -166,7 +166,7 @@
             <td><s:date format="yyyy-MM-dd" name="#withholding.witholdingDate"/></td>
             <td><s:date format="yyyy-MM-dd" name="#withholding.deteline"/></td>
             <td><s:property value="#withholding.useType"/></td>
-            <td><s:property value="#withholding.adduser"/></td>
+            <td><s:property value="#withholding.checkuser"/></td>
 
         </tr>
     </s:iterator>

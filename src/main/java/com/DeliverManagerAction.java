@@ -68,6 +68,15 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
     Integer placeId;
     Integer withholdingId;
     Integer producerId;
+    String category;//查询用到类别
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getProducerName() {
         return producerName;
@@ -143,7 +152,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
 
     public String checkDeliver() {               //得到所需出库的单子
         Deliver condition = new Deliver();
-        if (StringUtils.isEmpty(goodsName) || StringUtils.isEmpty(producerName) || StringUtils.isEmpty(placeName)) {
+        if (StringUtils.isEmpty(goodsName) || StringUtils.isEmpty(producerName) || StringUtils.isEmpty(placeName)||StringUtils.isEmpty(category)) {
             if (goodsName != null && !goodsName.equals("")) {
                 String[] strs = goodsName.split("\\|");
                 Integer id = Integer.parseInt(strs[1]);
@@ -162,6 +171,10 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
                 Place place = placeBiz.getPlace(placeName).get(0);
                 condition.setPlace(place);
                 placeName = "";
+            }
+            if (category != null && !category.equals("")) {
+                condition.setCategory(category);
+                category = "";
             }
         }
         condition.setState("no");
@@ -185,6 +198,10 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
             deliver2.setRemark(deliver.getRemark());
         if (session.get("name") != null) {
             deliver2.setCheckuser(session.get("name").toString()); //得到出库确认人
+        }
+        else {
+            session.put("nowithholding", "操作时间过长,session丢失，需重新登录!");
+            return "input";
         }
         deliverBiz.editDeliver(deliver2);                //更改状态ok1
         return "success";
@@ -297,6 +314,7 @@ public class DeliverManagerAction extends ActionSupport implements RequestAware,
         condition.setState("no");
         condition.setCategory("其他出库");
         deliverBiz.add(condition);
+        session.put("deliverlistok", condition);
         return "success";
     }
 

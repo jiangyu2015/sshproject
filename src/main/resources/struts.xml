@@ -147,7 +147,6 @@
             <result type="redirect" name="success">/rksq/rksqList.jsp</result>
             <result type="redirect" name="input">/rksq/fail.jsp</result>
         </action>
-
         <action name="dbSelect" class="withholdingSelect" method="searchInventoryFlowGoods"> <!-- 调拨申请前先查询库存流动-->
             <result type="redirect" name="success">/dbsq/dbsqGoodsList.jsp</result>
             <result type="redirect" name="fail">/dbsq/fail.jsp</result>
@@ -216,6 +215,7 @@
         </action>
         <action name="ckOk" class="deliverOk" method="deliverOk">
             <result type="redirect" name="success">ckcheck.action</result>
+            <result type="redirect" name="input">ck/fail.jsp</result>
         </action>
 
         <action name="eventsAdd" class="eventsAdd" method="addEvents">
@@ -260,7 +260,7 @@
             <result type="redirect" name="success">/ck/ckOkList.jsp</result>
         </action>
         <action name="ckOtherAdd" class="deliverAdd" method="addOtherDeliver">
-            <result type="redirect" name="success">/ck/test.jsp</result>
+            <result type="redirect" name="success">/ck/ckOkList.jsp</result>
         </action>
         <action name="editck" class="deliverEdit" method="editDeliver">
             <result type="redirect" name="success">/ck/ckList.jsp</result>

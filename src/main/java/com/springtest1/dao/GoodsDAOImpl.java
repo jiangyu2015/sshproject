@@ -28,9 +28,9 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
                 if (condition != null) {
                     if (condition.getGoodsId() != null && !condition.getGoodsId().equals("")) {
                         c.add(Restrictions.eq("goodsId", condition.getGoodsId()));
-                    } else if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
+                    } /*else */if (condition.getGoodsName() != null && !condition.getGoodsName().equals("")) {
                         c.add(Restrictions.eq("goodsName", condition.getGoodsName()));
-                    } else if (condition.getState() != null && !condition.getState().equals("")) {
+                    }/* else*/ if (condition.getState() != null && !condition.getState().equals("")) {
                         c.add(Restrictions.eq("state", condition.getState()));
                     }
                 }
@@ -77,8 +77,7 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
 
        } */
     public List<Goods> getGoods(String name) {    //模糊查询
-        String hql = "from Goods g where g.goodsName like '" + name + "%'";
-        System.out.println("GOODSDAOIMPL" + hql);
+        String hql = "from Goods g where g.goodsName like  '%" + name + "%'";
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
 

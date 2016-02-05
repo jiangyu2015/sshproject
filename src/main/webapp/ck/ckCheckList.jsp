@@ -189,10 +189,11 @@
             var val = $("#goods").val();
             var val2 = $("#producer").val();
             var val3 = $("#place").val();
+            var val4 = $("#category").val();
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
             var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
-            if (!val && !val2 && !val3) {
+            if (!val && !val2 && !val3&& !val4) {
                 alert("请输入至少一个查询选项");
                 return false;
             }
@@ -235,6 +236,12 @@
             <div class="head-lable">入库地点：</div>
             <input id="place" class="head-input" list="selectplace" name="placeName" style="width: 10%;"/>
             <datalist id="selectplace"></datalist>
+            <div class="head-lable">出库类别：</div>
+            <select id="category"class="head-input" name="category" style="width: 10%;"/>
+            <option></option>
+            <option value="其他出库">其他出库</option>
+            <option value="正常调拨">正常调拨</option>
+            </select>
             <input type="submit" class="btn-remove" value="查询" style="left: 20px;;">
         </form>
     </div>

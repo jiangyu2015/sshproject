@@ -55,7 +55,9 @@ public class DeliverDAOImpl extends HibernateDaoSupport implements DeliverDAO {
                             c.add(Restrictions.eq("place.placeId", condition.getPlace().getPlaceId()));
                         }
                     }
-
+                    if (condition.getCategory() != null) {
+                        c.add(Restrictions.eq("category", condition.getCategory()));
+                    }
                 }
                 if (c.list().size() <= 0) {
                     return new ArrayList<Deliver>();
