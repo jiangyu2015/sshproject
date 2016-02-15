@@ -14,9 +14,9 @@ public class GoodsBizImpl implements GoodsBiz {
         this.goodsDAO = goodsDAO;
     }
 
-    public List <Goods>getGoodsList(Goods condition) {
+    public List<Goods> getGoodsList(Goods condition) {
 
-        List <Goods>list = goodsDAO.search(condition);
+        List<Goods> list = goodsDAO.search(condition);
         return list;
     }
 
@@ -56,5 +56,10 @@ public class GoodsBizImpl implements GoodsBiz {
     @Transactional
     public List<Goods> getOverdueGoods() {
         return goodsDAO.getOverdueGoods();
+    }
+
+    @Transactional
+    public List<Goods> getOverGoods() {
+        return goodsDAO.getOverGoods();
     }
 }

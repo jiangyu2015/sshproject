@@ -27,5 +27,5 @@ public interface GoodsDAO {
 
     public List<Goods> getOverdueGoods();  //看是否过期
 
-
+    public List<Goods> getOverGoods();
 }

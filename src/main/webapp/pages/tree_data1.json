@@ -18,6 +18,9 @@
 			},{
 				"id": "overdueGoods.action",
 				"text": "过期提醒"
+			},{
+				"id": "overGoods.action",
+				"text": "过期商品"
 			}]
 		},{
 			"text": "商户信息",

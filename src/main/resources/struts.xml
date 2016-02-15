@@ -28,11 +28,14 @@
         <action name="overdueGoods" class="overdueGoods" method="getOverdueGoods">
             <result type="redirect" name="success">/sp/overdueList.jsp</result>
         </action>
-
-        <action name="spDel" class="goodsDel" method="delGoods">
-            <result type="redirect" name="success">/sp/test.jsp</result>
-            <result type="redirect" name="input">/sp/fail.jsp</result>
+        <action name="overGoods" class="overdueGoods" method="getOverGoods">
+            <result type="redirect" name="success">/sp/overList.jsp</result>
         </action>
+
+      <!--  <action name="spDel" class="goodsDel" method="delGoods">
+            <result type="redirect" name="success">/sp/overList.jsp</result>
+            <result type="redirect" name="input">/sp/fail.jsp</result>
+        </action>-->
         <action name="spEdit" class="editGoods" method="editGoods">
             <result type="redirect" name="success">/sp/spList.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
@@ -41,10 +44,10 @@
             <result type="redirect" name="success">/sp/spUpList.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
         </action>
-        <action name="spUpd" class="goodsUpd" method="modify">
+      <!--  <action name="spUpd" class="goodsUpd" method="modify">
             <result type="redirect" name="success">/sp/test.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
-        </action>
+        </action>-->
         <action name="spCheck" class="goodsCheck" method="checkGoods">
             <result type="redirect" name="goodsCheck">/sp/spCheckList.jsp</result>
             <!--    <result type="redirect" name="input">/sp/fail.jsp</result>-->

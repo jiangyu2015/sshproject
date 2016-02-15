@@ -140,8 +140,21 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
         List<Goods> goodslist = query.list();
         if (goodslist.size() <= 0) return new ArrayList<Goods>();
         else {
-            Goods g = (Goods) query.list().get(0);
-            System.out.println(g.getGoodsName());
+         /*   Goods g = (Goods) query.list().get(0);*/
+            return goodslist;
+        }
+    }
+
+    public List<Goods> getOverGoods() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String start = sdf.format(date);
+        String hql = "from Goods g where  g.expirationDate<'" + start + "'";
+        Session session = this.getSessionFactory().getCurrentSession();
+        Query query = session.createQuery(hql);
+        List<Goods> goodslist = query.list();
+        if (goodslist.size() <= 0) return new ArrayList<Goods>();
+        else {
             return goodslist;
         }
     }

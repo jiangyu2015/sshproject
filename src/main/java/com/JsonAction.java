@@ -183,6 +183,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         return SUCCESS;
 
     }
+
     public String checkGoods() {            //检查商品相似
         try {
             String goodsName = request.getParameter("goodsName");  //解码两次
@@ -199,12 +200,36 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         }
         return SUCCESS;
     }
+
+    public String deleteGoods() {            //刪除
+        try {
+            String id = request.getParameter("goodsId");
+            int goodsId = Integer.valueOf(id);
+
+            Goods condition = new Goods();
+            condition.setGoodsId(goodsId);
+            List<Goods> list = goodsBiz.getGoodsList(condition);
+
+            if (list.size() > 0) {
+                Goods goods = list.get(0);
+                boolean e = goodsBiz.delGoods(goods);
+                if (e) return SUCCESS;
+                else return ERROR;
+            } else return ERROR;
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+
     public String selectProducer() {            //状态为yesok的商户
         List<Producer> producerlist = producerBiz.getProducerCheck();
         if (producerlist.size() > 0) {
             try {
-                Producer g = producerlist.get(0);
-                System.out.println(g.getProducerId() + "传值JsonAction");
+            /*    Producer g = producerlist.get(0);
+                System.out.println(g.getProducerId() + "传值JsonAction");*/
                 JSONObject json = new JSONObject();
                 json.put("producerList", producerlist);
                 result = json.toString();//给result赋值，传递给页面

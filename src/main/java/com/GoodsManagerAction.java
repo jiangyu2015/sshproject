@@ -132,7 +132,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         }
     }
 
-    public String delGoods() {
+  /*  public String delGoods() {
         System.out.println(goodsName);
         Goods condition = new Goods();
         condition.setGoodsName(goodsName);
@@ -145,7 +145,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             if (e) return "success";
             else return "input";
         } else return "input";
-    }
+    }*/
 
     public String listGoods() {
         List goods = goodsBiz.getAllGoods();
@@ -171,7 +171,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         } else return "input";
     }
 
-    public String modify() {
+  /*  public String modify() {
         Goods condition = (Goods) session.get("goods");
         if (goods.getGoodsBackName() != null && !goods.getGoodsBackName().equals(""))        //后台名字
             condition.setGoodsBackName(goods.getGoodsBackName());
@@ -220,7 +220,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         } else
             return "input";
 
-    }
+    }*/
 
     public String editGoods() {
         Goods g = new Goods();
@@ -295,6 +295,12 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
 
     public String getOverdueGoods(){
         List goods = goodsBiz.getOverdueGoods();
+        session.put("goodslist", goods);
+        return "success";
+    }
+
+    public String getOverGoods(){
+        List goods = goodsBiz.getOverGoods();
         session.put("goodslist", goods);
         return "success";
     }
