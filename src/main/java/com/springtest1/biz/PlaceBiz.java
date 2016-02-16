@@ -12,7 +12,7 @@ public interface PlaceBiz {
     public List getAllPlace();
     public List<Place> getPlaceList( Place condition);
     public void add(Place condition);
-    public boolean delGoods(Place good);  //删除x
+    public boolean editPlace(Place place);
     public List<Place> getPlace(String name);
 
 }

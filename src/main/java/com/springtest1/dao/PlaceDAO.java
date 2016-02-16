@@ -10,7 +10,7 @@ public interface PlaceDAO {
     public List getAllPlace();
     public List<Place> search(Place condition);   //查询
     public void add(Place condition);//add
-    public boolean delGoods(Place condition); //del
+    public void editPlace(Place place);
 
     public List<Place> getPlace(String name);  //找id查询
 

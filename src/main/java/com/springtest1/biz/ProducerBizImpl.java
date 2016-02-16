@@ -30,15 +30,14 @@ public class ProducerBizImpl implements ProducerBiz {
         producerDAO.add(condition);
     }
 
-    public boolean delProducer(Producer producer) {
+/*    public boolean delProducer(Producer producer) {
         return producerDAO.delProducer(producer);
-    }
+    }*/
 
     public boolean editProducer(Producer producer) {
-        System.out.println("biz里面的" + producer.getProducerName());
         producerDAO.editProducer(producer);
         return true;
-    } //修改AllList商品
+    } //修改
 
     @Transactional
     public List<Producer> getProducer(String name) {

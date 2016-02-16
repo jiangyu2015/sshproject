@@ -72,10 +72,10 @@
             <result type="redirect" name="success">/sh/shList.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
-        <action name="shDel" class="producerDel" method="delProducer">
+   <!--     <action name="shDel" class="producerDel" method="delProducer">
             <result type="redirect" name="success">/sh/test.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
-        </action>
+        </action>-->
         <action name="shCheck" class="producerCheck" method="checkProducer">
             <result type="redirect" name="producerCheck">/sh/shCheckList.jsp</result>
         </action>
@@ -85,6 +85,12 @@
         </action>
         <action name="listPlace" class="placeList" method="listplace">
             <result type="redirect" name="place">/place/placeAllList.jsp</result>
+        </action>
+        <action name="addPlace" class="placeList" method="addPlace">
+            <result type="redirect" name="success">/place/placeAllList.jsp</result>
+        </action>
+        <action name="editPlace" class="placeList" method="editPlace">
+            <result type="redirect" name="success">/place/placeAllList.jsp</result>
         </action>
 
         <action name="listrksq" class="storageAppList" method="listStorageApp">
@@ -196,9 +202,9 @@
             <result type="redirect" name="success">/ck/ckList.jsp</result>
             <result type="redirect" name="input">/ck/fail.jsp</result>
         </action>
-        <action name="rkAdd" class="storageAdd" method="addStorage">
+      <!--  <action name="rkAdd" class="storageAdd" method="addStorage">
             <result type="redirect" name="success">/rk/test.jsp</result>
-        </action>
+        </action>-->
         <action name="rkcheck" class="storageCheck" method="checkStorage">    <!--确认收货查询所有未确认的-->
             <result type="redirect" name="storageCheck">/rk/rkCheckList.jsp</result>
         </action>

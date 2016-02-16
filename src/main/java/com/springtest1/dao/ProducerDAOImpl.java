@@ -48,11 +48,6 @@ public class ProducerDAOImpl extends HibernateDaoSupport implements ProducerDAO 
         super.getHibernateTemplate().save(producer);
     }
 
-    public boolean delProducer(Producer condition) {
-        super.getHibernateTemplate().delete(condition);
-        return true;
-    }
-
     public void editProducer(Producer producer) {
         super.getHibernateTemplate().update(producer);   //修改
     }

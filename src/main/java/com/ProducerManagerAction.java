@@ -82,7 +82,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
     
     
 
-    public String delProducer() {
+  /*  public String delProducer() {
         System.out.println(producerName);
         Producer condition = new Producer();
         condition.setProducerName(producerName);
@@ -95,7 +95,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
             if (e) return "success";
             else return "input";
         } else return "input";
-    }
+    }*/
 
     public String addProducer() throws Exception {                  //增加商户
         Producer condition = new Producer();
@@ -143,21 +143,17 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         Producer p=new Producer();
         p.setProducerId(producer.getProducerId());
         Producer condition = producerBiz.getProducerList(p).get(0);
-        if (producer.getProducerId() != null && !producer.getProducerId().equals("")) {
+      /*  if (producer.getProducerId() != null && !producer.getProducerId().equals("")) {
             condition.setProducerId(producer.getProducerId());
-            System.out.println(producer.getProducerId());
-        }
+        }*/
         if (producer.getProducerName() != null && !producer.getProducerName().equals("")) {
             condition.setProducerName(producer.getProducerName());
-            System.out.println(producer.getProducerName());
         }
         if (producer.getProducerAddress() != null && !producer.getProducerAddress().equals("")) {
             condition.setProducerAddress(producer.getProducerAddress());
-            System.out.println(producer.getProducerAddress());
         }
         if (producer.getLinkman() != null && !producer.getLinkman().equals("")) {
             condition.setLinkman(producer.getLinkman());
-            System.out.println(producer.getLinkman());
         }
         if (producer.getTelOne() != null && !producer.getTelOne().equals("")) {
             condition.setTelOne(producer.getTelOne());

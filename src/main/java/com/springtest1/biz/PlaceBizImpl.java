@@ -29,10 +29,11 @@ public class PlaceBizImpl implements PlaceBiz {
     public void add(Place condition) {
         placeDAO.add(condition);
     }
+    public boolean editPlace(Place place) {
+       placeDAO.editPlace(place);
+        return true;
+    } //修改
 
-    public boolean delGoods(Place Place) {
-        return placeDAO.delGoods(Place);
-    }
 
     @Transactional
     public List<Place> getPlace(String name){

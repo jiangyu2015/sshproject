@@ -314,7 +314,6 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<Object[]> list = sqlQuery.list();
-        System.out.println("DAO" + list.size());
         List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
         for (Object[] row : list) {
             System.out.println(row);

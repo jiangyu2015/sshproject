@@ -1,6 +1,7 @@
 package com.springtest1.dao;
 
 import com.hibtest1.entity.Place;
+import com.hibtest1.entity.Producer;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -46,9 +47,8 @@ public class PlaceDAOImpl extends HibernateDaoSupport implements PlaceDAO {
         super.getHibernateTemplate().save(Place);
     }
 
-    public boolean delGoods(Place condition) {
-        super.getHibernateTemplate().delete(condition);
-        return true;
+    public void editPlace(Place place) {
+        super.getHibernateTemplate().update(place);   //修改
     }
 
     public List<Place> getPlace(String name) {    //模糊查询

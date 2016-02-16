@@ -15,18 +15,18 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
 
     <script>
-        function edit(){
-            if($(".active").length == 0){
+        function edit() {
+            if ($(".active").length == 0) {
                 alert('请选择要修改的行');
-            }else{
+            } else {
                 var $tds = $("tr.active").children();
                 var $lines = $("#dialog_edit").find('form').children();
-                for(var i = 0, len = $tds.length; i < len; i++) {
+                for (var i = 0, len = $tds.length; i < len; i++) {
                     var $line = $lines.eq(i);
 
-                    if(i == 0){
+                    if (i == 0) {
                         $line.find('.input-div').html($tds.eq(i).text());
-                    }else {
+                    } else {
                         $line.find('input').val($tds.eq(i).text());
                     }
                 }
@@ -41,6 +41,37 @@
                 $(this).addClass('active');
             });
         });
+
+        function check() {
+            var producerName = $('#producerName').val().replace(/\s/g, "");
+            $('#producerName').val(producerName);
+            var producerAddress = $('#producerAddress').val();
+            var linkman = $('#linkman').val();
+            $(".input-div span").html("");
+            $("#div_alert").html("");
+            if (producerName == null || producerName.length == 0 || isNull(producerName)) {
+                $("#div_producerName").html("请输入仓库名称!");
+                return false;
+            }
+            if (producerAddress == null || producerAddress.length == 0 || isNull(producerAddress)) {
+                $("#div_producerAddress").html("请输入仓库地址!");
+                return false;
+            }
+            if (linkman == null || linkman.length == 0 || isNull(linkman)) {
+                $("#div_linkman").html("请输入联系人!");
+                return false;
+            }
+            if ($('#telOne').val() == "") {
+                $("#div_alert").html("请输入联系电话");
+                return false;
+            }
+        }
+        function isNull(str) {
+            if (str == "") return true;
+            var regu = "^[ ]+$";
+            var re = new RegExp(regu);
+            return re.test(str);
+        }
     </script>
 </head>
 
@@ -48,8 +79,8 @@
 <div class="table-div">
     <div class="title">仓库信息</div>
     <div class="btn-div">
-    <%--    <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <input type="button" class="btn-eidt" value="修改" onclick="edit();">
+        <%--     <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -78,29 +109,43 @@
     </table>
 </div>
 
-<%--
 <div id="dialog_edit" class="dialog-div">
     <div class="dialog-masking"></div>
     <div class="dialog-content">
         <div class="title">修改仓库</div>
         <div class="overflow-div">
             <div class="content">
-                <form method="post" action="editPlace" target="_parent">
+                <form method="post" action="editPlace.action">
                     <div class="line">
                         <div class="lable">仓库id：</div>
-                        <div class="input-div"></div>
-                    </div>
-                    <div class="line">
-                        <div class="lable">仓库名称：</div>
-                        <div class="input-div"><input placeholder="请输入仓库名称" name="place.placeName"/></div>
+                        <div class="input-div"><input name="place.placeId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
 
+                    <div class="line">
+                        <div class="lable"><span>* </span>仓库名称：</div>
+                        <div class="input-div"><input id="producerName" name="place.placeName"/> <span id="div_producerName"></span></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">仓库地址：</div>
+                        <div class="input-div"><input id="producerAddress" name="place.address"/> <span id="div_producerAddress"></span></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">仓库收货人：</div>
+                        <div class="input-div"><input id="linkman" name="place.receiver"/>   <span id="div_linkman"></span></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">联系电话：</div>
+                        <div class="input-div"><input id="telOne" name="place.tel"/></div>
+                    </div>
                     <div class="line">
                         <div class="lable">仓库状态：</div>
-                        <div class="input-div"><input placeholder="请输入仓库状态" name="place.state"/></div>
+                        <div class="input-div"><input name="place.state"/></div>
                     </div>
 
-                    <input type="submit" value="确定" class="btn-submit" onclick="$('#dialog_edit').hide();"/>
+                    <span id="div_alert"></span></br>
+                    <input type="submit" value="确定" class="btn-submit" onclick="return check();"/>
                     <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit').hide();"/>
                 </form>
             </div>
@@ -109,4 +154,3 @@
 </div>
 </body>
 </html>
---%>
