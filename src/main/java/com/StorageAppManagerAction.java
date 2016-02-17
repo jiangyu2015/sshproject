@@ -169,6 +169,7 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             storage.setAdduser(storageApp.getAdduser());
         storage.setCategory("正常入库");
         storage.setState("no");
+        storage.setOver(0);
         storageBiz.add(storage);
         return "success";
     }

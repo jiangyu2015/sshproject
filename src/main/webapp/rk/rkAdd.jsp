@@ -5,6 +5,8 @@
   Date: 2015/11/27
   Time: 15:18
   To change this template use File | Settings | File Templates.
+
+  没啥用了
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
@@ -55,6 +57,7 @@
                     <option value="社区特卖">社区特卖</option>
                     <option value="物业礼包">物业礼包</option>
                     <option value="福利">福利</option>
+                    <option value="福利（其他）">福利（其他）</option>
                 </select>
 
             </div>

@@ -6,7 +6,7 @@
 <hibernate-mapping package="com.hibtest1.entity">
     <class name="StorageApp" table="rk_application">
         <id name="storageAppId" type="java.lang.Integer">
-            <column name="rk_application_id" length="4"/>
+            <column name="rk_application_id" length="8"/>
             <generator class="native">
             </generator>
         </id>

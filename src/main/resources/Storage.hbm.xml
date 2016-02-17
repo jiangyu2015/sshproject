@@ -6,7 +6,7 @@
 <hibernate-mapping package="com.hibtest1.entity">
     <class name="Storage" table="rk_detail">
         <id name="storageId" type="java.lang.Integer">
-            <column name="rk_id" length="4"/>
+            <column name="rk_id" length="8"/>
             <generator class="native">
             </generator>
         </id>
@@ -51,6 +51,9 @@
         </property>
         <property name="storageAppId" type="java.lang.Integer">
             <column name="rkapplicationId" length="4" not-null="false"/>
+        </property>
+        <property name="over" type="java.lang.Integer">
+            <column name="over" length="1" not-null="false"/>
         </property>
         <many-to-one name="goods" column="sp_id" class="com.hibtest1.entity.Goods" lazy="false"/>
         <many-to-one name="place" column="rk_place_id" class="com.hibtest1.entity.Place"  lazy="false"/>

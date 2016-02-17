@@ -17,6 +17,8 @@
         function edit() {
             if ($(".active").length == 0) {
                 alert('请选择要确认的行');
+            } else if ( $("tr.active").children().eq(14)=='ok') {
+                alert('已收过货，请选择多次收货按钮');
             } else {
                 var $tds = $("tr.active").children();
                 var $lines = $("#dialog_edit").find('form').children();
@@ -205,7 +207,7 @@
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
             var selectId2 = $("[value='" + val2 + "']").eq(0).attr('id');
             var selectId3 = $("[value='" + val3 + "']").eq(0).attr('id');
-            if (!val && !val2 && !val3  && !val4) {
+            if (!val && !val2 && !val3 && !val4) {
                 alert("请输入至少一个查询选项");
                 return false;
             }
@@ -235,8 +237,12 @@
 <div class="table-div">
     <div class="title">确认收货</div>
     <div class="btn-div">
-        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();" style="width: 90px;">
+        <input type="button" class="btn-eidt" value="确认收货" onclick="edit();" style="width: 90px;"/>
+        <input type="button" class="btn-eidt" value="多次收货" onclick="edit();" style="width: 90px;"/>
+        <%-- <input type="button" class="btn-eidt" value="确认完结" onclick="over();" style="position: absolute; width: 90px; right: 10px;"/>--%>
     </div>
+
+
     <div class="btn-div">
         <form method="post" action="rkCheckSelect.action" onsubmit="return checkSelect()" class="head-form">
             <div class="head-lable">商品名称：</div>
@@ -246,13 +252,13 @@
             <input id="producer" class="head-input" list="selectproducer" name="producerName" style="width: 10%;"/>
             <datalist id="selectproducer"></datalist>
             <div class="head-lable">入库地点：</div>
-            <input id="place" class="head-input" list="selectplace" name="storagePlace"  style="width: 10%;"/>
+            <input id="place" class="head-input" list="selectplace" name="storagePlace" style="width: 10%;"/>
             <datalist id="selectplace"></datalist>
             <div class="head-lable">入库类别：</div>
-            <select id="category"class="head-input" name="category" style="width: 10%;"/>
-                <option></option>
-                <option value="正常入库">正常入库</option>
-                <option value="正常调拨">正常调拨</option>
+            <select id="category" class="head-input" name="category" style="width: 10%;"/>
+            <option></option>
+            <option value="正常入库">正常入库</option>
+            <option value="正常调拨">正常调拨</option>
             </select>
             <input type="submit" class="btn-remove" value="查询" style="left: 20px;;">
         </form>
@@ -403,7 +409,8 @@
                     </div>
                     <div class="line">
                         <div class="lable">备注：</div>
-                        <div class="input-div"><input placeholder="请输入备注（可输入200个字符）" name="storage.remark" maxlength="200"/></div>
+                        <div class="input-div"><input placeholder="请输入备注（可输入200个字符）" name="storage.remark"
+                                                      maxlength="200"/></div>
                     </div>
 
                     <div class="line">
@@ -426,6 +433,18 @@
                         <div class="lable">入库类别：</div>
                         <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="input-div">
+                            <div class="lable-left">
+                                <input type="radio" name="storage.over" value="0" id="radio_service" checked="checked"/>
+                                <label for="radio_service">未完全入库</label>
+                            </div>
+                            <div class="lable-right">
+                                <input type="radio" name="storage.over" value="1" id="radio_object"/>
+                                <label for="radio_object">已完全入库</label>
+                            </div>
+                        </div>
                     </div>
                     <span id="div_alert"></span><br>
                     <div style="position: relative; bottom: 0px;">

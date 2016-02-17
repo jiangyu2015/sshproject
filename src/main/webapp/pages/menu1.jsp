@@ -64,6 +64,73 @@
             background-color: #E6F4FD;
             border-radius: 5px;
         }
+
+        .tree-title {
+            line-height: 40px;
+            color: #0CB2F5;
+        }
+        .tree-folder +.tree-title {
+            font-weight: bold;
+        }
+        .tree-file {
+            background: none;
+        }
+        .tree-folder-open {
+            background: none;
+        }
+        .tree-folder {
+            background: none;
+        }
+        .tree-node {
+            height: 40px;
+            white-space: nowrap;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #ccc;
+            background: -webkit-linear-gradient(top, #FDFDFD ,#F5F5F5);
+            border: 1px solid #ccc;
+            margin: 2px 0px;
+        }
+        .tree-node +ul {
+            padding: 5px 10px !important;
+            border: 1px solid #ccc;
+            background: #fff;
+            margin-top: -5px !important;
+        }
+        .tree-node-selected {
+            background: -webkit-linear-gradient(top, #9BD2F3 ,#268AF1);
+        }
+        .tree-node-selected > .tree-title {
+            color: #fff;
+        }
+        .tree-collapsed {
+            margin-left: 10px;
+            margin-top: 10px;
+            background: url('img/icon_right.png') no-repeat;
+            background-size: contain;
+        }
+        .tree-collapsed-hover {
+            background: url('img/icon_right_hover.png') no-repeat !important;
+            background-size: contain !important;
+        }
+        .tree-node-selected > .tree-collapsed {
+            background: url('img/icon_right_select.png') no-repeat;
+            background-size: contain;
+        }
+        .tree-expanded {
+            margin-left: 10px;
+            margin-top: 10px;
+            background: url('img/icon_down.png') no-repeat;
+            background-size: contain;
+        }
+        .tree-expanded-hover {
+            background: url('img/icon_down_hover.png') no-repeat !important;
+            background-size: contain !important;
+        }
+        .tree-node-selected > .tree-expanded {
+            background: url('img/icon_down_select.png') no-repeat;
+            background-size: contain;
+        }
     </style>
 </head>
 

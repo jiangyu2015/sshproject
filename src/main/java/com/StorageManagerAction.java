@@ -119,13 +119,13 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         Storage condition = new Storage();
         if (goodsName != null && !goodsName.equals("")) {
         /*    if (goodsName.indexOf("|") != -1) {*/  //前台判断
-                String[] strs = goodsName.split("\\|");
-                Integer id = Integer.parseInt(strs[1]);
-                Goods g = new Goods();
-                g.setGoodsId(id);
-                Goods goods = goodsBiz.getGoodsList(g).get(0);
-                System.out.println(goods.getGoodsName());
-                condition.setGoods(goods);
+            String[] strs = goodsName.split("\\|");
+            Integer id = Integer.parseInt(strs[1]);
+            Goods g = new Goods();
+            g.setGoodsId(id);
+            Goods goods = goodsBiz.getGoodsList(g).get(0);
+            System.out.println(goods.getGoodsName());
+            condition.setGoods(goods);
         }
         if (producerName != null && !producerName.equals("")) {
             Producer producer = producerBiz.getProducer(producerName).get(0);
@@ -194,6 +194,7 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         session.put("storagelistok", list);
         return "success";
     }
+
     public String checkStorage() {               //得到所需入库的单子
         List<Storage> storage = storageBiz.getCheckStorage();
         session.put("storagelistcheck", storage);
@@ -205,6 +206,8 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         condition.setStorageId(storage.getStorageId());
         List list = storageBiz.getStorageList(condition);
         Storage storage2 = (Storage) list.get(0);
+  /*      int overId = 0; //默认没有完结
+        int expectedNumber = 0;*/
         storage2.setState("ok");
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             storage2.setStorageDate(storage.getStorageDate());
@@ -213,37 +216,45 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         }
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
             storage2.setRemark(storage.getRemark());
+        if(storage.getOver()!=null)   //确认完结没完结 多少可以在前端判断下
+            storage2.setOver(storage.getOver());
         if (session.get("name") != null) {
             storage2.setCheckuser(session.get("name").toString()); //得到入库确认人
         }
+     /*   if (storage.getExpectedNumber() != null)
+            expectedNumber = storage.getExpectedNumber();
+        if (expectedNumber <= storage.getStorageNumber())
+            overId = 1;   //实际数大于等于预期数  完结;*/
+
         storageBiz.editStorage(storage2);                //更改状态ok1
+
         return "success";
     }
 
- /*   public String addStorage() throws Exception {                  //有错误 用不到不改了 增加入库申请
-        Storage condition = new Storage();
-        Goods g=new Goods();
-        g.setGoodsName(goodsName);
-        Goods goods = goodsBiz.getGoodsList(g).get(0);
-        condition.setGoods(goods);
-        Producer p=new Producer();
-        p.setProducerName();
-        Producer producer = producerBiz.getProducer(storagePlace).get(0);
-        condition.setProducer(producer);
-        Place place = placeBiz.getPlace(storagePlace).get(0);
-        condition.setPlace(place);
-        if (storage.getStorageDate() != null)                      //实际入库时间
-            condition.setStorageDate(storage.getStorageDate());
-        if (storage.getStorageNumber() != null)               //实收数量
-            condition.setStorageNumber(storage.getStorageNumber());
-        if (storage.getStorageType() != null)          //入库类型
-            condition.setStorageType(storage.getStorageType());
-        if (storage.getRemark() != null)          //备注
-            condition.setRemark(storage.getRemark());
-        storageBiz.add(condition);
-        return "success";
-    }
-*/
+    /*   public String addStorage() throws Exception {                  //有错误 用不到不改了 增加入库申请
+           Storage condition = new Storage();
+           Goods g=new Goods();
+           g.setGoodsName(goodsName);
+           Goods goods = goodsBiz.getGoodsList(g).get(0);
+           condition.setGoods(goods);
+           Producer p=new Producer();
+           p.setProducerName();
+           Producer producer = producerBiz.getProducer(storagePlace).get(0);
+           condition.setProducer(producer);
+           Place place = placeBiz.getPlace(storagePlace).get(0);
+           condition.setPlace(place);
+           if (storage.getStorageDate() != null)                      //实际入库时间
+               condition.setStorageDate(storage.getStorageDate());
+           if (storage.getStorageNumber() != null)               //实收数量
+               condition.setStorageNumber(storage.getStorageNumber());
+           if (storage.getStorageType() != null)          //入库类型
+               condition.setStorageType(storage.getStorageType());
+           if (storage.getRemark() != null)          //备注
+               condition.setRemark(storage.getRemark());
+           storageBiz.add(condition);
+           return "success";
+       }
+   */
     public String editStorage() {  //能改吗 不能
         Storage condition = new Storage();
         if (storage.getStorageId() != null && !storage.getStorageId().equals("")) {

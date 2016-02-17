@@ -6,12 +6,12 @@
 <hibernate-mapping package="com.hibtest1.entity">
     <class name="Producer" table="sh_info">
         <id name="producerId" type="java.lang.Integer">
-            <column name="sh_id" length="4"/>
+            <column name="sh_id" length="8"/>
             <generator class="native">
             </generator>
         </id>
         <property name="producerName" type="java.lang.String">
-            <column name="sh_name" length="30" not-null="true"/>
+            <column name="sh_name" length="70" not-null="true"/>
         </property>
         <property name="producerAddress" type="java.lang.String">
             <column name="sh_add" length="50" not-null="false"/>

@@ -22,6 +22,7 @@ public class Storage implements Serializable {
     private String adduser; //添加人
     private String checkuser; //确认收货人
     private Integer storageAppId; //入库申请id
+    private Integer over; //结束标记
 
     public Integer getStorageAppId() {
         return storageAppId;
@@ -142,5 +143,13 @@ public class Storage implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Integer getOver() {
+        return over;
+    }
+
+    public void setOver(Integer over) {
+        this.over = over;
     }
 }

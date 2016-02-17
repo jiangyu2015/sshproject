@@ -6,16 +6,16 @@
 <hibernate-mapping package="com.hibtest1.entity">
     <class name="Goods" table="sp_info" >
         <id name="goodsId" type="java.lang.Integer">
-            <column name="sp_id" length="4"/>
+            <column name="sp_id" length="8"/>
             <generator class="native">
             </generator>
         </id>
         <property name="goodsName" type="java.lang.String">
-            <column name="sp_name" length="30" not-null="true"/>
+            <column name="sp_name" length="70" not-null="true"/>
         </property>
 
         <property name="goodsBackName" type="java.lang.String">
-            <column name="back_name" length="30" not-null="false"/>
+            <column name="back_name" length="70" not-null="false"/>
         </property>
         <property name="value" type="java.lang.Float">
             <column name="value" length="15" not-null="false"/>

@@ -6,7 +6,7 @@
 <hibernate-mapping package="com.hibtest1.entity">
     <class name="Place" table="kc_place">
         <id name="placeId" type="java.lang.Integer">
-            <column name="kc_id" length="4"/>
+            <column name="kc_id" length="5"/>
             <generator class="native">
             </generator>
         </id>

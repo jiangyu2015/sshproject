@@ -430,6 +430,18 @@
                         <div class="input-div"><input readonly="readonly"
                                                       style="border: none;-webkit-box-shadow: none;"/></div>
                     </div>
+                    <div class="line">
+                        <div class="input-div">
+                            <div class="lable-left">
+                                <input type="radio" name="storage.over" value="0" id="radio_service" checked="checked"/>
+                                <label for="radio_service">未完全入库</label>
+                            </div>
+                            <div class="lable-right">
+                                <input type="radio" name="storage.over" value="1" id="radio_object"/>
+                                <label for="radio_object">已完全入库</label>
+                            </div>
+                        </div>
+                    </div>
                     <span id="div_alert"></span><br>
                     <div style="position: relative; bottom: 0px;">
                         <input type="submit" value="确认" class="btn-submit" onclick="return check();"/>
