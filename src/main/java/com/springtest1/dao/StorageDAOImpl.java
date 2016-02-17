@@ -24,7 +24,7 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
         return query.list();
     }
 
-    public List<Storage> getCheckStorage() {     //审核查出"no"状态的单子
+    public List<Storage> getCheckStorage() {     //审核查出"no"状态的单子  明天继续
         String hql = "from Storage s where s.over=0";
         Session session = this.getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
