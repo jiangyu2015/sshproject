@@ -230,7 +230,13 @@
             <div class="input-div">
                 <select name="deliver.remark">
                     <option value=""></option>
-                    <option value="借领">借领</option>
+                    <option value="借领（拓粉）">借领（拓粉）</option>
+                    <option value="借领（客诉补偿/重发）">借领（客诉补偿/重发）</option>
+                    <option value="借领（乐居活动）">借领（乐居活动）</option>
+                    <option value="借领（同城会/达人活动）">借领（同城会/达人活动）</option>
+                    <option value="借领（社区活动）">借领（社区活动）</option>
+                    <option value="借领（自提点）">借领（自提点）</option>
+                    <option value="借领（其它）">借领（其它）</option>
                 </select>
             </div>
         </div>

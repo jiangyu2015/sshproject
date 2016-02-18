@@ -74,6 +74,9 @@ public class StorageDAOImpl extends HibernateDaoSupport implements StorageDAO {
                     } /*else if (condition.getCategory() != null && !condition.getCategory().equals("")) {
                         c.add(Restrictions.eq("category", condition.getCategory()));
                     }*/
+                    if (condition.getOver() != null /*&& !condition.getState().equals("")*/) {
+                        c.add(Restrictions.eq("over", condition.getOver()));
+                    }
                 }
                 if (c.list().size() <= 0) {
                     return new ArrayList<Storage>();

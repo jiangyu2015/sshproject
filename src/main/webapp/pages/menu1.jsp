@@ -66,33 +66,39 @@
         }
 
         .tree-title {
-            line-height: 40px;
+            line-height: 30px;
             color: #0CB2F5;
+            margin-left: -6px;
         }
         .tree-folder +.tree-title {
             font-weight: bold;
         }
         .tree-file {
             background: none;
+            width: 0;
         }
         .tree-folder-open {
             background: none;
+            width: 0;
         }
         .tree-folder {
             background: none;
+            width: 0;
         }
         .tree-node {
-            height: 40px;
+            height: 30px;
             white-space: nowrap;
             cursor: pointer;
             border-radius: 5px;
             background-color: #ccc;
-            background: -webkit-linear-gradient(top, #FDFDFD ,#F5F5F5);
+            /*background: -webkit-linear-gradient(top, #FDFDFD ,#F5F5F5);*/
+            background-color: #F5F5F5;
             border: 1px solid #ccc;
             margin: 2px 0px;
         }
         .tree-node +ul {
-            padding: 5px 10px !important;
+            padding: 5px !important;
+          /*  padding: 5px 10px !important;*/
             border: 1px solid #ccc;
             background: #fff;
             margin-top: -5px !important;
@@ -104,8 +110,8 @@
             color: #fff;
         }
         .tree-collapsed {
-            margin-left: 10px;
-            margin-top: 10px;
+            margin: 8px;
+            margin-left: 4px;
             background: url('img/icon_right.png') no-repeat;
             background-size: contain;
         }
@@ -118,8 +124,8 @@
             background-size: contain;
         }
         .tree-expanded {
-            margin-left: 10px;
-            margin-top: 10px;
+            margin: 8px;
+            margin-left: 4px;
             background: url('img/icon_down.png') no-repeat;
             background-size: contain;
         }
@@ -130,6 +136,9 @@
         .tree-node-selected > .tree-expanded {
             background: url('img/icon_down_select.png') no-repeat;
             background-size: contain;
+        }
+        .tree-indent {
+            width: 5px;
         }
     </style>
 </head>

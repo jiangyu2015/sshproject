@@ -17,18 +17,31 @@
         function edit() {
             if ($(".active").length == 0) {
                 alert('请选择要确认的行');
-            } else if ( $("tr.active").children().eq(14)=='ok') {
-                alert('已收过货，请选择多次收货按钮');
             } else {
                 var $tds = $("tr.active").children();
-                var $lines = $("#dialog_edit").find('form').children();
-                for (var i = 0, len = $tds.length; i < len; i++) {
-                    var $line = $lines.eq(i);
-                    $line.find('input').val($tds.eq(i).text());
+                if ($tds.eq(14).text() == 'ok') {
+                    var $lines = $("#dialog_edit1").find('form').children();
+                    for (var i = 0, len = $tds.length; i < len; i++) {
+                        var $line = $lines.eq(i);
+                        if (i >= 12) {
+                            $line = $lines.eq(i + 1); //第i+1个input的才是第i个td的值
+                        }
+                        $line.find('input').val($tds.eq(i).text());
+                    }
+                    $(".input-div span").html("");
+                    $("#div_alert2").html("");
+                    $("#dialog_edit1").show();
                 }
-                $(".input-div span").html("");
-                $("#div_alert").html("");
-                $("#dialog_edit").show();
+                else {
+                    var $lines = $("#dialog_edit").find('form').children();
+                    for (var i = 0, len = $tds.length; i < len; i++) {
+                        var $line = $lines.eq(i);
+                        $line.find('input').val($tds.eq(i).text());
+                    }
+                    $(".input-div span").html("");
+                    $("#div_alert").html("");
+                    $("#dialog_edit").show();
+                }
             }
         }
 
@@ -142,9 +155,9 @@
             var arrs = storageDate.split("-");
             var storageday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
             var storagedays = storageday.getTime();
-            $(".input-div span").html("");
+            var radio = document.getElementsByName("storage.over");  //判断下有没有选错
+            $(".input-div span").html(""); //清空
             $("#div_alert").html("");
-
             if (storageDate == null || storageDate.length == 0) {
                 alert("请输入实际入库日期！");
                 $("#div_storageDate").html("请输入实际入库日期！");
@@ -158,6 +171,53 @@
             if (storagedays > todays) {
                 alert("确认收货不成功，实际入库时间不能比今天大");
                 $("#div_alert").html("确认收货不成功，实际入库时间不能比今天大");
+                return false;
+            }
+            if (expectedNumber <= storageNumber && radio[0].checked == true) {
+                alert("实际已大于等于预期，请选择已完全入库");
+                $("#div_alert").html("实际已大于等于预期，请选择已完全入库");
+                return false;
+            }
+            else {
+                $('#dialog_edit').hide();
+                alert("确认收货成功");
+                return true;
+            }
+        }
+
+        function check2() {
+            var storageDate = $("#storageDate2").val();  //实际入库时间
+            var expectedNumber = $("#expectedNumber2").val(); //预期入库数
+            var storageNumber =Number($("#storageNumber3").val()); //原来的实收    实收数量和预期入库数到时候再说
+            var storageNumberNow = Number(Number($("#storageNumber2").val()) + storageNumber); //实收数量为本次加上原来的实收
+            var arr = getToDay().split("-");    //比较时间
+            var today = new Date(arr[0], arr[1], arr[2]);  //今天
+            var todays = today.getTime();
+            var arrs = storageDate.split("-");
+            var storageday = new Date(arrs[0], arrs[1], arrs[2]); //实际入库时间
+            var storagedays = storageday.getTime();
+            var radio = document.getElementsByName("storage.over");  //判断下有没有选错
+            $(".input-div span").html("");
+            $("#div_alert2").html("");
+
+            if (storageDate == null || storageDate.length == 0) {
+                alert("请输入实际入库日期！");
+                $("#div_storageDate").html("请输入实际入库日期！");
+                return false;
+            }
+            if (storageNumber == null || storageNumber.length == 0) {
+                alert("请输入实际入库数！");
+                $("#div_storageNumber").html("请输入实际入库数！");
+                return false;
+            }
+            if (storagedays > todays) {
+                alert("确认收货不成功，实际入库时间不能比今天大");
+                $("#div_alert2").html("确认收货不成功，实际入库时间不能比今天大");
+                return false;
+            }
+            if (expectedNumber <= storageNumberNow && radio[2].checked == true) { //radion name一样的有4个
+                alert("实际已大于等于预期，请选择已完全入库");
+                $("#div_alert2").html("实际已大于等于预期，请选择已完全入库");
                 return false;
             }
             else {
@@ -238,11 +298,8 @@
     <div class="title">确认收货</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="确认收货" onclick="edit();" style="width: 90px;"/>
-        <input type="button" class="btn-eidt" value="多次收货" onclick="edit();" style="width: 90px;"/>
-        <%-- <input type="button" class="btn-eidt" value="确认完结" onclick="over();" style="position: absolute; width: 90px; right: 10px;"/>--%>
+        <%-- <input type="button" class="btn-eidt" value="多次收货" onclick="edit();" style="width: 90px; left: 130px;"/>--%>
     </div>
-
-
     <div class="btn-div">
         <form method="post" action="rkCheckSelect.action" onsubmit="return checkSelect()" class="head-form">
             <div class="head-lable">商品名称：</div>
@@ -437,12 +494,12 @@
                     <div class="line">
                         <div class="input-div">
                             <div class="lable-left">
-                                <input type="radio" name="storage.over" value="0" id="radio_service" checked="checked"/>
-                                <label for="radio_service">未完全入库</label>
+                                <input type="radio" name="storage.over" value="0" id="radio_no" checked="checked"/>
+                                <label for="radio_no">未完全入库</label>
                             </div>
                             <div class="lable-right">
-                                <input type="radio" name="storage.over" value="1" id="radio_object"/>
-                                <label for="radio_object">已完全入库</label>
+                                <input type="radio" name="storage.over" value="1" id="radio_ok"/>
+                                <label for="radio_ok">已完全入库</label>
                             </div>
                         </div>
                     </div>
@@ -458,4 +515,153 @@
 </div>
 </body>
 </html>
+
+
+<div id="dialog_edit1" class="dialog-div">
+    <div class="dialog-masking"></div>
+    <div class="dialog-content">
+        <div class="title">确认收货</div>
+        <div class="overflow-div">
+            <div class="content">
+                <form method="post" action="rkOk">
+                    <div class="line">
+                        <div class="lable">入库明细id：</div>
+                        <div class="input-div"><input name="storage.storageId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+
+                    </div>
+                    <div class="line">
+                        <div class="lable">商户名称：</div>
+                        <div class="input-div">
+                            <input name="storage.producer.producerName" readonly="readonly"
+                                   style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">商品id：</div>
+                        <div class="input-div"><input name="storage.goods.goodsId" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">商品名称：</div>
+                        <div class="input-div"><input name="storage.goods.goodsName" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">仓库名称：</div>
+                        <div class="input-div"><input name="storage.place.placeName" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">商品生产日期：</div>
+                        <div class="input-div"><input name="storage.goods.creationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">商品保质期：</div>
+                        <div class="input-div"><input name="storage.goods.baozhiqi" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">商品截止日期：</div>
+                        <div class="input-div"><input name="storage.goods.expirationDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">预期入库时间：</div>
+                        <div class="input-div"><input id="expectedDate2" name="storage.expectedDate" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;" type="date"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable"><span>* </span>实际入库时间：</div>
+                        <div class="input-div"><input id="storageDate2" placeholder="请输入实际入库时间"
+                                                      name="storage.storageDate" type="date"/> <span
+                                id="div_storageDate2"></span>
+                        </div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">预期数量：</div>
+                        <div class="input-div"><input id="expectedNumber2" name="storage.expectedNumber"
+                                                      readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable"><span>* </span>实收数量：</div>
+                        <div class="input-div">
+                            <input id="storageNumber3" name="storage.storageNumber" readonly="readonly"
+                                   style="border: none;-webkit-box-shadow: none;"/>
+                        </div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable"><span>* </span>本次入库数量：</div>
+                        <div class="input-div">
+                            <input id="storageNumber2" placeholder="请输入本次入库数量"
+                                   name="storageNumber" onkeyup="value=value.replace(/[^\d]/g,'')"
+                                   onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
+                            <span id="div_storageNumber2"></span></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">入库类型：</div>
+                        <div class="input-div"><input name="storage.storageType" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">备注：</div>
+                        <div class="input-div"><input placeholder="请输入备注（可输入200个字符）" name="storage.remark"
+                                                      maxlength="200"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">入库状态：</div>
+                        <div class="input-div"><input id="state2" name="storage.state" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">申请人：</div>
+                        <div class="input-div"><input name="storage.adduser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+
+                    <div class="line">
+                        <div class="lable">确认收货人：</div>
+                        <div class="input-div"><input name="storage.checkuser" readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="lable">入库类别：</div>
+                        <div class="input-div"><input readonly="readonly"
+                                                      style="border: none;-webkit-box-shadow: none;"/></div>
+                    </div>
+                    <div class="line">
+                        <div class="input-div">
+                            <div class="lable-left">
+                                <input type="radio" name="storage.over" value="0" id="radio_no2" checked="checked"/>
+                                <label for="radio_no2">未完全入库</label>
+                            </div>
+                            <div class="lable-right">
+                                <input type="radio" name="storage.over" value="1" id="radio_ok2"/>
+                                <label for="radio_ok2">已完全入库</label>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="div_alert2"></span><br>
+                    <div style="position: relative; bottom: 0px;">
+                        <input type="submit" value="确认" class="btn-submit" onclick="return check2();"/>
+                        <input type="button" value="取消" class="btn-cancle" onclick="$('#dialog_edit1').hide();"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
 

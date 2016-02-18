@@ -44,6 +44,15 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
     String goodsName;   //商品名称
     String producerName;//商户
     String category;//查询用到类别
+    Integer storageNumber;
+
+    public Integer getStorageNumber() {
+        return storageNumber;
+    }
+
+    public void setStorageNumber(Integer storageNumber) {
+        this.storageNumber = storageNumber;
+    }
 
     public String getProducerName() {
         return producerName;
@@ -159,10 +168,10 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
             Place place = placeBiz.getPlace(storagePlace).get(0);
             condition.setPlace(place);
         }
-        if (category != null && !category.equals("")) {   //加不下 先没有
+        if (category != null && !category.equals("")) {
             condition.setCategory(category);
         }
-        condition.setState("no");
+        condition.setOver(0);
         List list = storageBiz.getStorageList(condition);
         session.put("storagelistcheck", list);
         return "success";
@@ -212,11 +221,14 @@ public class StorageManagerAction extends ActionSupport implements RequestAware,
         if (storage.getStorageDate() != null && !storage.getStorageDate().equals(""))                      //实际入库时间
             storage2.setStorageDate(storage.getStorageDate());
         if (storage.getStorageNumber() != null && !storage.getStorageNumber().equals("")) {             //实收数量
-            storage2.setStorageNumber(storage.getStorageNumber());
+            if (storageNumber != null)
+                storage2.setStorageNumber(storage.getStorageNumber() + storageNumber);
+            else
+                storage2.setStorageNumber(storage.getStorageNumber());
         }
         if (storage.getRemark() != null && !storage.getRemark().equals(""))          //备注
             storage2.setRemark(storage.getRemark());
-        if(storage.getOver()!=null)   //确认完结没完结 多少可以在前端判断下
+        if (storage.getOver() != null)   //确认完结没完结 多少可以在前端判断下
             storage2.setOver(storage.getOver());
         if (session.get("name") != null) {
             storage2.setCheckuser(session.get("name").toString()); //得到入库确认人
