@@ -243,6 +243,7 @@
             <div class="lable"><span>* </span>商品评级：</div>
             <div class="input-div">
                 <select name="goods.commodityRating">
+                    <option value=""></option>
                     <option value="A+">A+</option>
                     <option value="A">A</option>
                     <option value="B+">B+</option>

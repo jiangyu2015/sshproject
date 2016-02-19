@@ -50,7 +50,6 @@
         </action>-->
         <action name="spCheck" class="goodsCheck" method="checkGoods">
             <result type="redirect" name="goodsCheck">/sp/spCheckList.jsp</result>
-            <!--    <result type="redirect" name="input">/sp/fail.jsp</result>-->
         </action>
         <action name="spSelectCheck" class="goodsCheckSelect" method="checkGoodsSelect">
             <result type="redirect" name="success">/sp/spSelectList.jsp</result>

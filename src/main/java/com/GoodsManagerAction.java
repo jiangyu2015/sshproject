@@ -119,12 +119,11 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
                 condition.setVweight(goods.getVweight()); //体积重量
             if (goods.getStandard() != null)
                 condition.setStandard(goods.getStandard());  //装箱规格
-            if (goods.getCommodityRating()!= null)
+            if (goods.getCommodityRating() != null)
                 condition.setCommodityRating(goods.getCommodityRating());  //商品评级
             if (session.get("name") != null) {
                 condition.setAdduser(session.get("name").toString()); //得到增加人
-            }
-            else return "login";
+            } else return "login";
             condition.setState("no");
             session.put("goodslist", condition);
             goodsBiz.add(condition);
@@ -260,7 +259,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             condition.setStandard(goods.getStandard());  //装箱规格
         if (goods.getState() != null && !goods.getState().equals(""))
             condition.setState(goods.getState());  //开放状态
-        if (goods.getCommodityRating()!= null && !goods.getCommodityRating().equals(""))
+        if (goods.getCommodityRating() != null && !goods.getCommodityRating().equals(""))
             condition.setCommodityRating(goods.getCommodityRating());  //商品评级
         if (session.get("name") != null) {
             condition.setEdituser(session.get("name").toString()); //得到修改人
@@ -276,9 +275,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         Goods g = new Goods();
         g.setState("no");
         List<Goods> goods = goodsBiz.getGoodsList(g);
-        if (goods.size() > 0) {
-            session.put("goodslistcheck", goods);
-        }
+        session.put("goodslistcheck", goods);
         return "goodsCheck";
     }
 
@@ -286,20 +283,17 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         Goods condition = new Goods();
         condition.setGoodsName(goodsName);
         List list = goodsBiz.getGoodsList(condition);
-        if (list.size() > 0) {
-            session.put("goodslistcheck", list);
-            return "success";
-        } else
-            return "input";
+        session.put("goodslistcheck", list);
+        return "success";
     }
 
-    public String getOverdueGoods(){
+    public String getOverdueGoods() {
         List goods = goodsBiz.getOverdueGoods();
         session.put("goodslist", goods);
         return "success";
     }
 
-    public String getOverGoods(){
+    public String getOverGoods() {
         List goods = goodsBiz.getOverGoods();
         session.put("goodslist", goods);
         return "success";

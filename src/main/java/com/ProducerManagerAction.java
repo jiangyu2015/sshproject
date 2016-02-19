@@ -71,9 +71,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         condition.setProducerName(producerName);
         System.out.println("商户查询Manager" + condition.getProducerName());
         List list = producerBiz.getProducerList(condition);
-        System.out.println(list.size());
         if (list.size() > 0) {
-
             session.put("producerlist",list);
             return "success";
         } else

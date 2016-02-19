@@ -582,7 +582,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
     public String goodsCheckOk() {
         String id = request.getParameter("id");
         int goodsId = Integer.valueOf(id);
-        System.out.println("JsonActionCheck传值" + goodsId);
         Goods condition = new Goods();
         condition.setGoodsId(goodsId);
         List list = goodsBiz.getGoodsList(condition);

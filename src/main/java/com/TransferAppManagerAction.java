@@ -264,7 +264,7 @@ public class TransferAppManagerAction extends ActionSupport implements RequestAw
             storage.setStorageNumber(transferApp.getTransferNumber());
             deliver.setDeliverNumber(transferApp.getTransferNumber());  //直接实际出入库了
         }
-        storage.setOver(1);//不存在多次确认，直接完结，确认state=no就行
+        storage.setOver(1);//不存在多次确认，直接完结
         storage.setCategory("正常转库");
         deliver.setCategory("正常转库");
         storage.setState("ok");

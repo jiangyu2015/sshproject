@@ -275,7 +275,7 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
             storage.setExpectedNumber(allotApp.getAllotNumber());  //调拨数
             deliver.setExpecteNumber(allotApp.getAllotNumber());
         }
-        storage.setOver(1);//不存在多次确认，直接完结，确认state=no就行
+        storage.setOver(0);//不存在多次确认，也要确认，自己选择
         storage.setCategory("正常调拨");
         deliver.setCategory("正常调拨");
         storage.setState("no");
