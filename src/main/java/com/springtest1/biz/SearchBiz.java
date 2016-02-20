@@ -1,6 +1,7 @@
 package com.springtest1.biz;
 
 import com.dto.CommodityDto;
+import com.hibtest1.pageBean.PageBean;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface SearchBiz  {
     public List<CommodityDto> searchAll();
     public List<CommodityDto> searchAllGoods(String goodsName);
     public List<CommodityDto> searchWithholding(Integer goodsId,Integer producerId,Integer placeId,String type);
+
+    public PageBean queryForPage(int pageSize, int page);
 }

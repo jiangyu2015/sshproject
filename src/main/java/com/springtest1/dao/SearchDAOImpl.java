@@ -1,11 +1,15 @@
 package com.springtest1.dao;
 
 import com.dto.CommodityDto;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -427,6 +431,58 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
         return commodityDtoList;
 
     }
+
+
+    /** *//**
+     * 分页查询
+     * @param sql 查询的条件
+     * @param offset 开始记录
+     * @param length 一次查询几条记录
+     * @return
+     */
+    public List queryForPage(final String sql, final int offset, final int length){
+        Session session = this.getSessionFactory().getCurrentSession();
+        SQLQuery sqlQuery = session.createSQLQuery(sql);
+        sqlQuery.setFirstResult(offset);
+        sqlQuery.setMaxResults(length);
+        List<Object[]> list = sqlQuery.list();
+        List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
+        for (Object[] row : list) {
+            CommodityDto commodityDto = new CommodityDto();
+            commodityDto.setProducerId((Integer) row[0]);
+            commodityDto.setProducerName((String) row[1]); //商户名称
+            commodityDto.setGoodsId((Integer) row[2]);
+            commodityDto.setGoodsName((String) row[3]);//商品名称
+            commodityDto.setPlaceId((Integer) row[4]); //
+            commodityDto.setPlaceName((String) row[5]); //仓库名称
+            commodityDto.setTotolStorage((BigDecimal) row[6]);  //总入库数  BigDecimal
+            commodityDto.setTotolDeliver((BigDecimal) row[7]); //总出库数 BigDecimal
+            commodityDto.setCarryingExcessInventory((BigDecimal) row[8]); //账目剩余库存
+            commodityDto.setWithholdingNumber((BigDecimal) row[9]); //预提数
+            commodityDto.setWithholdingConsume((BigDecimal) row[10]); //预提消耗
+            commodityDto.setSurplusWithholdingNumber((BigDecimal) row[11]); //剩余预提
+            commodityDto.setAvailableInventory((BigDecimal) row[12]);//预提后可用库存
+            commodityDto.setId((Integer) row[13]);//明细id
+            commodityDto.setType((String) row[14]);  //入库类型
+            commodityDtoList.add(commodityDto);
+        }
+
+        return commodityDtoList;
+    }
+
+
+/** *//**
+     * 查询所有记录数
+     * @return 总记录数
+     */
+    public int getAllRowCount(String hql){
+        Session session = this.getSessionFactory().getCurrentSession();
+        SQLQuery sqlQuery = session.createSQLQuery(hql);
+        List<Object[]> list = sqlQuery.list();
+        return list.size();
+
+    }
+
 }
 
 

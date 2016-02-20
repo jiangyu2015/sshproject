@@ -285,7 +285,8 @@
             <result type="redirect" name="fail">/search/fail.jsp</result>
         </action>
         <action name="searchall" class="searchAll" method="searchAll">
-            <result type="redirect" name="success">/search/inventoryFlowAll.jsp</result>
+          <!--  <result type="redirect" name="success">/search/inventoryFlowAll.jsp</result>-->
+             <result type="redirect" name="success">/search/inventoryFlowAll1.jsp</result>
         </action>
         <action name="inventoryFlowSelect" class="withholdingSelect" method="searchInventoryFlowGoods"> <!-- 查询商品库存流动-->
             <result type="redirect" name="success">/search/inventoryGoodsList.jsp</result>

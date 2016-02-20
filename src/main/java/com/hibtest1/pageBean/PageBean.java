@@ -1,18 +1,28 @@
 package com.hibtest1.pageBean;
+import com.dto.CommodityDto;
 import com.hibtest1.entity.Goods;
 
 import java.util.List;
 
 public class PageBean {
-    private int allRow; //�ܼ�¼��
-    private int totalPage;  //��ҳ��
-    private int currentPage;  //��ǰҳ
-    private int pageSize;  //ÿҳ�ļ�¼��
-    private boolean isFirstPage;  //�Ƿ�Ϊ��ǰ��һҳ
-    private boolean isLastPage;  //�Ƿ�Ϊ���һҳ
-    private boolean hasPreviousPage;  //�Ƿ���ǰһҳ
-    private boolean hasNextPage;  //�Ƿ�����һҳ
+    private int allRow;
+    private int totalPage;
+    private int currentPage;
+    private int pageSize;
+    private boolean isFirstPage;
+    private boolean isLastPage;
+    private boolean hasPreviousPage;
+    private boolean hasNextPage;
     private List<Goods> listGoods;
+    private List<CommodityDto> listCommodityDto;
+
+    public List<CommodityDto> getListCommodityDto() {
+        return listCommodityDto;
+    }
+
+    public void setListCommodityDto(List<CommodityDto> listCommodityDto) {
+        this.listCommodityDto = listCommodityDto;
+    }
 
     public List<Goods> getListGoods() {
         return listGoods;
@@ -69,9 +79,7 @@ public class PageBean {
     public void setHasNextPage(boolean hasNextPage) {
         this.hasNextPage = hasNextPage;
     }
-    /**
-     * ��ʼ����ҳ��Ϣ
-     */
+
     public void init(){
         this.isFirstPage = isFirstPage;
         this.isLastPage = isLastPage;

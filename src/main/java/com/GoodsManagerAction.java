@@ -188,7 +188,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
         return NONE;
     }*/
 
-    public String modifyShow() {   //有问题
+  /*  public String modifyShow() {   //有问题
         Goods condition = new Goods();
         condition.setGoodsName(goodsName);
         List list = goodsBiz.getGoodsList(condition);
@@ -198,7 +198,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
             session.put("goods", goods);
             return "success";
         } else return "input";
-    }
+    }*/
 
     public String editGoods() {
         Goods g = new Goods();
