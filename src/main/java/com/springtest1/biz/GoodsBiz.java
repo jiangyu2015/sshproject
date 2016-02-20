@@ -1,6 +1,7 @@
 package com.springtest1.biz;
 
 import com.hibtest1.entity.Goods;
+import com.hibtest1.pageBean.PageBean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,4 +25,7 @@ public interface GoodsBiz {
 
     public List<Goods> getOverdueGoods();
     public List<Goods> getOverGoods();
+
+
+    public PageBean queryForPage(int pageSize,int page);
 }

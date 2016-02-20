@@ -23,7 +23,8 @@
             <result type="redirect" name="login">/pages/menu1.jsp</result>
         </action>
         <action name="listGoods" class="goodsList" method="listGoods">
-            <result type="redirect" name="goods">/sp/spAllList.jsp</result>
+       <!--     <result type="redirect" name="goods">/sp/spAllList.jsp</result>修改前-->
+            <result type="redirect" name="goods">/sp/spAll.jsp</result>
         </action>
         <action name="overdueGoods" class="overdueGoods" method="getOverdueGoods">
             <result type="redirect" name="success">/sp/overdueList.jsp</result>
