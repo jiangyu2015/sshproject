@@ -103,9 +103,9 @@
     <bean id="overdueGoods" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
-    <bean id="goodsUpdShow" class="com.GoodsManagerAction" scope="prototype">
+  <!--  <bean id="goodsUpdShow" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"/>
-    </bean>
+    </bean>-->
     <bean id="editGoods" class="com.GoodsManagerAction" scope="prototype">
         <property name="goodsBiz" ref="goodsBiz"/>
     </bean>
