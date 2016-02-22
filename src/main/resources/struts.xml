@@ -41,10 +41,10 @@
             <result type="redirect" name="success">/sp/spList.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
         </action>
-        <action name="spUpdShow" class="goodsUpdShow" method="modifyShow">
+       <!-- <action name="spUpdShow" class="goodsUpdShow" method="modifyShow">
             <result type="redirect" name="success">/sp/spUpList.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
-        </action>
+        </action>-->
       <!--  <action name="spUpd" class="goodsUpd" method="modify">
             <result type="redirect" name="success">/sp/test.jsp</result>
             <result type="redirect" name="input">/sp/fail.jsp</result>
@@ -72,10 +72,6 @@
             <result type="redirect" name="success">/sh/shList.jsp</result>
             <result type="redirect" name="input">/sh/fail.jsp</result>
         </action>
-   <!--     <action name="shDel" class="producerDel" method="delProducer">
-            <result type="redirect" name="success">/sh/test.jsp</result>
-            <result type="redirect" name="input">/sh/fail.jsp</result>
-        </action>-->
         <action name="shCheck" class="producerCheck" method="checkProducer">
             <result type="redirect" name="producerCheck">/sh/shCheckList.jsp</result>
         </action>
