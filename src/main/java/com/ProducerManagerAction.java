@@ -4,6 +4,7 @@ import com.hibtest1.entity.Producer;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.ProducerBiz;
+import org.apache.http.protocol.HTTP;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 

@@ -14,7 +14,7 @@
             <column name="sh_name" length="70" not-null="true"/>
         </property>
         <property name="producerAddress" type="java.lang.String">
-            <column name="sh_add" length="50" not-null="false"/>
+            <column name="sh_add" length="200" not-null="false"/>
         </property>
         <property name="linkman" type="java.lang.String">
             <column name="linkman" length="5" not-null="false"/>

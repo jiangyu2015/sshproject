@@ -72,7 +72,7 @@
         }
         .tree-folder +.tree-title {
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
         }
         .tree-file {
             background: none;
