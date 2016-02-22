@@ -9,7 +9,20 @@
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
+        var checkSubmitFlg = false;
+       /* function checkSubmit() {*/
+
+ /*       }*/
+
         function check(form) {
+            if (!checkSubmitFlg) {
+                checkSubmitFlg = true;
+                return true;
+            }
+            else{
+                alert("不能重复提交");
+                return false;
+            }
             var producerName = $('#producerName').val().replace(/\s/g, "");
             $('#producerName').val(producerName);
             var producerAddress = $('#producerAddress').val();
