@@ -98,7 +98,6 @@ public class SearchManagerAction extends ActionSupport implements RequestAware, 
 
     public String searchInventoryFlow(){
         List<CommodityDto> list = searchBiz.searchInventoryFlow();
-        System.out.println(list.size());
         if (list.size() > 0) {
             session.put("inventoryflow", list);
             return "success";

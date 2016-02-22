@@ -35,7 +35,7 @@
                 dataType: 'json'
             });
         });
-        function check() {
+        function check1() {
             var val = $("#item").val();
             var selectId = $("[value='" + val + "']").eq(0).attr('value');
 
@@ -45,16 +45,29 @@
             }
             else  return true;
         }
+        function check2() {
+            var goods = $("#goods").val();
+            if (goods == "") {
+                alert("请输入商品名称");
+                return false;
+            }
+            else  return true;
+        }
     </script>
 </head>
 <body>
 <div class="table-div">
     <div class="title">商品库存流动信息</div>
-    <form method="post" action="inventoryFlowSelect.action" onsubmit="return check()" class="head-form">
+    <form method="post" action="inventoryFlowSelect.action" onsubmit="return check1()"  class="head-form" style="float: left;">
         <div class="head-lable">商品名称：</div>
-        <input id="item" class="head-input" list="select" name="goodsName"/>
+        <input id="item" class="head-input" list="select" name="goodsName" style="width: 180px;"/>
         <datalist id="select"></datalist>
         <input type="submit" class="btn-remove head-btn-right" value="查询">
+    </form>
+    <form method="post" action="inventoryFlowSelect.action" onsubmit="return check2()" class="head-form">
+        <div class="head-lable"></div>
+        <input id="goods" class="head-input"  name="goodsName" style="width: 180px;"/>
+        <input type="submit" class="btn-remove head-btn-right" value="模糊查询" style="width: 90px;"/>
     </form>
     <table id="advSearch" class="table">
         <thead>

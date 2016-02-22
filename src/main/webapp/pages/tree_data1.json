@@ -239,10 +239,6 @@
         "text": "库存流动情况查询",
         "children": [
           {
-            "id": "searchkcld.action",
-            "text": "查库存"
-          },
-          {
             "id": "searchall.action",
             "text": "库存流动表"
           }

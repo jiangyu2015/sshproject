@@ -108,6 +108,10 @@
                     $("#div_unit").html("请输入商品单位!");
                     return false;
                 }
+                if ((creationDate != ""&& expirationDate != "" && baozhiqi == "")) {
+                    $("#div_alert").html("请算出保质期后再提交）");
+                    return false;
+                }
                 if ((creationDate == "" && baozhiqi == "") || (creationDate == "" && expirationDate == "") || (baozhiqi == "" && expirationDate == "")) {
                     $("#div_alert").html("请输入至少两个（生产日期、保质期、保质期截止日期）");
                     return false;
@@ -164,6 +168,15 @@
             var dates = (endTime - startTime) / (1000 * 60 * 60 * 24);
             return dates;
         }
+
+        function check1() {
+            var goods = $("#goods").val();
+            if (goods == "") {
+                alert("请输入商品名称");
+                return false;
+            }
+            else  return true;
+        }
     </script>
 </head>
 
@@ -172,7 +185,11 @@
     <div class="title">商品信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();">
-        <%--        <input type="button" class="btn-remove" value="删除" onclick="alert('删除');">--%>
+        <form method="post" action="spSelect.action" onsubmit="return check1()" class="head-form">
+            <div class="head-lable">商品名称：</div>
+            <input id="goods" class="head-input"  name="goodsName"/>
+            <input type="submit" class="btn-remove head-btn-right" value="模糊查询" style="width: 90px;"/>
+        </form>
     </div>
     <table id="advSearch" class="table">
         <thead>
@@ -353,6 +370,7 @@
                         <div class="lable"><span>* </span>商品评级：</div>
                         <div class="input-div">
                             <select id="typeIn" name="goods.commodityRating">
+                                <option value=""></option>
                                 <option value="A+">A+</option>
                                 <option value="A">A</option>
                                 <option value="B+">B+</option>

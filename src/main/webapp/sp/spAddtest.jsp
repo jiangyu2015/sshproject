@@ -59,6 +59,10 @@
                 $("#div_unit").html("请输入商品单位!");
                 return false;
             }
+            if ((creationDate != ""&& expirationDate != "" && baozhiqi == "")) {
+                $("#div_alert").html("请算出保质期后再提交）");
+                return false;
+            }
             if ((creationDate == "" && baozhiqi == "") || (creationDate == "" && expirationDate == "") || (baozhiqi == "" && expirationDate == "")) {
                 $("#div_alert").html("请输入至少两个（生产日期、保质期、保质期截止日期）");
                 return false;

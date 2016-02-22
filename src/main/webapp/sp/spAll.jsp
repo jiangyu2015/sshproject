@@ -111,6 +111,10 @@
                     $("#div_unit").html("请输入商品单位!");
                     return false;
                 }
+                if ((creationDate != ""&& expirationDate != "" && baozhiqi == "")) {
+                    $("#div_alert").html("请算出保质期后再提交）");
+                    return false;
+                }
                 if ((creationDate == "" && baozhiqi == "") || (creationDate == "" && expirationDate == "") || (baozhiqi == "" && expirationDate == "")) {
                     $("#div_alert").html("请输入至少两个（生产日期、保质期、保质期截止日期）");
                     return false;
@@ -168,9 +172,17 @@
         }
 
         function select() {
-
             window.location.href = "spSelect.action?goodsName="+ $tds.eq(0).text();
             "ytsqAdd.jsp?id=" + $tds.eq(0).text();
+        }
+
+        function check1() {
+            var goods = $("#goods").val();
+            if (goods == "") {
+                alert("请输入商品名称");
+                return false;
+            }
+            else  return true;
         }
     </script>
 </head>
@@ -180,7 +192,7 @@
     <div class="title">商品信息</div>
     <div class="btn-div">
         <input type="button" class="btn-eidt" value="修改" onclick="edit();"/>
-        <form method="post" action="spSelect.action" class="head-form">
+        <form method="post" action="spSelect.action" onsubmit="return check1()" class="head-form">
             <div class="head-lable">商品名称：</div>
             <input id="goods" class="head-input"  name="goodsName"/>
             <input type="submit" class="btn-remove head-btn-right" value="模糊查询" style="width: 90px;"/>
@@ -246,22 +258,21 @@
         <s:iterator value="%{#session.pagebeangoods}" var="pageBean">
             <div class="divcss5">
                 <tr>
-                    <td colspan="6" align="center" bgcolor="#5BA8DE">共<s:property
-                            value="#pageBean.allRow"/>条记录 共<s:property
-                            value="#pageBean.totalPage"/>页 当前第<s:property
-                            value="#pageBean.currentPage"/>页<br> <s:if
-                            test="%{#pageBean.currentPage == 1}">
-                        第一页 上一页
-                    </s:if> <!-- currentPage为当前页 --> <s:else>
-                        <a href="listGoods.action?page=1">第一页</a>
-                        <a href="listGoods.action?page=<s:property value="%{#pageBean.currentPage-1}"/>">上一页</a>
-                    </s:else> <s:if test="%{#pageBean.currentPage != #pageBean.totalPage}">
-                        <a
-                                href="listGoods.action?page=<s:property value="%{#pageBean.currentPage+1}"/>">下一页</a>
-                        <a
-                                href="listGoods.action?page=<s:property value="#pageBean.totalPage"/>">最后一页</a>
-                    </s:if> <s:else>
-                        下一页 最后一页
+                    <td colspan="23" align="center" bgcolor="#5BA8DE">
+                        <a class="bar-margin">共<s:property value="#pageBean.allRow"/>条记录</a>
+                        <a class="bar-margin"> 共<s:property value="#pageBean.totalPage"/>页</a>
+                        <a class="bar-margin">当前第<s:property value="#pageBean.currentPage"/>页</a><br>
+                        <s:if test="%{#pageBean.currentPage == 1}">
+                            <a class="bar-margin">第一页</a><a class="bar-margin">上一页</a>
+                        </s:if> <!-- currentPage为当前页 --> <s:else>
+                        <a class="bar-margin" href="listGoods.action?page=1">第一页</a>
+                        <a class="bar-margin" href="listGoods.action?page=<s:property value='%{#pageBean.currentPage-1}'/>">上一页</a>
+                    </s:else>
+                        <s:if test="%{#pageBean.currentPage != #pageBean.totalPage}">
+                            <a class="bar-margin" href="listGoods.action?page=<s:property value='%{#pageBean.currentPage+1}'/>">下一页</a>
+                            <a class="bar-margin" href="listGoods.action?page=<s:property value='#pageBean.totalPage'/>">最后一页</a>
+                        </s:if> <s:else>
+                        <a class="bar-margin">下一页</a><a class="bar-margin">最后一页</a>
                     </s:else>
                     </td>
                 </tr>
@@ -396,6 +407,7 @@
                         <div class="lable"><span>* </span>商品评级：</div>
                         <div class="input-div">
                             <select id="typeIn" name="goods.commodityRating">
+                                <option value=""></option>
                                 <option value="A+">A+</option>
                                 <option value="A">A</option>
                                 <option value="B+">B+</option>

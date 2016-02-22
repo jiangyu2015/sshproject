@@ -314,13 +314,12 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
                 "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
                 "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id " +
-                "WHERE sp.sp_name='" + goodsName + "';";
+                "WHERE sp.sp_name like'%" + goodsName + "%';";
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<Object[]> list = sqlQuery.list();
         List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
         for (Object[] row : list) {
-            System.out.println(row);
             CommodityDto commodityDto = new CommodityDto();
             commodityDto.setProducerId((Integer) row[0]);
             commodityDto.setProducerName((String) row[1]); //商户名称
