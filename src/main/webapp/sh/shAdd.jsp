@@ -1,4 +1,4 @@
-<%@ page import="java.util.Date" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,10 +44,9 @@
 </head>
 
 <body>
-<%--<% String tokenValue = new Date().getTime() + ""; %>--%>
 <div class="title">添加商户</div>
 <div class="content">
-    <form method="post" action="shAdd" onsubmit="return check(this)">
+    <form method="post" action="shAdd.action" onsubmit="return check(this)">
         <div class="line">
             <div class="lable"><span>* </span>商户名称：</div>
             <div class="input-div">
@@ -77,8 +76,6 @@
             <div class="lable">联系电话2：</div>
             <div class="input-div"><input id="telTwo" placeholder="请输入备用联系电话" name="producer.telTwo"/></div>
         </div>
-<%--        <input type="hidden" name="token" value="<%=tokenValue %>">
-        <% session.setAttribute("token", tokenValue);%>--%>
         <span id="div_alert"></span><br>
         <input type="submit" value="提交" class="btn-submit"/>
     </form>
