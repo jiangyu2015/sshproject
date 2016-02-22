@@ -124,7 +124,7 @@ public class SearchManagerAction extends ActionSupport implements RequestAware, 
 
         this.pageBean =searchBiz.queryForPage(20, page);
         this.listCommodityDto=this.pageBean.getListCommodityDto();
-        session.put("inventoryflow", listCommodityDto);
+        session.put("inventoryflowall", listCommodityDto);
         session.put("pagebeancommoditydto", pageBean);
         return "success";
     }

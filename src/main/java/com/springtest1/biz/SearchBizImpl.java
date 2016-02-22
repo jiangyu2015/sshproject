@@ -116,14 +116,13 @@ public class SearchBizImpl extends HibernateDaoSupport implements SearchBiz {
                 "AND zmkc.rk_place_id = syyt.place_id AND zmkc.rk_type = syyt.use_type " +
                 "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
                 "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
-                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id ;";
+                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id ";
         int allRow = searchDAO.getAllRowCount(sql);//总记录数
         int totalPage = PageBean.countTatalPage(pageSize, allRow);//总页数
         final int offset = PageBean.countOffset(pageSize, page);//当前页开始记录
         final int length = pageSize;//每页记录数
         final int currentPage = PageBean.countCurrentPage(page);
         List<CommodityDto> list = searchDAO.queryForPage(sql, offset, length);//"一页"的记录
-
 //把分页信息保存到Bean中
         PageBean pageBean = new PageBean();
         pageBean.setPageSize(pageSize);
