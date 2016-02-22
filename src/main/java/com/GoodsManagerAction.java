@@ -261,7 +261,7 @@ public class GoodsManagerAction extends ActionSupport implements RequestAware, S
     public String checkGoodsSelect() { //得到查询的信息来审核 与search一样
         Goods condition = new Goods();
         condition.setGoodsName(goodsName);
-        condition.setState("no");
+        condition.setState("no");//新加的
         List list = goodsBiz.getGoodsList(condition);
         session.put("goodslistcheck", list);
         return "success";
