@@ -32,8 +32,6 @@ public class StorageAppDAOImpl extends HibernateDaoSupport implements StorageApp
         if (storageapplist.size() <= 0) {
             return new ArrayList<StorageApp>();
         } else {
-            StorageApp sa = (StorageApp) query.list().get(0);
-            System.out.println(sa.getGoodsName());
             return storageapplist;
         }
     }

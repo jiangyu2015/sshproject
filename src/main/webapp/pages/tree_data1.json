@@ -64,34 +64,6 @@
     "state": "closed",
     "children": [
       {
-        "text": "商品审核",
-        "state": "closed",
-        "children": [
-          {
-            "id": "spCheck.action",
-            "text": "商品审核"
-          },
-          {
-            "id": "sp/spCheckSelect.jsp",
-            "text": "查询未审核商品"
-          }
-        ]
-      },
-      {
-        "text": "商户审核",
-        "state": "closed",
-        "children": [
-          {
-            "id": "shCheck.action",
-            "text": "商户审核"
-          },
-          {
-            "id": "sh/shCheckSelect.jsp",
-            "text": "查询未审核商户"
-          }
-        ]
-      },
-      {
         "text": "入库申请",
         "state": "closed",
         "children": [
@@ -130,6 +102,34 @@
           {
             "id": "listzksq.action",
             "text": "查询所有转库申请信息"
+          }
+        ]
+      },
+      {
+        "text": "商品审核",
+        "state": "closed",
+        "children": [
+          {
+            "id": "spCheck.action",
+            "text": "商品审核"
+          },
+          {
+            "id": "sp/spCheckSelect.jsp",
+            "text": "查询未审核商品"
+          }
+        ]
+      },
+      {
+        "text": "商户审核",
+        "state": "closed",
+        "children": [
+          {
+            "id": "shCheck.action",
+            "text": "商户审核"
+          },
+          {
+            "id": "sh/shCheckSelect.jsp",
+            "text": "查询未审核商户"
           }
         ]
       },

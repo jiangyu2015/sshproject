@@ -1,6 +1,7 @@
 package com.springtest1.biz;
 
 import com.hibtest1.entity.Producer;
+import com.hibtest1.pageBean.PageBean;
 import com.springtest1.dao.ProducerDAO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,5 +48,27 @@ public class ProducerBizImpl implements ProducerBiz {
     @Transactional
     public List<Producer> getProducerCheck(){
         return  producerDAO.getProducerCheck();
+    }
+
+    //通过applicationContext.xml配置文件注入MemberDao的值
+
+    public PageBean queryForPage(int pageSize, int page) {
+        final String hql = "from Producer";//查询语句
+        int allRow = producerDAO.getAllRowCount(hql);//总记录数
+        int totalPage = PageBean.countTatalPage(pageSize, allRow);//总页数
+        final int offset = PageBean.countOffset(pageSize, page);//当前页开始记录
+        final int length = pageSize;//每页记录数
+        final int currentPage = PageBean.countCurrentPage(page);
+        List<Producer> list = producerDAO.queryForPage(hql, offset, length);//"一页"的记录
+
+//把分页信息保存到Bean中
+        PageBean pageBean = new PageBean();
+        pageBean.setPageSize(pageSize);
+        pageBean.setCurrentPage(currentPage);
+        pageBean.setAllRow(allRow);
+        pageBean.setTotalPage(totalPage);
+        pageBean.setListProducer(list);
+        pageBean.init();
+        return pageBean;
     }
 }

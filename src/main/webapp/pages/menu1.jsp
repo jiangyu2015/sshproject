@@ -18,6 +18,24 @@
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.easyui.min.js"></script>
 
     <script>
+
+      /*  var a = setInterval(function(){
+            $.ajax({
+                type : "POST",
+                url :  "checkStorageAppCountJsonAction",
+                data : {
+
+                },
+                success : function(data, xhrTxt) {
+                    var d = eval("(" + data + ")");
+                    var count = d.count;
+                    alert(count);
+                },
+                dataType : "json"
+            });
+        },3*60*1000);*/
+
+
         $(function () {
 
            /*  alert(document.getElementById("sess").value);*/

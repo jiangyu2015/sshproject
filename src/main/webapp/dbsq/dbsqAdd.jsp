@@ -52,6 +52,7 @@
                 dataType: 'json'
             });
         });
+
         function check(form) {
             var result;
             $.ajax({
@@ -156,7 +157,7 @@
 <body>
 <div class="title">添加调拨申请信息</div>
 <div class="content">
-    <form method="post" action="dbAdd" onsubmit="return check(this)">
+    <form method="post" action="dbAdd.action" onsubmit="return check(this)">
         <div class="line">
             <div class="lable">商户名称：</div>
             <div class="input-div"><input id="producerName" name="producerName" readonly="readonly"

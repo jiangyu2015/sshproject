@@ -197,7 +197,6 @@
             <input id="goods" class="head-input"  name="goodsName"/>
             <input type="submit" class="btn-remove head-btn-right" value="模糊查询" style="width: 90px;"/>
         </form>
-
     </div>
     <table id="advSearch" class="table">
         <thead>

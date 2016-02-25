@@ -1,6 +1,7 @@
 package com.hibtest1.pageBean;
 import com.dto.CommodityDto;
 import com.hibtest1.entity.Goods;
+import com.hibtest1.entity.Producer;
 
 import java.util.List;
 
@@ -15,6 +16,15 @@ public class PageBean {
     private boolean hasNextPage;
     private List<Goods> listGoods;
     private List<CommodityDto> listCommodityDto;
+    private List<Producer> listProducer;
+
+    public List<Producer> getListProducer() {
+        return listProducer;
+    }
+
+    public void setListProducer(List<Producer> listProducer) {
+        this.listProducer = listProducer;
+    }
 
     public List<CommodityDto> getListCommodityDto() {
         return listCommodityDto;

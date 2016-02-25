@@ -156,7 +156,6 @@ public class AllotManagerAction extends ActionSupport implements RequestAware, S
     }
 
     public String addAllotApp() throws Exception {                  //增加调拨申请
-        System.out.println("addAllotApp");
         AllotApp condition = new AllotApp();
         if (allotApp.getAllotNumber() != null)               //调拨数量
             condition.setAllotNumber(allotApp.getAllotNumber());

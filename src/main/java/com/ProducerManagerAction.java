@@ -1,6 +1,7 @@
 package com;
 
 import com.hibtest1.entity.Producer;
+import com.hibtest1.pageBean.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.springtest1.biz.ProducerBiz;
@@ -59,42 +60,60 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
 
     Producer producer;
     String producerName;
+    //分页
+    private int page = 1;//第几页
+    private List<Producer> listProducer;
+    private PageBean pageBean;
 
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public List<Producer> getListProducer() {
+        return listProducer;
+    }
+
+    public void setListProducer(List<Producer> listProducer) {
+        this.listProducer = listProducer;
+    }
+
+    public PageBean getPageBean() {
+        return pageBean;
+    }
+
+    public void setPageBean(PageBean pageBean) {
+        this.pageBean = pageBean;
+    }
+
+    /*  public String listProducer() {
+          List producer = producerBiz.getAllProducer();
+          session.put("producerlistall", producer);
+          return "producer";
+      }*/
     public String listProducer() {
-        List producer = producerBiz.getAllProducer();
-        session.put("producerlistall", producer);
+        this.pageBean = producerBiz.queryForPage(20, page);
+        this.listProducer = this.pageBean.getListProducer();
+        session.put("producerlistall", listProducer);
+        session.put("pagebeanproducer", pageBean);
         return "producer";
     }
+
 
     public String searchProducerList() {
         System.out.println(producerName);
         Producer condition = new Producer();
         condition.setProducerName(producerName);
-        System.out.println("商户查询Manager" + condition.getProducerName());
         List list = producerBiz.getProducerList(condition);
-        if (list.size() > 0) {
-            session.put("producerlist",list);
+   /*     if (list.size() > 0) {*/
+            session.put("producerlist", list);
             return "success";
-        } else
-            return "input";
+      /*  } else
+            return "input";*/
     }
-    
-    
-
-  /*  public String delProducer() {
-        System.out.println(producerName);
-        Producer condition = new Producer();
-        condition.setProducerName(producerName);
-        List<Producer> list = producerBiz.getProducerList(condition);
-        System.out.println(list.size());
-        if (list.size() > 0) {
-            Producer producer = new Producer();
-            producer = (Producer) list.get(0);
-            boolean e = producerBiz.delProducer(producer);
-            if (e) return "success";
-            else return "input";
-        } else return "input";
-    }*/
 
     public String addProducer() throws Exception {                  //增加商户
         Producer condition = new Producer();
@@ -120,12 +139,12 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
             }
             condition.setState("no");
             producerBiz.add(condition);
-            session.put("producerlist",condition);
+            session.put("producerlist", condition);
             return "success";
         }
     }
 
-    public String modifyShow() {                        //更新显示
+    public String modifyShow() {                        //更新显示 么啥用
         Producer condition = new Producer();
         condition.setProducerName(producerName);
         List list = producerBiz.getProducerList(condition);
@@ -139,7 +158,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
     }
 
     public String editProducer() {
-        Producer p=new Producer();
+        Producer p = new Producer();
         p.setProducerId(producer.getProducerId());
         Producer condition = producerBiz.getProducerList(p).get(0);
       /*  if (producer.getProducerId() != null && !producer.getProducerId().equals("")) {
@@ -173,8 +192,8 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
             return "success";
         } else return "input";
     }
- 
-    public String  checkProducer() {               //得到所需审核的单子
+
+    public String checkProducer() {               //得到所需审核的单子
         Producer p = new Producer();
         p.setState("no");
         List<Producer> producer = producerBiz.getProducerList(p);
@@ -182,7 +201,7 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         return "producerCheck";
     }
 
-    public String checkProducerSelect(){ //得到查询的信息来审核 与search一样
+    public String checkProducerSelect() { //得到查询的信息来审核 与search一样
         System.out.println(producerName);
         Producer condition = new Producer();
         condition.setProducerName(producerName);

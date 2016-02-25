@@ -74,7 +74,6 @@
                     var str = "";
                     var d = eval("(" + data + ")");
                     var goods = d.goodsList;
-                    console.log(goods);
                     for (var i = 0; i < goods.length; i++) {
                         str = str + "<option value='" + goods[i].goodsName + "|" + goods[i].goodsId + "'>";
                     }

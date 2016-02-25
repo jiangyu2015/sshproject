@@ -24,8 +24,8 @@ public interface GoodsBiz {
     public List<Goods> isGoods(final Goods condition);
 
     public List<Goods> getOverdueGoods();
-    public List<Goods> getOverGoods();
 
+    public List<Goods> getOverGoods();
 
     public PageBean queryForPage(int pageSize,int page);
 }

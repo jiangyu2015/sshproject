@@ -80,18 +80,22 @@
                 {
                     if (producerName == null || producerName.length == 0 || isNull(producerName)) {
                         $("#div_producerName").html("请输入商户名称!");
+                        alert("请输入商户名称!");
                         return false;
                     }
                     if (producerAddress ==null || producerAddress.length == 0 || isNull(producerAddress)) {
                         $("#div_producerAddress").html("请输入商户地址!");
+                        alert("请输入商户地址!");
                         return false;
                     }
                     if (linkman ==null || linkman.length == 0 || isNull(linkman)) {
                         $("#div_linkman").html("请输入联系人!");
+                        alert("请输入联系人!");
                         return false;
                     }
                     if ($('#telOne').val() == "" && $('#telTwo').val() == "") {
                         $("#div_alert").html("请输入至少一个联系电话!");
+                        alert("请输入至少一个联系电话!");
                         return false;
                     }
                 }
@@ -145,6 +149,29 @@
                 <td><s:property value="#producer.edituser"/></td>
                 <td><s:property value="#producer.checkuser"/></td>
             </tr>
+        </s:iterator>
+        <s:iterator value="%{#session.pagebeanproducer}" var="pageBean">
+            <div class="divcss5">
+                <tr>
+                    <td colspan="23" align="center" bgcolor="#5BA8DE">
+                        <a class="bar-margin">共<s:property value="#pageBean.allRow"/>条记录</a>
+                        <a class="bar-margin"> 共<s:property value="#pageBean.totalPage"/>页</a>
+                        <a class="bar-margin">当前第<s:property value="#pageBean.currentPage"/>页</a><br>
+                        <s:if test="%{#pageBean.currentPage == 1}">
+                            <a class="bar-margin">第一页</a><a class="bar-margin">上一页</a>
+                        </s:if> <!-- currentPage为当前页 --> <s:else>
+                        <a class="bar-margin" href="listSh.action?page=1">第一页</a>
+                        <a class="bar-margin" href="listGoods.action?page=<s:property value='%{#pageBean.currentPage-1}'/>">上一页</a>
+                    </s:else>
+                        <s:if test="%{#pageBean.currentPage != #pageBean.totalPage}">
+                            <a class="bar-margin" href="listGoods.action?page=<s:property value='%{#pageBean.currentPage+1}'/>">下一页</a>
+                            <a class="bar-margin" href="listGoods.action?page=<s:property value='#pageBean.totalPage'/>">最后一页</a>
+                        </s:if> <s:else>
+                        <a class="bar-margin">下一页</a><a class="bar-margin">最后一页</a>
+                    </s:else>
+                    </td>
+                </tr>
+            </div>
         </s:iterator>
         </tbody>
     </table>

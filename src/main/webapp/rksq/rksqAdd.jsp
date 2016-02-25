@@ -15,6 +15,7 @@
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
+        var checkSubmitFlg = false;
         $(function () {
             $.ajax({
                 type: "post",
@@ -209,8 +210,15 @@
                 return false;
             }
             else {
-                alert("入库申请成功！");
-                return true;
+                if (!checkSubmitFlg) {
+                    checkSubmitFlg = true;
+                    alert("入库申请成功！");
+                    return true;
+                }
+                else {
+                    alert("不能重复提交");
+                    return false;
+                }
             }
         }
 

@@ -140,7 +140,6 @@ public class GoodsDAOImpl extends HibernateDaoSupport implements GoodsDAO {
         List<Goods> goodslist = query.list();
         if (goodslist.size() <= 0) return new ArrayList<Goods>();
         else {
-         /*   Goods g = (Goods) query.list().get(0);*/
             return goodslist;
         }
     }

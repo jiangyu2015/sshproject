@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="../common.css"/>
     <script type="text/javascript" src="../resources/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript">
+        var checkSubmitFlg = false;
         function checkGoods() {
             var goodsName = $("#goodsName").val();
             if (goodsName != null && goodsName != "") {
@@ -69,6 +70,14 @@
             }
             if (baozhiqi < 0) {
                 $("#div_alert").html("生产日期必须小于保质期截止日期!");
+                return false;
+            }
+            if (!checkSubmitFlg) {
+                checkSubmitFlg = true;
+                return true;
+            }
+            else{
+                alert("不能重复提交");
                 return false;
             }
         }

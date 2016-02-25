@@ -90,18 +90,22 @@
             {
                 if (producerName == null || producerName.length == 0 || isNull(producerName)) {
                     $("#div_producerName").html("请输入商户名称!");
+                    alert("请输入商户名称!");
                     return false;
                 }
                 if (producerAddress ==null || producerAddress.length == 0 || isNull(producerAddress)) {
                     $("#div_producerAddress").html("请输入商户地址!");
+                    alert("请输入商户地址!");
                     return false;
                 }
                 if (linkman ==null || linkman.length == 0 || isNull(linkman)) {
                     $("#div_linkman").html("请输入联系人!");
+                    alert("请输入联系人!");
                     return false;
                 }
                 if ($('#telOne').val() == "" && $('#telTwo').val() == "") {
                     $("#div_alert").html("请输入至少一个联系电话!");
+                    alert("请输入至少一个联系电话!");
                     return false;
                 }
             }

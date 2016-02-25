@@ -586,7 +586,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         condition.setGoodsId(goodsId);
         List list = goodsBiz.getGoodsList(condition);
         if (list.size() > 0) {
-            System.out.println(list.size());
             Goods goods = (Goods) list.get(0);
             goods.setState("yesok");                               //改申请state
             Calendar calendar = Calendar.getInstance();
@@ -607,7 +606,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
         condition.setProducerId(producerId);
         List list = producerBiz.getProducerList(condition);
         if (list.size() > 0) {
-            System.out.println(list.size());
             Producer producer = (Producer) list.get(0);
             producer.setState("yesno");                               //改申请state
             Calendar calendar = Calendar.getInstance();
@@ -624,7 +622,6 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
     public String producerCheckOk() {
         String id = request.getParameter("id");
         int producerId = Integer.valueOf(id);
-        System.out.println("JsonActionCheck传值" + producerId);
         Producer condition = new Producer();
         condition.setProducerId(producerId);
         List list = producerBiz.getProducerList(condition);
@@ -640,6 +637,16 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
             }
             producerBiz.editProducer(producer);
         }
+        return SUCCESS;
+    }
+
+    //查询有没有新的
+    public String checkStorageAppCount() {               //得到所需审核的单子
+        List<StorageApp> storageApp = storageAppBiz.getCheckStorageApp();
+        int storageAppCount=storageApp.size();
+        JSONObject json = new JSONObject();
+        json.put("count", storageAppCount);
+        result = json.toString();
         return SUCCESS;
     }
 

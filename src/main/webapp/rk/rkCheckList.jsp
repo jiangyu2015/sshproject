@@ -147,8 +147,8 @@
 
         function check() {
             var storageDate = $("#storageDate").val();  //实际入库时间
-            var expectedNumber = $("#expectedNumber").val(); //预期入库数
-            var storageNumber = $("#storageNumber").val(); //实收数量    实收数量和预期入库数到时候再说
+            var expectedNumber =Number( $("#expectedNumber").val()); //预期入库数
+            var storageNumber =Number( $("#storageNumber").val()); //实收数量    实收数量和预期入库数到时候再说
             var arr = getToDay().split("-");    //比较时间
             var today = new Date(arr[0], arr[1], arr[2]);  //今天
             var todays = today.getTime();

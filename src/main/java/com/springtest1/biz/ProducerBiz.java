@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.hibtest1.entity.Producer;
+import com.hibtest1.pageBean.PageBean;
 
 /**
  * Created by user on 2015/11/25.
@@ -22,4 +23,6 @@ public interface ProducerBiz {
      public List<Producer> getProducer(String name);
 
     public List<Producer> getProducerCheck();
+
+    public PageBean queryForPage(int pageSize, int page);
 }
