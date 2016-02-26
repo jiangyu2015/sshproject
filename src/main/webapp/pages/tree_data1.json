@@ -1,6 +1,6 @@
 [
   {
-    "text": "库存基础信息",
+    "text": "基础信息",
     "state": "closed",
     "children": [
       {
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "text": "业务",
+    "text": "申请",
     "state": "closed",
     "children": [
       {
@@ -106,82 +106,6 @@
         ]
       },
       {
-        "text": "商品审核",
-        "state": "closed",
-        "children": [
-          {
-            "id": "spCheck.action",
-            "text": "商品审核"
-          },
-          {
-            "id": "sp/spCheckSelect.jsp",
-            "text": "查询未审核商品"
-          }
-        ]
-      },
-      {
-        "text": "商户审核",
-        "state": "closed",
-        "children": [
-          {
-            "id": "shCheck.action",
-            "text": "商户审核"
-          },
-          {
-            "id": "sh/shCheckSelect.jsp",
-            "text": "查询未审核商户"
-          }
-        ]
-      },
-      {
-        "text": "入库申请单审核",
-        "state": "closed",
-        "children": [
-          {
-            "id": "rksqcheck.action",
-            "text": "入库申请单审核"
-          }
-        ]
-      },
-      {
-        "text": "调拨申请单审核",
-        "state": "closed",
-        "children": [
-          {
-            "id": "dbsqcheck.action",
-            "text": "调拨申请单审核"
-          }
-        ]
-      },
-      {
-        "text": "转库申请单审核",
-        "state": "closed",
-        "children": [
-          {
-            "id": "zksqcheck.action",
-            "text": "转库申请单审核"
-          }
-        ]
-      },
-      {
-        "text": "确认收货",
-        "state": "closed",
-        "children": [
-          {
-            "id": "rkcheck.action",
-            "text": "确认收货"
-          },
-          {
-            "id": "listrk.action",
-            "text": "查询入库明细"
-          },
-          {
-            "id": "listokrk.action",
-            "text": "查询已入库商品明细"
-          }
-        ]
-      },
-      {
         "text": "预提申请",
         "state": "closed",
         "children": [
@@ -200,6 +124,94 @@
           {
             "id": "ytNowAllList.action",
             "text": "查询在期预提信息"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "审核",
+    "state": "closed",
+    "children": [
+      {
+        "text": "商品审核<div id='count4'></div>",
+        "state": "closed",
+        "children": [
+          {
+            "id": "spCheck.action",
+            "text": "商品审核"
+          },
+          {
+            "id": "sp/spCheckSelect.jsp",
+            "text": "查询未审核商品"
+          }
+        ]
+      },
+      {
+        "text": "商户审核<div id='count5'></div>",
+        "state": "closed",
+        "children": [
+          {
+            "id": "shCheck.action",
+            "text": "商户审核"
+          },
+          {
+            "id": "sh/shCheckSelect.jsp",
+            "text": "查询未审核商户"
+          }
+        ]
+      },
+      {
+        "text": "入库申请单审核<div id='count1'></div>",
+        "state": "closed",
+        "children": [
+          {
+            "id": "rksqcheck.action",
+            "text": "入库申请单审核"
+          }
+        ]
+      },
+      {
+        "text": "调拨申请单审核<div id='count2'></div>",
+        "state": "closed",
+        "children": [
+          {
+            "id": "dbsqcheck.action",
+            "text": "调拨申请单审核"
+          }
+        ]
+      },
+      {
+        "text": "转库申请单审核<div id='count3'></div>",
+        "state": "closed",
+        "children": [
+          {
+            "id": "zksqcheck.action",
+            "text": "转库申请单审核"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "确认",
+    "state": "closed",
+    "children": [
+      {
+        "text": "确认收货",
+        "state": "closed",
+        "children": [
+          {
+            "id": "rkcheck.action",
+            "text": "确认收货"
+          },
+          {
+            "id": "listrk.action",
+            "text": "查询入库明细"
+          },
+          {
+            "id": "listokrk.action",
+            "text": "查询已入库商品明细"
           }
         ]
       },

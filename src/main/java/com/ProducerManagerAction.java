@@ -89,11 +89,6 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         this.pageBean = pageBean;
     }
 
-    /*  public String listProducer() {
-          List producer = producerBiz.getAllProducer();
-          session.put("producerlistall", producer);
-          return "producer";
-      }*/
     public String listProducer() {
         this.pageBean = producerBiz.queryForPage(20, page);
         this.listProducer = this.pageBean.getListProducer();
@@ -101,7 +96,6 @@ public class ProducerManagerAction extends ActionSupport implements RequestAware
         session.put("pagebeanproducer", pageBean);
         return "producer";
     }
-
 
     public String searchProducerList() {
         System.out.println(producerName);

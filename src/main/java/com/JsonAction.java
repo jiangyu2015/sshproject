@@ -642,10 +642,21 @@ public class JsonAction extends ActionSupport implements ServletRequestAware, Se
 
     //查询有没有新的
     public String checkStorageAppCount() {               //得到所需审核的单子
-        List<StorageApp> storageApp = storageAppBiz.getCheckStorageApp();
-        int storageAppCount=storageApp.size();
+        List<StorageApp> storageApp = storageAppBiz.getCheckStorageApp();  //入库申请
+        List<AllotApp> allotApp = allotAppBiz.getCheckAllotApp(); //调拨申请
+        List<TransferApp> transferApp = transferAppBiz.getCheckTransferApp(); //转库申请
+        Goods g = new Goods();  //商品审核
+        g.setState("no");
+        List<Goods> goods = goodsBiz.getGoodsList(g);
+        Producer p = new Producer();  //商户审核
+        p.setState("no");
+        List<Producer> producer = producerBiz.getProducerList(p);
         JSONObject json = new JSONObject();
-        json.put("count", storageAppCount);
+        json.put("count1", storageApp.size());//入库申请
+        json.put("count2", allotApp.size());//调拨申请
+        json.put("count3", transferApp.size());//转库申请
+        json.put("count4",  goods.size()); //商品审核
+        json.put("count5",  producer.size()); //商户审核
         result = json.toString();
         return SUCCESS;
     }
