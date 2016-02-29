@@ -142,7 +142,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
         return commodityDtoList;
     }
 
-    public List<CommodityDto> searchAll() {  //查总库存流动
+    public List<CommodityDto> searchAll() {  //查总库存流动  已经没用 用在biz了
         String sql = "SELECT " +
                 "	zmkc.sh_id, " +
                 "	sh.sh_name AS producerName, " +   //1商户
@@ -156,12 +156,12 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
                 "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, " + //11剩余预提数
-                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id,zmkc.rk_type  " +  //12预提后可用库存 13明细id 14库存类型
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id,zmkc.rk_type,zmkc.remark  " +  //12预提后可用库存 13明细id 14库存类型 15备注
 
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.rk_type,zrk.ss_number, " +
                 "			ifnull(zck.ck_number, 0) ck_number, " +
-                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id " +
-                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,rk_type,sum(ss_number) ss_number,rk_id " +
+                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id,zrk.remark " +
+                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,rk_type,sum(ss_number) ss_number,rk_id,remark " +
                 "				FROM rk_detail WHERE state = 'ok' " +
                 "				GROUP BY sh_id, sp_id,rk_place_id,rk_type " +
                 "			) zrk " +  /*总入库*/
@@ -213,14 +213,13 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "AND zmkc.rk_place_id = syyt.place_id AND zmkc.rk_type = syyt.use_type " +
                 "LEFT JOIN kc_place AS kc ON zmkc.rk_place_id = kc.kc_id " +
                 "LEFT JOIN sp_info AS sp ON zmkc.sp_id = sp.sp_id " +
-                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id ;";
+                "LEFT JOIN sh_info AS sh ON zmkc.sh_id = sh.sh_id where zmkc.zmkc<>0 ";
         Session session = this.getSessionFactory().getCurrentSession();
         SQLQuery sqlQuery = session.createSQLQuery(sql);
         List<Object[]> list = sqlQuery.list();
         System.out.println("DAO" + list.size());
         List<CommodityDto> commodityDtoList = new ArrayList<>(list.size());
         for (Object[] row : list) {
-            System.out.println(row);
             CommodityDto commodityDto = new CommodityDto();
             commodityDto.setProducerId((Integer) row[0]);
             commodityDto.setProducerName((String) row[1]); //商户名称
@@ -237,6 +236,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             commodityDto.setAvailableInventory((BigDecimal) row[12]);//预提后可用库存
             commodityDto.setId((Integer) row[13]);//明细id
             commodityDto.setType((String) row[14]);//类型
+            commodityDto.setRemark((String) row[15]);  //备注
             commodityDtoList.add(commodityDto);
         }
         return commodityDtoList;
@@ -256,12 +256,12 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
                 "	ifnull(syyt.ytzs, 0) AS withholdingNumber, " +  //9预提总数
                 "	ifnull(syyt.ytzxx, 0) AS withholdingConsume, " +  //10预提消耗
                 "	ifnull(syyt.syyt, 0) AS surplusWithholdingNumber, " + //11剩余预提数
-                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id,zmkc.rk_type  " +  //12预提后可用库存 13明细id 14库存类型
+                "	zmkc.zmkc - ifnull(syyt.syyt, 0) AS  AvailableInventory,zmkc.rk_id,zmkc.rk_type,zmkc.remark  " +  //12预提后可用库存 13明细id 14库存类型 15备注
 
                 "FROM (	SELECT zrk.sp_id,zrk.sh_id,zrk.rk_place_id,zrk.rk_type,zrk.ss_number, " +
                 "			ifnull(zck.ck_number, 0) ck_number, " +
-                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id " +
-                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,rk_type,sum(ss_number) ss_number,rk_id " +
+                "			zrk.ss_number - ifnull(zck.ck_number, 0) zmkc,zrk.rk_id,zrk.remark " +
+                "		FROM ( 	SELECT sp_id,sh_id,rk_place_id,rk_type,sum(ss_number) ss_number,rk_id,remark " +
                 "				FROM rk_detail WHERE state = 'ok' " +
                 "				GROUP BY sh_id, sp_id,rk_place_id,rk_type " +
                 "			) zrk " +  /*总入库*/
@@ -336,6 +336,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             commodityDto.setAvailableInventory((BigDecimal) row[12]);//预提后可用库存
             commodityDto.setId((Integer) row[13]);//明细id
             commodityDto.setType((String) row[14]);  //入库类型
+            commodityDto.setRemark((String) row[15]);  //备注
             commodityDtoList.add(commodityDto);
         }
         return commodityDtoList;
@@ -463,6 +464,7 @@ public class SearchDAOImpl extends HibernateDaoSupport implements SearchDAO {
             commodityDto.setAvailableInventory((BigDecimal) row[12]);//预提后可用库存
             commodityDto.setId((Integer) row[13]);//明细id
             commodityDto.setType((String) row[14]);  //入库类型
+            commodityDto.setRemark((String) row[15]);  //备注
             commodityDtoList.add(commodityDto);
         }
 

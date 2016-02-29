@@ -85,6 +85,7 @@
             <th>剩余预提</th>
             <th>预提后可用库存</th>
             <th>使用类型</th>
+            <th>备注</th>
         </tr>
         </thead>
         <tbody>
@@ -106,6 +107,7 @@
                 <td><s:property value="#inventoryflow.surplusWithholdingNumber"/></td>
                 <td><s:property value="#inventoryflow.availableInventory"/></td>
                 <td><s:property value="#inventoryflow.type"/></td>
+                <td><s:property value="#inventoryflow.remark"/></td>
 
             </tr>
         </s:iterator>

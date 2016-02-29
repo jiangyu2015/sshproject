@@ -167,6 +167,8 @@ public class StorageAppManagerAction extends ActionSupport implements RequestAwa
             storage.setStorageType(storageApp.getStorageType());
         if (storageApp.getAdduser() != null && !storageApp.getAdduser().equals("")) //入库申请人加入到入库明细中
             storage.setAdduser(storageApp.getAdduser());
+        if(storageApp.getSldId()!=null && !storageApp.getSldId().equals("")) //三联单
+            storage.setRemark(storageApp.getSldId());
         storage.setCategory("正常入库");
         storage.setState("no");
         storage.setOver(0);

@@ -163,7 +163,8 @@
                 $("#div_storageDate").html("请输入实际入库日期！");
                 return false;
             }
-            if (storageNumber == null || storageNumber.length == 0) {
+          /*  if (storageNumber == null || storageNumber.length == 0) {*/
+            if (storageNumber ==  0) {
                 alert("请输入实际入库数！");
                 $("#div_storageNumber").html("请输入实际入库数！");
                 return false;
@@ -187,7 +188,7 @@
 
         function check2() {
             var storageDate = $("#storageDate2").val();  //实际入库时间
-            var expectedNumber = $("#expectedNumber2").val(); //预期入库数
+            var expectedNumber =Number( $("#expectedNumber2").val()); //预期入库数
             var storageNumber =Number($("#storageNumber3").val()); //原来的实收    实收数量和预期入库数到时候再说
             var storageNumberNow = Number(Number($("#storageNumber2").val()) + storageNumber); //实收数量为本次加上原来的实收
             var arr = getToDay().split("-");    //比较时间

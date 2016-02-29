@@ -21,6 +21,15 @@ public class CommodityDto {
     private BigDecimal totolStorage;  //总入库数
     private BigDecimal totolDeliver;//总出库数
     private BigDecimal carryingExcessInventory;//账面剩余库存数
+    private String remark;  //三联单 =备注
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Integer getGoodsId() {
         return goodsId;
